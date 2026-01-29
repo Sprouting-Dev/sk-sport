@@ -17,6 +17,10 @@ export default async function HomePage() {
 
   return (
     <div className="home">
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <button className="btn btn-primary">One</button>
+      <button className="btn btn-secondary">Two</button>
+      <button className="btn btn-accent btn-outline">Three</button>
       <div className="content">
         <picture>
           <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
