@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { ButtonLink } from '@/components/button'
+
 import './styles.css'
 
 export default function HomePage() {
@@ -8,9 +9,14 @@ export default function HomePage() {
       <p className="body-md text-base-content/80">
         View theme colors and typography examples.
       </p>
-      <Link className="btn btn-primary btn-lg-typo" href="/example">
-        Open examples
-      </Link>
+      <div className="flex flex-wrap justify-center gap-3">
+        <ButtonLink href="/example" size="lg" variant="primary">
+          Open examples
+        </ButtonLink>
+        <ButtonLink href="/components" size="lg" variant="outline">
+          Component showcase
+        </ButtonLink>
+      </div>
     </div>
   )
 }

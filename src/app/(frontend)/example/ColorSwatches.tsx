@@ -13,7 +13,7 @@ export default function ColorSwatches({ tokens }: ColorSwatchesProps) {
     <ul className="grid grid-cols-2 gap-3">
       {stableTokens.map((token) => (
         <li
-          className="flex items-center gap-3 rounded-lg border border-base-300 bg-base-100 px-3 py-2 text-sm"
+          className="flex items-center gap-3 rounded-lg border border-base-300 px-3 py-2 text-sm bg-white"
           key={token}
         >
           <span
