@@ -1,4 +1,4 @@
-import { Button, ButtonLink } from '@/components/button'
+import { Button } from '@/components/button'
 
 import ColorSwatches from './ColorSwatches'
 // import '../styles.css'

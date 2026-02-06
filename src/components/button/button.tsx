@@ -117,8 +117,11 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       if (!React.isValidElement(child)) return null
 
       const childProps = child.props as { className?: string }
+      const typedChild = child as React.ReactElement<
+        { className?: string } & Record<string, unknown>
+      >
 
-      return React.cloneElement(child as React.ReactElement<any>, {
+      return React.cloneElement(typedChild, {
         ...(child.props as Record<string, unknown>),
         ...(props as Record<string, unknown>),
         className: cn(childProps?.className, classes),
@@ -173,3 +176,5 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
     )
   },
 )
+
+Button.displayName = 'Button'
