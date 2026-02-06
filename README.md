@@ -4,7 +4,7 @@ This template comes configured with the bare minimum to get started on anything 
 
 ## Quick start
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+This template uses SQLite by default for local development and can be deployed with a managed database for production.
 
 ## Quick Start - local setup
 
@@ -17,21 +17,20 @@ After you click the `Deploy` button above, you'll want to have standalone copy o
 ### Development
 
 1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
-
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+2. `cd my-project && cp .env.example .env` to copy the example environment variables
+3. Update `PAYLOAD_SECRET` in `.env` for your local setup
+4. `npm install && npm run dev` to install dependencies and start the dev server
+5. open `http://localhost:3000` to open the app in your browser
 
 That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
 
 #### Docker (Optional)
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+If you prefer to use Docker for local development, the provided docker-compose.yml file can be used.
 
 To do so, follow these steps:
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
+- SQLite stores data in a local file (default: `payload.db`) and does not require a database server.
 - Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
 
 ## How it works
@@ -61,6 +60,28 @@ Alternatively, you can use [Docker](https://www.docker.com) to spin up this temp
 1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
 
 That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+
+## Environment
+
+- `PAYLOAD_SECRET`: required for Payload initialization
+- `DATABASE_URL`: SQLite file path for local dev (default in `.env.example`)
+
+## Scripts
+
+- `npm run dev`: start Next.js dev server
+- `npm run build`: build for production
+- `npm run start`: start production server
+- `npm run lint`: lint with Next.js ESLint config
+- `npm run test`: run integration tests (Playwright is opt-in)
+- `npm run test:int`: run integration tests
+- `npm run test:e2e`: run Playwright tests
+- `npm run generate:types`: generate Payload types after schema changes
+- `npm run generate:importmap`: regenerate Payload import map after component changes
+
+## Testing
+
+1. Integration tests: `npm run test:int`
+2. E2E tests: `npm run test:e2e` (optional)
 
 ## Questions
 
