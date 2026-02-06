@@ -52,22 +52,9 @@
 }
 
 :root {
-  --btn-gradient: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  --btn-gradient-20: linear-gradient(
-    90deg,
-    rgba(11, 63, 184, 0.2) 0%,
-    rgba(255, 59, 141, 0.2) 100%
-  );
-}
-
-:root {
-  --btn-gradient: linear-gradient(90deg, #0b3fb8 0%, #6d5bd0 50%, #ff3b8d 100%);
-  --btn-gradient-20: linear-gradient(
-    90deg,
-    rgba(11, 63, 184, 0.2) 0%,
-    rgba(109, 91, 208, 0.2) 50%,
-    rgba(255, 59, 141, 0.2) 100%
-  );
+  --gradient: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --gradient-60: linear-gradient(90deg, rgba(11, 63, 184, 0.6) 0%, rgba(255, 59, 141, 0.6) 100%);
+  --gradient-20: linear-gradient(90deg, rgba(11, 63, 184, 0.2) 0%, rgba(255, 59, 141, 0.2) 100%);
 }
 
 /*Border Gradient Button*/
@@ -83,7 +70,7 @@
   content: '';
   position: absolute;
   inset: 1px;
-  background: var(--btn-gradient-20);
+  background: var(--gradient-20);
   z-index: 0;
 }
 .btn-gradient-solid-border::before {
@@ -91,7 +78,7 @@
   position: absolute;
   inset: 0;
   padding: 1px;
-  background: var(--btn-gradient);
+  background: var(--gradient);
   z-index: 0;
 
   -webkit-mask:
@@ -103,4 +90,7 @@
 .btn-gradient-solid-border > * {
   position: relative;
   z-index: 1;
+}
+.btn-gradient-solid-border:hover::after {
+  background: var(--gradient-60);
 }
