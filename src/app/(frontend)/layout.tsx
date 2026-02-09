@@ -1,5 +1,6 @@
 import React from 'react'
 import { rajdhani, notoSansThai } from '@/lib/fonts'
+import { Navbar } from '@/components/layout/'
 import '@/style/typography.css'
 import './styles.css'
 
@@ -14,7 +15,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" data-theme="sksport">
       <body className={`${rajdhani.variable} ${notoSansThai.variable}`}>
-        <main>{children}</main>
+        <Navbar />
+        <main className="pt-20">{children}</main>
       </body>
     </html>
   )
