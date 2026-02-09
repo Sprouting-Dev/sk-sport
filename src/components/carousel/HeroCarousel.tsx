@@ -1,32 +1,15 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React from 'react'
 import Image, { StaticImageData } from 'next/image'
+import { useCarousel } from '@/hooks/useCarousel'
 
 interface HeroCarouselProps {
   images: StaticImageData[]
 }
 
 export const HeroCarousel: React.FC<HeroCarouselProps> = ({ images }) => {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const carouselRef = useRef<HTMLDivElement>(null)
-
-  const handleScroll = () => {
-    if (carouselRef.current) {
-      const scrollLeft = carouselRef.current.scrollLeft
-      const width = carouselRef.current.offsetWidth
-      const index = Math.round(scrollLeft / width)
-      setCurrentSlide(index)
-    }
-  }
-
-  useEffect(() => {
-    const carousel = carouselRef.current
-    if (carousel) {
-      carousel.addEventListener('scroll', handleScroll)
-      return () => carousel.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+  const { currentSlide, carouselRef } = useCarousel(images.length)
 
   return (
     <>
