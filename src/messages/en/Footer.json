@@ -1,0 +1,18 @@
+{
+  "companyNamePart1": "SK.SPORT",
+  "companyNamePart2": "TRADING CO.,LTD.",
+  "description": "Lorem ipsum dolor sit amet consectur. Purus suscipit pellentesque eu dapibus.",
+  "siteMap": "Site Map",
+  "legal": "Legal",
+  "links": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "products": "Products",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "articles": "Articles",
+    "faq": "FAQ",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Term of Services"
+  }
+}

@@ -55,6 +55,43 @@
   --gradient: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   --gradient-60: linear-gradient(90deg, rgba(11, 63, 184, 0.6) 0%, rgba(255, 59, 141, 0.6) 100%);
   --gradient-20: linear-gradient(90deg, rgba(11, 63, 184, 0.2) 0%, rgba(255, 59, 141, 0.2) 100%);
+
+  /* Footer */
+  --footer-bg: #19202e;
+  --footer-gradient-overlay: linear-gradient(
+    93.72deg,
+    rgba(0, 75, 215, 0.2) 6.68%,
+    rgba(255, 95, 168, 0.2) 110.89%
+  );
+
+  /* Fonts */
+  --font-prompt: var(--font-prompt);
+}
+
+/* Company Name Typography */
+.company-name-part1 {
+  font-family: var(--font-prompt);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  background: linear-gradient(270deg, #ff5fa8 5.8%, #4282fa 83.04%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.company-name-part2 {
+  font-family: var(--font-prompt);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  background: linear-gradient(89.99deg, #ff5fa8 8.42%, #3376f4 97.19%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 /*Border Gradient Button*/
@@ -85,6 +122,9 @@
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
   mask-composite: exclude;
 }
 .btn-gradient-solid-border > * {
@@ -93,4 +133,43 @@
 }
 .btn-gradient-solid-border:hover::after {
   background: var(--gradient-60);
+}
+
+/* Footer */
+.footer-bg {
+  position: relative;
+  background: var(--footer-bg);
+}
+.footer-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--footer-gradient-overlay);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.footer-gradient-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient);
+  z-index: 2;
+}
+
+.footer-gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.social-icon-bg {
+  background: linear-gradient(
+    123.69deg,
+    rgba(0, 75, 215, 0.2) 12.87%,
+    rgba(255, 53, 145, 0.2) 87.15%
+  );
 }
