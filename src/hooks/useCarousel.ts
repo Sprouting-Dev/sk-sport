@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react'
 
 export const useCarousel = (length: number, intervalTime: number = 10000) => {
@@ -20,6 +19,8 @@ export const useCarousel = (length: number, intervalTime: number = 10000) => {
   }, [])
 
   useEffect(() => {
+    if (length < 2) return
+
     const interval = setInterval(() => {
       if (carouselRef.current) {
         const nextSlide = (currentSlide + 1) % length
