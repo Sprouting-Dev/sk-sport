@@ -30,51 +30,44 @@ export const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-12">
             {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="body-sm text-white font-medium"
-              >
+              <Link key={item.name} href={item.href} className="body-sm text-white font-medium">
                 {item.name}
               </Link>
             ))}
-            
+
             <button className="relative p-2 text-white">
               <ShoppingCartSimple size={32} />
             </button>
           </div>
 
-          <button
-            onClick={toggleMenu}
-            className="md:hidden p-2 text-white"
-          >
+          <button onClick={toggleMenu} className="md:hidden p-2 text-white">
             <List size={32} />
           </button>
         </div>
       </nav>
-      
-      <div 
+
+      <div
         className={cn(
-            "fixed inset-0 z-40  md:hidden transition-opacity duration-300",
-            isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          'fixed inset-0 z-40  md:hidden transition-opacity duration-300',
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none',
         )}
         onClick={closeMenu}
       />
 
       <div
         className={cn(
-          "fixed top-0 right-0 z-50 h-full w-1/2 bg-base-content transform transition-transform duration-300 ease-in-out md:hidden flex flex-col",
-          isOpen ? "translate-x-0" : "translate-x-full"
+          'fixed top-0 right-0 z-50 h-full w-1/2 bg-base-content transform transition-transform duration-300 ease-in-out md:hidden flex flex-col',
+          isOpen ? 'translate-x-0' : 'translate-x-full',
         )}
       >
         <div className="flex justify-between items-center p-5 h-20">
-            <button onClick={closeMenu} className="text-white">
-                <X size={32} />
-            </button>
+          <button onClick={closeMenu} className="text-white">
+            <X size={32} />
+          </button>
 
-            <button className="relative text-white p-2">
-                <ShoppingCartSimple size={32} />
-            </button>
+          <button className="relative text-white p-2">
+            <ShoppingCartSimple size={32} />
+          </button>
         </div>
 
         <div className="flex flex-col w-full">

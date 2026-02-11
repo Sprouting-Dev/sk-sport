@@ -1,10 +1,7 @@
 import { Button } from '@/components/button'
-
 import ColorSwatches from './ColorSwatches'
-// import '../styles.css'
 
 const variants = ['primary', 'secondary', 'ghost', 'outline', 'link', 'gradient'] as const
-
 const sizes = ['sm', 'md'] as const
 
 export default function ExamplePage() {
