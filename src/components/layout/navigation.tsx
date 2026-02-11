@@ -3,16 +3,9 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, ShoppingCart } from 'lucide-react'
+import { NAV_ITEMS } from '@/const/navigation'
+import { List, X, ShoppingCartSimple } from '@phosphor-icons/react'
 import { cn } from '@/utils/cn'
-
-const navItems = [
-  { name: 'Products', href: '/products' },
-  { name: 'Services', href: '/services' },
-  { name: 'Portfolio', href: '/portfolio' },
-  { name: 'About Us', href: '/about' },
-  { name: 'Contact Us', href: '/contact' },
-]
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -36,7 +29,7 @@ export const Navbar = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-12">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -47,7 +40,7 @@ export const Navbar = () => {
             ))}
             
             <button className="relative p-2 text-white">
-              <ShoppingCart size={32} />
+              <ShoppingCartSimple size={32} />
             </button>
           </div>
 
@@ -55,7 +48,7 @@ export const Navbar = () => {
             onClick={toggleMenu}
             className="md:hidden p-2 text-white"
           >
-            <Menu size={32} />
+            <List size={32} />
           </button>
         </div>
       </nav>
@@ -80,25 +73,22 @@ export const Navbar = () => {
             </button>
 
             <button className="relative text-white p-2">
-                <ShoppingCart size={32} />
+                <ShoppingCartSimple size={32} />
             </button>
         </div>
 
         <div className="flex flex-col w-full">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <Link
               key={item.name}
               href={item.href}
               onClick={closeMenu}
               className="group relative flex items-center w-full px-6 py-5 text-white overflow-hidden transition-all duration-300"
             >
-              {/* 1. พื้นหลังไล่สี (ซ้าย -> ขวา) : แสดงเมื่อ Hover */}
               <span className="absolute inset-0 bg-gradient-to-r from-primary/40 from-50% to-secondary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
 
-              {/* 2. เส้นขอบด้านซ้ายไล่สี (บน -> ล่าง) : ใช้ span สร้างแถบขนาด 4px */}
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary from-20% to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* ข้อความเมนู */}
               <span className="relative z-10 body-md tracking-wide group-hover:translate-x-2 transition-transform duration-300">
                 {item.name}
               </span>
