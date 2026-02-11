@@ -4,73 +4,73 @@
   --font-body: var(--font-body);
 
   /* Heading (Rajdhani) */
-  --h1-desktop-size: 64px;
+  --h1-desktop-size: 4rem;
   --h1-desktop-lh: 1.1;
   --h1-desktop-w: 500;
 
-  --h2-desktop-size: 32px;
+  --h2-desktop-size: 2rem;
   --h2-desktop-lh: 1.2;
   --h2-desktop-w: 600;
 
-  --h3-desktop-size: 24px;
+  --h3-desktop-size: 1.5rem;
   --h3-desktop-lh: 1.3;
   --h3-desktop-w: 500;
 
-  --h1-mobile-size: 32px;
+  --h1-mobile-size: 2rem;
   --h1-mobile-lh: 1.2;
   --h1-mobile-w: 500;
 
-  --h2-mobile-size: 16px;
+  --h2-mobile-size: 1rem;
   --h2-mobile-lh: 1.3;
   --h2-mobile-w: 600;
 
-  --h3-mobile-size: 14px;
+  --h3-mobile-size: 0.875rem;
   --h3-mobile-lh: 1.3;
   --h3-mobile-w: 500;
 
   /* Body (Noto Sans Thai) */
-  --body-lg-size: 24px;
+  --body-lg-size: 1.5rem;
   --body-lg-lh: 1.5;
   --body-lg-w: 500;
 
-  --body-md-desktop-size: 18px;
+  --body-md-desktop-size: 1.125rem;
   --body-md-desktop-lh: 1.6;
   --body-md-desktop-w: 400;
 
-  --body-sm-desktop-size: 16px;
+  --body-sm-desktop-size: 1rem;
   --body-sm-desktop-lh: 1.6;
   --body-sm-desktop-w: 400;
 
-  --body-md-mobile-size: 14px;
+  --body-md-mobile-size: 0.875rem;
   --body-md-mobile-lh: 1.6;
   --body-md-mobile-w: 400;
 
-  --body-sm-mobile-size: 12px;
+  --body-sm-mobile-size: 0.75rem;
   --body-sm-mobile-lh: 1.6;
   --body-sm-mobile-w: 400;
 
   /* Button (Noto Sans Thai) */
-  --btn-lg-desktop-size: 18px;
+  --btn-lg-desktop-size: 1.125rem;
   --btn-lg-desktop-lh: 1;
   --btn-lg-desktop-w: 600;
 
-  --btn-sm-desktop-size: 16px;
+  --btn-sm-desktop-size: 1rem;
   --btn-sm-desktop-lh: 1;
   --btn-sm-desktop-w: 600;
 
-  --btn-link-desktop-size: 16px;
+  --btn-link-desktop-size: 1rem;
   --btn-link-desktop-lh: 1;
   --btn-link-desktop-w: 400;
 
-  --btn-lg-mobile-size: 16px;
+  --btn-lg-mobile-size: 1rem;
   --btn-lg-mobile-lh: 1;
   --btn-lg-mobile-w: 600;
 
-  --btn-sm-mobile-size: 12px;
+  --btn-sm-mobile-size: 0.75rem;
   --btn-sm-mobile-lh: 1;
   --btn-sm-mobile-w: 600;
 
-  --btn-link-mobile-size: 12px;
+  --btn-link-mobile-size: 0.75rem;
   --btn-link-mobile-lh: 1;
   --btn-link-mobile-w: 400;
 }
@@ -84,37 +84,37 @@
 }
 
 /* Headings */
-.h1 {
+h1 {
   font-family: var(--font-heading);
   font-size: var(--h1-mobile-size);
   line-height: var(--h1-mobile-lh);
   font-weight: var(--h1-mobile-w);
 }
-.h2 {
+h2 {
   font-family: var(--font-heading);
   font-size: var(--h2-mobile-size);
   line-height: var(--h2-mobile-lh);
   font-weight: var(--h2-mobile-w);
 }
-.h3 {
+h3 {
   font-family: var(--font-heading);
   font-size: var(--h3-mobile-size);
   line-height: var(--h3-mobile-lh);
   font-weight: var(--h3-mobile-w);
 }
 
-@media (min-width: 768px) {
-  .h1 {
+@media (min-width: 48rem) {
+  h1 {
     font-size: var(--h1-desktop-size);
     line-height: var(--h1-desktop-lh);
     font-weight: var(--h1-desktop-w);
   }
-  .h2 {
+  h2 {
     font-size: var(--h2-desktop-size);
     line-height: var(--h2-desktop-lh);
     font-weight: var(--h2-desktop-w);
   }
-  .h3 {
+  h3 {
     font-size: var(--h3-desktop-size);
     line-height: var(--h3-desktop-lh);
     font-weight: var(--h3-desktop-w);
@@ -140,7 +140,7 @@
   line-height: var(--body-sm-mobile-lh);
   font-weight: var(--body-sm-mobile-w);
 }
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .body-md {
     font-size: var(--body-md-desktop-size);
     line-height: var(--body-md-desktop-lh);
@@ -172,7 +172,7 @@
   line-height: var(--btn-link-mobile-lh);
   font-weight: var(--btn-link-mobile-w);
 }
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .btn-lg-typo {
     font-size: var(--btn-lg-desktop-size);
     line-height: var(--btn-lg-desktop-lh);
