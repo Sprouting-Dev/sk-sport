@@ -44,7 +44,7 @@
   --size-field: 0.25rem;
 
   /* border size */
-  --border: 1px;
+  --border: 0.0625rem;
 
   /* effects */
   --depth: 1;
@@ -56,48 +56,41 @@
   --gradient-60: linear-gradient(90deg, rgba(11, 63, 184, 0.6) 0%, rgba(255, 59, 141, 0.6) 100%);
   --gradient-20: linear-gradient(90deg, rgba(11, 63, 184, 0.2) 0%, rgba(255, 59, 141, 0.2) 100%);
 
-  /* Footer */
-  --footer-bg: #19202e;
-  --footer-gradient-overlay: linear-gradient(
+  --section-bg: #19202e;
+  --section-gradient-overlay-right: linear-gradient(
     93.72deg,
     rgba(0, 75, 215, 0.2) 6.68%,
     rgba(255, 95, 168, 0.2) 110.89%
   );
-
-  /* Fonts */
-  --font-prompt: var(--font-prompt);
+  --section-gradient-overlay-left: linear-gradient(
+    93.72deg,
+    rgba(255, 95, 168, 0.2) 110.89%,
+    rgba(0, 75, 215, 0.2) 6.68%
+  );
 }
 
 /* Company Name Typography */
 .company-name-part1 {
   font-family: var(--font-prompt);
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 100%;
-  letter-spacing: 0%;
   background: linear-gradient(270deg, #ff5fa8 5.8%, #4282fa 83.04%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
 }
 .company-name-part2 {
   font-family: var(--font-prompt);
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 100%;
-  letter-spacing: 0%;
   background: linear-gradient(89.99deg, #ff5fa8 8.42%, #3376f4 97.19%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
 }
 
 /*Border Gradient Button*/
 .btn-gradient-solid-border {
   position: relative;
-  border-radius: 0px;
+  border-radius: 0;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -106,7 +99,7 @@
 .btn-gradient-solid-border::after {
   content: '';
   position: absolute;
-  inset: 1px;
+  inset: 0.0625rem;
   background: var(--gradient-20);
   z-index: 0;
 }
@@ -114,10 +107,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  padding: 1px;
+  padding: 0.0625rem;
   background: var(--gradient);
   z-index: 0;
-
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -135,24 +127,24 @@
   background: var(--gradient-60);
 }
 
-/* Footer */
-.footer-bg {
-  position: relative;
-  background: var(--footer-bg);
-}
-.footer-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--footer-gradient-overlay);
-  z-index: 1;
-  pointer-events: none;
-}
-
 .social-icon-bg {
   background: linear-gradient(
     123.69deg,
     rgba(0, 75, 215, 0.2) 12.87%,
     rgba(255, 53, 145, 0.2) 87.15%
   );
+}
+
+/* Footer */
+.section-bg-to-right {
+  position: relative;
+  background: var(--section-bg);
+}
+.section-bg-to-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--section-gradient-overlay-right);
+  z-index: 1;
+  pointer-events: none;
 }
