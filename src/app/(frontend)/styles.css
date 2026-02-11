@@ -149,23 +149,6 @@
   pointer-events: none;
 }
 
-.footer-gradient-border {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient);
-  z-index: 2;
-}
-
-.footer-gradient-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .social-icon-bg {
   background: linear-gradient(
     123.69deg,

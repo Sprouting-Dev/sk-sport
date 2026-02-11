@@ -1,8 +1,6 @@
 import React from 'react'
-import { rajdhani, notoSansThai } from '@/lib/fonts'
-import { Navbar } from '@/components/layout/'
+import { Navbar, Footer } from '@/components/layout/'
 import { rajdhani, notoSansThai, prompt } from '@/lib/fonts'
-import { Footer } from '@/components/footer/footer'
 import '@/style/typography.css'
 import './styles.css'
 import { NextIntlClientProvider } from 'next-intl'
@@ -19,13 +17,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const messages = await getMessages()
 
   return (
-    <html lang="en" data-theme="sksport">
-      <body className={`${rajdhani.variable} ${notoSansThai.variable}`}>
-        <Navbar />
-        <main className="pt-20">{children}</main>
     <html lang={locale} data-theme="sksport">
       <body className={`${rajdhani.variable} ${notoSansThai.variable} ${prompt.variable}`}>
         <NextIntlClientProvider messages={messages}>
+          <Navbar />
           <main className="pt-20">{children}</main>
           <Footer />
         </NextIntlClientProvider>
