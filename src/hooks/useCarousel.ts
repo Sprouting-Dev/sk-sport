@@ -35,5 +35,15 @@ export const useCarousel = (length: number, intervalTime: number = 10000) => {
     return () => clearInterval(interval)
   }, [currentSlide, length, intervalTime])
 
-  return { currentSlide, setCurrentSlide, carouselRef }
+  const scrollToSlide = (index: number) => {
+    if (carouselRef.current) {
+      const width = carouselRef.current.offsetWidth
+      carouselRef.current.scrollTo({
+        left: width * index,
+        behavior: 'smooth',
+      })
+    }
+  }
+
+  return { currentSlide, setCurrentSlide, carouselRef, scrollToSlide }
 }
