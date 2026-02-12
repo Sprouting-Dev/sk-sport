@@ -40,9 +40,9 @@ const CardItem = ({ image, date, title, href }: Omit<ArticleItem, 'id'>) => {
       <div className="flex flex-col px-1 w-full">
         <span className="body-sm font-medium mb-1 text-left">{date}</span>
         <Link href={href} draggable={false} className="w-full  text-left">
-          <h3 className="body-sm leading-snug group-hover:text-primary transition-colors break-words line-clamp-2">
+          <p className="body-sm leading-snug group-hover:text-primary transition-colors break-words line-clamp-2">
             {title}
-          </h3>
+          </p>
         </Link>
       </div>
     </div>
@@ -54,26 +54,19 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
 
-  const checkScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
-      setCanScrollLeft(scrollLeft > 0)
-      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1)
-    }
+  const checkScroll = (target: HTMLDivElement | null) => {
+    if (!target) return
+    const { scrollLeft, scrollWidth, clientWidth } = target
+    setCanScrollLeft(scrollLeft > 0)
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1)
   }
 
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (container) {
-      checkScroll()
-      container.addEventListener('scroll', checkScroll)
-      window.addEventListener('resize', checkScroll)
+   const handleScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
+    checkScroll(e.currentTarget)
+  }
 
-      return () => {
-        container.removeEventListener('scroll', checkScroll)
-        window.removeEventListener('resize', checkScroll)
-      }
-    }
+ useEffect(() => {
+    checkScroll(scrollContainerRef.current)
   }, [items])
 
   const scroll = (direction: 'left' | 'right') => {
@@ -85,7 +78,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
   }
 
   return (
-    <div className="relative w-full group/slider">
+    <div className="relative w-full max-w-full min-w-0 group/slider overflow-hidden">
       {canScrollLeft && (
         <button
           onClick={() => scroll('left')}
@@ -97,6 +90,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
 
       <div
         ref={scrollContainerRef}
+        onScroll={handleScroll}
         className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 pt-2 no-scrollbar w-full"
       >
         {items.map((item) => (
