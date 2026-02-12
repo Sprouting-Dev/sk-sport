@@ -9,14 +9,16 @@ interface HeroCarouselProps {
   images: StaticImageData[]
   activeIndex?: number
   onSlideChange?: (index: number) => void
+  interval?: number
 }
 
 export const HeroCarousel: React.FC<HeroCarouselProps> = ({
   images,
   activeIndex,
   onSlideChange,
+  interval = 5000,
 }) => {
-  const { currentSlide, carouselRef, scrollToSlide } = useCarousel(images.length)
+  const { currentSlide, carouselRef, scrollToSlide } = useCarousel(images.length, interval)
   const prevActiveIndexRef = React.useRef(activeIndex)
 
   React.useEffect(() => {
@@ -55,7 +57,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                 src={img}
                 alt={`Hero Background ${index + 1}`}
                 fill
-                className="object-cover object-center "
+                className="object-cover object-top"
                 priority={index === 0}
               />
             </div>
