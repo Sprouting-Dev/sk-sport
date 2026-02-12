@@ -2,9 +2,8 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { ButtonLink } from '@/components/button'
-import { ArticleCard } from '@/components/card'
+import { Accomplishment } from '@/components/home'
 import { Hero } from '@/components/hero/Hero'
 import ProductSection from '@/components/home/ProductSection'
 import './styles.css'
@@ -48,12 +47,11 @@ const blogPosts = [
 ]
 
 export default function HomePage() {
-  const router = useRouter()
-  
   return ( 
-    <div className="mx-auto flex min-h-[60vh] w-full flex-col items-center justify-center gap-4 px-6 text-center">
+    <div className="mx-auto flex min-h-[60vh] w-full flex-col items-center justify-center gap-4">
       <Hero />
       <ProductSection />
+      <Accomplishment items={blogPosts} />
       <h1 className="h1">Welcome</h1>
       <p className="body-md text-base-content/80">View theme colors and typography examples.</p>
       <div className="flex flex-wrap justify-center gap-3">
@@ -67,25 +65,6 @@ export default function HomePage() {
       <Link className="btn btn-primary btn-lg-typo" href="/example">
         Open examples
       </Link>
-
-      {/* Article Card */}
-      <div className="container mx-auto px-4 md:pt-16 pt-8 md:pb-8">
-        <div className="flex items-center justify-between">
-          <div className="h2 text-primary">
-            Our Company’s Accomplishments
-          </div>
-          <button 
-            className="btn btn-gradient-solid-border btn-sm-typo text-primary md:w-38.5 w-22.5 md:h-12 h-7"
-            onClick={() => router.push('')}
-          >
-            See All
-          </button>
-        </div>
-      </div>
-      <div className="w-full">
-        <ArticleCard items={blogPosts} />
-      </div>
-      
     </div>
   )
 }
