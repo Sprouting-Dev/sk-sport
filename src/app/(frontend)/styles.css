@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 @plugin "daisyui";
+
+@theme {
+  --color-header: #0445bf;
+  --color-header-bg: #f2f2f2;
+}
 @plugin "daisyui/theme" {
   name: 'sksport';
   default: true;
@@ -147,4 +152,85 @@
   background: var(--section-gradient-overlay-right);
   z-index: 1;
   pointer-events: none;
+}
+
+/* Custom Utilities for fixing ESLint errors */
+.text-light {
+  color: #ffffff;
+}
+
+.bg-hero {
+  background-color: #171717;
+}
+
+.bg-overlay-40 {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.bg-overlay-gradient {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4), transparent);
+}
+
+.hero-title-gradient {
+  background: linear-gradient(to right, #2563eb, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Arbitrary value replacements */
+.hero-wrapper-height {
+  height: 100%;
+}
+@media (min-width: 768px) {
+  .hero-wrapper-height {
+    height: calc(100vh - 5rem);
+  }
+}
+
+.hero-content-max-w {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .hero-content-max-w {
+    max-width: 29.25rem;
+  }
+}
+
+.hero-btn-width {
+  width: 9.625rem;
+}
+@media (min-width: 768px) {
+  .hero-btn-width {
+    width: 11.875rem;
+  }
+}
+
+/* Product Page Utilities */
+.hover-border-light-50 {
+  transition-property: border-color;
+  transition-duration: 300ms;
+}
+.hover-border-light-50:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.text-subtle {
+  color: #9ca3af;
+}
+
+.bg-gradient-card-left {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2), transparent);
+}
+
+.bg-gradient-card-right {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
 }
