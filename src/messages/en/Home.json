@@ -5,5 +5,28 @@
     "title_part3": "LIMITS",
     "description": "Your Partner for World-Class Sports Facility Development.",
     "contact_us": "Contact Us"
+  },
+  "Product": {
+    "title": "Our Products",
+    "categories": {
+      "gymEquipment": {
+        "title": "Gym Equipment",
+        "displayTitle_line1": "Gym",
+        "displayTitle_line2": "Equipment",
+        "description": "High-quality gym equipment for your fitness journey.High-quality gym equipment for your fitness journey.High-quality gym equipment for your fitness journey."
+      },
+      "outdoorFitness": {
+        "title": "Outdoor Fitness",
+        "displayTitle_line1": "Outdoor",
+        "displayTitle_line2": "Fitness",
+        "description": "Durable outdoor fitness solutions for parks and communities.Durable outdoor fitness solutions for parks and communities.Durable outdoor fitness solutions for parks and communities."
+      },
+      "gymnasticsEquipment": {
+        "title": "Gymnastics Equipment",
+        "displayTitle_line1": "Gymnastics",
+        "displayTitle_line2": "Equipment",
+        "description": "Professional gymnastics equipment for training and competition.Professional gymnastics equipment for training and competition.Professional gymnastics equipment for training and competition."
+      }
+    }
   }
 }

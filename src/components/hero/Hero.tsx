@@ -15,7 +15,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="relative w-full hero-wrapper-height h-full max-h-308 overflow-hidden bg-hero text-light">
-      <HeroCarousel images={carouselImages} />
+      <HeroCarousel images={carouselImages} interval={5000} />
 
       <div className="relative z-10 flex md:h-full h-full md:w-full hero-content-max-w flex-col justify-center px-6 py-12 lg:px-24 lg:py-24 pointer-events-none bg-overlay-40 gap-9">
         <div className="max-w-xl flex flex-col pointer-events-auto gap-6">
