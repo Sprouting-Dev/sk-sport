@@ -75,7 +75,7 @@ export default function HomePage() {
             Our Company’s Accomplishments
           </div>
           <button 
-            className="btn btn-gradient-solid-border btn-sm-typo text-primary md:w-[9.625rem] w-[5.625rem] md:h-12 h-7"
+            className="btn btn-gradient-solid-border btn-sm-typo text-primary md:w-38.5 w-22.5 md:h-12 h-7"
             onClick={() => router.push('')}
           >
             See All
