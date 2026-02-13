@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Navbar, Footer } from '@/components/layout/'
+import { Navbar, Footer, CTAFooter } from '@/components/layout/'
 import { ButtonLink } from '@/components/button'
 import { rajdhani, notoSansThai, prompt } from '@/lib/fonts'
 import '@/style/typography.css'
@@ -25,6 +25,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <main className="pt-20">{children}</main>
+          <CTAFooter />
           <Footer />
           {isLocalEnv && (
             <ButtonLink
