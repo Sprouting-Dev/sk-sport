@@ -7,6 +7,7 @@ import {
   ContactSection,
   OurProducts,
   PartnersSection,
+  Services,
 } from '@/components/home'
 import { Hero } from '@/components/hero/Hero'
 import './styles.css'
@@ -53,6 +54,7 @@ export default function HomePage() {
   return (
     <div className="mx-auto flex min-h-[60vh] w-full flex-col items-center justify-center bg-header-bg">
       <Hero />
+      <Services />
       <OurProducts />
       <Accomplishment items={blogPosts} />
       <AboutCompany />
