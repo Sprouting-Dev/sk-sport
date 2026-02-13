@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { CaretLeft, CaretRight } from '@phosphor-icons/react'
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react'
 
 export interface ArticleItem {
   id: string | number
@@ -40,7 +40,7 @@ const CardItem = ({ image, date, title, href }: Omit<ArticleItem, 'id'>) => {
       <div className="flex flex-col px-1 w-full">
         <span className="body-sm font-medium mb-1 text-left">{date}</span>
         <Link href={href} draggable={false} className="w-full  text-left">
-          <p className="body-sm leading-snug group-hover:text-primary transition-colors break-words line-clamp-2">
+          <p className="body-sm leading-snug group-hover:text-primary transition-colors wrap-break-word line-clamp-2">
             {title}
           </p>
         </Link>
@@ -61,11 +61,11 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
     setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1)
   }
 
-   const handleScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
+  const handleScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
     checkScroll(e.currentTarget)
   }
 
- useEffect(() => {
+  useEffect(() => {
     checkScroll(scrollContainerRef.current)
   }, [items])
 
@@ -84,7 +84,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
           onClick={() => scroll('left')}
           className="absolute left-0 top-35 z-20 text-header-bg/60 transition-all hidden md:block"
         >
-          <CaretLeft size={96} strokeWidth={1.5} />
+          <CaretLeftIcon size={96} strokeWidth={1.5} />
         </button>
       )}
 
@@ -105,7 +105,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
           onClick={() => scroll('right')}
           className="absolute right-0 top-35 z-20 text-header-bg/60 transition-all hidden md:block"
         >
-          <CaretRight size={96} strokeWidth={1.5} />
+          <CaretRightIcon size={96} strokeWidth={1.5} />
         </button>
       )}
     </div>
