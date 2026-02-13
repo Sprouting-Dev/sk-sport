@@ -159,6 +159,14 @@
   color: #ffffff;
 }
 
+.bg-light {
+  background-color: #ffffff;
+}
+
+.support-card-height {
+  height: 24.66rem;
+}
+
 .bg-hero {
   background-color: #171717;
 }
@@ -233,6 +241,101 @@
 
 .bg-gradient-card-right {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+}
+
+/* Service Cards */
+.service-card {
+  min-height: 39.75rem;
+}
+
+@media (min-width: 80rem) {
+  .service-card {
+    height: 49.21875rem;
+  }
+}
+
+.service-card-overlay {
+  background: linear-gradient(360deg, rgba(25, 32, 46, 0.9) 0%, rgba(0, 0, 0, 0.18) 101.64%);
+}
+
+.service-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 20;
+}
+
+.service-card-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  width: 100%;
+}
+
+.service-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 434px;
+}
+
+.service-card-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.2;
+  color: #ffffff;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  white-space: pre-line;
+}
+
+.service-card-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ffffff;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+  white-space: pre-line;
+}
+
+.support-service-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 2rem;
+  color: #0445bf;
+}
+
+.support-card-overlay {
+  background: linear-gradient(360deg, rgba(25, 32, 46, 0.8) 0%, rgba(4, 69, 191, 0.08) 101.64%);
+}
+
+.support-card-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.service-section-header {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.service-section-header h2 {
+  color: #0445bf;
+}
+
+.service-section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 400;
+  text-align: center;
+  color: #0445bf;
 }
 
 @layer utilities {
