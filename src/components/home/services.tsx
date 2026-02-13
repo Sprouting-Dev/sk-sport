@@ -8,15 +8,17 @@ import { Basketball, Heartbeat, Info } from '@phosphor-icons/react/dist/ssr'
 export const Services = () => {
   return (
     <section className="w-full">
-      <div className="text-center p-12 text-primary space-y-4">
-        <h2>Our Services</h2>
-        <p className="body-sm text-primary text-center">
+      <div className="service-section-header">
+        <h2 className="h2 mb-4">Our Services</h2>
+        <p className="service-section-subtitle">
           Professional solution for sports facility development
         </p>
       </div>
 
-      <div className="w-full">
+      {/* Services Content */}
+      <div className="w-full py-10">
         <div className="mb-2 grid w-full grid-cols-1 gap-2 lg:grid-cols-2">
+          {/* Left Card */}
           <ServiceCard
             title={`Gymnastic Equipment\nInstallation`}
             description={`Lorem ipsum dolor sit amet\ncon . Purus suscipit pellentesque.\nLorem ipsum\ndolor sit amet con.`}
@@ -26,6 +28,8 @@ export const Services = () => {
             imageAlt="Gymnastic equipment in a modern facility"
             alignButton="bottom"
           />
+
+          {/* Right Card */}
           <ServiceCard
             title={`Outdoor Exercise\nEquipment`}
             description={`Lorem ipsum dolor sit amet\ncon . Purus suscipit pellentesque.\nLorem ipsum\ndolor sit amet con.`}
@@ -37,11 +41,13 @@ export const Services = () => {
           />
         </div>
 
+        {/* Support Services Section */}
         <div className="w-full px-4 pt-12">
           <div className="mb-8 text-center">
-            <h2 className="text-primary">Support Services</h2>
+            <h2 className="support-service-title">Support Services</h2>
           </div>
 
+          {/* Grid Layout */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <SupportCard
               title="Consulting & Design"
