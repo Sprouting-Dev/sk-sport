@@ -10,7 +10,7 @@ import heroBg1 from '@/assets/d048eb9439e681c322341cf84065711c767aa9b7.png'
 import gymEquipImg from '@/assets/2333e2e983810b68fda29635701f7e8ec2321d91.jpg'
 import outdoorFitnessImg from '@/assets/9569b11f338e44ba2f832f22f1d53659ce5edca0.jpg'
 
-export const ProductSection = () => {
+export const OurProducts = () => {
   const t = useTranslations('Home.Product')
 
   const categoryKeys = ['gymEquipment', 'outdoorFitness', 'gymnasticsEquipment'] as const
@@ -105,5 +105,3 @@ export const ProductSection = () => {
     </div>
   )
 }
-
-export default ProductSection

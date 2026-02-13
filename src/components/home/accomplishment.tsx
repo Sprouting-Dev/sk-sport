@@ -13,7 +13,7 @@ export const Accomplishment = ({ items }: AccomplishmentProps) => {
 
   return (
     <div className="w-full overflow-hidden">
-      <div className="container mx-auto md:px-10 px-6 md:pt-16 pt-8 md:pb-8">
+      <div className="mx-auto md:px-10 px-6 md:pt-16 pt-8 md:pb-8">
         <div className="flex items-center justify-between">
           <h2 className="text-primary">Our Company’s Accomplishments</h2>
           <button
