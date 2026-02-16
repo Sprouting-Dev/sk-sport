@@ -1,7 +1,9 @@
 'use client'
 
 import React from 'react'
-import { Accomplishment, OurProducts } from '@/components/home'
+import Link from 'next/link'
+import { ButtonLink } from '@/components/button'
+import { Accomplishment, AboutCompany, ContactSection, OurProducts, PartnersSection } from '@/components/home'
 import { Hero } from '@/components/hero/Hero'
 import './styles.css'
 
@@ -44,11 +46,27 @@ const blogPosts = [
 ]
 
 export default function HomePage() {
-  return (
-    <div className="mx-auto flex min-h-[60vh] w-full flex-col items-center justify-center gap-4">
+  return ( 
+    <div className="mx-auto flex min-h-[60vh] w-full flex-col items-center justify-center bg-header-bg">
       <Hero />
       <OurProducts />
       <Accomplishment items={blogPosts} />
+      <AboutCompany />
+      <ContactSection />
+      <PartnersSection />
+      <h1 className="h1">Welcome</h1>
+      <p className="body-md text-base-content/80">View theme colors and typography examples.</p>
+      <div className="flex flex-wrap justify-center gap-3">
+        <ButtonLink href="/example" variant="primary">
+          Open examples
+        </ButtonLink>
+      </div>
+      <p className="body-md text-base-content/80">
+        View theme colors and typography examples.
+      </p>
+      <Link className="btn btn-primary btn-lg-typo" href="/example">
+        Open examples
+      </Link>
     </div>
   )
 }
