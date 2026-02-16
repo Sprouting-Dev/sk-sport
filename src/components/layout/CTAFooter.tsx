@@ -2,30 +2,18 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 export const CTAFooter = () => {
-  const pathname = usePathname()
-  // Show on Home ('/')
-  // Show on Single Pages
-  const isHome = pathname === '/'
-  const isSinglePage =
-    // pathname.startsWith('/services/') ||
-    pathname.includes('united-discovery') ||
-    pathname.includes('health-management-system') ||
-    pathname.includes('equipment-for-top-gymnasts')
-
-  const shouldShow = isHome || isSinglePage
-
-  if (!shouldShow) {
-    return null
-  }
-
   return (
-    <div className="cta-section">
-      <div className="cta-content">
-        <h2 className="cta-title">Need a complete sport facility solution ?</h2>
-        <Link href="/contact" className="cta-button">
+    <div className="cta-gradient-bg flex w-full items-center justify-center">
+      <div className="cta-content-width flex w-full flex-col items-center justify-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
+        <h2 className="cta-text-style font-heading font-semibold">
+          Need a complete sport facility solution ?
+        </h2>
+        <Link
+          href="/contact"
+          className="font-heading cta-button-bg cta-button-bg-hover cta-text-style flex items-center justify-center gap-2.5 border border-transparent bg-clip-padding font-semibold transition-all duration-300"
+        >
           Contact Our Team
         </Link>
       </div>

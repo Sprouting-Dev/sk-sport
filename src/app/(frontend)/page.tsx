@@ -9,6 +9,7 @@ import {
   PartnersSection,
   Services,
 } from '@/components/home'
+import { CTAFooter } from '@/components/layout/CTAFooter'
 import { Hero } from '@/components/hero/Hero'
 import './styles.css'
 
@@ -57,6 +58,7 @@ export default function HomePage() {
       <Services />
       <OurProducts />
       <Accomplishment items={blogPosts} />
+      <CTAFooter />
       <AboutCompany />
       <ContactSection />
       <PartnersSection />
