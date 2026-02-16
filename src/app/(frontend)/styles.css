@@ -95,6 +95,22 @@
   filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
 }
 
+/* Gallery Title Typography */
+.gallery-title-our {
+  font-family: var(--font-rajdhani);
+  font-weight: 600;
+  color: #004bd7;
+}
+
+.gallery-title-gallery {
+  font-family: var(--font-rajdhani);
+  font-weight: 600;
+  background: linear-gradient(90deg, #004bd7 0%, #ff3591 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /*Border Gradient Button*/
 .btn-gradient-solid-border {
   position: relative;
@@ -294,4 +310,63 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+.gallery-container-height {
+  height: 15.5rem; /* 248px */
+}
+
+.gallery-image-width {
+  width: 15.625rem; /* 250px */
+}
+
+.gallery-image-height {
+  height: 15.5rem; /* 248px */
+}
+
+.gallery-image-gap {
+  gap: 1rem; /* 16px */
+}
+
+.gallery-modal-top {
+  margin-top: 3.125rem; /* 50px */
+}
+
+.gallery-modal-width {
+  width: 32.5rem; /* 520px */
+}
+
+.gallery-modal-height {
+  height: 32.625rem; /* 522px */
+}
+
+.gallery-modal-radius {
+  border-radius: 0.9375rem; /* 15px */
+}
+
+.gallery-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.gallery-button-bg {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.gallery-button-bg:hover {
+  background-color: #ffffff;
+}
+
+.gallery-title-size {
+  font-size: 2rem; /* 32px */
+}
+
+.gallery-title-leading {
+  line-height: 120%;
+}
+
+.gallery-title-pb {
+  padding-bottom: 2.5rem; /* 40px */
+}
+
+.gallery-max-width {
+  max-width: 80rem; /* 1280px */
 }

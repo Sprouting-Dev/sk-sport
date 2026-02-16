@@ -62,6 +62,7 @@ export default function HomePage() {
       <AboutCompany />
       <ContactSection />
       <PartnersSection />
+      <Gallery />
     </div>
   )
 }
