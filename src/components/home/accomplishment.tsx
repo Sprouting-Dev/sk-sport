@@ -1,15 +1,20 @@
 'use client'
 
 import React from 'react'
-import { useRouter } from 'next/navigation'
 import { ArticleCard, type ArticleItem } from '@/components/card'
+import { NAV_ITEMS } from '@/const/navigation'
+import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
 interface AccomplishmentProps {
   items: ArticleItem[]
 }
 
 export const Accomplishment = ({ items }: AccomplishmentProps) => {
+  const t = useTranslations('Home.Accomplishment')
   const router = useRouter()
+
+  const Path = NAV_ITEMS.find((item) => item.name === 'Portfolio')?.href || '#'
 
   return (
     <div className="w-full overflow-hidden">
@@ -17,10 +22,10 @@ export const Accomplishment = ({ items }: AccomplishmentProps) => {
         <div className="flex items-center justify-between">
           <h2 className="text-primary">Our Company’s Accomplishments</h2>
           <button
-            className="btn btn-gradient-solid-border btn-sm-typo md:w-38.5 w-22.5 md:h-12 h-7"
-            onClick={() => router.push('')}
+            onClick={() => router.push(Path)}
+            className="btn btn-gradient-solid-border btn-sm-typo w-22.5 md:w-38.5 h-7 md:h-12"
           >
-            <span className="text-primary">See All</span>
+            <span className="text-primary ">{t(`button`)}</span>
           </button>
         </div>
       </div>

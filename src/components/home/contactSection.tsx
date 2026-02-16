@@ -2,16 +2,25 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { Button } from '../button'
+import { NAV_ITEMS } from '@/const/navigation'
 import { MapPinAreaIcon, PhoneIcon, EnvelopeIcon } from '@phosphor-icons/react'
+import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
 export const ContactSection = () => {
+  const t = useTranslations('Home.ContactSection')
+  const router = useRouter()
+
+  const Path = NAV_ITEMS.find((item) => item.name === 'Contact Us')?.href || '#'
+
   return (
     <div className="w-full flex flex-col">
       <div className="bg-base-content text-light py-6 md:py-14 px-4 text-center">
         <h2>
-          Don&apos;t just play-dominate. Contact our
+          {t(`title1`)}
           <br />
-          specialists to find your perfect fit.
+          {t(`title2`)}
         </h2>
       </div>
 
@@ -80,9 +89,13 @@ export const ContactSection = () => {
             </div>
 
             <div className="mt-6 md:-mt-10 flex justify-start md:justify-end">
-              <button className="btn btn-gradient-solid-border btn-sm-typo w-27 md:w-38.5 h-7 md:h-12">
+              <Button
+                size="sm"
+                onClick={() => router.push(Path)}
+                className="w-27 md:w-38.5 h-7 md:h-12"
+              >
                 <span className="text-light">Contact Us</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>

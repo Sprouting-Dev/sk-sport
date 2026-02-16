@@ -1,8 +1,6 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
-import { ButtonLink } from '@/components/button'
 import { Accomplishment, AboutCompany, ContactSection, OurProducts, PartnersSection } from '@/components/home'
 import { Hero } from '@/components/hero/Hero'
 import './styles.css'
@@ -54,19 +52,6 @@ export default function HomePage() {
       <AboutCompany />
       <ContactSection />
       <PartnersSection />
-      <h1 className="h1">Welcome</h1>
-      <p className="body-md text-base-content/80">View theme colors and typography examples.</p>
-      <div className="flex flex-wrap justify-center gap-3">
-        <ButtonLink href="/example" variant="primary">
-          Open examples
-        </ButtonLink>
-      </div>
-      <p className="body-md text-base-content/80">
-        View theme colors and typography examples.
-      </p>
-      <Link className="btn btn-primary btn-lg-typo" href="/example">
-        Open examples
-      </Link>
     </div>
   )
 }

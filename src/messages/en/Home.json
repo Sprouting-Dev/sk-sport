@@ -28,5 +28,16 @@
         "description": "Professional gymnastics equipment for training and competition.Professional gymnastics equipment for training and competition.Professional gymnastics equipment for training and competition."
       }
     }
+  },
+  "AboutCompany": {
+    "title": "SK. Sport Trading CO.,LTD.",
+    "detail": "United Group has a subsidiary company, United Discovery Co., Ltd., which operates in the tourism and service sector, such as organizing international tours, booking airline tickets and hotels, and arranging student study trips abroad."
+  },
+  "Accomplishment": {
+    "button": "See All"
+  },
+  "ContactSection": {
+    "title1": "Don't just play-dominate. Contact our",
+    "title2": "specialists to find your perfect fit."
   }
 }
