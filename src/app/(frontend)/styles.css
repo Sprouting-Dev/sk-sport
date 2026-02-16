@@ -4,6 +4,9 @@
 @theme {
   --color-header: #0445bf;
   --color-header-bg: #f2f2f2;
+  --color-light: #ffffff;
+  --spacing-service-card: 39.75rem;
+  --spacing-service-card-lg: 49.21875rem;
 }
 @plugin "daisyui/theme" {
   name: 'sksport';
@@ -155,13 +158,6 @@
 }
 
 /* Custom Utilities for fixing ESLint errors */
-.text-light {
-  color: #ffffff;
-}
-
-.bg-light {
-  background-color: #ffffff;
-}
 
 .support-card-height {
   height: 24.66rem;
@@ -244,15 +240,6 @@
 }
 
 /* Service Cards */
-.service-card {
-  min-height: 39.75rem;
-}
-
-@media (min-width: 80rem) {
-  .service-card {
-    height: 49.21875rem;
-  }
-}
 
 .service-card-overlay {
   background: linear-gradient(360deg, rgba(25, 32, 46, 0.9) 0%, rgba(0, 0, 0, 0.18) 101.64%);
