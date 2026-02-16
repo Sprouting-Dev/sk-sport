@@ -2,10 +2,15 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { NAV_ITEMS } from '@/const/navigation'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 export const AboutCompany = () => {
+  const t = useTranslations('Home.AboutCompany')
   const router = useRouter()
+
+  const Path = NAV_ITEMS.find((item) => item.name === 'About Us')?.href || '#'
 
   return (
     <div className="w-full flex flex-col gap-8 pt-10">
@@ -26,15 +31,13 @@ export const AboutCompany = () => {
 
         <div className="container relative z-20 mx-auto px-6 h-full flex items-center justify-end">
           <div className="w-full md:w-1/2 flex flex-col gap-6 text-light md:pl-10">
-            <h3>SK. Sport Trading CO.,LTD.</h3>
+            <h3>{t(`title`)}</h3>
 
-            <p className="indent-1 body-sm">
-              มีบริษัทในเครือ ยูไนเต็ด กรุ๊ป คือ บริษัท ยูไนเต็ด ดิสคัพเวอรี่ จำกัด ซึ่งเป็นบริษัทที่ประกอบธุรกิจเกี่ยวกับการท้องเที่ยวและการบริการ เช่นการ การนำทัวร์เที่ยวต่างประเทศ การจองตั๋วเครื่องบินและการจองโรงแรม การนำทัวร์นักศึกษาดูงานต่างประเทศต่างๆ
-            </p>
+            <p className="indent-1 body-sm">{t(`detail`)}</p>
 
             <div className="pt-4 flex justify-center md:justify-end">
               <button
-                onClick={() => router.push('/about')}
+                onClick={() => router.push(Path)}
                 className="btn btn-gradient-solid-border btn-sm-typo w-27 md:w-38.5 h-7 md:h-12"
               >
                 <span className="text-light">About Us</span>
