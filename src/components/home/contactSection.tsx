@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '../button'
-import { NAV_ITEMS } from '@/const/navigation'
+import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { MapPinAreaIcon, PhoneIcon, EnvelopeIcon } from '@phosphor-icons/react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -11,8 +11,6 @@ import { useRouter } from 'next/navigation'
 export const ContactSection = () => {
   const t = useTranslations('Home.ContactSection')
   const router = useRouter()
-
-  const Path = NAV_ITEMS.find((item) => item.name === 'Contact Us')?.href || '#'
 
   return (
     <div className="w-full flex flex-col">
@@ -91,7 +89,7 @@ export const ContactSection = () => {
             <div className="mt-6 md:-mt-10 flex justify-start md:justify-end">
               <Button
                 size="sm"
-                onClick={() => router.push(Path)}
+                onClick={() => router.push(NAV_PATHS[NavKey.ContactUs])}
                 className="w-27 md:w-38.5 h-7 md:h-12"
               >
                 <span className="text-light">Contact Us</span>

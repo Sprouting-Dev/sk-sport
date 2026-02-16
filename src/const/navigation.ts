@@ -1,12 +1,15 @@
-export type NavItem = {
-  name: string
-  href: string
+export enum NavKey {
+  Products = 'products',
+  Services = 'services',
+  Portfolio = 'portfolio',
+  AboutUs = 'aboutUs',
+  ContactUs = 'contactUs',
 }
 
-export const NAV_ITEMS: NavItem[] = [
-  { name: 'Products', href: '/products' },
-  { name: 'Services', href: '/services' },
-  { name: 'Portfolio', href: '/portfolio' },
-  { name: 'About Us', href: '/about' },
-  { name: 'Contact Us', href: '/contact' },
-]
+export const NAV_PATHS: Record<NavKey, string> = {
+  [NavKey.Products]: '/products',
+  [NavKey.Services]: '/services',
+  [NavKey.Portfolio]: '/portfolio',
+  [NavKey.AboutUs]: '/about',
+  [NavKey.ContactUs]: '/contact',
+}
