@@ -38,11 +38,13 @@ export const ServiceCard = ({
       <div className="service-card-overlay absolute inset-0 z-10" />
 
       <div
-        className={`service-card-content ${
+        className={`flex flex-col h-full p-6 relative z-20 ${
           alignButton === 'top' ? 'justify-start' : 'justify-end'
         }`}
       >
-        <div className={`service-card-grid ${alignButton === 'top' ? 'items-start' : 'items-end'}`}>
+        <div
+          className={`grid grid-cols-service-card-layout gap-4 w-full ${alignButton === 'top' ? 'items-start' : 'items-end'}`}
+        >
           <div className="service-card-text">
             <h3 className="service-card-title">{title}</h3>
             <p className="service-card-desc">{description}</p>
