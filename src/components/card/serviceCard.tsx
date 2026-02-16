@@ -24,7 +24,7 @@ export const ServiceCard = ({
   alignButton = 'bottom',
 }: ServiceCardProps) => {
   return (
-    <div className="service-card group relative flex flex-col justify-between overflow-hidden">
+    <div className="min-h-service-card xl:h-service-card-lg group relative flex flex-col justify-between overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
           src={image}
