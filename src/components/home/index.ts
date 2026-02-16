@@ -1,2 +1,5 @@
+export * from './aboutCompany'
 export * from './accomplishment'
+export * from './contactSection'
 export * from './ourProducts'
+export * from './partnersSection'

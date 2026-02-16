@@ -1,0 +1,48 @@
+'use client'
+
+import React from 'react'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+
+export const AboutCompany = () => {
+  const router = useRouter()
+
+  return (
+    <div className="w-full flex flex-col gap-8 pt-10">
+      <div className="text-center space-y-2">
+        <p className="body-sm text-primary">
+          Professional <br /> with
+        </p>
+        <h2 className="text-primary">Our Company</h2>
+      </div>
+
+      <div className="relative w-full h-80 md:h-140">
+        <div className="absolute inset-0 z-0">
+          <Image src="/About Company BG.png" alt="BG" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-overlay-40 z-5" />
+          <div className="absolute inset-0 bg-overlay-40 z-10 md:hidden" />
+          <div className="absolute inset-y-0 right-0 w-1/2 bg-overlay-40 z-10 hidden md:block" />
+        </div>
+
+        <div className="container relative z-20 mx-auto px-6 h-full flex items-center justify-end">
+          <div className="w-full md:w-1/2 flex flex-col gap-6 text-light md:pl-10">
+            <h3>SK. Sport Trading CO.,LTD.</h3>
+
+            <p className="indent-1 body-sm">
+              มีบริษัทในเครือ ยูไนเต็ด กรุ๊ป คือ บริษัท ยูไนเต็ด ดิสคัพเวอรี่ จำกัด ซึ่งเป็นบริษัทที่ประกอบธุรกิจเกี่ยวกับการท้องเที่ยวและการบริการ เช่นการ การนำทัวร์เที่ยวต่างประเทศ การจองตั๋วเครื่องบินและการจองโรงแรม การนำทัวร์นักศึกษาดูงานต่างประเทศต่างๆ
+            </p>
+
+            <div className="pt-4 flex justify-center md:justify-end">
+              <button
+                onClick={() => router.push('/about')}
+                className="btn btn-gradient-solid-border btn-sm-typo w-27 md:w-38.5 h-7 md:h-12"
+              >
+                <span className="text-light">About Us</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
