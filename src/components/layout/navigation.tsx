@@ -2,10 +2,18 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { NAV_ITEMS } from '@/const/navigation'
+import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { ListIcon, XIcon, ShoppingCartSimpleIcon } from '@phosphor-icons/react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
+
+const NAV_ITEMS = [
+  { name: 'Products', href: NAV_PATHS[NavKey.Products] },
+  { name: 'Services', href: NAV_PATHS[NavKey.Services] },
+  { name: 'Portfolio', href: NAV_PATHS[NavKey.Portfolio] },
+  { name: 'About Us', href: NAV_PATHS[NavKey.AboutUs] },
+  { name: 'Contact Us', href: NAV_PATHS[NavKey.ContactUs] },
+]
 
 export const Navbar = () => {
   const t = useTranslations('Footer')

@@ -2,15 +2,13 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { NAV_ITEMS } from '@/const/navigation'
+import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 export const AboutCompany = () => {
   const t = useTranslations('Home.AboutCompany')
   const router = useRouter()
-
-  const Path = NAV_ITEMS.find((item) => item.name === 'About Us')?.href || '#'
 
   return (
     <div className="w-full flex flex-col gap-8 pt-10">
@@ -37,7 +35,7 @@ export const AboutCompany = () => {
 
             <div className="pt-4 flex justify-center md:justify-end">
               <button
-                onClick={() => router.push(Path)}
+                onClick={() => router.push(NAV_PATHS[NavKey.AboutUs])}
                 className="btn btn-gradient-solid-border btn-sm-typo w-27 md:w-38.5 h-7 md:h-12"
               >
                 <span className="text-light">About Us</span>
