@@ -1,15 +1,15 @@
 export enum NavKey {
-  Products = 'products',
-  Services = 'services',
-  Portfolio = 'portfolio',
-  AboutUs = 'aboutUs',
-  ContactUs = 'contactUs',
+  PRODUCT = 'product',
+  SERVICE = 'service',
+  PORTFOLIO = 'portfolio',
+  ABOUT_US = 'aboutUs',
+  CONTACT_US = 'contactUs',
 }
 
 export const NAV_PATHS: Record<NavKey, string> = {
-  [NavKey.Products]: '/products',
-  [NavKey.Services]: '/services',
-  [NavKey.Portfolio]: '/portfolio',
-  [NavKey.AboutUs]: '/about',
-  [NavKey.ContactUs]: '/contact',
+  [NavKey.PRODUCT]: '/product',
+  [NavKey.SERVICE]: '/service',
+  [NavKey.PORTFOLIO]: '/portfolio',
+  [NavKey.ABOUT_US]: '/about',
+  [NavKey.CONTACT_US]: '/contact',
 }

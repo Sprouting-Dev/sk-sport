@@ -35,7 +35,7 @@ export const AboutCompany = () => {
 
             <div className="pt-4 flex justify-center md:justify-end">
               <button
-                onClick={() => router.push(NAV_PATHS[NavKey.AboutUs])}
+                onClick={() => router.push(NAV_PATHS[NavKey.ABOUT_US])}
                 className="btn btn-gradient-solid-border btn-sm-typo w-27 md:w-38.5 h-7 md:h-12"
               >
                 <span className="text-light">About Us</span>

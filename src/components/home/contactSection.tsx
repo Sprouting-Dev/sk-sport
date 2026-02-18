@@ -89,7 +89,7 @@ export const ContactSection = () => {
             <div className="mt-6 md:-mt-10 flex justify-start md:justify-end">
               <Button
                 size="sm"
-                onClick={() => router.push(NAV_PATHS[NavKey.ContactUs])}
+                onClick={() => router.push(NAV_PATHS[NavKey.CONTACT_US])}
                 className="w-27 md:w-38.5 h-7 md:h-12"
               >
                 <span className="text-light">Contact Us</span>

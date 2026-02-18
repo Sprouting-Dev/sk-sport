@@ -39,15 +39,14 @@ const socialLinks = [
 
 export const Footer: React.FC = () => {
   const router = useRouter()
-  const t = useTranslations('Footer')
+  const t = useTranslations('Layout')
 
   const siteMapLinks = [
     { label: t('links.home'), href: '/' },
     { label: t('links.aboutUs'), href: '/about' },
-    { label: t('links.products'), href: '/products' },
-    { label: t('links.services'), href: '/services' },
+    { label: t('links.product'), href: '/product' },
+    { label: t('links.service'), href: '/service' },
     { label: t('links.portfolio'), href: '/portfolio' },
-    { label: t('links.articles'), href: '/articles' },
     { label: t('links.faq'), href: '/faq' },
   ]
 
