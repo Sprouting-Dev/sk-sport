@@ -14,7 +14,7 @@ export const ContactSection = () => {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="bg-base-content text-light py-6 md:py-14 px-4 text-center">
+      <div className="bg-base-content text-primary-content py-6 md:py-14 px-4 text-center">
         <h2>
           {t(`title1`)}
           <br />
@@ -61,26 +61,26 @@ export const ContactSection = () => {
           </div>
 
           <div className="relative z-10 w-full max-w-lg md:max-w-2xl md:mr-auto">
-            <h2 className="text-light mb-4 md:my-12">Meet Us</h2>
+            <h2 className="text-primary-content mb-4 md:my-12">Meet Us</h2>
 
             <div className="flex flex-col gap-2 md:gap-6">
               <div className="flex items-start gap-4">
                 <MapPinAreaIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
-                <p className="text-xs md:text-2xl font-medium font-body text-light">
+                <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
                   Ek Thaksin Road, Pathum Thani
                 </p>
               </div>
 
               <div className="flex items-start gap-4">
                 <PhoneIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
-                <p className="text-xs md:text-2xl font-medium font-body text-light">
+                <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
                   06-4927504258
                 </p>
               </div>
 
               <div className="flex items-start gap-4">
                 <EnvelopeIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
-                <p className="text-xs md:text-2xl font-medium font-body text-light">
+                <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
                   kheo@12gmail.com
                 </p>
               </div>
@@ -92,7 +92,7 @@ export const ContactSection = () => {
                 onClick={() => router.push(NAV_PATHS[NavKey.CONTACT_US])}
                 className="w-27 md:w-38.5 h-7 md:h-12"
               >
-                <span className="text-light">Contact Us</span>
+                <span className="text-primary-content">Contact Us</span>
               </Button>
             </div>
           </div>
