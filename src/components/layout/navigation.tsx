@@ -7,16 +7,20 @@ import { ListIcon, XIcon, ShoppingCartSimpleIcon } from '@phosphor-icons/react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
 
-const NAV_ITEMS = [
-  { name: 'Products', href: NAV_PATHS[NavKey.Products] },
-  { name: 'Services', href: NAV_PATHS[NavKey.Services] },
-  { name: 'Portfolio', href: NAV_PATHS[NavKey.Portfolio] },
-  { name: 'About Us', href: NAV_PATHS[NavKey.AboutUs] },
-  { name: 'Contact Us', href: NAV_PATHS[NavKey.ContactUs] },
-]
+const NAV_KEYS = [
+  NavKey.PRODUCT,
+  NavKey.SERVICE,
+  NavKey.PORTFOLIO,
+  NavKey.ABOUT_US,
+  NavKey.CONTACT_US,
+] as const
 
 export const Navbar = () => {
-  const t = useTranslations('Footer')
+  const t = useTranslations('Layout')
+  const navItems = NAV_KEYS.map((key) => ({
+    key,
+    href: NAV_PATHS[key],
+  }))
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -35,13 +39,13 @@ export const Navbar = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-12">
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <Link
-                key={item.name}
+                key={item.key}
                 href={item.href}
                 className="body-sm text-primary-content font-medium"
               >
-                {item.name}
+                {t(`links.${item.key}`)}
               </Link>
             ))}
 
@@ -81,9 +85,9 @@ export const Navbar = () => {
         </div>
 
         <div className="flex flex-col w-full">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
-              key={item.name}
+              key={item.key}
               href={item.href}
               onClick={closeMenu}
               className="group relative flex items-center w-full px-6 py-5 text-primary-content overflow-hidden transition-all duration-300"
@@ -93,7 +97,7 @@ export const Navbar = () => {
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-r from-primary from-20% to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <span className="relative z-10 body-md tracking-wide group-hover:translate-x-2 transition-transform duration-300">
-                {item.name}
+                {t(`links.${item.key}`)}
               </span>
             </Link>
           ))}

@@ -32,17 +32,9 @@ export const PartnersSection = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-4 gap-8 md:gap-12 items-center justify-items-center">
           {partners.map((partner) => (
-            <div 
-              key={partner.id} 
-              className="relative w-full flex justify-center items-center h-16"
-            >
+            <div key={partner.id} className="relative w-full flex justify-center items-center h-16">
               <div className="relative w-49 h-19.5">
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  fill
-                  className="object-contain"
-                />
+                <Image src={partner.logo} alt={partner.name} fill className="object-contain" />
               </div>
             </div>
           ))}

@@ -7,10 +7,11 @@
   "links": {
     "home": "Home",
     "aboutUs": "About Us",
-    "products": "Products",
-    "services": "Services",
+    "contactUs": "Contact Us",
+    "product": "Product",
+    "service": "Service",
     "portfolio": "Portfolio",
-    "articles": "Articles",
+    "article": "Article",
     "faq": "FAQ",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Term of Services"

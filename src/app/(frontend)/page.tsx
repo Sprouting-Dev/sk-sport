@@ -1,7 +1,13 @@
 'use client'
 
 import React from 'react'
-import { Accomplishment, AboutCompany, ContactSection, OurProducts, PartnersSection } from '@/components/home'
+import {
+  Accomplishment,
+  AboutCompany,
+  ContactSection,
+  OurProducts,
+  PartnersSection,
+} from '@/components/home'
 import { Hero } from '@/components/hero/Hero'
 import './styles.css'
 
@@ -44,7 +50,7 @@ const blogPosts = [
 ]
 
 export default function HomePage() {
-  return ( 
+  return (
     <div className="mx-auto flex min-h-[60vh] w-full flex-col items-center justify-center bg-header-bg">
       <Hero />
       <OurProducts />

@@ -7,10 +7,11 @@
   "links": {
     "home": "หน้าหลัก",
     "aboutUs": "เกี่ยวกับเรา",
-    "products": "สินค้า",
-    "services": "บริการ",
+    "contactUs": "ติดต่อเรา",
+    "product": "สินค้า",
+    "service": "บริการ",
     "portfolio": "ผลงาน",
-    "articles": "บทความ",
+    "article": "บทความ",
     "faq": "คำถามที่พบบ่อย",
     "privacyPolicy": "นโยบายความเป็นส่วนตัว",
     "termsOfService": "ข้อตกลงการใช้บริการ"
