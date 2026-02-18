@@ -23,6 +23,8 @@ export const ServiceCard = ({
   imageAlt,
   alignButton = 'bottom',
 }: ServiceCardProps) => {
+  const isTop = alignButton === 'top'
+
   return (
     <div className="min-h-service-card xl:h-service-card-lg group relative flex flex-col justify-between overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -34,28 +36,38 @@ export const ServiceCard = ({
         />
       </div>
 
-      {/* Gradient Overlay */}
       <div className="service-card-overlay absolute inset-0 z-10" />
 
-      <div
-        className={`flex flex-col h-full p-6 relative z-20 ${
-          alignButton === 'top' ? 'justify-start' : 'justify-end'
-        }`}
-      >
-        <div
-          className={`grid grid-cols-service-card-layout gap-4 w-full ${alignButton === 'top' ? 'items-start' : 'items-end'}`}
-        >
-          <div className="service-card-text">
-            <h3 className="service-card-title">{title}</h3>
-            <p className="service-card-desc">{description}</p>
-          </div>
+      <div className="relative z-20 flex items-start justify-between gap-4 p-6">
+        {isTop && (
+          <>
+            <div className="service-card-text">
+              <h3 className="service-card-title">{title}</h3>
+              <p className="service-card-desc">{description}</p>
+            </div>
+            <div className="shrink-0">
+              <ButtonLink href={href} variant="gradient" size="md" className="text-light">
+                {buttonText}
+              </ButtonLink>
+            </div>
+          </>
+        )}
+      </div>
 
-          <div className="relative z-30 mb-1">
-            <ButtonLink href={href} variant="gradient" size="md" className="text-light">
-              {buttonText}
-            </ButtonLink>
-          </div>
-        </div>
+      <div className="relative z-20 flex items-end justify-between gap-4 p-6">
+        {!isTop && (
+          <>
+            <div className="service-card-text">
+              <h3 className="service-card-title">{title}</h3>
+              <p className="service-card-desc">{description}</p>
+            </div>
+            <div className="shrink-0">
+              <ButtonLink href={href} variant="gradient" size="md" className="text-light">
+                {buttonText}
+              </ButtonLink>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

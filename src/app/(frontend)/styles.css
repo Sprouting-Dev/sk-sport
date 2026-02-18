@@ -240,10 +240,12 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
 }
 
-/* Service Cards */
-
 .service-card-overlay {
   background: linear-gradient(360deg, rgba(25, 32, 46, 0.9) 0%, rgba(0, 0, 0, 0.18) 101.64%);
+}
+
+.text-shadow-card {
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 .service-card-text {
@@ -309,22 +311,6 @@
   background: linear-gradient(360deg, rgba(25, 32, 46, 0.8) 0%, rgba(4, 69, 191, 0.08) 101.64%);
 }
 
-.support-card-title {
-  font-family: var(--font-heading);
-  font-size: var(--h2-mobile-size);
-  line-height: var(--h2-mobile-lh);
-  font-weight: var(--h2-mobile-w);
-  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
-}
-
-@media (min-width: 48rem) {
-  .support-card-title {
-    font-size: var(--h2-desktop-size);
-    line-height: var(--h2-desktop-lh);
-    font-weight: var(--h2-desktop-w);
-  }
-}
-
 .service-section-header {
   padding: 3rem 1.5rem;
   text-align: center;
@@ -332,23 +318,6 @@
 
 .service-section-header h2 {
   color: #0445bf;
-}
-
-.service-section-subtitle {
-  font-family: var(--font-body);
-  font-size: var(--body-sm-mobile-size);
-  line-height: var(--body-sm-mobile-lh);
-  font-weight: var(--body-sm-mobile-w);
-  text-align: center;
-  color: #0445bf;
-}
-
-@media (min-width: 48rem) {
-  .service-section-subtitle {
-    font-size: var(--body-sm-desktop-size);
-    line-height: var(--body-sm-desktop-lh);
-    font-weight: var(--body-sm-desktop-w);
-  }
 }
 
 @layer utilities {
