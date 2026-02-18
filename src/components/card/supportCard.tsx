@@ -22,7 +22,7 @@ export const SupportCard = ({ title, image, icon, imageAlt }: SupportCardProps) 
       <div className="absolute inset-0 z-10 support-card-overlay" />
       <div className="relative z-20 flex items-center gap-4">
         <div className="text-light">{icon}</div>
-        <h3 className="text-light support-card-title">{title}</h3>
+        <h3 className="text-light text-shadow-card">{title}</h3>
       </div>
     </div>
   )
