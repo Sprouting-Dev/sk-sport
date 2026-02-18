@@ -28,7 +28,7 @@ export const AboutCompany = () => {
         </div>
 
         <div className="container relative z-20 mx-auto px-6 h-full flex items-center justify-end">
-          <div className="w-full md:w-1/2 flex flex-col gap-6 text-light md:pl-10">
+          <div className="w-full md:w-1/2 flex flex-col gap-6 text-primary-content md:pl-10">
             <h3>{t(`title`)}</h3>
 
             <p className="indent-1 body-sm">{t(`detail`)}</p>
@@ -38,7 +38,7 @@ export const AboutCompany = () => {
                 onClick={() => router.push(NAV_PATHS[NavKey.ABOUT_US])}
                 className="btn btn-gradient-solid-border btn-sm-typo w-27 md:w-38.5 h-7 md:h-12"
               >
-                <span className="text-light">About Us</span>
+                <span className="text-primary-content">About Us</span>
               </button>
             </div>
           </div>

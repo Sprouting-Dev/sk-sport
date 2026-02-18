@@ -4,9 +4,6 @@
 @theme {
   --color-header: #0445bf;
   --color-header-bg: #f2f2f2;
-  --color-light: #ffffff;
-  --spacing-service-card: 39.75rem;
-  --spacing-service-card-lg: 49.21875rem;
   --grid-cols-service-card-layout: 1fr auto;
 }
 @plugin "daisyui/theme" {
@@ -24,7 +21,7 @@
 
   /* BRAND */
   --color-primary: oklch(0.4435 0.1997 262.02);
-  --color-primary-content: oklch(98% 0.01 240);
+  --color-primary-content: oklch(1 0 180);
 
   --color-secondary: oklch(0.6689 0.2418 359.19);
   --color-secondary-content: oklch(98% 0.01 200);
@@ -158,12 +155,6 @@
   pointer-events: none;
 }
 
-/* Custom Utilities for fixing ESLint errors */
-
-.support-card-height {
-  height: 24.66rem;
-}
-
 .bg-hero {
   background-color: #171717;
 }
@@ -248,76 +239,12 @@
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
 }
 
-.service-card-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-width: 434px;
-}
-
-.service-card-title {
-  font-family: var(--font-heading);
-  font-size: var(--h2-mobile-size);
-  line-height: var(--h2-mobile-lh);
-  font-weight: var(--h2-mobile-w);
-  color: #ffffff;
+.text-shadow {
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
-  white-space: pre-line;
-}
-
-@media (min-width: 48rem) {
-  .service-card-title {
-    font-size: var(--h2-desktop-size);
-    line-height: var(--h2-desktop-lh);
-    font-weight: var(--h2-desktop-w);
-  }
-}
-
-.service-card-desc {
-  font-family: var(--font-body);
-  font-size: var(--body-sm-mobile-size);
-  line-height: var(--body-sm-mobile-lh);
-  font-weight: var(--body-sm-mobile-w);
-  color: #ffffff;
-  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
-  white-space: pre-line;
-}
-
-@media (min-width: 48rem) {
-  .service-card-desc {
-    font-size: var(--body-sm-desktop-size);
-    line-height: var(--body-sm-desktop-lh);
-    font-weight: var(--body-sm-desktop-w);
-  }
-}
-
-.support-service-title {
-  font-family: var(--font-heading);
-  font-size: var(--h2-mobile-size);
-  line-height: var(--h2-mobile-lh);
-  font-weight: var(--h2-mobile-w);
-  color: #0445bf;
-}
-
-@media (min-width: 48rem) {
-  .support-service-title {
-    font-size: var(--h2-desktop-size);
-    line-height: var(--h2-desktop-lh);
-    font-weight: var(--h2-desktop-w);
-  }
 }
 
 .support-card-overlay {
   background: linear-gradient(360deg, rgba(25, 32, 46, 0.8) 0%, rgba(4, 69, 191, 0.08) 101.64%);
-}
-
-.service-section-header {
-  padding: 3rem 1.5rem;
-  text-align: center;
-}
-
-.service-section-header h2 {
-  color: #0445bf;
 }
 
 @layer utilities {

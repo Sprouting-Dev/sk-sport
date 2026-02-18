@@ -10,7 +10,7 @@ export interface SupportCardProps {
 
 export const SupportCard = ({ title, image, icon, imageAlt }: SupportCardProps) => {
   return (
-    <div className="support-card-height bg-light group relative flex w-full flex-col justify-end overflow-hidden rounded-lg p-9">
+    <div className="bg-light group relative flex w-full h-28 md:h-full md:aspect-square flex-col justify-end overflow-hidden rounded-lg p-3 md:p-9">
       <div className="absolute inset-0 z-0">
         <Image
           src={image}
@@ -21,8 +21,8 @@ export const SupportCard = ({ title, image, icon, imageAlt }: SupportCardProps) 
       </div>
       <div className="absolute inset-0 z-10 support-card-overlay" />
       <div className="relative z-20 flex items-center gap-4">
-        <div className="text-light">{icon}</div>
-        <h3 className="text-light text-shadow-card">{title}</h3>
+        <div className="text-primary-content">{icon}</div>
+        <h3 className="text-primary-content text-shadow-card">{title}</h3>
       </div>
     </div>
   )

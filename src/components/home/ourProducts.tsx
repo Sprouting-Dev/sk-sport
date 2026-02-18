@@ -29,7 +29,7 @@ export const OurProducts = () => {
         <h2 className="text-header">{t('title')}</h2>
       </div>
 
-      <section className="relative w-full hero-wrapper-height h-full max-h-170 overflow-hidden text-light transition-all duration-500">
+      <section className="relative w-full hero-wrapper-height h-full max-h-170 overflow-hidden text-primary-content transition-all duration-500">
         <HeroCarousel
           images={categoryImages}
           activeIndex={activeIndex}
@@ -88,7 +88,7 @@ export const OurProducts = () => {
                       <div
                         className={
                           isLeft
-                            ? 'absolute bottom-4 left-4 text-light font-medium text-lg leading-tight'
+                            ? 'absolute bottom-4 left-4 text-primary-content font-medium text-lg leading-tight'
                             : 'absolute bottom-1 left-1 text-subtle font-medium text-xs leading-tight'
                         }
                       >

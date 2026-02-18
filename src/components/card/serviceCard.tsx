@@ -26,7 +26,7 @@ export const ServiceCard = ({
   const isTop = alignButton === 'top'
 
   return (
-    <div className="min-h-service-card xl:h-service-card-lg group relative flex flex-col justify-between overflow-hidden">
+    <div className="w-full aspect-square group relative flex flex-col justify-between overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
           src={image}
@@ -41,12 +41,12 @@ export const ServiceCard = ({
       <div className="relative z-20 flex items-start justify-between gap-4 p-6">
         {isTop && (
           <>
-            <div className="service-card-text">
-              <h3 className="service-card-title">{title}</h3>
-              <p className="service-card-desc">{description}</p>
+            <div className="space-y-2 max-w-md">
+              <h2 className="text-primary-content text-shadow whitespace-pre-wrap">{title}</h2>
+              <p className="font-body text-primary-content">{description}</p>
             </div>
             <div className="shrink-0">
-              <ButtonLink href={href} variant="gradient" size="md" className="text-light">
+              <ButtonLink href={href} variant="gradient" size="md" className="text-primary-content">
                 {buttonText}
               </ButtonLink>
             </div>
@@ -57,12 +57,12 @@ export const ServiceCard = ({
       <div className="relative z-20 flex items-end justify-between gap-4 p-6">
         {!isTop && (
           <>
-            <div className="service-card-text">
-              <h3 className="service-card-title">{title}</h3>
-              <p className="service-card-desc">{description}</p>
+            <div className="space-y-2 max-w-md">
+              <h2 className="text-primary-content text-shadow whitespace-pre-wrap">{title}</h2>
+              <p className="font-body text-primary-content">{description}</p>
             </div>
             <div className="shrink-0">
-              <ButtonLink href={href} variant="gradient" size="md" className="text-light">
+              <ButtonLink href={href} variant="gradient" size="md" className="text-primary-content">
                 {buttonText}
               </ButtonLink>
             </div>
