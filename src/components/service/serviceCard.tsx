@@ -21,7 +21,6 @@ export const ServiceCard = ({
   href = '#',
   variant = 'vertical',
 }: ServiceCardProps) => {
-
   const t = useTranslations('Service')
   const isHorizontal = variant === 'horizontal'
 
