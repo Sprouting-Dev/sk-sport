@@ -5,11 +5,12 @@ import {
   Accomplishment,
   AboutCompany,
   ContactSection,
+  Gallery,
   OurProducts,
   PartnersSection,
   Services,
 } from '@/components/home'
-import { CTAFooter } from '@/components/layout/CTAFooter'
+import { CTAFooter } from '@/components/layout'
 import { Hero } from '@/components/hero/Hero'
 import './styles.css'
 
