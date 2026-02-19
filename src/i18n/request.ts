@@ -36,7 +36,7 @@ export default getRequestConfig(async () => {
     .filter(Boolean) as Locale[]
   const locale = cookieLocale ?? headerLocales[0] ?? defaultLocale
 
-  const namespaces = ['Layout', 'Home'] as const
+  const namespaces = ['Layout', 'Home', 'Service'] as const
   const messages = Object.fromEntries(
     await Promise.all(
       namespaces.map(async (namespace) => [
