@@ -1,9 +1,11 @@
 'use client'
 
 import React from 'react'
-import { ServiceCard } from '@/components/service/'
+import { ServiceCard, ServiceCardProps } from '@/components/service/'
 
-const services = [
+type Service = ServiceCardProps & { id: number }
+
+const services: Service[] = [
   {
     id: 1,
     title: 'United Discovery',
