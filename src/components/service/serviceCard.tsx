@@ -2,8 +2,9 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { Button } from '../button'
+import { Button } from '@/components/button'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import { cn } from '@/utils/cn'
 
 export type ServiceCardProps = {
@@ -21,7 +22,9 @@ export const ServiceCard = ({
   href = '#',
   variant = 'vertical',
 }: ServiceCardProps) => {
+  
   const t = useTranslations('Service')
+  const router = useRouter()
   const isHorizontal = variant === 'horizontal'
 
   return (
@@ -55,7 +58,7 @@ export const ServiceCard = ({
         <p className="body-sm">{description}</p>
 
         <div className="flex justify-end">
-          <Button variant="link" size="sm" href={href}>
+          <Button variant="link" size="sm" onClick={() => router.push(href)}>
             {t(`serviceCard`)}
           </Button>
         </div>
