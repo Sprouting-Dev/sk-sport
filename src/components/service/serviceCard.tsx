@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Button } from '../button'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
 
 export type ServiceCardProps = {
@@ -20,19 +21,21 @@ export const ServiceCard = ({
   href = '#',
   variant = 'vertical',
 }: ServiceCardProps) => {
+
+  const t = useTranslations('Service')
   const isHorizontal = variant === 'horizontal'
 
   return (
     <div
       className={cn(
-        'group relative flex w-full overflow-hidden rounded-xl bg-light shadow-lg transition-all duration-300',
-        isHorizontal ? 'flex-col md:flex-row' : 'flex-col'
+        'group relative flex w-full overflow-hidden rounded-xl bg-primary-content shadow-lg transition-all duration-300',
+        isHorizontal ? 'flex-col md:flex-row' : 'flex-col',
       )}
     >
       <div
         className={cn(
           'relative overflow-hidden',
-          isHorizontal ? 'h-31 w-full md:h-auto md:w-1/2' : 'h-31 md:h-60 w-full'
+          isHorizontal ? 'h-31 w-full md:h-auto md:w-1/2' : 'h-31 md:h-60 w-full',
         )}
       >
         <Image
@@ -46,23 +49,16 @@ export const ServiceCard = ({
       <div
         className={cn(
           'flex flex-col py-2 md:py-4 px-4 md:px-6',
-          isHorizontal ? 'md:min-h-75 w-full md:w-1/2' : 'w-full'
+          isHorizontal ? 'md:min-h-75 w-full md:w-1/2' : 'w-full',
         )}
       >
-        <h2 className="mb-1 md:mb-3">
-          {title}
-        </h2>
-        <p className="body-sm">
-          {description}
-        </p>
-        
+        <h2 className="mb-1 md:mb-3">{title}</h2>
+        <p className="body-sm">{description}</p>
+
         <div className="flex justify-end">
-          <Link
-            href={href}
-            className="inline-flex items-center text-xs md:text-base font-normal text-primary underline"
-          >
-            Read more
-          </Link>
+          <Button variant="link" size="sm" href={href}>
+            {t(`serviceCard`)}
+          </Button>
         </div>
       </div>
     </div>
