@@ -1,11 +1,6 @@
 @import 'tailwindcss';
 @plugin "daisyui";
 
-@theme {
-  --color-header: #0445bf;
-  --color-header-bg: #f2f2f2;
-  --grid-cols-service-card-layout: 1fr auto;
-}
 @plugin "daisyui/theme" {
   name: 'sksport';
   default: true;
@@ -71,9 +66,15 @@
   );
   --section-gradient-overlay-left: linear-gradient(
     93.72deg,
-    rgba(255, 95, 168, 0.2) 110.89%,
-    rgba(0, 75, 215, 0.2) 6.68%
+    rgba(255, 95, 168, 0.1),
+    rgba(0, 75, 215, 0.2)
   );
+}
+
+@theme {
+  --color-header: #0445bf;
+  --color-header-bg: #f2f2f2;
+  --grid-cols-service-card-layout: 1fr auto;
 }
 
 /* Company Name Typography */
@@ -142,7 +143,7 @@
   );
 }
 
-/* Footer */
+/* bg gradient */
 .section-bg-to-right {
   position: relative;
   background: var(--section-bg);
@@ -152,6 +153,19 @@
   position: absolute;
   inset: 0;
   background: var(--section-gradient-overlay-right);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.section-bg-to-left {
+  position: relative;
+  background: var(--section-bg);
+}
+.section-bg-to-left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--section-gradient-overlay-left);
   z-index: 1;
   pointer-events: none;
 }
@@ -267,33 +281,8 @@
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
 }
 
-.support-service-title {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 2rem;
-  color: #0445bf;
-}
-
 .support-card-overlay {
   background: linear-gradient(360deg, rgba(25, 32, 46, 0.8) 0%, rgba(4, 69, 191, 0.08) 101.64%);
-}
-
-.service-section-header {
-  padding: 3rem 1.5rem;
-  text-align: center;
-}
-
-.service-section-header h2 {
-  color: #0445bf;
-}
-
-.service-section-subtitle {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1;
-  font-weight: 400;
-  text-align: center;
-  color: #0445bf;
 }
 
 @layer utilities {
@@ -305,50 +294,4 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-}
-
-.cta-gradient-bg {
-  height: 20rem;
-  background:
-    linear-gradient(87.59deg, rgba(255, 53, 145, 0.1) 0%, rgba(4, 69, 191, 0.1) 26.25%),
-    linear-gradient(0deg, #19202e, #19202e);
-}
-
-.cta-button-bg {
-  height: 6.75rem;
-  width: 32.625rem;
-  background: linear-gradient(
-    92.92deg,
-    rgba(0, 75, 215, 0.2) 21.45%,
-    rgba(128, 91, 198, 0.18) 65.16%,
-    rgba(255, 106, 181, 0.2) 108.86%
-  );
-  border-image-source: linear-gradient(90deg, #0445bf 0%, #ff3591 100%);
-  border-image-slice: 1;
-}
-
-.cta-button-bg-hover:hover {
-  background: linear-gradient(
-    92.92deg,
-    rgba(0, 75, 215, 0.4) 21.45%,
-    rgba(128, 91, 198, 0.36) 65.16%,
-    rgba(255, 106, 181, 0.4) 108.86%
-  );
-}
-
-.cta-content-width {
-  max-width: 80rem;
-  padding: 0 1.5rem;
-}
-
-@media (min-width: 64rem) {
-  .cta-content-width {
-    padding: 0 4.5rem;
-  }
-}
-
-.cta-text-style {
-  color: var(--color-light);
-  font-size: 2rem;
-  line-height: 1.2;
 }

@@ -1,21 +1,26 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
+import { Button } from '@/components/button'
+import { NavKey, NAV_PATHS } from '@/const/navigation'
+import { useRouter } from 'next/navigation'
 
 export const CTAFooter = () => {
+  const router = useRouter()
+
   return (
-    <div className="cta-gradient-bg flex w-full items-center justify-center">
-      <div className="cta-content-width flex w-full flex-col items-center justify-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
-        <h2 className="cta-text-style font-heading font-semibold">
+    <div className="section-bg-to-left h-40 md:h-80 flex w-full items-center justify-center">
+      <div className="max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center-safe">
+        <h2 className="text-primary-content font-heading font-semibold">
           Need a complete sport facility solution ?
         </h2>
-        <Link
-          href="/contact"
-          className="font-heading cta-button-bg cta-button-bg-hover cta-text-style flex items-center justify-center gap-2.5 border border-transparent bg-clip-padding font-semibold transition-all duration-300"
+        <Button
+          variant="gradient"
+          onClick={() => router.push(NAV_PATHS[NavKey.CONTACT_US])}
+          className="h-10 md:h-27 flex items-center justify-center border border-transparent bg-clip-padding transition-all duration-300"
         >
-          Contact Our Team
-        </Link>
+          <h2 className="text-primary-content">Contact Our Team</h2>
+        </Button>
       </div>
     </div>
   )
