@@ -69,6 +69,9 @@
     rgba(255, 95, 168, 0.1),
     rgba(0, 75, 215, 0.2)
   );
+
+  --color-dot-active: #ec4899;
+  --color-dot-inactive: #475569;
 }
 
 @theme {

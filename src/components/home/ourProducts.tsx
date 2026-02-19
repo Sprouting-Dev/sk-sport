@@ -16,6 +16,12 @@ export const OurProducts = () => {
   const categoryKeys = ['gymEquipment', 'outdoorFitness', 'gymnasticsEquipment'] as const
   const categoryImages = [gymEquipImg, outdoorFitnessImg, heroBg1]
 
+  const heroImages = categoryImages.map((img, index) => ({
+    src: img,
+    alt: t(`categories.${categoryKeys[index]}.title`),
+    id: `product-hero-${index}`,
+  }))
+
   const [activeIndex, setActiveIndex] = React.useState(2)
   const activeKey = categoryKeys[activeIndex]
 
@@ -31,7 +37,7 @@ export const OurProducts = () => {
 
       <section className="relative w-full hero-wrapper-height h-full max-h-170 overflow-hidden text-primary-content transition-all duration-500">
         <HeroCarousel
-          images={categoryImages}
+          images={heroImages}
           activeIndex={activeIndex}
           onSlideChange={setActiveIndex}
           interval={5000}

@@ -43,7 +43,7 @@ export const useCarousel = (length: number, intervalTime: number = 5000) => {
                 isResettingRef.current = false
               })
             }
-          }, 500)
+          }, 750)
         }
       }
     }, intervalTime)
@@ -76,7 +76,7 @@ export const useCarousel = (length: number, intervalTime: number = 5000) => {
                 isResettingRef.current = false
               })
             }
-          }, 500)
+          }, 750)
         } else {
           carouselRef.current.scrollTo({
             left: width * index,

@@ -3,15 +3,31 @@
 import React from 'react'
 import { HeroCarousel } from '@/components/carousel/HeroCarousel'
 import { Button } from '@/components/button'
-import heroBg3 from '@/assets/banner-test3.jpg'
-import heroBg2 from '@/assets/bannner-test2.jpg'
-import heroBg1 from '@/assets/d048eb9439e681c322341cf84065711c767aa9b7.png'
-
+import type { Home } from '@/payload-types'
 import { useTranslations } from 'next-intl'
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  media?: Home['heroMedia']
+}
+
+export const Hero: React.FC<HeroProps> = ({ media }) => {
   const t = useTranslations('Home')
-  const carouselImages = [heroBg3, heroBg2, heroBg1]
+
+  const carouselImages = React.useMemo(() => {
+    if (media && media.length > 0) {
+      return media
+        .map((item) => {
+          if (typeof item === 'string') return null
+          return {
+            src: item.url || '',
+            alt: item.alt,
+            id: item.id,
+          }
+        })
+        .filter((item) => item && item.src) as { src: string; alt: string; id: string }[]
+    }
+    return []
+  }, [media])
 
   return (
     <section className="relative w-full hero-wrapper-height h-full max-h-308 overflow-hidden bg-hero text-primary-content">
