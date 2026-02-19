@@ -426,6 +426,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Home {
   id: string
   heroMedia?: (string | HeroMedia)[] | null
+  galleryMedia?: (string | GalleryMedia)[] | null
   updatedAt?: string | null
   createdAt?: string | null
 }
@@ -435,6 +436,7 @@ export interface Home {
  */
 export interface HomeSelect<T extends boolean = true> {
   heroMedia?: T
+  galleryMedia?: T
   updatedAt?: T
   createdAt?: T
   globalType?: T

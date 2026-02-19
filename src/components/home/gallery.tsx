@@ -1,25 +1,24 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { X, CaretLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
+import { XIcon, CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react/dist/ssr'
+import { GalleryMedia } from '@/payload-types'
+import { Marquee } from '@/utils/Marquee'
 
-const galleryImages = [
-  '/gallery-1.png',
-  '/gallery-2.png',
-  '/gallery-3.png',
-  '/gallery-4.png',
-  '/gallery-5.png',
-  '/gallery-1.png',
-  '/gallery-2.png',
-  '/gallery-3.png',
-  '/gallery-4.png',
-  '/gallery-5.png',
-]
+interface GalleryProps {
+  media?: (string | GalleryMedia)[] | null
+}
 
-export const Gallery = () => {
+export const Gallery = ({ media }: GalleryProps) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const galleryImages = (media || [])
+    .map((item) => {
+      if (typeof item === 'string') return item
+      return item.url
+    })
+    .filter((url): url is string => !!url)
 
   const openModal = (index: number) => {
     setSelectedImageIndex(index)
@@ -43,25 +42,6 @@ export const Gallery = () => {
     }
   }
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -266,
-        behavior: 'smooth',
-      })
-    }
-  }
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 266,
-        behavior: 'smooth',
-      })
-    }
-  }
-
-  // Keyboard navigation for modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedImageIndex === null) return
@@ -79,11 +59,12 @@ export const Gallery = () => {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [selectedImageIndex])
+  }, [selectedImageIndex, galleryImages.length])
+
+  if (galleryImages.length === 0) return null
 
   return (
-    <section className="w-full pt-10 pb-24">
-      {/* Header */}
+    <section className="w-full pt-10 pb-24 overflow-hidden">
       <div className="mx-auto w-full max-w-screen-xl px-4">
         <h2 className="h2 pb-10 leading-tight">
           <span className="text-primary">Our</span>
@@ -92,41 +73,20 @@ export const Gallery = () => {
         </h2>
       </div>
 
-      {/* Gallery Strip - Edge to Edge */}
-      <div className="relative mt-4 h-64 w-full">
-        {/* Left Arrow */}
-        <button
-          onClick={scrollLeft}
-          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
-          aria-label="Scroll left"
-        >
-          <CaretLeft size={32} weight="bold" />
-        </button>
-
-        {/* Image Container */}
-        <div ref={scrollContainerRef} className="no-scrollbar flex h-full gap-4 overflow-x-auto">
+      <div className="relative mt-4 h-72 w-full flex items-center overflow-hidden">
+        <Marquee pauseOnHover speed={20}>
           {galleryImages.map((src, index) => (
             <div
-              key={`gallery-image-${index}-${src.replace(/[^a-z0-9]/gi, '')}`}
-              className="relative h-64 w-64 shrink-0 cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              key={`marquee-item-${index}`}
+              className="relative h-64 w-64 shrink-0 cursor-pointer overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg"
               onClick={() => openModal(index)}
             >
               <Image src={src} alt={`Gallery ${index + 1}`} fill className="object-cover" />
             </div>
           ))}
-        </div>
-
-        {/* Right Arrow */}
-        <button
-          onClick={scrollRight}
-          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
-          aria-label="Scroll right"
-        >
-          <CaretRight size={32} weight="bold" />
-        </button>
+        </Marquee>
       </div>
 
-      {/* Modal Popup */}
       {selectedImageIndex !== null && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center bg-overlay-40 backdrop-blur-sm"
@@ -136,34 +96,30 @@ export const Gallery = () => {
             className="relative mt-12 h-[80vh] w-[90%] max-w-xl overflow-hidden rounded-2xl bg-primary-content shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               onClick={closeModal}
               className="absolute right-4 top-4 z-10 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
               aria-label="Close"
             >
-              <X size={24} weight="bold" />
+              <XIcon size={24} weight="bold" />
             </button>
 
-            {/* Left Arrow */}
             <button
               onClick={goToPrevious}
               className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
               aria-label="Previous"
             >
-              <CaretLeft size={32} weight="bold" />
+              <CaretLeftIcon size={32} weight="bold" />
             </button>
 
-            {/* Right Arrow */}
             <button
               onClick={goToNext}
               className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
               aria-label="Next"
             >
-              <CaretRight size={32} weight="bold" />
+              <CaretRightIcon size={32} weight="bold" />
             </button>
 
-            {/* Image */}
             <div className="relative h-full w-full">
               <Image
                 src={galleryImages[selectedImageIndex]}

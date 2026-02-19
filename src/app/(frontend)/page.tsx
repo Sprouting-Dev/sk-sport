@@ -63,7 +63,8 @@ export default async function HomePage() {
       <AboutCompany />
       <ContactSection />
       <PartnersSection />
-      <Gallery />
+      <PartnersSection />
+      <Gallery media={homeData.galleryMedia} />
     </div>
   )
 }

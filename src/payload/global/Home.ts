@@ -16,5 +16,12 @@ export const Home: GlobalConfig = {
       relationTo: 'hero-media',
       hasMany: true,
     },
+    {
+      name: 'galleryMedia',
+      label: 'Gallery Media',
+      type: 'relationship',
+      relationTo: 'gallery-media',
+      hasMany: true,
+    },
   ],
 }
