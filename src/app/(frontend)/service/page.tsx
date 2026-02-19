@@ -14,7 +14,7 @@ const services: Service[] = [
     description:
       'Professional international travel and study tour services. With extensive experience in global educational tours, we are trusted by government agencies and educational institutions for comprehensive and well-organized programs worldwide.',
     image: '/Service/United Discovery.png',
-    href: '/service/united-discovery',
+    href: "/service/united-discovery",
     variant: 'horizontal',
   },
   {
@@ -23,7 +23,7 @@ const services: Service[] = [
     description:
       'Design and installation of professional sports equipment for indoor and outdoor facilities.',
     image: '/Service/Integrated Sports Installation.png',
-    href: '/service/integrated-sports-installation',
+    href: "/service/integrated-sports-installation",
     variant: 'vertical',
   },
   {
@@ -32,7 +32,7 @@ const services: Service[] = [
     description:
       'Technology-driven systems for monitoring and managing health and physical performance.',
     image: '/Service/Health Management System.png',
-    href: '/service/health-management-system',
+    href: "/service/health-management-system",
     variant: 'vertical',
   },
   {
@@ -41,7 +41,7 @@ const services: Service[] = [
     description:
       'High-performance gymnastics equipment designed for elite athletes and international competition standards.',
     image: '/Service/Equipment for Top Gymnasts.png',
-    href: '#',
+    href: "/service/equipment-for-top-gymnasts",
     variant: 'vertical',
   },
   {
@@ -50,7 +50,7 @@ const services: Service[] = [
     description:
       'Vision and coordination training systems to enhance athletic performance and reaction efficiency.',
     image: '/Service/Sports Vision Training.png',
-    href: '/service/sports-vision-training',
+    href: "/service/sports-vision-training",
     variant: 'vertical',
   },
 ]
