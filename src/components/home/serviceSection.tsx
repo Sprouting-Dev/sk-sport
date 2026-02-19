@@ -3,20 +3,18 @@
 import React from 'react'
 import { ServiceCard } from '@/components/card'
 import { SupportCard } from '@/components/card/supportCard'
-import { Basketball, Heartbeat, Info } from '@phosphor-icons/react/dist/ssr'
+import { BasketballIcon, HeartbeatIcon, InfoIcon } from '@phosphor-icons/react/dist/ssr'
 
 export const Services = () => {
   return (
     <section className="w-full">
-      <div className="service-section-header">
-        <h2 className="h2 mb-4">Our Services</h2>
-        <p className="service-section-subtitle">
-          Professional solution for sports facility development
-        </p>
+      <div className="text-primary space-y-4 text-center py-12">
+        <h2>Our Services</h2>
+        <p className="font-body">Professional solution for sports facility development</p>
       </div>
 
       {/* Services Content */}
-      <div className="w-full py-10">
+      <div className="w-full">
         <div className="mb-2 grid w-full grid-cols-1 gap-2 lg:grid-cols-2">
           {/* Left Card */}
           <ServiceCard
@@ -44,7 +42,7 @@ export const Services = () => {
         {/* Support Services Section */}
         <div className="w-full px-4 pt-12">
           <div className="mb-8 text-center">
-            <h2 className="support-service-title">Support Services</h2>
+            <h2 className="text-primary">Support Services</h2>
           </div>
 
           {/* Grid Layout */}
@@ -52,19 +50,19 @@ export const Services = () => {
             <SupportCard
               title="Consulting & Design"
               image="/consulting-support-services.png"
-              icon={<Basketball size={48} weight="light" />}
+              icon={<BasketballIcon size={48} weight="light" />}
               imageAlt="Consulting and Design Services"
             />
             <SupportCard
               title="Health Care Service"
               image="/healthcare-support-services.png"
-              icon={<Heartbeat size={48} weight="light" color="#FF3591" />}
+              icon={<HeartbeatIcon size={48} weight="light" color="#FF3591" />}
               imageAlt="Health Care Services"
             />
             <SupportCard
               title="Maintenance & Support"
               image="/maintenance-support-services.png"
-              icon={<Info size={48} weight="light" />}
+              icon={<InfoIcon size={48} weight="light" />}
               imageAlt="Maintenance and Support Services"
             />
           </div>
