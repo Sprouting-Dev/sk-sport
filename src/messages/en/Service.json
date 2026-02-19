@@ -1,3 +1,13 @@
 {
-  "serviceCard": "Read more"
+  "serviceCard": "Read more",
+  "Hero": {
+    "titleLine1": "Professional Sports Equipment",
+    "titleLine2": "& Services",
+    "subtitle_line1": "Complete sports solutions from",
+    "subtitle_line2": "installation to performance systems",
+    "cta": "Contact Us"
+  },
+  "IntegratedInstallation": {
+    "titleLine1": "Integrated Sports Installation"
+  }
 }
