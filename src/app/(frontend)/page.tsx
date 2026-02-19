@@ -1,6 +1,4 @@
-'use client'
-
-import React from 'react'
+import { getHomeGlobal } from '@/data'
 import {
   Accomplishment,
   AboutCompany,
@@ -52,10 +50,12 @@ const blogPosts = [
   },
 ]
 
-export default function HomePage() {
+export default async function HomePage() {
+  const homeData = await getHomeGlobal()
+
   return (
     <div className="mx-auto flex min-h-[60vh] w-full flex-col items-center justify-center bg-header-bg">
-      <Hero />
+      <Hero media={homeData.heroMedia} />
       <Services />
       <OurProducts />
       <Accomplishment items={blogPosts} />
