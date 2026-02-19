@@ -84,34 +84,31 @@ export const Gallery = () => {
   return (
     <section className="w-full pt-10 pb-24">
       {/* Header */}
-      <div className="mx-auto w-full gallery-max-width px-4">
-        <h2 className="gallery-title-size gallery-title-leading gallery-title-pb">
-          <span className="gallery-title-our">Our</span>
+      <div className="mx-auto w-full max-w-screen-xl px-4">
+        <h2 className="h2 pb-10 leading-tight">
+          <span className="text-primary">Our</span>
           <span> </span>
-          <span className="gallery-title-gallery">Gallery</span>
+          <span className="text-primary">Gallery</span>
         </h2>
       </div>
 
       {/* Gallery Strip - Edge to Edge */}
-      <div className="relative mt-4 w-full gallery-container-height">
+      <div className="relative mt-4 h-64 w-full">
         {/* Left Arrow */}
         <button
           onClick={scrollLeft}
-          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full gallery-button-bg p-2 shadow-lg transition-all hover:scale-110"
+          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
           aria-label="Scroll left"
         >
           <CaretLeft size={32} weight="bold" />
         </button>
 
         {/* Image Container */}
-        <div
-          ref={scrollContainerRef}
-          className="no-scrollbar flex h-full overflow-x-auto gallery-image-gap"
-        >
+        <div ref={scrollContainerRef} className="no-scrollbar flex h-full gap-4 overflow-x-auto">
           {galleryImages.map((src, index) => (
             <div
               key={`gallery-image-${index}-${src.replace(/[^a-z0-9]/gi, '')}`}
-              className="relative shrink-0 cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg gallery-image-width gallery-image-height"
+              className="relative h-64 w-64 shrink-0 cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
               onClick={() => openModal(index)}
             >
               <Image src={src} alt={`Gallery ${index + 1}`} fill className="object-cover" />
@@ -122,7 +119,7 @@ export const Gallery = () => {
         {/* Right Arrow */}
         <button
           onClick={scrollRight}
-          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full gallery-button-bg p-2 shadow-lg transition-all hover:scale-110"
+          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
           aria-label="Scroll right"
         >
           <CaretRight size={32} weight="bold" />
@@ -132,17 +129,17 @@ export const Gallery = () => {
       {/* Modal Popup */}
       {selectedImageIndex !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center gallery-modal-overlay backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-start justify-center bg-overlay-40 backdrop-blur-sm"
           onClick={closeModal}
         >
           <div
-            className="relative gallery-modal-top overflow-hidden gallery-modal-radius bg-light shadow-2xl gallery-modal-width gallery-modal-height"
+            className="relative mt-12 h-[80vh] w-[90%] max-w-xl overflow-hidden rounded-2xl bg-primary-content shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute right-4 top-4 z-10 rounded-full gallery-button-bg p-2 shadow-lg transition-all hover:scale-110"
+              className="absolute right-4 top-4 z-10 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
               aria-label="Close"
             >
               <X size={24} weight="bold" />
@@ -151,7 +148,7 @@ export const Gallery = () => {
             {/* Left Arrow */}
             <button
               onClick={goToPrevious}
-              className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full gallery-button-bg p-2 shadow-lg transition-all hover:scale-110"
+              className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
               aria-label="Previous"
             >
               <CaretLeft size={32} weight="bold" />
@@ -160,7 +157,7 @@ export const Gallery = () => {
             {/* Right Arrow */}
             <button
               onClick={goToNext}
-              className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full gallery-button-bg p-2 shadow-lg transition-all hover:scale-110"
+              className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-primary-content p-2 shadow-lg transition-all hover:scale-110"
               aria-label="Next"
             >
               <CaretRight size={32} weight="bold" />
