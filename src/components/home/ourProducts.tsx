@@ -51,7 +51,7 @@ export const OurProducts = () => {
                 <br />
                 {t(`categories.${activeKey}.displayTitle_line2`)}
               </h1>
-              <p className="body0 transition-all duration-300">
+              <p className="body-md transition-all duration-300">
                 {t(`categories.${activeKey}.description`)}
               </p>
             </div>

@@ -19,7 +19,7 @@ export const Services = () => {
           {/* Left Card */}
           <ServiceCard
             title={`Gymnastic Equipment\nInstallation`}
-            description={`Lorem ipsum dolor sit amet\ncon . Purus suscipit pellentesque.\nLorem ipsum\ndolor sit amet con.`}
+            description={`From planning and positioning to anchoring and final safety checks, we deliver a complete installation service built for long-term performance.`}
             image="/gymnastic-equipment.png"
             href="/services/gymnastic-equipment"
             buttonText="Learn more"
@@ -30,7 +30,7 @@ export const Services = () => {
           {/* Right Card */}
           <ServiceCard
             title={`Outdoor Exercise\nEquipment`}
-            description={`Lorem ipsum dolor sit amet\ncon . Purus suscipit pellentesque.\nLorem ipsum\ndolor sit amet con.`}
+            description={`Expert installation for every facility—aligned, secured, and tested to meet standards for safe daily training and competition readiness.`}
             image="/outdoor-exercise-equipment.png"
             href="/services/outdoor-exercise"
             buttonText="Learn more"

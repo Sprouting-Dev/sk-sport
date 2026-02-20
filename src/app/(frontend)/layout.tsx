@@ -9,8 +9,8 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 
 export const metadata: Metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'Your equipment. Our expertise. Perfectly installed.',
+  title: 'SK Sport',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
