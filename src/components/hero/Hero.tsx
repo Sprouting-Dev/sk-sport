@@ -5,6 +5,8 @@ import { HeroCarousel } from '@/components/carousel/HeroCarousel'
 import { Button } from '@/components/button'
 import type { Home } from '@/payload-types'
 import { useTranslations } from 'next-intl'
+import { NavKey, NAV_PATHS } from '@/const/navigation'
+import { useRouter } from 'next/navigation'
 
 interface HeroProps {
   media?: Home['heroMedia']
@@ -12,6 +14,8 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ media }) => {
   const t = useTranslations('Home')
+
+  const router = useRouter()
 
   const carouselImages = React.useMemo(() => {
     if (media && media.length > 0) {
@@ -43,7 +47,13 @@ export const Hero: React.FC<HeroProps> = ({ media }) => {
 
           <p className="body-sm">{t('Hero.description')}</p>
         </div>
-        <Button className="hero-btn-width text-primary-content">{t('Hero.contact_us')}</Button>
+        <Button
+          variant="gradient"
+          onClick={() => router.push(NAV_PATHS[NavKey.CONTACT_US])}
+          className="hero-btn-width text-primary-content cursor-pointer pointer-events-auto"
+        >
+          {t('Hero.contact_us')}
+        </Button>
       </div>
     </section>
   )
