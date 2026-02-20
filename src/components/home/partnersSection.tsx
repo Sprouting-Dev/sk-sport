@@ -7,22 +7,22 @@ const partners = [
   {
     id: 1,
     name: 'Life Fitness',
-    logo: '/partners/LifeFitness.png',
+    logo: '/Partners/LifeFitness.png',
   },
   {
     id: 2,
     name: 'NordicTrack',
-    logo: '/partners/NordicTrack.png',
+    logo: '/Partners/NordicTrack.png',
   },
   {
     id: 3,
     name: 'Cybex',
-    logo: '/partners/Cybex.png',
+    logo: '/Partners/Cybex.png',
   },
   {
     id: 4,
     name: 'Precor',
-    logo: '/partners/Precor.png',
+    logo: '/Partners/Precor.png',
   },
 ]
 
