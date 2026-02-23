@@ -59,7 +59,7 @@ export const ServiceCard = ({
 
         <div className="flex justify-end">
           <Button variant="link" size="sm" onClick={() => router.push(href)}>
-            {t(`serviceCard`)}
+            {t(`ReadMore`)}
           </Button>
         </div>
       </div>

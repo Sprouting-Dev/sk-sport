@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/button'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 export type RelatedArticleItem = {
@@ -21,6 +22,7 @@ export const RelatedArticle = ({
   title = 'บทความที่เกี่ยวข้อง',
   articles,
 }: RelatedArticleProps) => {
+  const t = useTranslations('Service')
   const router = useRouter()
 
   return (
@@ -35,7 +37,7 @@ export const RelatedArticle = ({
             
             <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl md:h-24 md:w-24">
               <Image
-                src={article.image || '/Checker.png'}
+                src={article.image || '/checker.png'}
                 alt={article.title}
                 fill
                 className="object-cover"
@@ -53,7 +55,7 @@ export const RelatedArticle = ({
                 onClick={() => router.push(article.href)}
                 className="no-underline -ml-3"
               >
-                อ่านเพิ่มเติม
+                {t(`ReadMore`)}
               </Button>
             </div>
           </div>
