@@ -5,40 +5,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRightIcon } from '@phosphor-icons/react'
 
-const services = [
-  {
-    id: 1,
-    title: 'United Discovery',
-    image: '/Service/United Discovery.png',
-    href: '/service/united-discovery',
-  },
-  {
-    id: 3,
-    title: 'Health Management System',
-    image: '/Service/Health Management System.png',
-    href: '/service/health-management-system',
-  },
-  {
-    id: 4,
-    title: 'Equipment for Top Gymnasts',
-    image: '/Service/Equipment for Top Gymnasts.png',
-    href: '/service/equipment-for-top-gymnasts',
-  },
-  {
-    id: 5,
-    title: 'Sports Vision Training',
-    image: '/Service/Sports Vision Training.png',
-    href: '/service/sports-vision-training',
-  },
-  {
-    id: 2,
-    title: 'Integrated Sports Installation',
-    image: '/Service/Integrated Sports Installation.png',
-    href: '/service/integrated-sports-installation',
-  },
-]
+export interface ServiceItem {
+  id: number | string
+  title: string
+  image: string
+  href: string
+}
 
-export const MoreServices = () => {
+interface MoreServicesProps {
+  services: ServiceItem[]
+}
+
+export const MoreServices = ({ services }: MoreServicesProps) => {
   return (
     <div className="w-full">
       <div className="container mx-auto">

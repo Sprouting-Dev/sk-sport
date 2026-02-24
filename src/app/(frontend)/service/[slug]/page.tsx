@@ -46,6 +46,14 @@ const RELATED_ARTICLES_DATA: Record<string, RelatedArticleItem[]> = {
   ]
 }
 
+const SERVICES_DATA = [
+  { id: 1, title: 'United Discovery', image: '/Service/United Discovery.png', href: '/service/united-discovery' },
+  { id: 3, title: 'Health Management System', image: '/Service/Health Management System.png', href: '/service/health-management-system' },
+  { id: 4, title: 'Equipment for Top Gymnasts', image: '/Service/Equipment for Top Gymnasts.png', href: '/service/equipment-for-top-gymnasts' },
+  { id: 5, title: 'Sports Vision Training', image: '/Service/Sports Vision Training.png', href: '/service/sports-vision-training' },
+  { id: 2, title: 'Integrated Sports Installation', image: '/Service/Integrated Sports Installation.png', href: '/service/integrated-sports-installation' },
+]
+
 function toTitle(slug: string) {
   return slug
     .split('-')
@@ -90,7 +98,7 @@ export default function ServicePage() {
             </div>
 
             <div className="order-3 w-full pt-4 pb-8 px-4 md:pb-16 lg:order-4 lg:col-span-3 lg:pt-8">
-              <MoreServices />
+              <MoreServices services={SERVICES_DATA} />
             </div>
 
           </div>
