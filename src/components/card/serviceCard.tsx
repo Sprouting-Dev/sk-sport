@@ -42,8 +42,10 @@ export const ServiceCard = ({
         {isTop && (
           <>
             <div className="space-y-2 max-w-md">
-              <h2 className="text-primary-content text-shadow whitespace-pre-wrap">{title}</h2>
-              <p className="font-body text-primary-content">{description}</p>
+              <p className="font-heading font-semibold text-2xl md:text-3xl leading-tight text-primary-content text-shadow whitespace-pre-wrap">
+                {title}
+              </p>
+              <p className="body-sm text-primary-content">{description}</p>
             </div>
             <div className="shrink-0">
               <ButtonLink href={href} variant="gradient" size="md" className="text-primary-content">
@@ -58,8 +60,10 @@ export const ServiceCard = ({
         {!isTop && (
           <>
             <div className="space-y-2 max-w-md">
-              <h2 className="text-primary-content text-shadow whitespace-pre-wrap">{title}</h2>
-              <p className="font-body text-primary-content">{description}</p>
+              <p className="font-heading font-semibold text-2xl md:text-3xl leading-tight text-primary-content text-shadow whitespace-pre-wrap">
+                {title}
+              </p>
+              <p className="body-sm text-primary-content">{description}</p>
             </div>
             <div className="shrink-0">
               <ButtonLink href={href} variant="gradient" size="md" className="text-primary-content">

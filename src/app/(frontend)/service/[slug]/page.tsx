@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import { ServiceHero } from '@/components/hero/serviceHero'
+import { CTAFooter } from '@/components/layout'
 
 function toTitle(slug: string) {
   return slug
@@ -24,6 +25,7 @@ export default function ServicePage() {
         showCta={false}
         contentPosition="bottom"
       />
+      <CTAFooter variant="light" />
     </main>
   )
 }
