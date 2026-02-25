@@ -231,8 +231,8 @@ export default function ServicePage() {
         <div className="w-full py-6 md:py-8">
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-x-16">
             <div className="order-1 lg:order-1 lg:col-span-2 px-4 flex flex-col gap-8">
-              {currentServiceDetails.map((item, idx) => (
-                <ServiceDetail key={idx} {...item} />
+              {currentServiceDetails.map((item) => (
+                <ServiceDetail key={item.sectionTitle ?? item.serviceTitle} {...item} />
               ))}
             </div>
 

@@ -23,12 +23,12 @@ export const DetailRowCard = ({
 
   const textBlock = (
     <div className="flex flex-1 flex-col gap-3">
-      {sectionTitle && <h2 className="tracking-title">{sectionTitle}</h2>}
-      <p className="body-sm tracking-title">{description}</p>
+      {sectionTitle && <h2>{sectionTitle}</h2>}
+      <p className="body-sm">{description}</p>
       {tags.length > 0 && (
         <div className="mt-1 flex flex-wrap gap-2">
-          {tags.map((tag, idx) => (
-            <span key={idx} className="badge badge-outline border-primary text-primary body-sm">
+          {tags.map((tag) => (
+            <span key={tag} className="badge badge-outline border-primary text-primary body-sm">
               {tag}
             </span>
           ))}
@@ -50,11 +50,11 @@ export const DetailRowCard = ({
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-3">
-          {images.map((src, idx) => (
-            <div key={idx} className="relative aspect-4/3">
+          {images.map((src, imgIdx) => (
+            <div key={src} className="relative aspect-4/3">
               <Image
                 src={src}
-                alt={`${sectionTitle || 'service'} ${idx + 1}`}
+                alt={`${sectionTitle || 'service'} ${imgIdx + 1}`}
                 fill
                 className="rounded-lg object-cover"
               />
