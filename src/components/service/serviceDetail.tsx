@@ -27,7 +27,7 @@ export const ServiceDetail = ({
     <section className="w-full">
       {serviceTitle && (
         <h2
-          className="mb-3 tracking-title"
+          className="mb-3"
           style={{
             background: 'linear-gradient(90deg, #FF5FA8 0%, #4282FA 50%)',
             WebkitBackgroundClip: 'text',

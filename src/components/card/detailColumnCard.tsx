@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { cn } from '@/utils/cn'
 
 export interface DetailColumnCardProps {
   sectionTitle?: string
@@ -33,12 +34,12 @@ export const DetailColumnCard = ({
             </div>
           ) : (
             // Multiple images: choose cols based on count, all in one row
-            <div className={`grid gap-3 ${images.length >= 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
-              {images.map((src, idx) => (
-                <div key={idx} className="relative aspect-4/3">
+            <div className={cn('grid gap-3', images.length >= 3 ? 'grid-cols-3' : 'grid-cols-2')}>
+              {images.map((src, imgIdx) => (
+                <div key={src} className="relative aspect-4/3">
                   <Image
                     src={src}
-                    alt={`${sectionTitle || 'service'} ${idx + 1}`}
+                    alt={`${sectionTitle || 'service'} ${imgIdx + 1}`}
                     fill
                     className="rounded-lg object-cover"
                   />
@@ -50,12 +51,12 @@ export const DetailColumnCard = ({
       )}
 
       <div className="flex flex-col gap-3">
-        {sectionTitle && <h2 className="tracking-title">{sectionTitle}</h2>}
-        <p className="body-sm tracking-title">{description}</p>
+        {sectionTitle && <h2>{sectionTitle}</h2>}
+        <p className="body-sm">{description}</p>
         {tags.length > 0 && (
           <div className="mt-1 flex flex-wrap gap-2">
-            {tags.map((tag, idx) => (
-              <span key={idx} className="badge badge-outline border-primary text-primary body-sm">
+            {tags.map((tag) => (
+              <span key={tag} className="badge badge-outline border-primary text-primary body-sm">
                 {tag}
               </span>
             ))}
