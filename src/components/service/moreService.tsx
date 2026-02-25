@@ -42,19 +42,15 @@ export const MoreServices = ({ services }: MoreServicesProps) => {
               <div className="absolute inset-0 bg-gradient-card-left" />
 
               <div className="relative z-10 flex flex-col p-4">
-                <h2 className="mb-1 md:mb-2 text-primary-content">
-                  {service.title}
-                </h2>
-                
+                <h2 className="mb-1 md:mb-2 text-primary-content">{service.title}</h2>
+
                 <div className="flex justify-end mt-auto">
                   <Link
                     href={service.href}
                     className="group/btn flex items-center body-sm text-secondary"
                   >
                     View Service
-                    <ArrowRightIcon
-                      className="w-5 md:w-6.25 h-5 md:h-6.25 ml-1 transition-transform duration-300 group-hover/btn:translate-x-1"
-                    />
+                    <ArrowRightIcon className="w-5 md:w-6.25 h-5 md:h-6.25 ml-1 transition-transform duration-300 group-hover/btn:translate-x-1" />
                   </Link>
                 </div>
               </div>
