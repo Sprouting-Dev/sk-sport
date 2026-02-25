@@ -295,4 +295,8 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  .tracking-title {
+    letter-spacing: 0.06em;
+  }
 }

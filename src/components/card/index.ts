@@ -1,3 +1,5 @@
 export * from './articleCard'
+export * from './detailColumnCard'
+export * from './detailRowCard'
 export * from './serviceCard'
 export * from './supportCard'
