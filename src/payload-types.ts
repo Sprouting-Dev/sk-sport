@@ -300,54 +300,24 @@ export interface ServiceMedia {
 export interface Service {
   id: string
   title: string
-  sectionTitle?: string | null
-  description: string
-  images?: (string | ServiceMedia)[] | null
-  variant?: ('column' | 'row') | null
-  columns?:
+  subtitle?: string | null
+  hero?: (string | null) | ServiceMedia
+  sections?:
     | {
-        image?: (string | null) | ServiceMedia
-        description?: {
-          root: {
-            type: string
-            children: {
-              type: any
-              version: number
-              [k: string]: unknown
+        sectionTitle?: string | null
+        description?: string | null
+        variant?: ('column' | 'row') | null
+        images?:
+          | {
+              image?: (string | null) | ServiceMedia
+              id?: string | null
             }[]
-            direction: ('ltr' | 'rtl') | null
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-            indent: number
-            version: number
-          }
-          [k: string]: unknown
-        } | null
+          | null
+        image?: (string | null) | ServiceMedia
+        alignment?: ('left' | 'right') | null
         id?: string | null
       }[]
     | null
-  rows?:
-    | {
-        image?: (string | null) | ServiceMedia
-        description?: {
-          root: {
-            type: string
-            children: {
-              type: any
-              version: number
-              [k: string]: unknown
-            }[]
-            direction: ('ltr' | 'rtl') | null
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-            indent: number
-            version: number
-          }
-          [k: string]: unknown
-        } | null
-        alignment?: ('left' | 'center' | 'right') | null
-        id?: string | null
-      }[]
-    | null
-  tags?: string[] | null
   updatedAt: string
   createdAt: string
 }
@@ -585,26 +555,24 @@ export interface ServiceMediaSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T
-  sectionTitle?: T
-  description?: T
-  images?: T
-  variant?: T
-  columns?:
+  subtitle?: T
+  hero?: T
+  sections?:
     | T
     | {
-        image?: T
+        sectionTitle?: T
         description?: T
-        id?: T
-      }
-  rows?:
-    | T
-    | {
+        variant?: T
+        images?:
+          | T
+          | {
+              image?: T
+              id?: T
+            }
         image?: T
-        description?: T
         alignment?: T
         id?: T
       }
-  tags?: T
   updatedAt?: T
   createdAt?: T
 }
