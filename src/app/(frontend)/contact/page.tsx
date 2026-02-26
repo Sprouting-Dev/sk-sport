@@ -1,4 +1,5 @@
 import { Hero } from '@/components/hero/Hero'
+import { ContactForm } from '@/components/contact'
 
 export default async function Contact() {
   const contactMedia = [
@@ -18,6 +19,9 @@ export default async function Contact() {
           </>
         }
       />
+      <div className="relative z-20 -mt-40 md:-mt-64">
+        <ContactForm />
+      </div>
     </div>
   )
 }
