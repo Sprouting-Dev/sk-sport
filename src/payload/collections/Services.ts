@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import type { Service } from '../../payload-types'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -59,7 +60,7 @@ export const Services: CollectionConfig = {
           label: 'Images',
           type: 'array',
           admin: {
-            condition: ({ siblingData }: { siblingData?: { variant?: string } }) =>
+            condition: (_: Partial<Service>, siblingData: { variant?: string }) =>
               siblingData?.variant === 'column',
           },
           fields: [
@@ -77,7 +78,7 @@ export const Services: CollectionConfig = {
           type: 'upload',
           relationTo: 'service-media',
           admin: {
-            condition: ({ siblingData }: { siblingData?: { variant?: string } }) =>
+            condition: (_: Partial<Service>, siblingData: { variant?: string }) =>
               siblingData?.variant === 'row',
           },
         },
@@ -91,7 +92,7 @@ export const Services: CollectionConfig = {
           ],
           defaultValue: 'left',
           admin: {
-            condition: ({ siblingData }: { siblingData?: { variant?: string } }) =>
+            condition: (_: Partial<Service>, siblingData: { variant?: string }) =>
               siblingData?.variant === 'row',
           },
         },
