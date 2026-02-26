@@ -5,7 +5,7 @@ export const Services: CollectionConfig = {
   admin: {
     group: 'Content',
     useAsTitle: 'title',
-    defaultColumns: ['title', 'sectionTitle', 'variants', 'createdAt'],
+    defaultColumns: ['title', 'subtitle', 'createdAt'],
   },
   access: {
     read: () => true,
@@ -14,77 +14,72 @@ export const Services: CollectionConfig = {
   fields: [
     {
       name: 'title',
-      label: 'Service Title',
+      label: 'Title',
       type: 'text',
       required: true,
     },
-
     {
-      name: 'sectionTitle',
-      label: 'Section Title',
+      name: 'subtitle',
+      label: 'Subtitle',
       type: 'text',
     },
-
     {
-      name: 'description',
-      label: 'Descriptions',
-      type: 'text', //ตอนแรกเป็น richtext
-      required: true,
-    },
-
-    {
-      name: 'images',
-      label: 'Images',
+      name: 'hero',
+      label: 'Hero Image',
       type: 'upload',
       relationTo: 'service-media',
-      hasMany: true,
     },
-
     {
-      name: 'variant',
-      label: 'Variant',
-      type: 'select',
-      options: [
-        { label: 'Column', value: 'column' },
-        { label: 'Row', value: 'row' },
-      ],
-      defaultValue: 'column',
-    },
-
-    {
-      name: 'columns',
-      label: 'Column Image / Description',
+      name: 'sections',
+      label: 'Sections',
       type: 'array',
       fields: [
+        {
+          name: 'sectionTitle',
+          label: 'Section Title',
+          type: 'text',
+        },
+        {
+          name: 'description',
+          label: 'Description',
+          type: 'text',
+        },
+        {
+          name: 'variant',
+          label: 'Variant',
+          type: 'select',
+          options: [
+            { label: 'Column', value: 'column' },
+            { label: 'Row', value: 'row' },
+          ],
+          defaultValue: 'column',
+        },
+        {
+          name: 'images',
+          label: 'Images',
+          type: 'array',
+          admin: {
+            condition: ({ siblingData }: { siblingData?: { variant?: string } }) =>
+              siblingData?.variant === 'column',
+          },
+          fields: [
+            {
+              name: 'image',
+              label: 'Image',
+              type: 'upload',
+              relationTo: 'service-media',
+            },
+          ],
+        },
         {
           name: 'image',
           label: 'Image',
           type: 'upload',
           relationTo: 'service-media',
-        },
-        {
-          name: 'description',
-          label: 'Description',
-          type: 'richText',
-        },
-      ],
-    },
-
-    {
-      name: 'rows',
-      label: 'Row Image / Description / Alignment',
-      type: 'array',
-      fields: [
-        {
-          name: 'image',
-          label: 'Image',
-          type: 'upload',
-          relationTo: 'service-media',
-        },
-        {
-          name: 'description',
-          label: 'Description',
-          type: 'richText',
+          admin: {
+            condition: ({ siblingData }: { siblingData?: { variant?: string } }) =>
+              siblingData?.variant === 'row',
+          },
         },
         {
           name: 'alignment',
@@ -92,19 +87,15 @@ export const Services: CollectionConfig = {
           type: 'select',
           options: [
             { label: 'Left', value: 'left' },
-            { label: 'Center', value: 'center' },
             { label: 'Right', value: 'right' },
           ],
           defaultValue: 'left',
+          admin: {
+            condition: ({ siblingData }: { siblingData?: { variant?: string } }) =>
+              siblingData?.variant === 'row',
+          },
         },
       ],
-    },
-
-    {
-      name: 'tags',
-      label: 'Tags',
-      type: 'text',
-      hasMany: true,
     },
   ],
 }
