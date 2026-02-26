@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { resendAdapter } from '@payloadcms/email-resend'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -12,6 +13,7 @@ import { Home } from './payload/global/Home'
 import { GalleryMedia } from './payload/collections/GalleryMedia'
 import { ServiceMedia } from './payload/collections/ServiceMedia'
 import { Services } from './payload/collections/Services'
+import { EmailTests } from './payload/collections/EmailTests'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, HeroMedia, GalleryMedia, ServiceMedia, Services],
+  collections: [Users, HeroMedia, GalleryMedia, ServiceMedia, Services, EmailTests],
   globals: [Home],
   localization: {
     locales: [
@@ -66,4 +68,9 @@ export default buildConfig({
       },
     }),
   ],
+  email: resendAdapter({
+    apiKey: process.env.RESEND_API_KEY || '',
+    defaultFromAddress: process.env.EMAIL_FROM || '',
+    defaultFromName: process.env.EMAIL_FROM_NAME || '',
+  }),
 })
