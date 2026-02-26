@@ -72,6 +72,7 @@ export interface Config {
     'gallery-media': GalleryMedia
     'service-media': ServiceMedia
     services: Service
+    'email-tests': EmailTest
     'payload-kv': PayloadKv
     'payload-locked-documents': PayloadLockedDocument
     'payload-preferences': PayloadPreference
@@ -84,6 +85,7 @@ export interface Config {
     'gallery-media': GalleryMediaSelect<false> | GalleryMediaSelect<true>
     'service-media': ServiceMediaSelect<false> | ServiceMediaSelect<true>
     services: ServicesSelect<false> | ServicesSelect<true>
+    'email-tests': EmailTestsSelect<false> | EmailTestsSelect<true>
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
     'payload-locked-documents':
       | PayloadLockedDocumentsSelect<false>
@@ -249,6 +251,26 @@ export interface Service {
   createdAt: string
 }
 /**
+ * Use this collection to test sending emails.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "email-tests".
+ */
+export interface EmailTest {
+  id: string
+  emailType: 'purchase-success' | 'thank-you'
+  /**
+   * The email address to send the test email to.
+   */
+  recipientEmail: string
+  /**
+   * A mock customer name to insert into the email template.
+   */
+  customerName: string
+  updatedAt: string
+  createdAt: string
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -291,6 +313,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'services'
         value: string | Service
+      } | null)
+    | ({
+        relationTo: 'email-tests'
+        value: string | EmailTest
       } | null)
   globalSlug?: string | null
   user: {
@@ -437,6 +463,17 @@ export interface ServicesSelect<T extends boolean = true> {
         alignment?: T
         id?: T
       }
+  updatedAt?: T
+  createdAt?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "email-tests_select".
+ */
+export interface EmailTestsSelect<T extends boolean = true> {
+  emailType?: T
+  recipientEmail?: T
+  customerName?: T
   updatedAt?: T
   createdAt?: T
 }

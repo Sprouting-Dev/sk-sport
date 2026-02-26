@@ -22,11 +22,13 @@
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.77.0",
+    "@payloadcms/email-resend": "^3.77.0",
     "@payloadcms/next": "3.77.0",
     "@payloadcms/richtext-lexical": "3.77.0",
     "@payloadcms/storage-s3": "3.77.0",
     "@payloadcms/ui": "3.77.0",
     "@phosphor-icons/react": "^2.1.10",
+    "@react-email/components": "^1.0.8",
     "@supabase/supabase-js": "^2.36.0",
     "@tailwindcss/postcss": "^4.1.18",
     "clsx": "^2.1.1",
