@@ -1,6 +1,4 @@
-'use client'
-
-import { useParams } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { ServiceHero } from '@/components/hero/serviceHero'
 import { CTAFooter } from '@/components/layout'
 import {
@@ -10,14 +8,61 @@ import {
   ServiceDetail,
   type ServiceDetailProps,
 } from '@/components/service'
+import { getServiceBySlug, getAllServices } from '@/data/service'
+import type { Service, ServiceMedia } from '@/payload-types'
 
-const HERO_IMAGES_DATA: Record<string, string> = {
-  'united-discovery': '/United Discovery BG.png',
-  'health-management-system': '/Health Management System BG.png',
-  'equipment-for-top-gymnasts': '/Equipment for Top Gymnasts BG.png',
-  'sports-vision-training': '/Sports Vision Training BG.png',
-  'integrated-sports-installation': '/integrated-sports-installation.png',
+// ---------------------------------------------------------------------------
+// Helper: map Payload `Service` → props ที่ component ต้องการ
+// ---------------------------------------------------------------------------
+
+function mapSectionToServiceDetailProps(
+  section: NonNullable<Service['sections']>[number],
+): ServiceDetailProps & { _id: string } {
+  const resolveImageUrl = (media: string | ServiceMedia | null | undefined): string => {
+    if (!media || typeof media === 'string') return ''
+    return media.url ?? ''
+  }
+
+  if (section.variant === 'row') {
+    return {
+      _id: section.id ?? '',
+      serviceTitle: '',
+      sectionTitle: section.sectionTitle ?? '',
+      detail: section.description ?? '',
+      variant: 'row',
+      alignment: (section.alignment as 'left' | 'right') ?? 'left',
+      images: [resolveImageUrl(section.image)],
+      tags: [],
+    }
+  }
+
+  // variant === 'column' (default)
+  return {
+    _id: section.id ?? '',
+    serviceTitle: '',
+    sectionTitle: section.sectionTitle ?? '',
+    detail: section.description ?? '',
+    variant: 'column',
+    images: (section.images ?? []).map((item) => resolveImageUrl(item.image)),
+    tags: [],
+  }
 }
+
+function mapServiceToMoreServicesItem(service: Service) {
+  const hero = service.hero
+  const imageUrl = hero && typeof hero !== 'string' ? (hero.url ?? '') : ''
+
+  return {
+    id: service.id,
+    title: service.title,
+    image: imageUrl,
+    href: `/service/${service.slug}`,
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Mock data — Related Articles (ยังไม่มี collection จริงใน Payload)
+// ---------------------------------------------------------------------------
 
 const RELATED_ARTICLES_DATA: Record<string, RelatedArticleItem[]> = {
   'united-discovery': [
@@ -122,108 +167,33 @@ const RELATED_ARTICLES_DATA: Record<string, RelatedArticleItem[]> = {
   ],
 }
 
-const SERVICES_DATA = [
-  {
-    id: 1,
-    title: 'United Discovery',
-    image: '/Service/United Discovery.png',
-    href: '/service/united-discovery',
-  },
-  {
-    id: 2,
-    title: 'Integrated Sports Installation',
-    image: '/Service/Integrated Sports Installation.png',
-    href: '/service/integrated-sports-installation',
-  },
-  {
-    id: 3,
-    title: 'Health Management System',
-    image: '/Service/Health Management System.png',
-    href: '/service/health-management-system',
-  },
-  {
-    id: 4,
-    title: 'Equipment for Top Gymnasts',
-    image: '/Service/Equipment for Top Gymnasts.png',
-    href: '/service/equipment-for-top-gymnasts',
-  },
-  {
-    id: 5,
-    title: 'Sports Vision Training',
-    image: '/Service/Sports Vision Training.png',
-    href: '/service/sports-vision-training',
-  },
-]
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
 
-const SERVICE_DETAILS_DATA: Record<string, ServiceDetailProps[]> = {
-  'united-discovery': [
-    {
-      serviceTitle: '',
-      sectionTitle: 'Bangkok - Singapore [3 วัน 2 คืน]',
-      detail:
-        'มารีนา เบย์ แซนด์ - เมอร์ไลอ้อน - ล่องเรือ - ยูนิเวอร์แซล สตูดิโอ - วัดเจ้าแม่กวนอิม - น้ำพุแห่งความมั่งคั่ง - ช้อปปิ้งออร์ชาร์ด ฯลฯ บริษัท ยูไนเต็ด ดิสคัพเวอรี่ จำกัด มีความยินดีที่ได้นำท่านเหินฟ้าท้าชั้นบรรยากาศ สู่ "เกาะสิงคโปร์" ที่เป็นดั่งดินแดนสวรรค์ของนักท่องเที่ยว ไม่ว่าจะเป็น บรรยากาศ สถานที่ท่องเที่ยวกิจกรรมต่างๆ และแหล่งช้อปปิ้งของแบร์นเนมชื่อดัง จากทั่วทุกมุมโลก รวมทั้งคาสิโนแห่งแรกของประเทศสิงคโปร์ รอให้ทุกท่านร่วมสัมผัสกับประสบการณ์ใหม่ที่น่าตื่นเต้น และสุดประทับใจ',
-      variant: 'row',
-      alignment: 'left',
-      images: ['/united-discovery/united-1.png'],
-      tags: ['3 วัน', '2 คืน', 'สิงคโปร์'],
-    },
-    {
-      serviceTitle: '',
-      sectionTitle: 'Bangkok - Korea [5 วัน 4 คืน]',
-      detail:
-        'เกาหลี - SKI RESORT - สวนสนุกเอเวอร์แลนด์ - ซัมซุงเด็ก - กันฮยอน - SEOUL TOWER - TEDDY BEAR SHOP - หลายอย่างอีกมากมาย ทัวร์เกาหลีฤดูหนาวที่สุดประทับใจ กิจกรรมหิมะที่ได้รับความนิยมสูงสุด',
-      variant: 'column',
-      images: ['/united-discovery/united-3.png'],
-      tags: ['5 วัน', '4 คืน', 'เกาหลี'],
-    },
-    {
-      serviceTitle: 'Bangkok - Osaka',
-      sectionTitle: 'Bangkok - Osaka [5 วัน 4 คืน]',
-      detail:
-        'Bangkok - Osaka (5 Fr 4คืน) เกียวโต - โตเกียวดิสนีย์แลนด์ - ยูนิเวอร์แซล สตูดิโอ - นารา - เกียวโต - โอซาก้า - โชปปิ้ง - ช้อปปิ้ง - ตลาดนัดขนาดใหญ่ 150 แห่ง เพื่อแนะนำร้านค้าที่ขายปลีกสินค้ายี่ห้อดัง นำท่านเดินทางสู่ "ไดโนซอร์" ที่ได้รับความนิยมสูงมากจากนักท่องเที่ยว รับบัตรเข้าชมแหล่ง 240 ที่สามารถนำไปใช้ นำโชค และเข้าชมความงดงามของตึกระฟ้าที่กรุงโอซาก้า',
-      variant: 'row',
-      alignment: 'right',
-      images: ['/united-discovery/united-4.png'],
-      tags: ['5 วัน', '4 คืน', 'ญี่ปุ่น'],
-    },
-    {
-      serviceTitle: 'SPIETH World-class gymnastics',
-      sectionTitle: 'Bangkok - Beijing [5 วัน 4 คืน]',
-      detail:
-        'Bangkok - Beijing (5 Fr 4คืน) Beijing Sports University - Beijing Research Institute of Sport Science (BISS) - China Institute of Sport Science (CISS) - ผู้เชี่ยวชาญจากจีน เพื่อเรียนรู้เกี่ยวกับ "วิทยาศาสตร์การกีฬา" ที่ประเทศจีน - มหาวิทยาลัยกีฬาปักกิ่ง กำแพงเมืองจีน พระราชวังฤดูร้อน พระราชวังต้องห้าม จัตุรัสเทียนอันเหมิน และอื่นๆ อีกมากมาย',
-      variant: 'column',
-      images: [
-        '/united-discovery/united-1.png',
-        '/united-discovery/united-2.png',
-        '/united-discovery/united-3.png',
-      ],
-      tags: ['5 วัน', '4 คืน', 'จีน'],
-    },
-  ],
-}
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
 
-function toTitle(slug: string) {
-  return slug
-    .split('-')
-    .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ')
-}
+  const [serviceData, allServices] = await Promise.all([getServiceBySlug(slug), getAllServices()])
 
-export default function ServicePage() {
-  const { slug } = useParams<{ slug: string | string[] }>()
-  const slugValue = Array.isArray(slug) ? slug[0] : (slug ?? '')
-  const titleLine1 = toTitle(slugValue)
+  if (!serviceData) {
+    notFound()
+  }
 
-  const currentHeroImage = HERO_IMAGES_DATA[slugValue] || '/integrated-sports-installation.png'
-  const currentRelatedArticles = RELATED_ARTICLES_DATA[slugValue] || []
-  const currentServiceDetails = SERVICE_DETAILS_DATA[slugValue] || []
+  const heroImage =
+    serviceData.hero && typeof serviceData.hero !== 'string' ? (serviceData.hero.url ?? '') : ''
+
+  const serviceDetails = (serviceData.sections ?? []).map(mapSectionToServiceDetailProps)
+
+  const moreServices = allServices.map(mapServiceToMoreServicesItem)
+
+  const relatedArticles: RelatedArticleItem[] = RELATED_ARTICLES_DATA[slug] ?? []
 
   return (
     <main className="flex w-full flex-col items-center">
       <ServiceHero
-        imageSrc={currentHeroImage}
-        titleLine1={titleLine1}
+        imageSrc={heroImage}
+        titleLine1={serviceData.title}
         showCta={false}
         contentPosition="bottom"
       />
@@ -231,15 +201,13 @@ export default function ServicePage() {
         <div className="w-full py-6 md:py-8">
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-x-16">
             <div className="order-1 lg:order-1 lg:col-span-2 px-4 flex flex-col gap-8">
-              {currentServiceDetails.map((item) => (
-                <ServiceDetail key={item.sectionTitle ?? item.serviceTitle} {...item} />
+              {serviceDetails.map((item, index) => (
+                <ServiceDetail key={item._id || index} {...item} />
               ))}
             </div>
 
             <div className="order-4 mt-8 px-4 lg:order-2 lg:col-span-1 lg:mt-0">
-              {currentRelatedArticles.length > 0 && (
-                <RelatedArticle articles={currentRelatedArticles} />
-              )}
+              {relatedArticles.length > 0 && <RelatedArticle articles={relatedArticles} />}
             </div>
 
             <div className="order-2 pt-4 lg:order-3 col-span-3">
@@ -247,7 +215,7 @@ export default function ServicePage() {
             </div>
 
             <div className="order-3 w-full pt-4 pb-8 px-4 md:pb-16 lg:order-4 lg:col-span-3 lg:pt-8">
-              <MoreServices services={SERVICES_DATA} />
+              <MoreServices services={moreServices} />
             </div>
           </div>
         </div>
