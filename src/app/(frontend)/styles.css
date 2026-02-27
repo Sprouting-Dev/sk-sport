@@ -96,6 +96,12 @@
   background-clip: text;
   filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
 }
+.text-gradient {
+  background: linear-gradient(90deg, #ff5fa8 0%, #4282fa 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 /*Border Gradient Button*/
 .btn-gradient-solid-border {

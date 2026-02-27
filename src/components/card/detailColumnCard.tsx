@@ -21,6 +21,7 @@ export const DetailColumnCard = ({
 
   return (
     <div className="flex w-full flex-col gap-4">
+      {sectionTitle && <h2>{sectionTitle}</h2>}
       {hasImages && (
         <div className="w-full">
           {images.length === 1 ? (
@@ -51,7 +52,6 @@ export const DetailColumnCard = ({
       )}
 
       <div className="flex flex-col gap-3">
-        {sectionTitle && <h2>{sectionTitle}</h2>}
         <p className="body-sm">{description}</p>
         {tags.length > 0 && (
           <div className="mt-1 flex flex-wrap gap-2">
