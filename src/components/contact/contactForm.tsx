@@ -2,17 +2,13 @@
 
 import React, { useState } from 'react'
 import { Button } from '../button'
+import { SuccessConfirm } from '@/components/common'
+import { socialLinks } from '@/components/layout'
 import {
   MapPinAreaIcon,
   EnvelopeIcon,
   PhoneIcon,
-  FacebookLogoIcon,
-  TiktokLogoIcon,
-  InstagramLogoIcon,
-  YoutubeLogoIcon,
-  ChatCircleIcon,
   CircleNotchIcon,
-  CheckCircleIcon,
   ClockIcon,
 } from '@phosphor-icons/react'
 
@@ -35,12 +31,28 @@ export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
-  const socialLinks = [
-    { Icon: FacebookLogoIcon, url: 'https://www.facebook.com' },
-    { Icon: TiktokLogoIcon, url: 'https://www.tiktok.com' },
-    { Icon: InstagramLogoIcon, url: 'https://www.instagram.com' },
-    { Icon: YoutubeLogoIcon, url: 'https://www.youtube.com' },
-    { Icon: ChatCircleIcon, url: 'https://line.me' },
+  const contactDetails = [
+    {
+      Icon: MapPinAreaIcon,
+      title: 'Head Office',
+      detail: '123, Main St. Anytown, USA',
+    },
+    {
+      Icon: EnvelopeIcon,
+      title: 'Email us',
+      detail: 'juieb34@gmail.com',
+    },
+    {
+      Icon: PhoneIcon,
+      title: 'Call us',
+      detail: '06-55883919',
+    },
+  ]
+
+  const openHours = [
+    { day: 'Monday - Friday', time: '9 am - 8 pm' },
+    { day: 'Saturday', time: '9 am - 5 pm' },
+    { day: 'Sunday', time: '9 am - 6 pm' },
   ]
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -96,35 +108,17 @@ export const ContactForm = () => {
           </p>
 
           <div className="mb-8 space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 md:h-12.5 md:w-12.5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-content">
-                <MapPinAreaIcon className="h-6 w-6 md:h-7.5 md:w-7.5" weight="fill" />
+            {contactDetails.map((info, idx) => (
+              <div key={idx} className="flex items-start gap-4">
+                <div className="flex h-10 w-10 md:h-12.5 md:w-12.5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-content">
+                  <info.Icon className="h-6 w-6 md:h-7.5 md:w-7.5" weight="fill" />
+                </div>
+                <div>
+                  <p className="body-md text-primary">{info.title}</p>
+                  <p className="body-md text-base-content">{info.detail}</p>
+                </div>
               </div>
-              <div>
-                <p className="body-md text-primary">Head Office</p>
-                <p className="body-md text-base-content">123, Main St. Anytown, USA</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 md:h-12.5 md:w-12.5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-content">
-                <EnvelopeIcon className="h-6 w-6 md:h-7.5 md:w-7.5" weight="fill" />
-              </div>
-              <div>
-                <p className="body-md text-primary">Email us</p>
-                <p className="body-md text-base-content">juieb34@gmail.com</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 md:h-12.5 md:w-12.5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-content">
-                <PhoneIcon className="h-6 w-6 md:h-7.5 md:w-7.5" weight="fill" />
-              </div>
-              <div>
-                <p className="body-md text-primary">Call us</p>
-                <p className="body-md text-base-content">06-55883919</p>
-              </div>
-            </div>
+            ))}
           </div>
 
           <hr className="mb-8 border-primary hidden md:block" />
@@ -132,13 +126,15 @@ export const ContactForm = () => {
           <div className="mb-8">
             <p className="mb-2 md:mb-4 body-md text-base-content">Follow our social media</p>
             <div className="flex gap-3">
-              {socialLinks.map(({ Icon, url }, idx) => (
+              {socialLinks.map((link, idx) => (
                 <a
                   key={idx}
-                  href={url}
-                  className="flex h-8 w-8 md:h-10.5 md:w-10.5 items-center justify-center rounded-full bg-primary text-primary-content transition hover:scale-110"
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon-wrapper flex h-8 w-8 md:h-10.5 md:w-10.5 items-center justify-center rounded-full bg-primary text-primary-content transition hover:scale-110 "
                 >
-                  <Icon className="h-4 w-4 md:h-6 md:w-6" weight="fill" />
+                  {link.icon}
                 </a>
               ))}
             </div>
@@ -147,27 +143,15 @@ export const ContactForm = () => {
           <div>
             <p className="mb-3 md:mb-8 body-md text-base-content">Open Hours</p>
             <div className="space-y-3 body-sm text-base-content">
-              <div className="flex justify-between">
-                <div className="flex flex-row gap-1 md:gap-2">
-                  <ClockIcon className="h-4 w-4 md:h-6 md:w-6 text-primary" weight="fill" />
-                  Monday - Friday
+              {openHours.map((schedule, idx) => (
+                <div key={idx} className="flex justify-between">
+                  <div className="flex flex-row gap-1 md:gap-2">
+                    <ClockIcon className="h-4 w-4 md:h-6 md:w-6 text-primary" weight="fill" />
+                    {schedule.day}
+                  </div>
+                  <span>{schedule.time}</span>
                 </div>
-                <span>9 am - 8 pm</span>
-              </div>
-              <div className="flex justify-between">
-                <div className="flex flex-row gap-1 md:gap-2">
-                  <ClockIcon className="h-4 w-4 md:h-6 md:w-6 text-primary" weight="fill" />
-                  Saturday
-                </div>
-                <span>9 am - 5 pm</span>
-              </div>
-              <div className="flex justify-between">
-                <div className="flex flex-row gap-1 md:gap-2">
-                  <ClockIcon className="h-4 w-4 md:h-6 md:w-6 text-primary" weight="fill" />
-                  Sunday
-                </div>
-                <span>9 am - 6 pm</span>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -176,23 +160,19 @@ export const ContactForm = () => {
           <h2 className="mb-8 text-primary">Send us message</h2>
 
           {isSuccess ? (
-            <div className="flex h-full flex-col items-center justify-center space-y-4 text-center">
-              <CheckCircleIcon className="h-15 w-15 md:h-20 md:w-20 text-success" weight="fill" />
-              <h3 className="text-base-content">Thank You!</h3>
-              <p className="body-sm text-base-content">
-                Your message has been sent successfully.
-                <br />
-                We will get back to you soon.
-              </p>
-              <Button
-                onClick={() => setIsSuccess(false)}
-                variant="primary"
-                size="md"
-                className="rounded-2xl mt-2 md:mt-6"
-              >
-                Send Another Message
-              </Button>
-            </div>
+            <SuccessConfirm
+              title="Thank You!"
+              description={
+                <>
+                  Your message has been sent successfully.
+                  <br />
+                  We will get back to you soon.
+                </>
+              }
+              buttonText="Send Another Message"
+              buttonClassName='rounded-2xl'
+              onButtonClick={() => setIsSuccess(false)}
+            />
           ) : (
             <form onSubmit={handleSubmit} className="flex h-full flex-col space-y-6">
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
