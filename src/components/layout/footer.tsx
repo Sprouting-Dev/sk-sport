@@ -14,7 +14,7 @@ import {
   EmailIcon,
 } from '@/components/icons'
 
-const socialLinks = [
+export const socialLinks = [
   {
     label: 'Facebook',
     href: 'https://facebook.com',
