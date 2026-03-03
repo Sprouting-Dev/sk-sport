@@ -67,32 +67,30 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User
-    'hero-media': HeroMedia
-    'gallery-media': GalleryMedia
-    'service-media': ServiceMedia
-    services: Service
-    'email-tests': EmailTest
-    'payload-kv': PayloadKv
-    'payload-locked-documents': PayloadLockedDocument
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  collectionsJoins: {}
+    users: User;
+    'hero-media': HeroMedia;
+    'gallery-media': GalleryMedia;
+    'service-media': ServiceMedia;
+    services: Service;
+    'email-tests': EmailTest;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>
-    'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>
-    'gallery-media': GalleryMediaSelect<false> | GalleryMediaSelect<true>
-    'service-media': ServiceMediaSelect<false> | ServiceMediaSelect<true>
-    services: ServicesSelect<false> | ServicesSelect<true>
-    'email-tests': EmailTestsSelect<false> | EmailTestsSelect<true>
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
-    'payload-locked-documents':
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
-  }
+    users: UsersSelect<false> | UsersSelect<true>;
+    'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
+    'gallery-media': GalleryMediaSelect<false> | GalleryMediaSelect<true>;
+    'service-media': ServiceMediaSelect<false> | ServiceMediaSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    'email-tests': EmailTestsSelect<false> | EmailTestsSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
     defaultIDType: string;
   };
@@ -257,18 +255,18 @@ export interface Service {
  * via the `definition` "email-tests".
  */
 export interface EmailTest {
-  id: string
-  emailType: 'purchase-success' | 'thank-you'
+  id: string;
+  emailType: 'purchase-success' | 'thank-you';
   /**
    * The email address to send the test email to.
    */
-  recipientEmail: string
+  recipientEmail: string;
   /**
    * A mock customer name to insert into the email template.
    */
-  customerName: string
-  updatedAt: string
-  createdAt: string
+  customerName: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -311,14 +309,14 @@ export interface PayloadLockedDocument {
         value: string | ServiceMedia;
       } | null)
     | ({
-        relationTo: 'services'
-        value: string | Service
+        relationTo: 'services';
+        value: string | Service;
       } | null)
     | ({
-        relationTo: 'email-tests'
-        value: string | EmailTest
-      } | null)
-  globalSlug?: string | null
+        relationTo: 'email-tests';
+        value: string | EmailTest;
+      } | null);
+  globalSlug?: string | null;
   user: {
     relationTo: 'users';
     value: string | User;
@@ -471,11 +469,11 @@ export interface ServicesSelect<T extends boolean = true> {
  * via the `definition` "email-tests_select".
  */
 export interface EmailTestsSelect<T extends boolean = true> {
-  emailType?: T
-  recipientEmail?: T
-  customerName?: T
-  updatedAt?: T
-  createdAt?: T
+  emailType?: T;
+  recipientEmail?: T;
+  customerName?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
