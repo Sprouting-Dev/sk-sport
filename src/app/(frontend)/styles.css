@@ -296,3 +296,15 @@
     scrollbar-width: none;
   }
 }
+
+.social-icon-wrapper svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 768px) {
+  .social-icon-wrapper svg {
+    width: 24px;
+    height: 24px;
+  }
+}
