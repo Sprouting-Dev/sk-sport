@@ -45,7 +45,9 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
     }
   }, [currentSlide, onSlideChange])
 
-  if (!images?.length) return null
+  if (!images || images.length === 0) {
+    return null
+  }
 
   return (
     <>
