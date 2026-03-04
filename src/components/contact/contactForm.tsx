@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Button } from '../button'
 import { SuccessConfirm } from '@/components/common'
-import { socialLinks } from '@/components/layout'
+import { socialLinks } from '@/components/common'
 import {
   MapPinAreaIcon,
   EnvelopeIcon,
@@ -11,6 +11,7 @@ import {
   CircleNotchIcon,
   ClockIcon,
 } from '@phosphor-icons/react'
+import { cn } from '@/utils/cn'
 
 interface FormData {
   name: string
@@ -78,6 +79,14 @@ export const ContactForm = () => {
     return Object.keys(newErrors).length === 0
   }
 
+  const getInputClassName = (hasError: boolean) =>
+  cn(
+    'rounded-xl body-sm border bg-secondary-content p-3 outline-none transition-all',
+    hasError
+      ? 'border-error bg-error-content'
+      : 'border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary',
+  )
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -108,8 +117,8 @@ export const ContactForm = () => {
           </p>
 
           <div className="mb-8 space-y-6">
-            {contactDetails.map((info, idx) => (
-              <div key={idx} className="flex items-start gap-4">
+            {contactDetails.map((info) => (
+              <div key={info.title} className="flex items-start gap-4">
                 <div className="flex h-10 w-10 md:h-12.5 md:w-12.5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-content">
                   <info.Icon className="h-6 w-6 md:h-7.5 md:w-7.5" weight="fill" />
                 </div>
@@ -126,9 +135,9 @@ export const ContactForm = () => {
           <div className="mb-8">
             <p className="mb-2 md:mb-4 body-md text-base-content">Follow our social media</p>
             <div className="flex gap-3">
-              {socialLinks.map((link, idx) => (
+              {socialLinks.map((link) => (
                 <a
-                  key={idx}
+                  key={link.href}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -143,8 +152,8 @@ export const ContactForm = () => {
           <div>
             <p className="mb-3 md:mb-8 body-md text-base-content">Open Hours</p>
             <div className="space-y-3 body-sm text-base-content">
-              {openHours.map((schedule, idx) => (
-                <div key={idx} className="flex justify-between">
+              {openHours.map((schedule) => (
+                <div key={schedule.day} className="flex justify-between">
                   <div className="flex flex-row gap-1 md:gap-2">
                     <ClockIcon className="h-4 w-4 md:h-6 md:w-6 text-primary" weight="fill" />
                     {schedule.day}
@@ -170,7 +179,7 @@ export const ContactForm = () => {
                 </>
               }
               buttonText="Send Another Message"
-              buttonClassName='rounded-2xl'
+              buttonClassName="rounded-2xl"
               onButtonClick={() => setIsSuccess(false)}
             />
           ) : (
@@ -184,11 +193,7 @@ export const ContactForm = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your name"
-                    className={`rounded-xl body-sm border bg-secondary-content p-3 outline-none transition-all ${
-                      errors.name
-                        ? 'border-error bg-error-content'
-                        : 'border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary'
-                    }`}
+                    className={getInputClassName(!!errors.name)}
                   />
                   {errors.name && <span className="mt-1 text-xs text-error">{errors.name}</span>}
                 </div>
@@ -201,11 +206,7 @@ export const ContactForm = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Enter your number"
-                    className={`rounded-xl body-sm border bg-secondary-content p-3 outline-none transition-all ${
-                      errors.phone
-                        ? 'border-error bg-error-content'
-                        : 'border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary'
-                    }`}
+                    className={getInputClassName(!!errors.phone)}
                   />
                   {errors.phone && <span className="mt-1 text-xs text-error">{errors.phone}</span>}
                 </div>
@@ -219,11 +220,7 @@ export const ContactForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
-                  className={`rounded-xl body-sm border bg-secondary-content p-3 outline-none transition-all ${
-                    errors.email
-                      ? 'border-error bg-error-content'
-                      : 'border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary'
-                  }`}
+                  className={getInputClassName(!!errors.email)}
                 />
                 {errors.email && <span className="mt-1 text-xs text-error">{errors.email}</span>}
               </div>
@@ -236,11 +233,7 @@ export const ContactForm = () => {
                   onChange={handleChange}
                   placeholder="Enter your message"
                   rows={5}
-                  className={`min-h-18 md:min-h-38 rounded-xl body-sm border bg-secondary-content p-3 outline-none transition-all resize-none ${
-                    errors.message
-                      ? 'border-error bg-error-content'
-                      : 'border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary'
-                  }`}
+                  className={getInputClassName(!!errors.message)}
                 />
                 {errors.message && (
                   <span className="mt-1 text-xs text-error">{errors.message}</span>
