@@ -45,6 +45,10 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
     }
   }, [currentSlide, onSlideChange])
 
+  if (!images || images.length === 0) {
+    return null
+  }
+
   return (
     <>
       <div className="absolute inset-0 z-0">
