@@ -60,13 +60,9 @@ export type SupportedTimezones =
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
   | 'Pacific/Fiji'
-  | 'Pacific/Fiji'
 
 export interface Config {
   auth: {
-    users: UserAuthOperations
-  }
-  blocks: {}
     users: UserAuthOperations
   }
   blocks: {}
@@ -76,6 +72,7 @@ export interface Config {
     'gallery-media': GalleryMedia
     'service-media': ServiceMedia
     services: Service
+    contact: Contact
     'payload-kv': PayloadKv
     'payload-locked-documents': PayloadLockedDocument
     'payload-preferences': PayloadPreference
@@ -88,6 +85,7 @@ export interface Config {
     'gallery-media': GalleryMediaSelect<false> | GalleryMediaSelect<true>
     'service-media': ServiceMediaSelect<false> | ServiceMediaSelect<true>
     services: ServicesSelect<false> | ServicesSelect<true>
+    contact: ContactSelect<false> | ContactSelect<true>
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
     'payload-locked-documents':
       | PayloadLockedDocumentsSelect<false>
@@ -99,12 +97,7 @@ export interface Config {
     defaultIDType: string
   }
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'th') | ('en' | 'th')[]
-    defaultIDType: string
-  }
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'th') | ('en' | 'th')[]
   globals: {
-    home: Home
-  }
     home: Home
   }
   globalsSelect: {
@@ -112,14 +105,7 @@ export interface Config {
   }
   locale: 'en' | 'th'
   user: User
-    home: HomeSelect<false> | HomeSelect<true>
-  }
-  locale: 'en' | 'th'
-  user: User
   jobs: {
-    tasks: unknown
-    workflows: unknown
-  }
     tasks: unknown
     workflows: unknown
   }
@@ -129,13 +115,7 @@ export interface UserAuthOperations {
     email: string
     password: string
   }
-    email: string
-    password: string
-  }
   login: {
-    email: string
-    password: string
-  }
     email: string
     password: string
   }
@@ -143,13 +123,7 @@ export interface UserAuthOperations {
     email: string
     password: string
   }
-    email: string
-    password: string
-  }
   unlock: {
-    email: string
-    password: string
-  }
     email: string
     password: string
   }
@@ -169,28 +143,12 @@ export interface User {
   hash?: string | null
   loginAttempts?: number | null
   lockUntil?: string | null
-  id: string
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
   sessions?:
     | {
         id: string
         createdAt?: string | null
         expiresAt: string
-        id: string
-        createdAt?: string | null
-        expiresAt: string
       }[]
-    | null
-  password?: string | null
-  collection: 'users'
     | null
   password?: string | null
   collection: 'users'
@@ -201,23 +159,9 @@ export interface User {
  */
 export interface HeroMedia {
   id: string
-  id: string
   /**
    * อธิบายว่าภาพนี้คืออะไร สำหรับคนใช้ screen reader และ SEO
    */
-  alt: string
-  prefix?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
   alt: string
   prefix?: string | null
   updatedAt: string
@@ -238,23 +182,9 @@ export interface HeroMedia {
  */
 export interface GalleryMedia {
   id: string
-  id: string
   /**
    * อธิบายว่าภาพนี้คืออะไร สำหรับคนใช้ screen reader และ SEO
    */
-  alt: string
-  prefix?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
   alt: string
   prefix?: string | null
   updatedAt: string
@@ -274,7 +204,6 @@ export interface GalleryMedia {
  * via the `definition` "service-media".
  */
 export interface ServiceMedia {
-  id: string
   id: string
   /**
    * อธิบายว่าภาพนี้คืออะไร สำหรับคนใช้ screen reader และ SEO
@@ -323,16 +252,26 @@ export interface Service {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string
+  name: string
+  email: string
+  phoneNumber?: string | null
+  detail?: string | null
+  updatedAt: string
+  createdAt: string
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
   id: string
   key: string
-  id: string
-  key: string
   data:
     | {
-        [k: string]: unknown
         [k: string]: unknown
       }
     | unknown[]
@@ -340,14 +279,12 @@ export interface PayloadKv {
     | number
     | boolean
     | null
-    | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string
   id: string
   document?:
     | ({
@@ -370,13 +307,12 @@ export interface PayloadLockedDocument {
         relationTo: 'services'
         value: string | Service
       } | null)
+    | ({
+        relationTo: 'contact'
+        value: string | Contact
+      } | null)
   globalSlug?: string | null
   user: {
-    relationTo: 'users'
-    value: string | User
-  }
-  updatedAt: string
-  createdAt: string
     relationTo: 'users'
     value: string | User
   }
@@ -389,19 +325,13 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string
-  id: string
   user: {
-    relationTo: 'users'
-    value: string | User
-  }
-  key?: string | null
     relationTo: 'users'
     value: string | User
   }
   key?: string | null
   value?:
     | {
-        [k: string]: unknown
         [k: string]: unknown
       }
     | unknown[]
@@ -411,20 +341,12 @@ export interface PayloadPreference {
     | null
   updatedAt: string
   createdAt: string
-    | null
-  updatedAt: string
-  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
   id: string
   name?: string | null
   batch?: number | null
@@ -445,22 +367,9 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T
   loginAttempts?: T
   lockUntil?: T
-  updatedAt?: T
-  createdAt?: T
-  email?: T
-  resetPasswordToken?: T
-  resetPasswordExpiration?: T
-  salt?: T
-  hash?: T
-  loginAttempts?: T
-  lockUntil?: T
   sessions?:
     | T
     | {
-        id?: T
-        createdAt?: T
-        expiresAt?: T
-      }
         id?: T
         createdAt?: T
         expiresAt?: T
@@ -484,38 +393,12 @@ export interface HeroMediaSelect<T extends boolean = true> {
   height?: T
   focalX?: T
   focalY?: T
-  alt?: T
-  prefix?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "gallery-media_select".
  */
 export interface GalleryMediaSelect<T extends boolean = true> {
-  alt?: T
-  prefix?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
   alt?: T
   prefix?: T
   updatedAt?: T
@@ -578,11 +461,21 @@ export interface ServicesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  name?: T
+  email?: T
+  phoneNumber?: T
+  detail?: T
+  updatedAt?: T
+  createdAt?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T
-  data?: T
   key?: T
   data?: T
 }
@@ -591,11 +484,6 @@ export interface PayloadKvSelect<T extends boolean = true> {
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T
-  globalSlug?: T
-  user?: T
-  updatedAt?: T
-  createdAt?: T
   document?: T
   globalSlug?: T
   user?: T
@@ -612,11 +500,6 @@ export interface PayloadPreferencesSelect<T extends boolean = true> {
   value?: T
   updatedAt?: T
   createdAt?: T
-  user?: T
-  key?: T
-  value?: T
-  updatedAt?: T
-  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -627,21 +510,12 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T
   updatedAt?: T
   createdAt?: T
-  name?: T
-  batch?: T
-  updatedAt?: T
-  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home".
  */
 export interface Home {
-  id: string
-  heroMedia?: (string | HeroMedia)[] | null
-  galleryMedia?: (string | GalleryMedia)[] | null
-  updatedAt?: string | null
-  createdAt?: string | null
   id: string
   heroMedia?: (string | HeroMedia)[] | null
   galleryMedia?: (string | GalleryMedia)[] | null
@@ -658,11 +532,6 @@ export interface HomeSelect<T extends boolean = true> {
   updatedAt?: T
   createdAt?: T
   globalType?: T
-  heroMedia?: T
-  galleryMedia?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -670,10 +539,8 @@ export interface HomeSelect<T extends boolean = true> {
  */
 export interface Auth {
   [k: string]: unknown
-  [k: string]: unknown
 }
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
 }
-

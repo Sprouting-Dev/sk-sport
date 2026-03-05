@@ -12,6 +12,7 @@ import { Home } from './payload/global/Home'
 import { GalleryMedia } from './payload/collections/GalleryMedia'
 import { ServiceMedia } from './payload/collections/ServiceMedia'
 import { Services } from './payload/collections/Services'
+import { Contact } from './payload/collections/Contact'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, HeroMedia, GalleryMedia, ServiceMedia, Services],
+  collections: [Users, HeroMedia, GalleryMedia, ServiceMedia, Services, Contact],
   globals: [Home],
   localization: {
     locales: [
