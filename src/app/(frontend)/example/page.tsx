@@ -42,9 +42,9 @@ export default function ExamplePage() {
         <section>
           <h2 className="h2 mb-3">Typography</h2>
           <div className="space-y-4 rounded-xl border border-base-300 p-4 bg-base-100">
-            <div className="h1">Heading 1 - Rajdhani</div>
-            <div className="h2">Heading 2 - Rajdhani</div>
-            <div className="h3">Heading 3 - Rajdhani</div>
+            <h1 className="h1">Heading 1 - Rajdhani</h1>
+            <h2 className="h2">Heading 2 - Rajdhani</h2>
+            <h3 className="h3">Heading 3 - Rajdhani</h3>
             <p className="body-lg">Body Large - Noto Sans Thai</p>
             <p className="body-md">Body Medium - Noto Sans Thai</p>
             <p className="body-sm">Body Small - Noto Sans Thai</p>
