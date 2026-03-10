@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { cn } from '@/utils/cn'
 
 export interface ArticleData {
+  id: number | string
   categories?: string
   title: string
   subtitle?: string
@@ -45,7 +46,7 @@ export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
 
       <div className="relative z-10 flex h-full w-full flex-col justify-end px-4 md:px-6 pb-1">
         {categories && (
-          <span className="body-md mb- uppercase tracking-wider text-info">{categories}</span>
+          <span className="body-md uppercase tracking-wider text-info">{categories}</span>
         )}
 
         <h3 className="mb-1 text-primary-content">{title}</h3>
