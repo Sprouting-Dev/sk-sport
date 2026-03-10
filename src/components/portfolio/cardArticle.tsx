@@ -2,30 +2,31 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { cn } from '@/utils/cn'
 
-export interface CardArticleProps {
-  categories: string
+export interface ArticleData {
+  categories?: string
   title: string
   subtitle?: string
   description: string
   image?: string
+}
+
+export interface CardArticleProps {
+  data: ArticleData
   onClick?: () => void
 }
 
-export const CardArticle: React.FC<CardArticleProps> = ({
-  categories,
-  title,
-  subtitle,
-  description,
-  image,
-  onClick,
-}) => {
+export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
+  const { categories, title, subtitle, description, image } = data
+
   return (
     <div
       onClick={onClick}
-      className={`group relative flex h-64 w-full overflow-hidden rounded-xl bg-base-300 transition-all duration-300 md:h-98 ${
-        onClick ? 'cursor-pointer hover:-translate-y-1' : ''
-      }`}
+      className={cn(
+        'group relative flex h-64 w-full overflow-hidden rounded-xl bg-base-300 transition-all duration-300 md:h-98',
+        onClick && 'cursor-pointer hover:-translate-y-1',
+      )}
     >
       {image ? (
         <Image

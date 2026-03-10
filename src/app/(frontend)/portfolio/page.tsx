@@ -99,15 +99,11 @@ export default function Portfolio() {
       <div className="p-6 md:p-8">
         <h2>OUR FACILITIES</h2>
         <div className="mt-6 md:mt-8 grid grid-cols-1 gap-4 md:gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {filteredArticles.map((article) => (
+          {filteredArticles.map((item) => (
             <CardArticle
-              key={article.id}
-              categories={article.categories}
-              title={article.title}
-              subtitle={article.subtitle}
-              description={article.description}
-              image={article.image}
-              onClick={() => router.push(`/portfolio/${article.id}`)}
+              key={item.id}
+              data={item}
+              onClick={() => router.push(`/portfolio/${item.id}`)}
             />
           ))}
         </div>
