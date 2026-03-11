@@ -8,11 +8,16 @@ import { useTranslations } from 'next-intl'
 import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { useRouter } from 'next/navigation'
 
+export type HeroVariant = 'default' | 'contact'
+
 interface HeroProps {
   media?: Home['heroMedia']
+  variant?: HeroVariant
+  title?: string
+  description?: React.ReactNode
 }
 
-export const Hero: React.FC<HeroProps> = ({ media }) => {
+export const Hero: React.FC<HeroProps> = ({ media, variant = 'default', title, description }) => {
   const t = useTranslations('Home')
 
   const router = useRouter()
@@ -33,11 +38,34 @@ export const Hero: React.FC<HeroProps> = ({ media }) => {
     return []
   }, [media])
 
+  const isContact = variant === 'contact'
+
   return (
     <section className="relative w-full hero-wrapper-height h-full max-h-308 overflow-hidden bg-hero text-primary-content">
       <HeroCarousel images={carouselImages} interval={5000} />
 
-      <div className="relative z-10 flex md:h-full h-full md:w-full hero-content-max-w flex-col justify-center px-6 py-12 lg:px-24 lg:py-24 pointer-events-none bg-overlay-40 gap-9">
+      <div 
+        className={`relative z-10 flex w-full pointer-events-none bg-overlay-40 ${
+          isContact 
+            ? 'h-full flex-col items-center justify-center text-center px-4' 
+            : 'md:h-full h-full md:w-full hero-content-max-w flex-col justify-center px-6 py-12 lg:px-24 lg:py-24 gap-9'
+        }`}
+      >
+        {isContact ? (
+          <div className="flex flex-col items-center gap-4 pointer-events-auto">
+            {title && (
+              <h1 className="h1 tracking-wider drop-shadow-md">
+                {title}
+              </h1>
+            )}
+            {description && (
+              <div className="body-md md:body-lg max-w-2xl text-primary-content/90 drop-shadow-sm">
+                {description}
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
         <div className="max-w-xl flex flex-col pointer-events-auto gap-6">
           <h1 className="h1 leading-[120%] tracking-wider md:leading-[100%] md:tracking-wider">
             <span className="block text-primary-content">{t('Hero.title_part1')}</span>
@@ -54,6 +82,8 @@ export const Hero: React.FC<HeroProps> = ({ media }) => {
         >
           {t('Hero.contact_us')}
         </Button>
+        </>
+        )}
       </div>
     </section>
   )

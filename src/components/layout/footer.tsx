@@ -3,39 +3,9 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-
 import { useTranslations } from 'next-intl'
-import {
-  FacebookIcon,
-  InstagramIcon,
-  YouTubeIcon,
-  LineIcon,
-  PhoneIcon,
-  EmailIcon,
-} from '@/components/icons'
-
-const socialLinks = [
-  {
-    label: 'Facebook',
-    href: 'https://facebook.com',
-    icon: <FacebookIcon />,
-  },
-  {
-    label: 'Instagram',
-    href: 'https://instagram.com',
-    icon: <InstagramIcon />,
-  },
-  {
-    label: 'YouTube',
-    href: 'https://youtube.com',
-    icon: <YouTubeIcon />,
-  },
-  {
-    label: 'LINE',
-    href: 'https://line.me',
-    icon: <LineIcon />,
-  },
-]
+import { PhoneIcon, EmailIcon } from '@/components/icons'
+import { socialLinks } from '@/components/common'
 
 export const Footer: React.FC = () => {
   const router = useRouter()
