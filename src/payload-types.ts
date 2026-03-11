@@ -67,30 +67,30 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
-    'hero-media': HeroMedia;
-    'gallery-media': GalleryMedia;
-    'service-media': ServiceMedia;
-    services: Service;
-    'email-tests': EmailTest;
-    'payload-kv': PayloadKv;
-    'payload-locked-documents': PayloadLockedDocument;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
-  };
-  collectionsJoins: {};
+    users: User
+    'hero-media': HeroMedia
+    'gallery-media': GalleryMedia
+    'service-media': ServiceMedia
+    services: Service
+    'payload-kv': PayloadKv
+    'payload-locked-documents': PayloadLockedDocument
+    'payload-preferences': PayloadPreference
+    'payload-migrations': PayloadMigration
+  }
+  collectionsJoins: {}
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
-    'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
-    'gallery-media': GalleryMediaSelect<false> | GalleryMediaSelect<true>;
-    'service-media': ServiceMediaSelect<false> | ServiceMediaSelect<true>;
-    services: ServicesSelect<false> | ServicesSelect<true>;
-    'email-tests': EmailTestsSelect<false> | EmailTestsSelect<true>;
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
-  };
+    users: UsersSelect<false> | UsersSelect<true>
+    'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>
+    'gallery-media': GalleryMediaSelect<false> | GalleryMediaSelect<true>
+    'service-media': ServiceMediaSelect<false> | ServiceMediaSelect<true>
+    services: ServicesSelect<false> | ServicesSelect<true>
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
+    'payload-locked-documents':
+      | PayloadLockedDocumentsSelect<false>
+      | PayloadLockedDocumentsSelect<true>
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
+  }
   db: {
     defaultIDType: string;
   };
@@ -270,6 +270,64 @@ export interface EmailTest {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: string
+  title: string
+  subtitle?: string | null
+  sectionTitle?: string | null
+  descriptions?: string | null
+  images?:
+    | {
+        image?: (string | null) | ServiceMedia
+        id?: string | null
+      }[]
+    | null
+  variant?: ('column' | 'row') | null
+  image?: (string | null) | ServiceMedia
+  alignment?: ('left' | 'right') | null
+  slug?: string | null
+  tags?:
+    | {
+        tag?: string | null
+        id?: string | null
+      }[]
+    | null
+  updatedAt: string
+  createdAt: string
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: string
+  title: string
+  subtitle?: string | null
+  sectionTitle?: string | null
+  descriptions?: string | null
+  images?:
+    | {
+        image?: (string | null) | ServiceMedia
+        id?: string | null
+      }[]
+    | null
+  variant?: ('column' | 'row') | null
+  image?: (string | null) | ServiceMedia
+  alignment?: ('left' | 'right') | null
+  slug?: string | null
+  tags?:
+    | {
+        tag?: string | null
+        id?: string | null
+      }[]
+    | null
+  updatedAt: string
+  createdAt: string
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -313,10 +371,10 @@ export interface PayloadLockedDocument {
         value: string | Service;
       } | null)
     | ({
-        relationTo: 'email-tests';
-        value: string | EmailTest;
-      } | null);
-  globalSlug?: string | null;
+        relationTo: 'services'
+        value: string | Service
+      } | null)
+  globalSlug?: string | null
   user: {
     relationTo: 'users';
     value: string | User;
@@ -474,6 +532,62 @@ export interface EmailTestsSelect<T extends boolean = true> {
   customerName?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T
+  subtitle?: T
+  sectionTitle?: T
+  descriptions?: T
+  images?:
+    | T
+    | {
+        image?: T
+        id?: T
+      }
+  variant?: T
+  image?: T
+  alignment?: T
+  slug?: T
+  tags?:
+    | T
+    | {
+        tag?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T
+  subtitle?: T
+  sectionTitle?: T
+  descriptions?: T
+  images?:
+    | T
+    | {
+        image?: T
+        id?: T
+      }
+  variant?: T
+  image?: T
+  alignment?: T
+  slug?: T
+  tags?:
+    | T
+    | {
+        tag?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
