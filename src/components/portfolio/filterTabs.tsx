@@ -38,7 +38,7 @@ export const FilterTab: React.FC<FilterTabProps> = ({
               className={`whitespace-nowrap rounded-none w-27 h-8 transition-all duration-300 shadow-none ${
                 activeCategory === category
                   ? 'bg-gradient-to-r from-primary to-secondary text-primary-content'
-                  : 'bg-header-bg text-base-content/30 border-base-content/30'
+                  : 'bg-primary-content text-base-content/30 border-base-content/30'
               }`}
             >
               {category}
@@ -56,7 +56,7 @@ export const FilterTab: React.FC<FilterTabProps> = ({
               className={`whitespace-nowrap rounded-none w-38 h-12 transition-all duration-300 ${
                 activeCategory === category
                   ? 'bg-gradient-to-r from-primary to-secondary text-primary-content'
-                  : 'bg-header-bg text-base-content/30 border-base-content/30'
+                  : 'bg-primary-content text-base-content/30 border-base-content/30'
               }`}
             >
               {category}
@@ -76,7 +76,7 @@ export const FilterTab: React.FC<FilterTabProps> = ({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder={placeholder}
-          className="body-sm w-full border border-base-content/30 bg-header-bg h-9.5 md:h-12.5 pl-11 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary"
+          className="body-sm w-full border border-base-content/30 bg-primary-content h-9.5 md:h-12.5 pl-11 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </div>
     </div>
