@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { Button } from '../button'
-import { Badge } from '@/components/common'
+import { Badge, CategoryBadge } from '@/components/common'
 import { useRouter } from 'next/navigation'
 import { ArticleData } from '@/components/portfolio/cardArticle'
 import { cn } from '@/utils/cn'
@@ -17,11 +17,12 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
 
   const newestArticles = articles.filter((article) => article.newest === true)
   const [activeId, setActiveId] = useState<string | number | null>(
-    newestArticles.length > 0 ? newestArticles[0].id : null
+    newestArticles.length > 0 ? newestArticles[0].id : null,
   )
 
   if (!newestArticles || newestArticles.length === 0) return null
-  const currentArticle = newestArticles.find((article) => article.id === activeId) || newestArticles[0]
+  const currentArticle =
+    newestArticles.find((article) => article.id === activeId) || newestArticles[0]
 
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col">
@@ -52,13 +53,7 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
 
         <div className="w-full md:w-1/2 p-4 md:p-12 flex flex-col justify-center">
           {currentArticle.category && (
-            <div className="mb-4">
-              <div className="inline-flex h-7 md:h-10 rounded-lg p-0.25 bg-gradient-to-r from-primary to-secondary">
-                <span className="flex h-full w-full items-center justify-center bg-primary-content text-primary body-sm px-4 rounded-lg">
-                  {currentArticle.category}
-                </span>
-              </div>
-            </div>
+            <CategoryBadge text={currentArticle.category} className="mb-4 self-start" />
           )}
 
           <h1 className=" text-base-content mb-3">{currentArticle.title}</h1>
@@ -79,11 +74,12 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
             variant="ghost"
             onClick={() => setActiveId(article.id)}
             aria-label={`Go to slide ${article.title}`}
-            className={`transition-all duration-300 ${
+            className={cn(
+              'transition-all duration-300',
               activeId === article.id
                 ? 'w-4 h-2 md:w-6 md:h-3 bg-secondary'
-                : 'w-2 h-2 md:w-3 md:h-3 bg-primary/50 hover:bg-primary/70'
-            }`}
+                : 'w-2 h-2 md:w-3 md:h-3 bg-primary/50 hover:bg-primary/70',
+            )}
           />
         ))}
       </div>
