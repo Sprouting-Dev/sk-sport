@@ -225,10 +225,14 @@ export interface ServiceMedia {
  * via the `definition` "services".
  */
 export interface Service {
-  id: string;
-  title: string;
-  subtitle?: string | null;
-  hero?: (string | null) | ServiceMedia;
+  id: string
+  title: string
+  /**
+   * URL-friendly identifier (e.g. "united-discovery")
+   */
+  slug: string
+  subtitle?: string | null
+  hero?: (string | null) | ServiceMedia
   sections?:
     | {
         sectionTitle?: string | null;
@@ -443,6 +447,7 @@ export interface ServiceMediaSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   subtitle?: T;
   hero?: T;
   sections?:

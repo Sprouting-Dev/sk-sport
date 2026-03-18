@@ -6,7 +6,7 @@ export const Services: CollectionConfig = {
   admin: {
     group: 'Content',
     useAsTitle: 'title',
-    defaultColumns: ['title', 'subtitle', 'createdAt'],
+    defaultColumns: ['title', 'slug', 'subtitle', 'createdAt'],
   },
   access: {
     read: () => true,
@@ -18,6 +18,16 @@ export const Services: CollectionConfig = {
       label: 'Title',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'slug',
+      label: 'Slug',
+      type: 'text',
+      required: true,
+      unique: true,
+      admin: {
+        description: 'URL-friendly identifier (e.g. "united-discovery")',
+      },
     },
     {
       name: 'subtitle',
@@ -35,6 +45,11 @@ export const Services: CollectionConfig = {
       label: 'Sections',
       type: 'array',
       fields: [
+        {
+          name: 'serviceTitle',
+          label: 'Service Title',
+          type: 'text',
+        },
         {
           name: 'sectionTitle',
           label: 'Section Title',
