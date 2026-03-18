@@ -25,19 +25,7 @@ export const ServiceDetail = ({
 }: ServiceDetailProps) => {
   return (
     <section className="w-full">
-      {serviceTitle && (
-        <h2
-          className="mb-3"
-          style={{
-            background: 'linear-gradient(90deg, #FF5FA8 0%, #4282FA 50%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
-          {serviceTitle}
-        </h2>
-      )}
+      {serviceTitle && <h2 className="mb-3 text-gradient">{serviceTitle}</h2>}
 
       {variant === 'row' ? (
         <DetailRowCard
