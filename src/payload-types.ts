@@ -229,6 +229,7 @@ export interface ServiceMedia {
  * via the `definition` "services".
  */
 export interface Service {
+<<<<<<< HEAD
   id: string
   title: string
   subtitle?: string | null
@@ -239,6 +240,22 @@ export interface Service {
         sectionTitle: string
         description?: string | null
         variant: 'column' | 'row'
+=======
+  id: string;
+  title: string;
+  /**
+   * URL-friendly identifier (e.g. "united-discovery")
+   */
+  slug: string;
+  subtitle?: string | null;
+  hero?: (string | null) | ServiceMedia;
+  sections?:
+    | {
+        serviceTitle?: string | null;
+        sectionTitle?: string | null;
+        description?: string | null;
+        variant?: ('column' | 'row') | null;
+>>>>>>> 873308b (feat: create pagination button component)
         images?:
           | {
               image: string | ServiceMedia
@@ -477,9 +494,10 @@ export interface ServicesSelect<T extends boolean = true> {
   sections?:
     | T
     | {
-        sectionTitle?: T
-        description?: T
-        variant?: T
+        serviceTitle?: T;
+        sectionTitle?: T;
+        description?: T;
+        variant?: T;
         images?:
           | T
           | {

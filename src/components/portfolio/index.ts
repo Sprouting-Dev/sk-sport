@@ -1,4 +1,5 @@
 export * from './cardArticle'
 export * from './filterTabs'
 export * from './highlightArticle'
+export * from './paginationButton'
 export * from './portfolioClient'
