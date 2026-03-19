@@ -13,7 +13,7 @@ export const CategoryBadge: React.FC<CategoryBadgeProps> = ({ text, className })
     <div
       className={cn(
         'inline-flex h-7 md:h-10 rounded-lg p-0.25 bg-gradient-to-r from-primary to-secondary',
-        className
+        className,
       )}
     >
       <span className="flex h-full w-full items-center justify-center bg-primary-content text-primary body-sm px-4 rounded-lg uppercase">

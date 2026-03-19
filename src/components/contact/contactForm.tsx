@@ -80,12 +80,12 @@ export const ContactForm = () => {
   }
 
   const getInputClassName = (hasError: boolean) =>
-  cn(
-    'rounded-xl body-sm border bg-secondary-content p-3 outline-none transition-all',
-    hasError
-      ? 'border-error bg-error-content'
-      : 'border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary',
-  )
+    cn(
+      'rounded-xl body-sm border bg-secondary-content p-3 outline-none transition-all',
+      hasError
+        ? 'border-error bg-error-content'
+        : 'border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary',
+    )
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
