@@ -23,11 +23,9 @@ export const FilterTab: React.FC<FilterTabProps> = ({
   onSearchChange,
   placeholder = 'Search...',
 }) => {
-
   return (
     <div className="flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between p-8">
       <div className="w-full overflow-x-auto pb-1 md:pb-0 no-scrollbar">
-        
         <div className="flex items-center justify-center gap-1 md:hidden">
           {mobileCategories.map((category) => (
             <Button
@@ -63,7 +61,6 @@ export const FilterTab: React.FC<FilterTabProps> = ({
             </Button>
           ))}
         </div>
-
       </div>
 
       <div className="relative w-full shrink-0 md:w-105">

@@ -6,7 +6,7 @@ export const Services: CollectionConfig = {
   admin: {
     group: 'Content',
     useAsTitle: 'title',
-    defaultColumns: ['title', 'subtitle', 'createdAt'],
+    defaultColumns: ['title', 'slug', 'subtitle', 'createdAt'],
   },
   access: {
     read: () => true,
@@ -25,70 +25,17 @@ export const Services: CollectionConfig = {
       type: 'text',
     },
     {
-      name: 'sectionTitle',
-      label: 'Section Title',
-      type: 'text',
-    },
-    {
-      name: 'descriptions',
-      label: 'Descriptions',
-      type: 'textarea',
-    },
-    {
-      name: 'images',
-      label: 'Images',
-      type: 'array',
-      admin: {
-        condition: (_: Partial<Service>, siblingData: Partial<Service>) =>
-          siblingData?.variant === 'column',
-      },
-      fields: [
-        {
-          name: 'image',
-          label: 'Image',
-          type: 'upload',
-          relationTo: 'service-media',
-        },
-      ],
-    },
-    {
-      name: 'variant',
-      label: 'Variant',
-      type: 'select',
-      options: [
-        { label: 'Column', value: 'column' },
-        { label: 'Row', value: 'row' },
-      ],
-      defaultValue: 'column',
-    },
-    {
-      name: 'image',
-      label: 'Image',
+      name: 'hero',
+      label: 'Hero Image',
       type: 'upload',
       relationTo: 'service-media',
-      admin: {
-        condition: (_: Partial<Service>, siblingData: Partial<Service>) =>
-          siblingData?.variant === 'row',
-      },
-    },
-    {
-      name: 'alignment',
-      label: 'Alignment',
-      type: 'select',
-      options: [
-        { label: 'Left', value: 'left' },
-        { label: 'Right', value: 'right' },
-      ],
-      defaultValue: 'left',
-      admin: {
-        condition: (_: Partial<Service>, siblingData: Partial<Service>) =>
-          siblingData?.variant === 'row',
-      },
     },
     {
       name: 'slug',
       label: 'Slug (Title as default)',
       type: 'text',
+      required: true,
+      unique: true,
       hooks: {
         beforeValidate: [
           ({ data, value }: { data?: Partial<Service> | null; value?: string | null }) => {
@@ -102,6 +49,77 @@ export const Services: CollectionConfig = {
           },
         ],
       },
+    },
+    {
+      name: 'sections',
+      label: 'Service Sections',
+      type: 'array',
+      fields: [
+        {
+          name: 'sectionTitle',
+          label: 'Section Title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'description',
+          label: 'Description',
+          type: 'textarea',
+        },
+        {
+          name: 'variant',
+          label: 'Layout Variant',
+          type: 'select',
+          options: [
+            { label: 'Column (Images Grid)', value: 'column' },
+            { label: 'Row (Image + Text)', value: 'row' },
+          ],
+          defaultValue: 'column',
+          required: true,
+        },
+        {
+          name: 'images',
+          label: 'Images',
+          type: 'array',
+          admin: {
+            condition: (_: Partial<Service>, siblingData: { variant?: string }) =>
+              siblingData?.variant === 'column',
+          },
+          fields: [
+            {
+              name: 'image',
+              label: 'Image',
+              type: 'upload',
+              relationTo: 'service-media',
+              required: true,
+            },
+          ],
+        },
+        {
+          name: 'image',
+          label: 'Single Image',
+          type: 'upload',
+          relationTo: 'service-media',
+          admin: {
+            condition: (_: Partial<Service>, siblingData: { variant?: string }) =>
+              siblingData?.variant === 'row',
+          },
+        },
+        {
+          name: 'alignment',
+          label: 'Image Alignment',
+          type: 'select',
+          options: [
+            { label: 'Left', value: 'left' },
+            { label: 'Right', value: 'right' },
+          ],
+          defaultValue: 'left',
+          admin: {
+            condition: (_: Partial<Service>, siblingData: { variant?: string }) =>
+              siblingData?.variant === 'row',
+          },
+        },
+      ],
     },
     {
       name: 'tags',

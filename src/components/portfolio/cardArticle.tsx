@@ -46,9 +46,7 @@ export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
       <div className="absolute inset-0 bg-gradient-to-t from-base-content/90 via-base-content/50 transition-opacity duration-300 group-hover:opacity-100" />
 
       <div className="relative z-10 flex h-full w-full flex-col justify-end px-4 md:px-6 pb-1">
-        {category && (
-          <span className="body-md uppercase tracking-wider text-info">{category}</span>
-        )}
+        {category && <span className="body-md uppercase tracking-wider text-info">{category}</span>}
 
         <h3 className="mb-1 text-primary-content">{title}</h3>
 

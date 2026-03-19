@@ -27,7 +27,7 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
         <h1 className="-ml-3 md:ml-0 mb-4 md:mb-6">HIGHLIGHTS</h1>
         <HighlightArticle articles={articles} />
       </div>
-      
+
       <div className="border-b border-base-content/20 bg-primary-content">
         <FilterTab
           desktopCategories={['ALL', 'VENUE', 'FACILITY', 'TRAINING']}
