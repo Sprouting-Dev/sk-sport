@@ -229,18 +229,6 @@ export interface ServiceMedia {
  * via the `definition` "services".
  */
 export interface Service {
-<<<<<<< HEAD
-  id: string
-  title: string
-  subtitle?: string | null
-  hero?: (string | null) | ServiceMedia
-  slug: string
-  sections?:
-    | {
-        sectionTitle: string
-        description?: string | null
-        variant: 'column' | 'row'
-=======
   id: string;
   title: string;
   /**
@@ -255,7 +243,6 @@ export interface Service {
         sectionTitle?: string | null;
         description?: string | null;
         variant?: ('column' | 'row') | null;
->>>>>>> 873308b (feat: create pagination button component)
         images?:
           | {
               image: string | ServiceMedia
