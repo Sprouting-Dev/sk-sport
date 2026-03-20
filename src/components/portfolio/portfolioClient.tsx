@@ -9,7 +9,7 @@ export interface PortfolioClientProps {
   articles: ArticleData[]
 }
 
-const ITEMS_PER_PAGE = 1
+const ITEMS_PER_PAGE = 9
 
 export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] }) => {
   const [activeTab, setActiveTab] = useState('ALL')
@@ -19,7 +19,7 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [activeTab, search])
+  }, [activeTab, search, articles])
 
   const filteredArticles = articles.filter((article) => {
     const matchCategory = activeTab === 'ALL' || article.category === activeTab
