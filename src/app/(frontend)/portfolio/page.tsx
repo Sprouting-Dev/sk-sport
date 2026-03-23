@@ -6,7 +6,7 @@ export default async function Portfolio() {
   let fetchedArticles: ArticleData[] = []
 
   try {
-    const res = await fetch('https://api.example.com', {})
+    const res = await fetch('https://api.example.com')
 
     if (!res.ok) {
       throw new Error(`Failed to fetch: ${res.status}`)
