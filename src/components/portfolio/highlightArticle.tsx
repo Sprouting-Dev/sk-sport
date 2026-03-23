@@ -29,7 +29,7 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
       <div
         onClick={() => router.push(`/portfolio/${currentArticle.id}`)}
         className={cn(
-          'flex flex-col md:flex-row bg-primary-content rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-101 mb-4 md:mb-10',
+          'flex flex-col md:flex-row max-h-125 bg-primary-content rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-101 mb-4 md:mb-10',
         )}
       >
         <div className="relative w-full md:w-1/2 h-50 md:h-125">
@@ -53,7 +53,7 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
 
         <div className="w-full md:w-1/2 p-4 md:p-12 flex flex-col justify-center">
           {currentArticle.category && (
-            <CategoryBadge text={currentArticle.category} className="mb-4 self-start" />
+            <CategoryBadge text={currentArticle.category} className="md:min-h-10 mb-4 self-start" />
           )}
 
           <h1 className=" text-base-content mb-3">{currentArticle.title}</h1>

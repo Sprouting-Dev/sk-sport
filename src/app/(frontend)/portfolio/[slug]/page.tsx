@@ -1,25 +1,32 @@
 import { notFound } from 'next/navigation'
 import { PortfolioHero } from '@/components/hero/portfolioHero'
 
-export default async function PortfolioDetailPage({  params,}: {  params: Promise<{ slug: string }>}) {
+export default async function PortfolioDetailPage({ params,}: { params: Promise<{ slug: string }>}) {
   const { slug } = await params
+  let portfolioData = null
 
-  const mockData = {
-    imageSrc: '',
-    category: 'VENUE',
-    title: 'มาดามปุ๊ก นำสปอร์ตโค้ชช่วยดันฟุตซอลหญิงทีมชาติไทยหวังติด 1 ใน 5 ของโลก',
-    subtitle: 'SK Sport Trading สนับสนุนทีมชาติฟุตซอลหญิง',
-    publishedDate: 'February 3, 2026',
+  try {
+    const res = await fetch(`https://api.example.com/${slug}`)
+
+    if (res.ok) {
+      portfolioData = await res.json()
+    }
+  } catch (error) {
+    console.error(`Error fetching portfolio details for slug: ${slug}`, error)
+  }
+
+  if (!portfolioData) {
+    notFound()
   }
 
   return (
     <main className="flex w-full flex-col items-center">
       <PortfolioHero
-        imageSrc={mockData.imageSrc || '/checker.png'}
-        category={mockData.category}
-        title={mockData.title}
-        subtitle={mockData.subtitle}
-        publishedDate={mockData.publishedDate}
+        imageSrc={portfolioData.imageSrc || '/checker.png'}
+        category={portfolioData.category}
+        title={portfolioData.title}
+        subtitle={portfolioData.subtitle}
+        publishedDate={portfolioData.publishedDate}
       />
 
       <div className="flex w-full flex-col items-center justify-center bg-header-bg">
