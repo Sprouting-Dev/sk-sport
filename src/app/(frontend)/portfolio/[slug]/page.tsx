@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { PortfolioHero } from '@/components/hero/portfolioHero'
+import { HighlightSection } from '@/components/portfolio'
 
 export default async function PortfolioDetailPage({ params,}: { params: Promise<{ slug: string }>}) {
   const { slug } = await params
@@ -29,10 +30,14 @@ export default async function PortfolioDetailPage({ params,}: { params: Promise<
         publishedDate={portfolioData.publishedDate}
       />
 
-      <div className="flex w-full flex-col items-center justify-center bg-header-bg">
+      <div className="flex w-full flex-col items-center justify-center bg-primary-content">
         <div className="w-full py-6 md:py-8">
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-x-16">
-            <div className="order-1 lg:order-1 lg:col-span-2 px-4 flex flex-col gap-8"></div>
+            <div className="order-1 lg:order-1 lg:col-span-2 px-10 flex flex-col gap-8">
+              {portfolioData.highlightText && (
+                <HighlightSection text={portfolioData.highlightText} />
+              )}
+            </div>
 
             <div className="order-4 mt-8 px-4 lg:order-2 lg:col-span-1 lg:mt-0"></div>
 
