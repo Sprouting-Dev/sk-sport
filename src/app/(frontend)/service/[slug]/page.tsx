@@ -1,14 +1,10 @@
 import { notFound } from 'next/navigation'
 import { ServiceHero } from '@/components/hero/serviceHero'
 import { CTAFooter } from '@/components/layout'
-import { Detail, type DetailProps } from '@/components/common'
-import { RelatedArticle, type RelatedArticleItem, MoreServices } from '@/components/service'
+import { Detail, type DetailProps, RelatedArticle, type RelatedArticleItem } from '@/components/common'
+import { MoreServices } from '@/components/service'
 import { getServiceBySlug, getAllServices } from '@/data/service'
 import type { Service, ServiceMedia } from '@/payload-types'
-
-// ---------------------------------------------------------------------------
-// Helper: map Payload `Service` → props ที่ component ต้องการ
-// ---------------------------------------------------------------------------
 
 function mapSectionToDetailProps(
   section: NonNullable<Service['sections']>[number],
@@ -31,7 +27,6 @@ function mapSectionToDetailProps(
     }
   }
 
-  // variant === 'column' (default)
   return {
     _id: section.id ?? '',
     detailTitle: '',
@@ -54,10 +49,6 @@ function mapServiceToMoreServicesItem(service: Service) {
     href: `/service/${service.slug}`,
   }
 }
-
-// ---------------------------------------------------------------------------
-// Mock data — Related Articles (ยังไม่มี collection จริงใน Payload)
-// ---------------------------------------------------------------------------
 
 const RELATED_ARTICLES_DATA: Record<string, RelatedArticleItem[]> = {
   'united-discovery': [
@@ -162,10 +153,6 @@ const RELATED_ARTICLES_DATA: Record<string, RelatedArticleItem[]> = {
   ],
 }
 
-// ---------------------------------------------------------------------------
-// Page
-// ---------------------------------------------------------------------------
-
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
@@ -194,7 +181,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       />
       <div className="flex w-full flex-col items-center justify-center bg-header-bg">
         <div className="w-full py-6 md:py-8">
-          <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-x-16">
+          <div className="flex flex-col lg:grid lg:grid-cols-3">
             <div className="order-1 lg:order-1 lg:col-span-2 px-4 flex flex-col gap-8">
               {serviceDetails.map((item, index) => (
                 <Detail key={item._id || index} {...item} />
