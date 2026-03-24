@@ -9,6 +9,7 @@ export interface DetailRowCardProps {
   images?: string[]
   alignment?: 'left' | 'right'
   tags?: string[]
+  verticalAlign?: 'top' | 'middle'
 }
 
 export const DetailRowCard = ({
@@ -17,6 +18,7 @@ export const DetailRowCard = ({
   images = [],
   alignment = 'left',
   tags = [],
+  verticalAlign = 'top',
 }: DetailRowCardProps) => {
   const hasImages = images.length > 0
   const isImageLeft = alignment === 'left'
@@ -65,19 +67,14 @@ export const DetailRowCard = ({
     </div>
   ) : null
 
+  const verticalAlignmentClass = verticalAlign === 'middle' ? 'md:items-center' : 'md:items-start'
+  
+  const directionClass = isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+
   return (
-    <div className="flex w-full flex-col gap-5 md:flex-row md:items-start md:gap-8">
-      {isImageLeft ? (
-        <>
-          {imageBlock}
-          {textBlock}
-        </>
-      ) : (
-        <>
-          {textBlock}
-          {imageBlock}
-        </>
-      )}
+    <div className={`flex w-full flex-col gap-5 md:gap-10 ${directionClass} ${verticalAlignmentClass}`}>
+      {imageBlock}
+      {textBlock}
     </div>
   )
 }

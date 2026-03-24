@@ -1,13 +1,8 @@
 import { notFound } from 'next/navigation'
 import { ServiceHero } from '@/components/hero/serviceHero'
 import { CTAFooter } from '@/components/layout'
-import {
-  RelatedArticle,
-  type RelatedArticleItem,
-  MoreServices,
-  ServiceDetail,
-  type ServiceDetailProps,
-} from '@/components/service'
+import { Detail, type DetailProps } from '@/components/common'
+import { RelatedArticle, type RelatedArticleItem, MoreServices } from '@/components/service'
 import { getServiceBySlug, getAllServices } from '@/data/service'
 import type { Service, ServiceMedia } from '@/payload-types'
 
@@ -15,9 +10,9 @@ import type { Service, ServiceMedia } from '@/payload-types'
 // Helper: map Payload `Service` → props ที่ component ต้องการ
 // ---------------------------------------------------------------------------
 
-function mapSectionToServiceDetailProps(
+function mapSectionToDetailProps(
   section: NonNullable<Service['sections']>[number],
-): ServiceDetailProps & { _id: string } {
+): DetailProps & { _id: string } {
   const resolveImageUrl = (media: string | ServiceMedia | null | undefined): string => {
     if (!media || typeof media === 'string') return ''
     return media.url ?? ''
@@ -26,7 +21,7 @@ function mapSectionToServiceDetailProps(
   if (section.variant === 'row') {
     return {
       _id: section.id ?? '',
-      serviceTitle: '',
+      detailTitle: '',
       sectionTitle: section.sectionTitle ?? '',
       detail: section.description ?? '',
       variant: 'row',
@@ -39,7 +34,7 @@ function mapSectionToServiceDetailProps(
   // variant === 'column' (default)
   return {
     _id: section.id ?? '',
-    serviceTitle: '',
+    detailTitle: '',
     sectionTitle: section.sectionTitle ?? '',
     detail: section.description ?? '',
     variant: 'column',
@@ -183,7 +178,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const heroImage =
     serviceData.hero && typeof serviceData.hero !== 'string' ? (serviceData.hero.url ?? '') : ''
 
-  const serviceDetails = (serviceData.sections ?? []).map(mapSectionToServiceDetailProps)
+  const serviceDetails = (serviceData.sections ?? []).map(mapSectionToDetailProps)
 
   const moreServices = allServices.map(mapServiceToMoreServicesItem)
 
@@ -202,7 +197,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-x-16">
             <div className="order-1 lg:order-1 lg:col-span-2 px-4 flex flex-col gap-8">
               {serviceDetails.map((item, index) => (
-                <ServiceDetail key={item._id || index} {...item} />
+                <Detail key={item._id || index} {...item} />
               ))}
             </div>
 

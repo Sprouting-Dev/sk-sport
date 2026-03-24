@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { CheckCircleIcon } from '@phosphor-icons/react'
 import { Button } from '../button'
