@@ -4,42 +4,48 @@ import React from 'react'
 import { DetailRowCard } from '@/components/card/detailRowCard'
 import { DetailColumnCard } from '@/components/card/detailColumnCard'
 
-export interface ServiceDetailProps {
-  serviceTitle: string
+export interface DetailProps {
+  detailTitle: string
   sectionTitle?: string
   detail: string
   images?: string[]
   variant?: 'column' | 'row'
   tags?: string[]
   alignment?: 'left' | 'right'
+  verticalAlign?: 'top' | 'middle'
 }
 
-export const ServiceDetail = ({
-  serviceTitle,
+export const Detail = ({
+  detailTitle,
   sectionTitle,
   detail,
   images = [],
   variant = 'column',
   tags = [],
   alignment = 'left',
-}: ServiceDetailProps) => {
+  verticalAlign = 'top',
+}: DetailProps) => {
+
+  const displayImages = images && images.length > 0 ? images : ['/checker.png']
+
   return (
     <section className="w-full">
-      {serviceTitle && <h2 className="mb-3 text-gradient">{serviceTitle}</h2>}
+      {detailTitle && <h2 className="mb-3 text-gradient">{detailTitle}</h2>}
 
       {variant === 'row' ? (
         <DetailRowCard
           sectionTitle={sectionTitle}
           description={detail}
-          images={images}
+          images={displayImages}
           alignment={alignment}
           tags={tags}
+          verticalAlign={verticalAlign}
         />
       ) : (
         <DetailColumnCard
           sectionTitle={sectionTitle}
           description={detail}
-          images={images}
+          images={displayImages}
           tags={tags}
         />
       )}

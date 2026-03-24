@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { PortfolioHero } from '@/components/hero/portfolioHero'
+import { Detail, type DetailProps } from '@/components/common'
 import { HighlightSection } from '@/components/portfolio'
 
 export default async function PortfolioDetailPage({ params,}: { params: Promise<{ slug: string }>}) {
@@ -36,6 +37,16 @@ export default async function PortfolioDetailPage({ params,}: { params: Promise<
             <div className="order-1 lg:order-1 lg:col-span-2 px-10 flex flex-col gap-8">
               {portfolioData.highlightText && (
                 <HighlightSection text={portfolioData.highlightText} />
+              )}
+
+              {portfolioData.sections && portfolioData.sections.length > 0 && (
+                <div className="flex flex-col gap-10 mt-4">
+                  {portfolioData.sections.map(
+                    (section: DetailProps & { _id?: string }, index: number) => (
+                      <Detail key={section._id || index} {...section} />
+                    ),
+                  )}
+                </div>
               )}
             </div>
 

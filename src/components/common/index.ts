@@ -1,4 +1,5 @@
 export * from './badge'
 export * from './categoryBadge'
+export * from './detail'
 export * from './socials'
 export * from './successConfirm'

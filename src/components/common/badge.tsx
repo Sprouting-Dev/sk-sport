@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { SparkleIcon } from '@phosphor-icons/react'
 import { cn } from '@/utils/cn'
