@@ -35,7 +35,7 @@ export const FilterTab: React.FC<FilterTabProps> = ({
               size="sm"
               className={`whitespace-nowrap rounded-none w-27 h-8 transition-all duration-300 shadow-none ${
                 activeCategory === category
-                  ? 'bg-gradient-to-r from-primary to-secondary text-primary-content'
+                  ? 'bg-gradient-to-r from-primary to-secondary text-primary-content border-none'
                   : 'bg-primary-content text-base-content/30 border-base-content/30'
               }`}
             >
@@ -53,7 +53,7 @@ export const FilterTab: React.FC<FilterTabProps> = ({
               size="sm"
               className={`whitespace-nowrap rounded-none w-38 h-12 transition-all duration-300 ${
                 activeCategory === category
-                  ? 'bg-gradient-to-r from-primary to-secondary text-primary-content'
+                  ? 'bg-gradient-to-r from-primary to-secondary text-primary-content border-none'
                   : 'bg-primary-content text-base-content/30 border-base-content/30'
               }`}
             >
