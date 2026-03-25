@@ -1,5 +1,6 @@
 export * from './cardArticle'
 export * from './filterTabs'
+export * from './gallerySection'
 export * from './highlightArticle'
 export * from './highlightSection'
 export * from './paginationButton'
