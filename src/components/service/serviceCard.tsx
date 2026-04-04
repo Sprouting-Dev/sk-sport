@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
+
 import { Button } from '@/components/button'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -39,13 +39,12 @@ export const ServiceCard = ({
           isHorizontal ? 'h-31 w-full md:h-auto md:w-1/2' : 'h-52 md:h-60 w-full',
         )}
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={image}
           alt={title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-
         {!isHorizontal && (
           <>
             <div className="absolute inset-0 bg-gradient-card-left md:hidden" />
