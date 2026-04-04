@@ -5,6 +5,9 @@ export const Contact: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
   },
+  access: {
+    create: () => true,
+  },
   fields: [
     {
       name: 'name',
