@@ -1,7 +1,12 @@
 import { notFound } from 'next/navigation'
 import { ServiceHero } from '@/components/hero/serviceHero'
 import { CTAFooter } from '@/components/layout'
-import { Detail, type DetailProps, RelatedArticle, type RelatedArticleItem } from '@/components/common'
+import {
+  Detail,
+  type DetailProps,
+  RelatedArticle,
+  type RelatedArticleItem,
+} from '@/components/common'
 import { MoreServices } from '@/components/service'
 import { getServiceBySlug, getAllServices } from '@/data/service'
 import type { Service, ServiceMedia } from '@/payload-types'

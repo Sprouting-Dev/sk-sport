@@ -3,7 +3,11 @@ import { PortfolioHero } from '@/components/hero/portfolioHero'
 import { Detail, type DetailProps, RelatedArticle } from '@/components/common'
 import { HighlightSection, GallerySection } from '@/components/portfolio'
 
-export default async function PortfolioDetailPage({ params,}: { params: Promise<{ slug: string }>}) {
+export default async function PortfolioDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
   const { slug } = await params
   let portfolioData = null
 
@@ -50,9 +54,9 @@ export default async function PortfolioDetailPage({ params,}: { params: Promise<
               )}
 
               {(portfolioData.galleryPhotos || portfolioData.galleryVideos) && (
-                <GallerySection 
-                  photos={portfolioData.galleryPhotos} 
-                  videos={portfolioData.galleryVideos} 
+                <GallerySection
+                  photos={portfolioData.galleryPhotos}
+                  videos={portfolioData.galleryVideos}
                 />
               )}
             </div>

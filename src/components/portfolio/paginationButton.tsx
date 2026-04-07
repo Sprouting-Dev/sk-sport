@@ -19,25 +19,25 @@ export const PaginationButton: React.FC<PaginationButtonProps> = ({
   if (totalPages <= 1) return null
 
   const getVisiblePages = () => {
-  if (totalPages <= 5) {
-    return Array.from({ length: totalPages }, (_, i) => i + 1)
-  }
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1)
+    }
 
-  let start = currentPage - 2
-  let end = currentPage + 2
+    let start = currentPage - 2
+    let end = currentPage + 2
 
-  if (start < 1) {
-    start = 1
-    end = Math.min(5, totalPages)
-  }
-  
-  if (end > totalPages) {
-    end = totalPages
-    start = Math.max(totalPages - 4, 1)
-  }
+    if (start < 1) {
+      start = 1
+      end = Math.min(5, totalPages)
+    }
 
-  return Array.from({ length: end - start + 1 }, (_, i) => start + i)
-}
+    if (end > totalPages) {
+      end = totalPages
+      start = Math.max(totalPages - 4, 1)
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i)
+  }
 
   const visiblePages = getVisiblePages()
   const showArrows = totalPages > 5

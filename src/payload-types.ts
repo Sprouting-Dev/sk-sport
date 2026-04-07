@@ -99,9 +99,11 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'th') | ('en' | 'th')[];
   globals: {
     home: Home;
+    about: About;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
+    about: AboutSelect<false> | AboutSelect<true>;
   };
   locale: 'en' | 'th';
   user: User;
@@ -573,11 +575,91 @@ export interface Home {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  historySectionTitle?: string | null;
+  companyName?: string | null;
+  historyDescription?: string | null;
+  historyHighlights?:
+    | {
+        value?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  missionTitle?: string | null;
+  missionDescription?: string | null;
+  visionTitle?: string | null;
+  visionDescription?: string | null;
+  founderSectionTitle?: string | null;
+  founderImage?: (string | null) | HeroMedia;
+  founderName?: string | null;
+  founderRole?: string | null;
+  founderDescription?: string | null;
+  founderQuote?: string | null;
+  featuredProjectsSectionTitle?: string | null;
+  featuredProjectsSectionSubtitle?: string | null;
+  featuredProjectsCtaText?: string | null;
+  servicesSectionTitle?: string | null;
+  servicesSectionSubtitle?: string | null;
+  servicesCtaText?: string | null;
+  productsSectionTitle?: string | null;
+  productsSectionSubtitle?: string | null;
+  productsCtaText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
   heroMedia?: T;
   galleryMedia?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  heroTitle?: T;
+  heroSubtitle?: T;
+  historySectionTitle?: T;
+  companyName?: T;
+  historyDescription?: T;
+  historyHighlights?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  missionTitle?: T;
+  missionDescription?: T;
+  visionTitle?: T;
+  visionDescription?: T;
+  founderSectionTitle?: T;
+  founderImage?: T;
+  founderName?: T;
+  founderRole?: T;
+  founderDescription?: T;
+  founderQuote?: T;
+  featuredProjectsSectionTitle?: T;
+  featuredProjectsSectionSubtitle?: T;
+  featuredProjectsCtaText?: T;
+  servicesSectionTitle?: T;
+  servicesSectionSubtitle?: T;
+  servicesCtaText?: T;
+  productsSectionTitle?: T;
+  productsSectionSubtitle?: T;
+  productsCtaText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -30,7 +30,7 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
   const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE)
   const paginatedArticles = filteredArticles.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    currentPage * ITEMS_PER_PAGE,
   )
 
   return (

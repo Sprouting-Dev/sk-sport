@@ -68,11 +68,13 @@ export const DetailRowCard = ({
   ) : null
 
   const verticalAlignmentClass = verticalAlign === 'middle' ? 'md:items-center' : 'md:items-start'
-  
+
   const directionClass = isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
 
   return (
-    <div className={`flex w-full flex-col gap-5 md:gap-10 ${directionClass} ${verticalAlignmentClass}`}>
+    <div
+      className={`flex w-full flex-col gap-5 md:gap-10 ${directionClass} ${verticalAlignmentClass}`}
+    >
       {imageBlock}
       {textBlock}
     </div>

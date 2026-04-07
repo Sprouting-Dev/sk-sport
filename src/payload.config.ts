@@ -10,6 +10,7 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { Users } from './payload/collections/Users'
 import { HeroMedia } from './payload/collections/HeroMedia'
 import { Home } from './payload/global/Home'
+import { About } from './payload/global/About'
 import { GalleryMedia } from './payload/collections/GalleryMedia'
 import { ServiceMedia } from './payload/collections/ServiceMedia'
 import { Services } from './payload/collections/Services'
@@ -27,7 +28,7 @@ export default buildConfig({
     },
   },
   collections: [Users, HeroMedia, GalleryMedia, ServiceMedia, Services, EmailTests, Contact],
-  globals: [Home],
+  globals: [Home, About],
   localization: {
     locales: [
       { label: 'English', code: 'en' },

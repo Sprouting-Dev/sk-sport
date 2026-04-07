@@ -25,7 +25,6 @@ export const Detail = ({
   alignment = 'left',
   verticalAlign = 'top',
 }: DetailProps) => {
-
   const displayImages = images && images.length > 0 ? images : ['/checker.png']
 
   return (
