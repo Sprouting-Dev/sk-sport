@@ -13,9 +13,7 @@ export const getPortfolioArticles = async (): Promise<PortfolioArticle[]> => {
   return result.docs
 }
 
-export const getPortfolioArticleBySlug = async (
-  slug: string,
-): Promise<PortfolioArticle | null> => {
+export const getPortfolioArticleBySlug = async (slug: string): Promise<PortfolioArticle | null> => {
   const payload = await getPayload({ config })
   const result = await payload.find({
     collection: 'portfolio-articles',

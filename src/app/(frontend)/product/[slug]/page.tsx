@@ -7,11 +7,7 @@ function resolveImageUrl(image: Product['image']): string {
   return (image as GalleryMedia).url ?? ''
 }
 
-export default async function ProductDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const product = await getProductBySlug(slug)
 

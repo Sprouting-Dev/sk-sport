@@ -57,7 +57,9 @@ export default async function ProductPage() {
                       {product.subtitle && (
                         <p className="body-sm text-subtle">{product.subtitle}</p>
                       )}
-                      <p className="body-sm text-base-content line-clamp-3">{product.description}</p>
+                      <p className="body-sm text-base-content line-clamp-3">
+                        {product.description}
+                      </p>
                     </div>
                   </Link>
                 )

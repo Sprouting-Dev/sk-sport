@@ -29,7 +29,17 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, HeroMedia, GalleryMedia, ServiceMedia, Services, EmailTests, Contact, PortfolioArticles, Products],
+  collections: [
+    Users,
+    HeroMedia,
+    GalleryMedia,
+    ServiceMedia,
+    Services,
+    EmailTests,
+    Contact,
+    PortfolioArticles,
+    Products,
+  ],
   globals: [Home, About],
   localization: {
     locales: [
