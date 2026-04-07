@@ -16,6 +16,8 @@ import { ServiceMedia } from './payload/collections/ServiceMedia'
 import { Services } from './payload/collections/Services'
 import { EmailTests } from './payload/collections/EmailTests'
 import { Contact } from './payload/collections/Contact'
+import { PortfolioArticles } from './payload/collections/PortfolioArticles'
+import { Products } from './payload/collections/Products'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,7 +29,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, HeroMedia, GalleryMedia, ServiceMedia, Services, EmailTests, Contact],
+  collections: [Users, HeroMedia, GalleryMedia, ServiceMedia, Services, EmailTests, Contact, PortfolioArticles, Products],
   globals: [Home, About],
   localization: {
     locales: [

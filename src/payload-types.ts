@@ -74,6 +74,8 @@ export interface Config {
     services: Service;
     'email-tests': EmailTest;
     contact: Contact;
+    'portfolio-articles': PortfolioArticle;
+    products: Product;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +90,8 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     'email-tests': EmailTestsSelect<false> | EmailTestsSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
+    'portfolio-articles': PortfolioArticlesSelect<false> | PortfolioArticlesSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -294,6 +298,39 @@ export interface Contact {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-articles".
+ */
+export interface PortfolioArticle {
+  id: string;
+  title: string;
+  subtitle?: string | null;
+  highlight?: boolean | null;
+  sectionTitle?: string | null;
+  sectionDetail: string;
+  sectionImage?: (string | null) | GalleryMedia;
+  gallery?: (string | GalleryMedia)[] | null;
+  tag?: string | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  title: string;
+  subtitle?: string | null;
+  category?: string | null;
+  description: string;
+  image?: (string | null) | GalleryMedia;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -343,6 +380,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact';
         value: string | Contact;
+      } | null)
+    | ({
+        relationTo: 'portfolio-articles';
+        value: string | PortfolioArticle;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: string | Product;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -519,6 +564,37 @@ export interface ContactSelect<T extends boolean = true> {
   email?: T;
   phoneNumber?: T;
   detail?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-articles_select".
+ */
+export interface PortfolioArticlesSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  highlight?: T;
+  sectionTitle?: T;
+  sectionDetail?: T;
+  sectionImage?: T;
+  gallery?: T;
+  tag?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  category?: T;
+  description?: T;
+  image?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

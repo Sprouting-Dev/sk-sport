@@ -6,6 +6,7 @@ import { cn } from '@/utils/cn'
 
 export interface ArticleData {
   id: number | string
+  slug?: string
   category?: string
   title: string
   subtitle?: string

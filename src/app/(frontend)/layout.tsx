@@ -7,6 +7,7 @@ import '@/style/typography.css'
 import './styles.css'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
+import { CartProvider } from '@/context/cartContext'
 
 export const metadata: Metadata = {
   description: 'Your equipment. Our expertise. Perfectly installed.',
@@ -23,20 +24,22 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang={locale} data-theme="sksport">
       <body className={`${rajdhani.variable} ${notoSansThai.variable} ${prompt.variable}`}>
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
-          <main className="pt-20">{children}</main>
+          <CartProvider>
+            <Navbar />
+            <main className="pt-20">{children}</main>
 
-          <Footer />
-          {isLocalEnv && (
-            <ButtonLink
-              href="/example"
-              variant="primary"
-              className="fixed right-4 bottom-4 z-50"
-              shape="circle"
-            >
-              ex
-            </ButtonLink>
-          )}
+            <Footer />
+            {isLocalEnv && (
+              <ButtonLink
+                href="/example"
+                variant="primary"
+                className="fixed right-4 bottom-4 z-50"
+                shape="circle"
+              >
+                ex
+              </ButtonLink>
+            )}
+          </CartProvider>
         </NextIntlClientProvider>
       </body>
     </html>

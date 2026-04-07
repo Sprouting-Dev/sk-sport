@@ -59,7 +59,7 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
             <CardArticle
               key={item.id}
               data={item}
-              onClick={() => router.push(`/portfolio/${item.id}`)}
+              onClick={() => router.push(`/portfolio/${item.slug ?? item.id}`)}
             />
           ))}
         </div>
