@@ -1,6 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useCart } from '@/context/cartContext'
+import { CONTACT } from '@/const/contact'
 import { Button } from '../button'
 import { SuccessConfirm } from '@/components/common'
 import { socialLinks } from '@/components/common'
@@ -32,21 +34,38 @@ export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
+  const { items } = useCart()
+  const cartPrefilledRef = useRef(false)
+
+  useEffect(() => {
+    if (cartPrefilledRef.current || items.length === 0) return
+    cartPrefilledRef.current = true
+
+    const itemLines = items.map((item) => `• ${item.title} × ${item.quantity}`).join('\n')
+
+    const prefill = `Product quote request:\n\n${itemLines}\n\nPlease provide pricing, availability, and installation details.`
+
+    setFormData((prev) => ({
+      ...prev,
+      message: prev.message ? prev.message : prefill,
+    }))
+  }, [items])
+
   const contactDetails = [
     {
       Icon: MapPinAreaIcon,
       title: 'Head Office',
-      detail: '123, Main St. Anytown, USA',
+      detail: CONTACT.address,
     },
     {
       Icon: EnvelopeIcon,
       title: 'Email us',
-      detail: 'juieb34@gmail.com',
+      detail: CONTACT.email,
     },
     {
       Icon: PhoneIcon,
       title: 'Call us',
-      detail: '06-55883919',
+      detail: CONTACT.phone,
     },
   ]
 
@@ -239,13 +258,19 @@ export const ContactForm = () => {
               </div>
 
               <div className="flex flex-col">
-                <label className="mb-1 md:mb-2 body-sm text-primary">Your Message</label>
+                <label className="mb-1 md:mb-2 body-sm text-primary">
+                  {items.length > 0 ? 'Quote Request Details' : 'Your Message'}
+                </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Enter your message"
-                  rows={5}
+                  placeholder={
+                    items.length > 0
+                      ? 'Your selected products are pre-filled below. Feel free to edit.'
+                      : 'Enter your message'
+                  }
+                  rows={7}
                   className={getInputClassName(!!errors.message)}
                 />
                 {errors.message && (

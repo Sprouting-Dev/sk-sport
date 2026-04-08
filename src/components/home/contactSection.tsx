@@ -7,6 +7,7 @@ import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { MapPinAreaIcon, PhoneIcon, EnvelopeIcon } from '@phosphor-icons/react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import { CONTACT } from '@/const/contact'
 
 export const ContactSection = () => {
   const t = useTranslations('Home.ContactSection')
@@ -31,7 +32,7 @@ export const ContactSection = () => {
             scrolling="no"
             marginHeight={0}
             marginWidth={0}
-            src="https://maps.google.com/maps?q=Ek+Thaksin+Rd,+Pathum+Thani&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src={CONTACT.mapEmbedSrc}
             className="absolute inset-0 w-full h-full"
             title="Google Map"
             loading="lazy"
@@ -67,21 +68,21 @@ export const ContactSection = () => {
               <div className="flex items-start gap-4">
                 <MapPinAreaIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
                 <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
-                  Ek Thaksin Road, Pathum Thani
+                  {CONTACT.address}
                 </p>
               </div>
 
               <div className="flex items-start gap-4">
                 <PhoneIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
                 <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
-                  06-4927504258
+                  {CONTACT.phone}
                 </p>
               </div>
 
               <div className="flex items-start gap-4">
                 <EnvelopeIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
                 <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
-                  kheo@12gmail.com
+                  {CONTACT.email}
                 </p>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { ListIcon, XIcon, ShoppingCartSimpleIcon } from '@phosphor-icons/react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
+import { useCart } from '@/context/cartContext'
 
 const NAV_KEYS = [
   NavKey.PRODUCT,
@@ -22,6 +23,7 @@ export const Navbar = () => {
     href: NAV_PATHS[key],
   }))
 
+  const { totalItems } = useCart()
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => setIsOpen(!isOpen)
@@ -49,9 +51,14 @@ export const Navbar = () => {
               </Link>
             ))}
 
-            <button className="relative p-2 text-primary-content">
+            <Link href="/cart" className="relative p-2 text-primary-content">
               <ShoppingCartSimpleIcon size={32} />
-            </button>
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
+                  {totalItems > 99 ? '99+' : totalItems}
+                </span>
+              )}
+            </Link>
           </div>
 
           <button onClick={toggleMenu} className="md:hidden p-2 text-primary-content">
@@ -79,9 +86,14 @@ export const Navbar = () => {
             <XIcon size={32} />
           </button>
 
-          <button className="relative text-primary-content p-2">
+          <Link href="/cart" onClick={closeMenu} className="relative text-primary-content p-2">
             <ShoppingCartSimpleIcon size={32} />
-          </button>
+            {totalItems > 0 && (
+              <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
+                {totalItems > 99 ? '99+' : totalItems}
+              </span>
+            )}
+          </Link>
         </div>
 
         <div className="flex flex-col w-full">

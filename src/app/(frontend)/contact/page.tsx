@@ -16,7 +16,7 @@ export default async function Contact() {
           <>
             Your Partner for World-Class Sports Facility Development.
             <br />
-            Lorem ipsum dolor sit amet consectetur.
+            We&apos;re here to help with equipment, installation, and facility planning.
           </>
         }
       />

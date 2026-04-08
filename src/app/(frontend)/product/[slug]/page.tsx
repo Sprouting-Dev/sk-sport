@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getProductBySlug } from '@/data/product'
 import type { Product, GalleryMedia } from '@/payload-types'
+import AddToCartButton from '@/components/product/addToCartButton'
 
 function resolveImageUrl(image: Product['image']): string {
   if (!image || typeof image === 'string') return ''
@@ -65,6 +66,17 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   </span>
                 </div>
               )}
+
+              <div className="pt-4">
+                <AddToCartButton
+                  id={product.id}
+                  slug={product.slug}
+                  title={product.title}
+                  subtitle={product.subtitle}
+                  category={product.category}
+                  image={imageUrl || undefined}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -9,7 +9,8 @@ import {
 } from '@/components/common'
 import { MoreServices } from '@/components/service'
 import { getServiceBySlug, getAllServices } from '@/data/service'
-import type { Service, ServiceMedia } from '@/payload-types'
+import { getPortfolioArticles } from '@/data/portfolio'
+import type { Service, ServiceMedia, GalleryMedia } from '@/payload-types'
 
 function mapSectionToDetailProps(
   section: NonNullable<Service['sections']>[number],
@@ -43,6 +44,11 @@ function mapSectionToDetailProps(
   }
 }
 
+function resolveGalleryUrl(media: string | GalleryMedia | null | undefined): string {
+  if (!media || typeof media === 'string') return ''
+  return media.url ?? ''
+}
+
 function mapServiceToMoreServicesItem(service: Service) {
   const hero = service.hero
   const imageUrl = hero && typeof hero !== 'string' ? (hero.url ?? '') : ''
@@ -55,113 +61,14 @@ function mapServiceToMoreServicesItem(service: Service) {
   }
 }
 
-const RELATED_ARTICLES_DATA: Record<string, RelatedArticleItem[]> = {
-  'united-discovery': [
-    { id: 1, title: 'How Study Tours Enhance Global Learning Experiences', href: '#', image: '' },
-    {
-      id: 2,
-      title: 'Planning Educational Trips for Institutions and Organizations',
-      href: '#',
-      image: '',
-    },
-    {
-      id: 3,
-      title: 'Key Destinations for International Study Tours Worldwide',
-      href: '#',
-      image: '',
-    },
-    {
-      id: 4,
-      title: 'Why Government and Educational Institutions Trust Professional Study Tour Services',
-      href: '#',
-      image: '',
-    },
-  ],
-  'health-management-system': [
-    {
-      id: 1,
-      title: 'End-to-End Sports Equipment Installation for Professional Facilities',
-      href: '#',
-      image: '',
-    },
-    {
-      id: 2,
-      title: 'Key Considerations When Designing Indoor Sports Facilities',
-      href: '#',
-      image: '',
-    },
-    {
-      id: 3,
-      title: 'Outdoor Sports Installation: From Planning to Execution',
-      href: '#',
-      image: '',
-    },
-    {
-      id: 4,
-      title: 'Ensuring Safety and Performance in Sports Facility Installation',
-      href: '#',
-      image: '',
-    },
-  ],
-  'equipment-for-top-gymnasts': [
-    {
-      id: 1,
-      title: 'The Role of Health Management Systems in Modern Training Centers',
-      href: '#',
-      image: '',
-    },
-    {
-      id: 2,
-      title: 'Using Technology to Monitor Physical Performance and Health',
-      href: '#',
-      image: '',
-    },
-    { id: 3, title: 'Benefits of Data-Driven Health Assessment Systems', href: '#', image: '' },
-    {
-      id: 4,
-      title: 'Health Management Solutions for Sports Centers and Institutions',
-      href: '#',
-      image: '',
-    },
-  ],
-  'sports-vision-training': [
-    {
-      id: 1,
-      title: 'Choosing the Right Equipment for Elite Gymnast Training',
-      href: '#',
-      image: '',
-    },
-    {
-      id: 2,
-      title: 'International Standards for Professional Gymnastics Equipment',
-      href: '#',
-      image: '',
-    },
-    {
-      id: 3,
-      title: 'How Quality Equipment Impacts Gymnast Performance and Safety',
-      href: '#',
-      image: '',
-    },
-    { id: 4, title: 'Designing Training Spaces for Competitive Gymnastics', href: '#', image: '' },
-  ],
-  'integrated-sports-installation': [
-    { id: 1, title: 'What Is Sports Vision Training and Why It Matters', href: '#', image: '' },
-    {
-      id: 2,
-      title: 'Improving Reaction Time Through Vision Training Systems',
-      href: '#',
-      image: '',
-    },
-    { id: 3, title: 'How Visual Coordination Enhances Athletic Performance', href: '#', image: '' },
-    { id: 4, title: 'Vision Training Solutions for Professional Athletes', href: '#', image: '' },
-  ],
-}
-
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  const [serviceData, allServices] = await Promise.all([getServiceBySlug(slug), getAllServices()])
+  const [serviceData, allServices, recentPortfolioArticles] = await Promise.all([
+    getServiceBySlug(slug),
+    getAllServices(),
+    getPortfolioArticles(),
+  ])
 
   if (!serviceData) {
     notFound()
@@ -174,7 +81,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   const moreServices = allServices.map(mapServiceToMoreServicesItem)
 
-  const relatedArticles: RelatedArticleItem[] = RELATED_ARTICLES_DATA[slug] ?? []
+  const relatedArticles: RelatedArticleItem[] = recentPortfolioArticles
+    .slice(0, 4)
+    .map((article) => ({
+      id: article.id,
+      title: article.title,
+      href: article.slug ? `/portfolio/${article.slug}` : '/portfolio',
+      image: resolveGalleryUrl(article.sectionImage as string | GalleryMedia | null),
+    }))
 
   return (
     <main className="flex w-full flex-col items-center">

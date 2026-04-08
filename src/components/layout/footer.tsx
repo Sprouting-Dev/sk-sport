@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { PhoneIcon, EmailIcon } from '@/components/icons'
 import { socialLinks } from '@/components/common'
+import { CONTACT } from '@/const/contact'
 
 export const Footer: React.FC = () => {
   const router = useRouter()
@@ -58,18 +59,18 @@ export const Footer: React.FC = () => {
             {/* Contact buttons */}
             <div className="flex flex-row flex-nowrap gap-3">
               <Link
-                href="tel:06-3850302"
+                href={`tel:${CONTACT.phone}`}
                 className="btn-gradient-solid-border flex items-center justify-start gap-3.25 px-3.75 py-2.5 flex-1 max-w-63 h-12 text-primary-content body-sm transition-all duration-300 whitespace-nowrap"
               >
                 <PhoneIcon className="w-4 h-4 relative z-1 shrink-0" />
-                <span className="relative z-1 truncate">06-3850302</span>
+                <span className="relative z-1 truncate">{CONTACT.phone}</span>
               </Link>
               <Link
-                href="mailto:jnfoe@gmail.com"
+                href={`mailto:${CONTACT.email}`}
                 className="btn-gradient-solid-border flex items-center justify-start gap-3.25 px-3.75 py-2.5 flex-1 max-w-63 h-12 text-primary-content body-sm transition-all duration-300 whitespace-nowrap"
               >
                 <EmailIcon className="w-4 h-4 relative z-1 shrink-0" />
-                <span className="relative z-1 truncate">jnfoe@gmail.com</span>
+                <span className="relative z-1 truncate">{CONTACT.email}</span>
               </Link>
             </div>
           </div>
