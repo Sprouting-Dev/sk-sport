@@ -1,25 +1,26 @@
 import React from 'react'
 import { FacebookIcon, InstagramIcon, YouTubeIcon, LineIcon } from '@/components/icons'
+import { SOCIAL_URLS } from '@/const/contact'
 
 export const socialLinks = [
   {
     label: 'Facebook',
-    href: 'https://facebook.com',
+    href: SOCIAL_URLS.facebook ?? '#',
     icon: <FacebookIcon />,
   },
   {
     label: 'Instagram',
-    href: 'https://instagram.com',
+    href: SOCIAL_URLS.instagram ?? '#',
     icon: <InstagramIcon />,
   },
   {
     label: 'YouTube',
-    href: 'https://youtube.com',
+    href: SOCIAL_URLS.youtube ?? '#',
     icon: <YouTubeIcon />,
   },
   {
     label: 'LINE',
-    href: 'https://line.me',
+    href: SOCIAL_URLS.line ?? '#',
     icon: <LineIcon />,
   },
 ]

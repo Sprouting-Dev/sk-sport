@@ -21,7 +21,7 @@ export const Services = () => {
             title={`Gymnastic Equipment\nInstallation`}
             description={`From planning and positioning to anchoring and final safety checks, we deliver a complete installation service built for long-term performance.`}
             image="/gymnastic-equipment.png"
-            href="service/integrated-sports-installation"
+            href="/service/integrated-sports-installation"
             buttonText="Learn more"
             imageAlt="Gymnastic equipment in a modern facility"
             alignButton="bottom"
@@ -32,7 +32,7 @@ export const Services = () => {
             title={`Outdoor Exercise\nEquipment`}
             description={`Expert installation for every facility—aligned, secured, and tested to meet standards for safe daily training and competition readiness.`}
             image="/outdoor-exercise-equipment.png"
-            href="/service/outdoor-exercise"
+            href="/service"
             buttonText="Learn more"
             imageAlt="Outdoor exercise equipment at sunset"
             alignButton="top"
