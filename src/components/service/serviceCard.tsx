@@ -29,14 +29,14 @@ export const ServiceCard = ({
   return (
     <div
       className={cn(
-        'group relative flex w-full overflow-hidden rounded-xl shadow-lg transition-all duration-300',
-        isHorizontal ? 'flex-col md:flex-row bg-primary-content' : 'flex-col',
+        'group relative flex h-full w-full flex-col overflow-hidden rounded-xl shadow-lg transition-all duration-300 bg-primary-content',
+        isHorizontal ? 'md:flex-row md:min-h-88 lg:min-h-100' : 'flex-col',
       )}
     >
       <div
         className={cn(
-          'relative overflow-hidden',
-          isHorizontal ? 'h-31 w-full md:h-auto md:w-1/2' : 'h-52 md:h-60 w-full',
+          'relative overflow-hidden shrink-0',
+          isHorizontal ? 'h-48 w-full md:h-full md:w-2/5 lg:w-1/2' : 'h-48 md:h-56 lg:h-60 w-full',
         )}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -45,37 +45,26 @@ export const ServiceCard = ({
           alt={title}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {!isHorizontal && (
-          <>
-            <div className="absolute inset-0 bg-gradient-card-left md:hidden" />
-            <div className="absolute inset-0 flex flex-col justify-end p-4 md:hidden">
-              <div className="flex items-end justify-between gap-3">
-                <div className="flex-1">
-                  <p className="font-heading font-semibold text-xl leading-tight text-primary-content mb-1">
-                    {title}
-                  </p>
-                  <p className="body-sm text-primary-content/90">{description}</p>
-                </div>
-                <div className="shrink-0">
-                  <Button variant="gradient" size="sm" onClick={() => router.push(href)}>
-                    {t('ReadMore')}
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
       </div>
 
       <div
         className={cn(
-          'flex flex-col py-2 md:py-4 px-4 md:px-6 bg-primary-content',
-          isHorizontal ? 'md:min-h-75 w-full md:w-1/2' : 'hidden md:flex w-full',
+          'flex flex-1 flex-col py-4 px-4 md:py-5 md:px-5 lg:py-6 lg:px-6',
+          isHorizontal ? 'w-full md:w-3/5 lg:w-1/2' : 'w-full',
         )}
       >
-        <h2 className="mb-1 md:mb-3">{title}</h2>
-        <p className="body-sm">{description}</p>
-        <div className="flex justify-end">
+        <h2 className="mb-2 md:mb-3 font-semibold line-clamp-2">{title}</h2>
+        <p
+          className={cn(
+            'body-sm text-base-content/80 mb-4',
+            isHorizontal
+              ? 'line-clamp-2 md:line-clamp-4 lg:line-clamp-5'
+              : 'line-clamp-2 md:line-clamp-3 lg:line-clamp-4',
+          )}
+        >
+          {description}
+        </p>
+        <div className="flex justify-end mt-auto pt-2">
           <Button variant="link" size="sm" onClick={() => router.push(href)}>
             {t('ReadMore')}
           </Button>

@@ -267,14 +267,7 @@
 }
 
 /* Service Cards */
-.service-card {
-  min-height: 39.75rem;
-}
-
 @media (min-width: 80rem) {
-  .service-card {
-    height: 49.21875rem;
-  }
   :root {
     --spacing-service-card-lg: 49.21875rem;
     --grid-cols-service-card-layout: 1fr auto;

@@ -31,13 +31,15 @@ export default async function ServicePage() {
 
       <div className="flex w-full flex-col items-center justify-center bg-header-bg">
         <div className="container mx-auto px-4 py-8 md:py-12">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 items-stretch">
             {services.map((service, index) => {
               const variant = index === 0 ? 'horizontal' : 'vertical'
               return (
                 <div
                   key={service.id}
-                  className={variant === 'horizontal' ? 'md:col-span-2' : 'col-span-1'}
+                  className={
+                    variant === 'horizontal' ? 'md:col-span-2 h-full' : 'col-span-1 h-full'
+                  }
                 >
                   <ServiceCard
                     title={service.title}

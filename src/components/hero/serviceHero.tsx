@@ -32,38 +32,42 @@ export const ServiceHero: React.FC<ServiceHeroProps> = ({
   const router = useRouter()
 
   return (
-    <section className="relative h-150 w-full overflow-hidden bg-hero text-primary-content">
+    <section className="relative flex w-full min-h-fit md:min-h-120 lg:min-h-150 overflow-hidden bg-hero text-primary-content">
       <Image src={imageSrc} alt={imageAlt} fill className="object-cover" priority />
 
-      <div className="bg-overlay-gradient absolute inset-0 z-10" />
+      <div className="absolute inset-0 z-10 md:bg-transparent bg-overlay-gradient hero-mobile-overlay" />
 
       <div
-        className={`relative z-20 flex h-full flex-col px-6 lg:px-24 ${
-          contentPosition === 'bottom' ? 'justify-end pb-10' : 'justify-center'
+        className={`relative z-20 flex flex-1 flex-col w-full px-4 md:px-6 lg:px-24 ${
+          contentPosition === 'bottom'
+            ? 'justify-end pb-12 md:pb-16'
+            : 'justify-center py-6 md:py-0'
         }`}
       >
-        <div className="flex flex-col gap-6">
-          <h1 className="text-5xl font-heading font-medium leading-tight tracking-wider text-primary-content">
+        <div className="flex flex-col gap-3 md:gap-6">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-medium leading-tight md:leading-tight tracking-wider text-primary-content">
             <span className="block">{titleLine1}</span>
             {titleLine2 && <span className="block">{titleLine2}</span>}
           </h1>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 md:gap-6">
             {subtitle && (
-              <p className="font-body text-base font-normal leading-snug tracking-wider text-primary-content">
+              <p className="font-body text-sm md:text-base font-normal leading-snug tracking-wider text-primary-content/90 max-w-[95%] md:max-w-xl">
                 {subtitle}
               </p>
             )}
 
             {showCta && (
-              <Button
-                variant="gradient"
-                size="md"
-                className="hero-btn-width text-primary-content"
-                onClick={() => router.push(ctaHref)}
-              >
-                {ctaLabel}
-              </Button>
+              <div className="mt-2 md:mt-0 hidden md:block">
+                <Button
+                  variant="gradient"
+                  size="md"
+                  className="hero-btn-width text-primary-content"
+                  onClick={() => router.push(ctaHref)}
+                >
+                  {ctaLabel}
+                </Button>
+              </div>
             )}
           </div>
         </div>

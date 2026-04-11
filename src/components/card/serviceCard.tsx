@@ -26,7 +26,7 @@ export const ServiceCard = ({
   const isTop = alignButton === 'top'
 
   return (
-    <div className="w-full aspect-square group relative flex flex-col justify-between overflow-hidden">
+    <div className="w-full min-h-159 max-h-197 md:h-197 group relative flex flex-col justify-between overflow-hidden rounded-xl shadow-lg transition-all duration-300">
       <div className="absolute inset-0 z-0">
         <Image
           src={image}
