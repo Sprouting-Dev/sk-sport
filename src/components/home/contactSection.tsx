@@ -66,28 +66,46 @@ export const ContactSection = () => {
 
             <div className="flex flex-col gap-2 md:gap-6">
               <div className="flex items-start gap-4">
-                <MapPinAreaIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
-                <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
-                  {CONTACT.address}
+                <MapPinAreaIcon
+                  weight="fill"
+                  className="w-4 md:w-8 h-4 md:h-8 text-secondary md:shrink-0 lg:shrink"
+                />
+                <p className="text-xs md:text-xl font-medium font-body text-primary-content">
+                  {(() => {
+                    const parts = CONTACT.address.split(', Bueng Yitho')
+                    if (parts.length < 2) return CONTACT.address
+                    return (
+                      <>
+                        {parts[0]},<br />
+                        Bueng Yitho{parts[1]}
+                      </>
+                    )
+                  })()}
                 </p>
               </div>
 
               <div className="flex items-start gap-4">
-                <PhoneIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
-                <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
+                <PhoneIcon
+                  weight="fill"
+                  className="w-4 md:w-8 h-4 md:h-8 text-secondary md:shrink-0 lg:shrink"
+                />
+                <p className="text-xs md:text-xl font-medium font-body text-primary-content">
                   {CONTACT.phone}
                 </p>
               </div>
 
               <div className="flex items-start gap-4">
-                <EnvelopeIcon weight="fill" className="w-4 md:w-8 h-4 md:h-8 text-secondary" />
-                <p className="text-xs md:text-2xl font-medium font-body text-primary-content">
+                <EnvelopeIcon
+                  weight="fill"
+                  className="w-4 md:w-8 h-4 md:h-8 text-secondary md:shrink-0 lg:shrink"
+                />
+                <p className="text-xs md:text-xl font-medium font-body text-primary-content">
                   {CONTACT.email}
                 </p>
               </div>
             </div>
 
-            <div className="mt-6 md:-mt-10 flex justify-start md:justify-end">
+            <div className="mt-6 md:mt-8 flex justify-start md:justify-end">
               <Button
                 size="sm"
                 onClick={() => router.push(NAV_PATHS[NavKey.CONTACT_US])}

@@ -75,9 +75,8 @@ export const ContactForm = () => {
   ]
 
   const openHours = [
-    { day: 'Monday - Friday', time: '9 am - 8 pm' },
-    { day: 'Saturday', time: '9 am - 5 pm' },
-    { day: 'Sunday', time: '9 am - 6 pm' },
+    { day: 'Monday - Friday', time: '9 am - 6 pm' },
+    { day: 'Saturday - Sunday', time: 'Closed' },
   ]
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -155,13 +154,15 @@ export const ContactForm = () => {
 
           <div className="mb-8 space-y-6">
             {contactDetails.map((info) => (
-              <div key={info.title} className="flex items-start gap-4">
+              <div key={info.title} className="flex items-start gap-3">
                 <div className="flex h-10 w-10 md:h-12.5 md:w-12.5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-content">
                   <info.Icon className="h-6 w-6 md:h-7.5 md:w-7.5" weight="fill" />
                 </div>
                 <div>
-                  <p className="body-md text-primary">{info.title}</p>
-                  <p className="body-md text-base-content">{info.detail}</p>
+                  <p className="text-sm md:text-sm lg:text-base text-primary">{info.title}</p>
+                  <p className="text-sm md:text-sm lg:text-base text-base-content wrap-break-word">
+                    {info.detail}
+                  </p>
                 </div>
               </div>
             ))}

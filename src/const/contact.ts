@@ -4,26 +4,21 @@
  * home contact section, and contact form automatically.
  */
 export const CONTACT = {
-  phone: '06-3850302',
-  email: 'jnfoe@gmail.com',
-  address: 'Ek Thaksin Road, Pathum Thani',
+  phone: '092 563 6195',
+  email: 'saseewirun@sksporttrading.com',
+  address: '50/750 Moo 2, Rangsit-Nakhon Nayok Rd., Bueng Yitho, Thanyaburi, Pathum Thani 12130',
   mapEmbedSrc:
-    'https://maps.google.com/maps?q=Ek+Thaksin+Rd,+Pathum+Thani&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6145.518129708774!2d100.65046800591138!3d13.99226988892362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d7f3dc1ee9ad7%3A0xaa36f520be1ab21d!2z4Lia4Lij4Li04Lip4Lix4LiX4LmA4Lit4Liq4LmA4LiELiDguKrguJvguK3guKPguYzguJUg4LmA4LiX4Lij4LiU4LiU4Li04LmJ4LiHIOC4iOC4s-C4geC4seC4lA!5e0!3m2!1sen!2sth!4v1775989944426!5m2!1sen!2sth',
 } as const
 
-/**
- * Company social media profile URLs.
- * Replace each null with the real URL before launch.
- * These values propagate to the footer and contact form social icons.
- */
 export const SOCIAL_URLS: {
   facebook: string | null
   instagram: string | null
   youtube: string | null
   line: string | null
 } = {
-  facebook: null, // TODO: replace with real Facebook page URL
-  instagram: null, // TODO: replace with real Instagram profile URL
-  youtube: null, // TODO: replace with real YouTube channel URL
-  line: null, // TODO: replace with real LINE official account URL
+  facebook: 'https://www.facebook.com/profile.php?id=100058286476117',
+  instagram: null,
+  youtube: 'https://youtube.com/@sksporttrading5092?si=S5_p9D7lRcJMuor0',
+  line: null,
 }

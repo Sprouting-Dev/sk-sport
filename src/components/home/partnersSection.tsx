@@ -15,8 +15,8 @@ export const PartnersSection = ({ partners }: PartnersSectionProps) => {
   if (!partners.length) return null
 
   return (
-    <div className="w-full bg-header-bg py-4 md:py-12">
-      <div className="container mx-auto px-4">
+    <div className="w-full bg-header-bg pt-12 pb-4 md:pt-20 md:pb-12">
+      <div className="container mx-auto px-8 md:px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center">
           {partners.map((partner) => (
             <div key={partner.id} className="relative w-full flex justify-center items-center h-16">

@@ -10,7 +10,7 @@ export const Services = () => {
   return (
     <section className="w-full">
       <div className="relative text-primary space-y-4 text-center py-12 px-4">
-        <h2>Our Services</h2>
+        <h2 className="text-3xl md:text-4xl">Our Services</h2>
         <p className="font-body">Professional solution for sports facility development</p>
         <Link
           href="/service"

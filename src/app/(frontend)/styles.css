@@ -202,7 +202,7 @@
 
 /* Arbitrary value replacements */
 .hero-wrapper-height {
-  height: 40rem;
+  height: 20rem;
 }
 @media (min-width: 768px) {
   .hero-wrapper-height {

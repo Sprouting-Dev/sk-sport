@@ -57,19 +57,20 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Contact buttons */}
-            <div className="flex flex-row flex-nowrap gap-3">
+            <div className="flex flex-row flex-nowrap gap-2 md:gap-3">
               <Link
                 href={`tel:${CONTACT.phone}`}
-                className="btn-gradient-solid-border flex items-center justify-start gap-3.25 px-3.75 py-2.5 flex-1 max-w-63 h-12 text-primary-content body-sm transition-all duration-300 whitespace-nowrap"
+                className="btn-gradient-solid-border flex items-center justify-start gap-1.5 md:gap-2 px-2 py-2 md:px-2.5 md:py-2.5 flex-1 max-w-32 md:max-w-40 h-10 md:h-12 text-primary-content body-sm transition-all duration-300 whitespace-nowrap"
               >
-                <PhoneIcon className="w-4 h-4 relative z-1 shrink-0" />
+                <PhoneIcon className="w-3.5 h-3.5 md:w-4 md:h-4 relative z-1 shrink-0" />
                 <span className="relative z-1 truncate">{CONTACT.phone}</span>
               </Link>
+
               <Link
                 href={`mailto:${CONTACT.email}`}
-                className="btn-gradient-solid-border flex items-center justify-start gap-3.25 px-3.75 py-2.5 flex-1 max-w-63 h-12 text-primary-content body-sm transition-all duration-300 whitespace-nowrap"
+                className="btn-gradient-solid-border flex items-center justify-start gap-1.5 md:gap-2 px-2 py-2 md:px-2.5 md:py-2.5 flex-1 max-w-56 md:max-w-75 h-10 md:h-12 text-primary-content body-sm transition-all duration-300 whitespace-nowrap"
               >
-                <EmailIcon className="w-4 h-4 relative z-1 shrink-0" />
+                <EmailIcon className="w-3.5 h-3.5 md:w-4 md:h-4 relative z-1 shrink-0" />
                 <span className="relative z-1 truncate">{CONTACT.email}</span>
               </Link>
             </div>
