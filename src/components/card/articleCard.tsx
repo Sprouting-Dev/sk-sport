@@ -100,6 +100,33 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
         ))}
       </div>
 
+      <div className="md:hidden pointer-events-none absolute inset-0 z-30 flex items-center justify-between px-2">
+        <div className="pointer-events-auto">
+          {canScrollLeft && (
+            <button
+              type="button"
+              onClick={() => scroll('left')}
+              aria-label="Previous accomplishment"
+              className="p-2 text-primary-content drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)] transition-opacity hover:opacity-90"
+            >
+              <CaretLeftIcon size={28} strokeWidth={2} />
+            </button>
+          )}
+        </div>
+        <div className="pointer-events-auto">
+          {canScrollRight && (
+            <button
+              type="button"
+              onClick={() => scroll('right')}
+              aria-label="Next accomplishment"
+              className="p-2 text-primary-content drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)] transition-opacity hover:opacity-90"
+            >
+              <CaretRightIcon size={28} strokeWidth={2} />
+            </button>
+          )}
+        </div>
+      </div>
+
       {canScrollRight && (
         <button
           onClick={() => scroll('right')}

@@ -23,5 +23,15 @@ export const Home: GlobalConfig = {
       relationTo: 'gallery-media',
       hasMany: true,
     },
+    {
+      name: 'partners',
+      label: 'Partners (logos)',
+      type: 'relationship',
+      relationTo: 'partner-media',
+      hasMany: true,
+      admin: {
+        description: 'Partner logos shown below the home hero. Order matches display order.',
+      },
+    },
   ],
 }

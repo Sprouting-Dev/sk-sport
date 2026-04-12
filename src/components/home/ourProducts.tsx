@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { HeroCarousel } from '@/components/carousel/HeroCarousel'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { CaretLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
 
 import heroBg1 from '@/assets/d048eb9439e681c322341cf84065711c767aa9b7.png'
 import gymEquipImg from '@/assets/2333e2e983810b68fda29635701f7e8ec2321d91.jpg'
@@ -29,6 +30,17 @@ export const OurProducts = () => {
     setActiveIndex((prev) => (prev + 1) % categoryKeys.length)
   }
 
+  const goPrev = () => {
+    setActiveIndex((prev) => Math.max(0, prev - 1))
+  }
+
+  const goNext = () => {
+    setActiveIndex((prev) => Math.min(categoryKeys.length - 1, prev + 1))
+  }
+
+  const canGoPrev = activeIndex > 0
+  const canGoNext = activeIndex < categoryKeys.length - 1
+
   return (
     <div className="w-full flex flex-col">
       <div className="w-full h-40 bg-header-bg px-4 flex justify-center items-center">
@@ -43,6 +55,33 @@ export const OurProducts = () => {
           interval={5000}
         />
 
+        <div className="md:hidden absolute inset-0 z-30 flex items-center justify-between px-3 pointer-events-none">
+          <div className="pointer-events-auto">
+            {canGoPrev && (
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label="Previous product category"
+                className="rounded-full bg-black/25 p-2 text-primary-content transition-opacity hover:bg-black/30"
+              >
+                <CaretLeft size={28} weight="bold" aria-hidden />
+              </button>
+            )}
+          </div>
+          <div className="pointer-events-auto">
+            {canGoNext && (
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label="Next product category"
+                className="rounded-full bg-black/25 p-2 text-primary-content transition-opacity hover:bg-black/30"
+              >
+                <CaretRight size={28} weight="bold" aria-hidden />
+              </button>
+            )}
+          </div>
+        </div>
+
         <div className="absolute inset-0 z-10 container px-13 py-12 flex flex-col justify-end md:justify-center pointer-events-none mx-auto ">
           <div className="flex flex-col md:flex-row md:items-start justify-between w-full h-full pb-16 md:pb-0 gap-8">
             <div className="max-w-2xl flex flex-col gap-4 pointer-events-auto">
@@ -56,7 +95,7 @@ export const OurProducts = () => {
               </p>
             </div>
 
-            <div className="flex gap-3 items-end pointer-events-auto w-full md:w-auto md:self-end min-h-55 md:min-h-65">
+            <div className="hidden md:flex gap-3 items-end pointer-events-auto w-full md:w-auto md:self-end min-h-55 md:min-h-65">
               <AnimatePresence mode="popLayout">
                 {[1, 2].map((offset) => {
                   const index = (activeIndex + offset) % categoryKeys.length

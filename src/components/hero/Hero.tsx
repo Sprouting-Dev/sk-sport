@@ -74,7 +74,7 @@ export const Hero: React.FC<HeroProps> = ({ media, variant = 'default', title, d
             <Button
               variant="gradient"
               onClick={() => router.push(NAV_PATHS[NavKey.CONTACT_US])}
-              className="hero-btn-width text-primary-content cursor-pointer pointer-events-auto"
+              className="hidden md:inline-flex hero-btn-width text-primary-content cursor-pointer pointer-events-auto"
             >
               {t('Hero.contact_us')}
             </Button>

@@ -36,6 +36,11 @@ export const ContactForm = () => {
 
   const { items } = useCart()
   const cartPrefilledRef = useRef(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (cartPrefilledRef.current || items.length === 0) return
@@ -169,7 +174,7 @@ export const ContactForm = () => {
             <div className="flex gap-3">
               {socialLinks.map((link) => (
                 <a
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -259,14 +264,14 @@ export const ContactForm = () => {
 
               <div className="flex flex-col">
                 <label className="mb-1 md:mb-2 body-sm text-primary">
-                  {items.length > 0 ? 'Quote Request Details' : 'Your Message'}
+                  {mounted && items.length > 0 ? 'Quote Request Details' : 'Your Message'}
                 </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   placeholder={
-                    items.length > 0
+                    mounted && items.length > 0
                       ? 'Your selected products are pre-filled below. Feel free to edit.'
                       : 'Enter your message'
                   }

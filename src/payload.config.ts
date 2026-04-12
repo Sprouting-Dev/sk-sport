@@ -18,6 +18,7 @@ import { EmailTests } from './payload/collections/EmailTests'
 import { Contact } from './payload/collections/Contact'
 import { PortfolioArticles } from './payload/collections/PortfolioArticles'
 import { Products } from './payload/collections/Products'
+import { PartnerMedia } from './payload/collections/PartnerMedia'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -39,6 +40,7 @@ export default buildConfig({
     Contact,
     PortfolioArticles,
     Products,
+    PartnerMedia,
   ],
   globals: [Home, About],
   localization: {
@@ -69,6 +71,7 @@ export default buildConfig({
         'hero-media': { prefix: 'hero-media' },
         'gallery-media': { prefix: 'gallery-media' },
         'service-media': { prefix: 'service-media' },
+        'partner-media': { prefix: 'partner-media' },
       },
       bucket: process.env.S3_BUCKET || '',
       config: {

@@ -109,42 +109,25 @@
 
 /*Border Gradient Button*/
 .btn-gradient-solid-border {
-  position: relative;
   border-radius: 0;
-  border: 0;
-  background: transparent;
+  border: 1px solid transparent;
   box-shadow: none;
-  overflow: hidden;
+  background-color: transparent;
+  /* Layer 1 (top): surface fill, clipped to padding-box so the 1px border gap is left uncovered */
+  /* Layer 2 (bottom): gradient fill, clipped to border-box so it shows through the border gap */
+  background-image: var(--gradient-20), var(--gradient);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
 }
-.btn-gradient-solid-border::after {
-  content: '';
-  position: absolute;
-  inset: 0.0625rem;
-  background: var(--gradient-20);
-  z-index: 0;
+.btn-gradient-solid-border:hover {
+  background-image: var(--gradient-60), var(--gradient);
 }
-.btn-gradient-solid-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  padding: 0.0625rem;
-  background: var(--gradient);
-  z-index: 0;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-}
-.btn-gradient-solid-border > * {
-  position: relative;
-  z-index: 1;
-}
-.btn-gradient-solid-border:hover::after {
-  background: var(--gradient-60);
+.btn-gradient-inner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .cta-footer-light {
@@ -203,7 +186,7 @@
 }
 
 .hero-title-gradient {
-  background: linear-gradient(to right, #2563eb, #a855f7, #ec4899);
+  background: linear-gradient(to right, #ec4899, #a855f7, #2563eb);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

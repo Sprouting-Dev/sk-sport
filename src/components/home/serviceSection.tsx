@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import { ServiceCard } from '@/components/card'
 import { SupportCard } from '@/components/card/supportCard'
 import { BasketballIcon, HeartbeatIcon, InfoIcon } from '@phosphor-icons/react/dist/ssr'
@@ -8,9 +9,15 @@ import { BasketballIcon, HeartbeatIcon, InfoIcon } from '@phosphor-icons/react/d
 export const Services = () => {
   return (
     <section className="w-full">
-      <div className="text-primary space-y-4 text-center py-12">
+      <div className="relative text-primary space-y-4 text-center py-12 px-4">
         <h2>Our Services</h2>
         <p className="font-body">Professional solution for sports facility development</p>
+        <Link
+          href="/service"
+          className="absolute right-4 top-1/2 -translate-y-1/2 body-sm text-primary hover:underline underline-offset-2"
+        >
+          View all →
+        </Link>
       </div>
 
       {/* Services Content */}
@@ -35,37 +42,33 @@ export const Services = () => {
             href="/service"
             buttonText="Learn more"
             imageAlt="Outdoor exercise equipment at sunset"
-            alignButton="top"
+            alignButton="bottom"
           />
         </div>
 
-        {/* Support Services Section */}
-        <div className="w-full px-4 pt-12">
-          <div className="mb-8 text-center">
-            <h2 className="text-primary">Support Services</h2>
-          </div>
-
-          {/* Grid Layout */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            <SupportCard
-              title="Consulting & Design"
-              image="/consulting-support-services.png"
-              icon={<BasketballIcon size={48} weight="light" />}
-              imageAlt="Consulting and Design Services"
-            />
-            <SupportCard
-              title="Health Care Service"
-              image="/healthcare-support-services.png"
-              icon={<HeartbeatIcon size={48} weight="light" color="#FF3591" />}
-              imageAlt="Health Care Services"
-            />
-            <SupportCard
-              title="Maintenance & Support"
-              image="/maintenance-support-services.png"
-              icon={<InfoIcon size={48} weight="light" />}
-              imageAlt="Maintenance and Support Services"
-            />
-          </div>
+        {/* Support cards — part of the same unified services section */}
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-3 mt-2">
+          <SupportCard
+            title="Consulting & Design"
+            image="/consulting-support-services.png"
+            icon={<BasketballIcon size={48} weight="light" />}
+            href="/service"
+            imageAlt="Consulting and Design Services"
+          />
+          <SupportCard
+            title="Health Care Service"
+            image="/healthcare-support-services.png"
+            icon={<HeartbeatIcon size={48} weight="light" color="#FF3591" />}
+            href="/service"
+            imageAlt="Health Care Services"
+          />
+          <SupportCard
+            title="Maintenance & Support"
+            image="/maintenance-support-services.png"
+            icon={<InfoIcon size={48} weight="light" />}
+            href="/service"
+            imageAlt="Maintenance and Support Services"
+          />
         </div>
       </div>
     </section>

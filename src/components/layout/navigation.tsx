@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { ListIcon, XIcon, ShoppingCartSimpleIcon } from '@phosphor-icons/react'
@@ -25,6 +25,11 @@ export const Navbar = () => {
 
   const { totalItems } = useCart()
   const [isOpen, setIsOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)
@@ -33,14 +38,15 @@ export const Navbar = () => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 h-20 bg-base-content">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
-          <Link href="/" onClick={closeMenu} className="flex items-center">
-            <h3 className="tracking-wider">
+          <Link href="/" onClick={closeMenu} className="flex items-center shrink-0">
+            <h3 className="tracking-wider whitespace-nowrap text-sm md:text-base lg:text-xl xl:text-2xl">
               <span className="company-name-part1">{t('companyNamePart1')} </span>
               <span className="company-name-part2">{t('companyNamePart2')}</span>
             </h3>
           </Link>
 
-          <div className="hidden md:flex items-center gap-12">
+          {/* Desktop full nav — lg and above only */}
+          <div className="hidden lg:flex items-center gap-10">
             {navItems.map((item) => (
               <Link
                 key={item.key}
@@ -53,7 +59,7 @@ export const Navbar = () => {
 
             <Link href="/cart" className="relative p-2 text-primary-content">
               <ShoppingCartSimpleIcon size={32} />
-              {totalItems > 0 && (
+              {mounted && totalItems > 0 && (
                 <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
                   {totalItems > 99 ? '99+' : totalItems}
                 </span>
@@ -61,15 +67,31 @@ export const Navbar = () => {
             </Link>
           </div>
 
+          {/* Mobile hamburger only — below md */}
           <button onClick={toggleMenu} className="md:hidden p-2 text-primary-content">
             <ListIcon size={32} />
           </button>
+
+          {/* Tablet compact controls: cart + hamburger — md to lg only */}
+          <div className="hidden md:flex lg:hidden items-center gap-1">
+            <Link href="/cart" className="hidden relative p-2 text-primary-content">
+              <ShoppingCartSimpleIcon size={32} />
+              {mounted && totalItems > 0 && (
+                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
+                  {totalItems > 99 ? '99+' : totalItems}
+                </span>
+              )}
+            </Link>
+            <button onClick={toggleMenu} className="p-2 text-primary-content">
+              <ListIcon size={32} />
+            </button>
+          </div>
         </div>
       </nav>
 
       <div
         className={cn(
-          'fixed inset-0 z-40  md:hidden transition-opacity duration-300',
+          'fixed inset-0 z-40 lg:hidden transition-opacity duration-300',
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none',
         )}
         onClick={closeMenu}
@@ -77,7 +99,7 @@ export const Navbar = () => {
 
       <div
         className={cn(
-          'fixed top-0 right-0 z-50 h-full w-1/2 bg-base-content transform transition-transform duration-300 ease-in-out md:hidden flex flex-col',
+          'fixed top-0 right-0 z-50 h-full w-1/2 bg-base-content transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col',
           isOpen ? 'translate-x-0' : 'translate-x-full',
         )}
       >
@@ -88,7 +110,7 @@ export const Navbar = () => {
 
           <Link href="/cart" onClick={closeMenu} className="relative text-primary-content p-2">
             <ShoppingCartSimpleIcon size={32} />
-            {totalItems > 0 && (
+            {mounted && totalItems > 0 && (
               <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
                 {totalItems > 99 ? '99+' : totalItems}
               </span>
