@@ -294,3 +294,213 @@
     height: 24px;
   }
 }
+
+/* className lint: avoid Tailwind arbitrary [] / palette colors — use theme + rem */
+
+.about-hero-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-info) 0%,
+    var(--color-primary) 45%,
+    color-mix(in oklch, var(--color-secondary) 70%, transparent) 100%
+  );
+}
+
+.about-hero-radial-overlay {
+  background: radial-gradient(
+    ellipse 100% 80% at 50% -30%,
+    rgba(255, 255, 255, 0.35) 0%,
+    transparent 55%
+  );
+}
+
+@media (min-width: 1024px) {
+  .about-hero-inner-py-lg {
+    padding-top: 4.25rem;
+    padding-bottom: 4.25rem;
+  }
+}
+
+.aspect-about-featured-image {
+  aspect-ratio: 5 / 4;
+}
+
+@media (min-width: 768px) {
+  .aspect-about-featured-image {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.aspect-product-card-main {
+  aspect-ratio: 5 / 4;
+}
+
+.aspect-ratio-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.aspect-ratio-3-4 {
+  aspect-ratio: 3 / 4;
+}
+
+.aspect-ratio-3-2 {
+  aspect-ratio: 3 / 2;
+}
+
+.aspect-ratio-16-10 {
+  aspect-ratio: 16 / 10;
+}
+
+.aspect-card-facility {
+  aspect-ratio: 4 / 5;
+}
+
+@media (min-width: 768px) {
+  .aspect-card-facility {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+.max-h-facility-card {
+  max-height: 22rem;
+}
+
+@media (min-width: 640px) {
+  .max-h-facility-card {
+    max-height: 24rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .max-h-facility-card {
+    max-height: 26rem;
+  }
+}
+
+.min-h-about-project-placeholder {
+  min-height: 12rem;
+}
+
+@media (min-width: 768px) {
+  .min-h-portfolio-highlight-md {
+    min-height: 17rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .min-h-portfolio-highlight-lg {
+    min-height: 19rem;
+  }
+}
+
+.about-project-card-image-hover {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.group:hover .about-project-card-image-hover {
+  transform: scale(1.03);
+}
+
+@media (min-width: 768px) {
+  .about-service-desc-md {
+    font-size: 0.9375rem;
+  }
+}
+
+.text-founder-label {
+  font-size: 0.6875rem;
+}
+
+.tracking-founder-role {
+  letter-spacing: 0.22em;
+}
+
+.tracking-partners-title {
+  letter-spacing: 0.2em;
+}
+
+.tracking-portfolio-highlights {
+  letter-spacing: 0.2em;
+}
+
+.tracking-portfolio-facilities {
+  letter-spacing: 0.18em;
+}
+
+.text-facility-card-category {
+  font-size: 0.625rem;
+}
+
+.tracking-facility-card-category {
+  letter-spacing: 0.14em;
+}
+
+.drop-shadow-article-nav-icon {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.65));
+}
+
+.product-search-bar-bg {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--color-info) 12%, var(--color-base-100)) 0%,
+    color-mix(in oklch, var(--color-secondary) 8%, var(--color-base-100)) 50%,
+    color-mix(in oklch, var(--color-secondary) 15%, var(--color-base-100)) 100%
+  );
+}
+
+.portfolio-hero-listing {
+  min-height: 13rem;
+  height: 36vw;
+  max-height: 18rem;
+}
+
+@media (min-width: 640px) {
+  .portfolio-hero-listing {
+    max-height: 20rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .portfolio-hero-listing {
+    max-height: none;
+    height: 22rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-hero-listing {
+    height: 26rem;
+  }
+}
+
+.aspect-a4-paper {
+  aspect-ratio: 210 / 297;
+}
+
+.detail-cert-single-wrap {
+  width: min(100%, 20rem);
+  max-width: 24rem;
+}
+
+@media (min-width: 768px) {
+  .detail-cert-single-wrap {
+    width: min(100%, 24rem);
+  }
+}
+
+.detail-cert-grid-wrap {
+  width: min(100%, 21rem);
+  max-width: 25rem;
+}
+
+@media (min-width: 768px) {
+  .detail-cert-grid-wrap {
+    width: min(100%, 25rem);
+  }
+}
+
+.drop-shadow-service-arrow {
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.45));
+}

@@ -99,7 +99,7 @@ export default function AboutServicesTeaser({
                       {item.title}
                     </h3>
                     {item.description ? (
-                      <p className="mt-2 text-sm leading-relaxed text-base-content/65 md:mt-2.5 md:text-[0.9375rem]">
+                      <p className="about-service-desc-md mt-2 text-sm leading-relaxed text-base-content/65 md:mt-2.5">
                         {item.description}
                       </p>
                     ) : null}

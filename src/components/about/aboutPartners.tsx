@@ -23,14 +23,14 @@ export default function AboutPartners({ partners }: AboutPartnersProps) {
   return (
     <section className="w-full bg-primary-content py-14 md:py-20">
       <div className="container mx-auto px-6">
-        <h2 className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.2em] text-base-content/60 md:mb-10 md:text-sm">
+        <h2 className="tracking-partners-title mb-8 text-center text-xs font-semibold uppercase text-base-content/60 md:mb-10 md:text-sm">
           Our Partners
         </h2>
         <div className="mx-auto grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 md:gap-5">
           {items.map((item, index) => (
             <div
               key={`${item.url}-${index}`}
-              className="flex aspect-[3/2] items-center justify-center rounded-xl border border-base-300/50 bg-header-bg px-4 py-5 shadow-sm"
+              className="aspect-ratio-3-2 flex items-center justify-center rounded-xl border border-base-300/50 bg-header-bg px-4 py-5 shadow-sm"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

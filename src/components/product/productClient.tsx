@@ -124,7 +124,7 @@ function CategoryCarouselRow({
             type="button"
             aria-label="Scroll products left"
             onClick={() => scrollPage(-1)}
-            className="absolute left-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-base-200 bg-white text-neutral-900 shadow-md md:h-10 md:w-10 md:-translate-x-1"
+            className="absolute left-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-base-200 bg-primary-content text-base-content shadow-md md:h-10 md:w-10 md:-translate-x-1"
           >
             <CaretLeftIcon className="h-5 w-5" weight="bold" />
           </button>
@@ -134,7 +134,7 @@ function CategoryCarouselRow({
             type="button"
             aria-label="Scroll products right"
             onClick={() => scrollPage(1)}
-            className="absolute right-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-base-200 bg-white text-neutral-900 shadow-md md:h-10 md:w-10 md:translate-x-1"
+            className="absolute right-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-base-200 bg-primary-content text-base-content shadow-md md:h-10 md:w-10 md:translate-x-1"
           >
             <CaretRightIcon className="h-5 w-5" weight="bold" />
           </button>
@@ -149,7 +149,7 @@ function CategoryCarouselRow({
                 href={`/product/${product.slug}`}
                 className="group flex h-full flex-col overflow-hidden rounded-box border border-base-300 bg-primary-content shadow-sm transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-base-200">
+                <div className="aspect-ratio-4-3 relative w-full overflow-hidden bg-base-200">
                   {product.imageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -288,7 +288,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
         <div className="flex w-full items-center justify-between gap-2 md:gap-4">
           {/* Search field */}
           <div ref={filterWrapRef} className="relative flex min-w-0 flex-1 items-center">
-            <div className="flex h-15 w-full max-w-3xl items-center gap-3 rounded-full bg-linear-to-r from-sky-100/95 via-pink-50/90 to-pink-100/95 px-4 shadow-sm ring-1 ring-base-content/10">
+            <div className="product-search-bar-bg flex h-15 w-full max-w-3xl items-center gap-3 rounded-full px-4 shadow-sm ring-1 ring-base-content/10">
               <input
                 type="search"
                 value={search}
@@ -322,7 +322,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
               <div
                 role="listbox"
                 aria-label="Categories"
-                className="absolute left-0 top-full z-20 mt-1 min-w-[11rem] rounded-box border border-base-300 bg-primary-content py-1 shadow-lg"
+                className="absolute left-0 top-full z-20 mt-1 min-w-44 rounded-box border border-base-300 bg-primary-content py-1 shadow-lg"
               >
                 <button
                   type="button"
@@ -367,7 +367,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
               type="button"
               onClick={() => setViewMode('list')}
               className={`flex h-10 w-10 cursor-pointer items-center justify-center transition-colors md:h-10 md:w-10 ${
-                viewMode === 'list' ? 'text-pink-500' : 'text-black'
+                viewMode === 'list' ? 'text-secondary' : 'text-base-content'
               }`}
               aria-label="List view"
             >
@@ -377,7 +377,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
               type="button"
               onClick={() => setViewMode('grid')}
               className={`flex h-10 w-10 cursor-pointer items-center justify-center transition-colors md:h-10 md:w-10 ${
-                viewMode === 'grid' ? 'text-pink-500' : 'text-black'
+                viewMode === 'grid' ? 'text-secondary' : 'text-base-content'
               }`}
               aria-label="Grid view"
             >
@@ -454,9 +454,9 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                             >
                               <Link
                                 href={`/product/${product.slug}`}
-                                className="group flex items-center gap-4 rounded-box border border-base-300 bg-white px-4 py-4 shadow-sm transition-shadow hover:shadow-md md:gap-5 md:px-5 md:py-5"
+                                className="group flex items-center gap-4 rounded-box border border-base-300 bg-primary-content px-4 py-4 shadow-sm transition-shadow hover:shadow-md md:gap-5 md:px-5 md:py-5"
                               >
-                                <div className="relative aspect-[4/3] w-16 shrink-0 overflow-hidden rounded bg-base-200 md:w-20">
+                                <div className="aspect-ratio-4-3 relative w-16 shrink-0 overflow-hidden rounded bg-base-200 md:w-20">
                                   {product.imageUrl ? (
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img

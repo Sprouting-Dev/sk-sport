@@ -48,17 +48,17 @@ export default function AboutFeaturedProjectsTeaser({
               const href = portfolioDetailHref(p.slug)
 
               const imageBlock = (
-                <div className="relative aspect-[5/4] w-full overflow-hidden bg-base-200 md:aspect-[4/3]">
+                <div className="aspect-about-featured-image relative w-full overflow-hidden bg-base-200">
                   {p.imageUrl ? (
                     <Image
                       src={p.imageUrl}
                       alt={p.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="about-project-card-image-hover object-cover"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   ) : (
-                    <div className="flex h-full min-h-[12rem] items-center justify-center text-sm text-base-content/35">
+                    <div className="min-h-about-project-placeholder flex h-full items-center justify-center text-sm text-base-content/35">
                       No image
                     </div>
                   )}

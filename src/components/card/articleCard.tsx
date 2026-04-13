@@ -107,7 +107,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
               type="button"
               onClick={() => scroll('left')}
               aria-label="Previous accomplishment"
-              className="p-2 text-primary-content drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)] transition-opacity hover:opacity-90"
+              className="drop-shadow-article-nav-icon p-2 text-primary-content transition-opacity hover:opacity-90"
             >
               <CaretLeftIcon size={28} strokeWidth={2} />
             </button>
@@ -119,7 +119,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
               type="button"
               onClick={() => scroll('right')}
               aria-label="Next accomplishment"
-              className="p-2 text-primary-content drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)] transition-opacity hover:opacity-90"
+              className="drop-shadow-article-nav-icon p-2 text-primary-content transition-opacity hover:opacity-90"
             >
               <CaretRightIcon size={28} strokeWidth={2} />
             </button>

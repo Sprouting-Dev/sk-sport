@@ -32,23 +32,23 @@ export default function AboutFounder({
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-base-300/45 bg-primary-content shadow-md">
           <div className="flex flex-col gap-7 p-6 md:flex-row md:items-stretch md:gap-10 md:p-8 lg:gap-12 lg:p-10">
-            <div className="mx-auto w-full max-w-[12rem] shrink-0 md:mx-0 md:w-52 md:max-w-none lg:w-56">
+            <div className="mx-auto w-full max-w-48 shrink-0 md:mx-0 md:w-52 md:max-w-none lg:w-56">
               {imageUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={imageUrl}
                   alt={imageAlt ?? ''}
-                  className="aspect-[3/4] w-full rounded-xl object-cover object-top shadow-sm"
+                  className="aspect-ratio-3-4 w-full rounded-xl object-cover object-top shadow-sm"
                 />
               ) : (
-                <div className="flex aspect-[3/4] w-full items-center justify-center rounded-xl border border-base-300 bg-base-200">
+                <div className="aspect-ratio-3-4 flex w-full items-center justify-center rounded-xl border border-base-300 bg-base-200">
                   <span className="text-sm text-base-content/40">Founder Image</span>
                 </div>
               )}
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col gap-3.5 md:justify-center md:gap-4">
-              <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:text-left md:text-xs">
+              <p className="text-founder-label tracking-founder-role text-center font-semibold uppercase text-primary md:text-left md:text-xs">
                 FOUNDER & CEO
               </p>
 

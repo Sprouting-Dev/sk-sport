@@ -17,7 +17,7 @@ interface MoreServicesProps {
 }
 
 const arrowBtnClass =
-  'absolute top-1/2 z-10 flex -translate-y-1/2 items-center lg:hidden p-2 text-base-content/65 drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)] transition-opacity hover:text-base-content hover:opacity-90'
+  'drop-shadow-service-arrow absolute top-1/2 z-10 flex -translate-y-1/2 items-center p-2 text-base-content/65 transition-opacity hover:text-base-content hover:opacity-90 lg:hidden'
 
 export const MoreServices = ({ services }: MoreServicesProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)

@@ -62,7 +62,7 @@ export const OurProducts = () => {
                 type="button"
                 onClick={goPrev}
                 aria-label="Previous product category"
-                className="rounded-full bg-black/25 p-2 text-primary-content transition-opacity hover:bg-black/30"
+                className="rounded-full bg-base-content/25 p-2 text-primary-content transition-opacity hover:bg-base-content/30"
               >
                 <CaretLeft size={28} weight="bold" aria-hidden />
               </button>
@@ -74,7 +74,7 @@ export const OurProducts = () => {
                 type="button"
                 onClick={goNext}
                 aria-label="Next product category"
-                className="rounded-full bg-black/25 p-2 text-primary-content transition-opacity hover:bg-black/30"
+                className="rounded-full bg-base-content/25 p-2 text-primary-content transition-opacity hover:bg-base-content/30"
               >
                 <CaretRight size={28} weight="bold" aria-hidden />
               </button>

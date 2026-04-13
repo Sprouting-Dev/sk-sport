@@ -48,7 +48,7 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
           detailHref ? 'cursor-pointer hover:shadow-lg' : 'cursor-default',
         )}
       >
-        <div className="relative aspect-[16/10] w-full shrink-0 md:aspect-auto md:w-[48%] md:min-h-[17rem] lg:min-h-[19rem]">
+        <div className="aspect-ratio-16-10 relative w-full shrink-0 md:aspect-auto md:w-[48%] md:min-h-portfolio-highlight-md lg:min-h-portfolio-highlight-lg">
           <div className="absolute left-3 top-3 z-10 md:left-4 md:top-4">
             <Badge />
           </div>
@@ -96,7 +96,7 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
             key={article.id}
             shape="circle"
             variant="ghost"
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>)  => {
               e.stopPropagation()
               setActiveId(article.id)
             }}

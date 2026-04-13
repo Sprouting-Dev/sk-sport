@@ -33,7 +33,7 @@ export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
     <div
       onClick={onClick}
       className={cn(
-        'group relative flex aspect-[4/5] w-full max-h-[22rem] overflow-hidden rounded-xl bg-base-300 sm:max-h-[24rem] md:aspect-[3/4] md:max-h-[26rem]',
+        'group relative flex aspect-card-facility max-h-facility-card w-full overflow-hidden rounded-xl bg-base-300',
         onClick
           ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-0.5'
           : 'cursor-default',
@@ -57,7 +57,7 @@ export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
 
       <div className="relative z-10 mt-auto flex w-full flex-col gap-1 px-4 pb-4 pt-12 md:gap-1.5 md:px-5 md:pb-5 md:pt-16">
         {category && (
-          <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-info md:text-xs">
+          <span className="text-facility-card-category tracking-facility-card-category font-semibold uppercase text-info md:text-xs">
             {category}
           </span>
         )}

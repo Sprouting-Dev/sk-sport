@@ -36,10 +36,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       <div className="flex w-full flex-col items-center bg-header-bg">
         <div className="container mx-auto px-6 py-10 md:py-14">
-          <div className="rounded-box border border-base-300 bg-white p-6 shadow-sm md:p-8 lg:p-10">
+          <div className="rounded-box border border-base-300 bg-primary-content p-6 shadow-sm md:p-8 lg:p-10">
             <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
               <div className="w-full shrink-0 lg:max-w-md lg:flex-1">
-                <div className="relative aspect-[5/4] w-full overflow-hidden rounded-box border border-base-300 bg-base-200 shadow-md">
+                <div className="aspect-product-card-main relative w-full overflow-hidden rounded-box border border-base-300 bg-base-200 shadow-md">
                   {imageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -100,7 +100,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                       href={href}
                       className="group flex w-full min-w-0 flex-col overflow-hidden rounded-box border border-base-300 bg-primary-content shadow-sm transition-all duration-300 hover:-translate-y-1 sm:w-44 md:w-48"
                     >
-                      <div className="relative aspect-[5/4] w-full overflow-hidden bg-base-200">
+                      <div className="aspect-product-card-main relative w-full overflow-hidden bg-base-200">
                         {thumb ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img

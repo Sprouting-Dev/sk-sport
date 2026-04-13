@@ -36,7 +36,7 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
   return (
     <div className="w-full bg-header-bg">
       <div className="max-w-7xl mx-auto px-4 pt-8 pb-2 md:px-6 md:pt-10 md:pb-4">
-        <h1 className="mb-5 text-base font-semibold uppercase tracking-[0.2em] text-base-content/80 md:mb-8">
+        <h1 className="tracking-portfolio-highlights mb-5 text-base font-semibold uppercase text-base-content/80 md:mb-8">
           HIGHLIGHTS
         </h1>
         <HighlightArticle articles={articles} />
@@ -57,7 +57,7 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
       </div>
 
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12 bg-primary-content">
-        <h2 className="text-base font-semibold uppercase tracking-[0.18em] text-base-content/75">
+        <h2 className="tracking-portfolio-facilities text-base font-semibold uppercase text-base-content/75">
           OUR FACILITIES
         </h2>
         <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-8 md:grid-cols-3 md:gap-6">
