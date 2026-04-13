@@ -12,35 +12,30 @@ export default function AboutProductsTeaser({
   productsCtaText,
 }: AboutProductsTeaserProps) {
   return (
-    <section className="section-bg-to-left w-full py-16 md:py-24">
-      <div className="relative z-10 container mx-auto px-6">
-        <div className="rounded-box border border-primary-content/10 bg-primary-content/5 px-8 py-10 backdrop-blur-sm md:px-12 md:py-12">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
-            <div className="flex flex-col gap-4 md:col-span-2">
-              {productsSectionTitle && (
-                <h2 className="text-2xl md:text-4xl font-heading font-medium tracking-wide text-primary-content leading-tight">
-                  {productsSectionTitle}
-                </h2>
-              )}
-              <div className="h-0.5 w-12 bg-gradient" />
-              {productsSectionSubtitle && (
-                <p className="body-sm text-primary-content/75 leading-relaxed max-w-xl">
-                  {productsSectionSubtitle}
-                </p>
-              )}
+    <section className="w-full bg-header-bg py-16 md:py-24">
+      <div className="container mx-auto max-w-3xl px-6">
+        <div className="mx-auto flex flex-col items-center text-center">
+          {productsSectionTitle ? (
+            <h2 className="text-2xl font-semibold tracking-wide text-base-content md:text-3xl lg:text-4xl">
+              {productsSectionTitle}
+            </h2>
+          ) : null}
+          <div className="mx-auto mt-4 h-px w-12 bg-gradient md:mt-5" />
+          {productsSectionSubtitle ? (
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-base-content/70 md:mt-6 md:text-base">
+              {productsSectionSubtitle}
+            </p>
+          ) : null}
+          {productsCtaText ? (
+            <div className="mt-10 flex w-full justify-center md:mt-12">
+              <Link
+                href="/product"
+                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-secondary px-9 py-3.5 text-sm font-semibold text-primary-content shadow-lg transition hover:opacity-95 md:px-10 md:py-4 md:text-base"
+              >
+                {productsCtaText}
+              </Link>
             </div>
-
-            {productsCtaText && (
-              <div className="flex items-center md:justify-end">
-                <Link
-                  href="/product"
-                  className="btn btn-gradient-solid-border btn-sm-typo h-10 px-6 inline-flex items-center"
-                >
-                  <span className="text-primary-content">{productsCtaText}</span>
-                </Link>
-              </div>
-            )}
-          </div>
+          ) : null}
         </div>
       </div>
     </section>

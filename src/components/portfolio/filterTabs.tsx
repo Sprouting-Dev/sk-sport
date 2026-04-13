@@ -24,9 +24,9 @@ export const FilterTab: React.FC<FilterTabProps> = ({
   placeholder = 'Search...',
 }) => {
   return (
-    <div className="flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between p-8">
-      <div className="w-full overflow-x-auto pb-1 md:pb-0 no-scrollbar">
-        <div className="flex items-center justify-center gap-1 md:hidden">
+    <div className="flex w-full flex-col gap-4 px-4 py-5 md:flex-row md:items-center md:justify-between md:gap-6 md:px-6 md:py-6">
+      <div className="w-full min-w-0 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
+        <div className="flex items-center justify-start gap-1 md:hidden">
           {mobileCategories.map((category) => (
             <Button
               key={`mobile-${category}`}
@@ -44,7 +44,7 @@ export const FilterTab: React.FC<FilterTabProps> = ({
           ))}
         </div>
 
-        <div className="hidden items-center justify-start gap-1 md:flex">
+        <div className="hidden items-center justify-start gap-1.5 md:flex md:flex-wrap">
           {desktopCategories.map((category) => (
             <Button
               key={`desktop-${category}`}
@@ -63,9 +63,9 @@ export const FilterTab: React.FC<FilterTabProps> = ({
         </div>
       </div>
 
-      <div className="relative w-full shrink-0 md:w-105">
+      <div className="relative w-full shrink-0 md:max-w-sm lg:max-w-xs">
         <MagnifyingGlassIcon
-          className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-base-content/50"
+          className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-base-content/45 md:left-3.5 md:h-5 md:w-5"
           weight="bold"
         />
         <input
@@ -73,7 +73,7 @@ export const FilterTab: React.FC<FilterTabProps> = ({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder={placeholder}
-          className="body-sm w-full border border-base-content/30 bg-primary-content h-9.5 md:h-12.5 pl-11 outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary"
+          className="body-sm h-10 w-full border border-base-content/25 bg-primary-content pl-10 pr-3 outline-none transition-all placeholder:text-base-content/40 focus:border-primary focus:ring-1 focus:ring-primary md:h-11 md:pl-11"
         />
       </div>
     </div>

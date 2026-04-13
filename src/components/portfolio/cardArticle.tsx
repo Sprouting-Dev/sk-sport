@@ -15,20 +15,28 @@ export interface ArticleData {
   newest?: boolean
 }
 
+/** Detail route resolves by CMS `slug` only; returns null if missing or whitespace. */
+export function portfolioDetailHref(slug?: string | null): string | null {
+  const t = typeof slug === 'string' ? slug.trim() : ''
+  return t !== '' ? `/portfolio/${t}` : null
+}
+
 export interface CardArticleProps {
   data: ArticleData
   onClick?: () => void
 }
 
 export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
-  const { category, title, subtitle, description, image } = data
+  const { category, title, subtitle, image } = data
 
   return (
     <div
       onClick={onClick}
       className={cn(
-        'group relative flex h-64 w-full overflow-hidden rounded-xl bg-base-300 transition-all duration-300 md:h-98',
-        onClick && 'cursor-pointer hover:-translate-y-1',
+        'group relative flex aspect-[4/5] w-full max-h-[22rem] overflow-hidden rounded-xl bg-base-300 sm:max-h-[24rem] md:aspect-[3/4] md:max-h-[26rem]',
+        onClick
+          ? 'cursor-pointer transition-transform duration-300 hover:-translate-y-0.5'
+          : 'cursor-default',
       )}
     >
       {image ? (
@@ -36,24 +44,33 @@ export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
           src={image}
           alt={title}
           fill
-          className="inset-0 object-cover transition-transform duration-500 group-hover:scale-110"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center bg-base-300 text-base-content/40">
-          <span>No Image</span>
+          <span className="text-sm">No Image</span>
         </div>
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-base-content/90 via-base-content/50 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-base-content/85 via-base-content/20 to-transparent" />
 
-      <div className="relative z-10 flex h-full w-full flex-col justify-end px-4 md:px-6 pb-1">
-        {category && <span className="body-md uppercase tracking-wider text-info">{category}</span>}
+      <div className="relative z-10 mt-auto flex w-full flex-col gap-1 px-4 pb-4 pt-12 md:gap-1.5 md:px-5 md:pb-5 md:pt-16">
+        {category && (
+          <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-info md:text-xs">
+            {category}
+          </span>
+        )}
 
-        <h3 className="mb-1 text-primary-content">{title}</h3>
+        <h3 className="line-clamp-2 text-base font-medium leading-snug text-primary-content md:text-lg">
+          {title}
+        </h3>
 
-        <p className="body-md mb-1 text-primary-content/80">{subtitle}</p>
-
-        <p className="body-sm text-primary-content/70">{description}</p>
+        {subtitle ? (
+          <p className="line-clamp-2 text-xs leading-snug text-primary-content/75 md:text-sm">
+            {subtitle}
+          </p>
+        ) : null}
       </div>
     </div>
   )

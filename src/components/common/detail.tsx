@@ -13,6 +13,8 @@ export interface DetailProps {
   tags?: string[]
   alignment?: 'left' | 'right'
   verticalAlign?: 'top' | 'middle'
+  /** Portrait certificate-style grid (A4-like); used only where explicitly set */
+  imagePresentation?: 'default' | 'certificate'
 }
 
 export const Detail = ({
@@ -24,6 +26,7 @@ export const Detail = ({
   tags = [],
   alignment = 'left',
   verticalAlign = 'top',
+  imagePresentation = 'default',
 }: DetailProps) => {
   const displayImages = images && images.length > 0 ? images : ['/checker.png']
 
@@ -46,6 +49,7 @@ export const Detail = ({
           description={detail}
           images={displayImages}
           tags={tags}
+          imagePresentation={imagePresentation}
         />
       )}
     </section>

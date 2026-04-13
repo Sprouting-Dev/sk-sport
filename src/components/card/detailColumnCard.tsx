@@ -9,6 +9,7 @@ export interface DetailColumnCardProps {
   description: string
   images?: string[]
   tags?: string[]
+  imagePresentation?: 'default' | 'certificate'
 }
 
 export const DetailColumnCard = ({
@@ -16,8 +17,10 @@ export const DetailColumnCard = ({
   description,
   images = [],
   tags = [],
+  imagePresentation = 'default',
 }: DetailColumnCardProps) => {
   const hasImages = images.length > 0
+  const isCertificate = imagePresentation === 'certificate'
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -25,24 +28,55 @@ export const DetailColumnCard = ({
       {hasImages && (
         <div className="w-full">
           {images.length === 1 ? (
-            <div className="relative aspect-video w-full">
+            <div
+              className={cn(
+                'relative',
+                isCertificate
+                  ? 'mx-auto aspect-[210/297] w-[min(100%,20rem)] max-w-[24rem] md:w-[min(100%,24rem)]'
+                  : 'aspect-video w-full',
+              )}
+            >
               <Image
                 src={images[0]}
                 alt={sectionTitle || 'service image'}
                 fill
-                className="rounded-lg object-cover"
+                className={cn(
+                  'rounded-lg',
+                  isCertificate
+                    ? 'object-contain shadow-md ring-1 ring-base-300/30'
+                    : 'object-cover',
+                )}
               />
             </div>
           ) : (
-            // Multiple images: choose cols based on count, all in one row
-            <div className={cn('grid gap-3', images.length >= 3 ? 'grid-cols-3' : 'grid-cols-2')}>
+            <div
+              className={cn(
+                'grid',
+                isCertificate
+                  ? 'grid-cols-1 justify-items-center gap-8 md:grid-cols-2 md:items-start md:justify-center md:gap-10'
+                  : cn('gap-3', images.length >= 3 ? 'grid-cols-3' : 'grid-cols-2'),
+              )}
+            >
               {images.map((src, imgIdx) => (
-                <div key={src} className="relative aspect-4/3">
+                <div
+                  key={`${src}-${imgIdx}`}
+                  className={cn(
+                    'relative',
+                    isCertificate
+                      ? 'aspect-[210/297] w-[min(100%,21rem)] max-w-[25rem] md:w-[min(100%,25rem)]'
+                      : 'aspect-4/3 w-full',
+                  )}
+                >
                   <Image
                     src={src}
                     alt={`${sectionTitle || 'service'} ${imgIdx + 1}`}
                     fill
-                    className="rounded-lg object-cover"
+                    className={cn(
+                      'rounded-lg',
+                      isCertificate
+                        ? 'object-contain shadow-md ring-1 ring-base-300/30'
+                        : 'object-cover',
+                    )}
                   />
                 </div>
               ))}

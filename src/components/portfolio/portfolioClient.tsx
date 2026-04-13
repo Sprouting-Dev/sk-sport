@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { FilterTab, CardArticle, HighlightArticle, PaginationButton } from '@/components/portfolio'
 import { useRouter } from 'next/navigation'
-import { ArticleData } from '@/components/portfolio/cardArticle'
+import { ArticleData, portfolioDetailHref } from '@/components/portfolio/cardArticle'
 
 export interface PortfolioClientProps {
   articles: ArticleData[]
@@ -35,40 +35,51 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
 
   return (
     <div className="w-full bg-header-bg">
-      <div className="max-w-7xl mx-auto pt-4 md:pt-8 px-6">
-        <h1 className="-ml-3 md:ml-0 mb-4 md:mb-6">HIGHLIGHTS</h1>
+      <div className="max-w-7xl mx-auto px-4 pt-8 pb-2 md:px-6 md:pt-10 md:pb-4">
+        <h1 className="mb-5 text-base font-semibold uppercase tracking-[0.2em] text-base-content/80 md:mb-8">
+          HIGHLIGHTS
+        </h1>
         <HighlightArticle articles={articles} />
       </div>
 
-      <div className="border-b border-base-content/20 bg-primary-content">
-        <FilterTab
-          desktopCategories={['ALL', 'VENUE', 'FACILITY', 'TRAINING']}
-          mobileCategories={['ALL', 'ARTICLES', 'GALLERY']}
-          activeCategory={activeTab}
-          onCategoryChange={setActiveTab}
-          searchQuery={search}
-          onSearchChange={setSearch}
-          placeholder="Search..."
-        />
+      <div className="border-b border-base-content/15 bg-primary-content">
+        <div className="mx-auto max-w-7xl">
+          <FilterTab
+            desktopCategories={['ALL', 'VENUE', 'FACILITY', 'TRAINING']}
+            mobileCategories={['ALL', 'ARTICLES', 'GALLERY']}
+            activeCategory={activeTab}
+            onCategoryChange={setActiveTab}
+            searchQuery={search}
+            onSearchChange={setSearch}
+            placeholder="Search..."
+          />
+        </div>
       </div>
 
-      <div className="p-6 md:p-8 bg-primary-content">
-        <h2>OUR FACILITIES</h2>
-        <div className="mt-6 md:mt-8 grid grid-cols-1 gap-4 md:gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {paginatedArticles.map((item) => (
-            <CardArticle
-              key={item.id}
-              data={item}
-              onClick={() => router.push(`/portfolio/${item.slug ?? item.id}`)}
-            />
-          ))}
+      <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12 bg-primary-content">
+        <h2 className="text-base font-semibold uppercase tracking-[0.18em] text-base-content/75">
+          OUR FACILITIES
+        </h2>
+        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-8 md:grid-cols-3 md:gap-6">
+          {paginatedArticles.map((item) => {
+            const href = portfolioDetailHref(item.slug)
+            return (
+              <CardArticle
+                key={item.id}
+                data={item}
+                onClick={href ? () => router.push(href) : undefined}
+              />
+            )
+          })}
         </div>
 
-        <PaginationButton
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+        <div className="mt-10 md:mt-14">
+          <PaginationButton
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
     </div>
   )

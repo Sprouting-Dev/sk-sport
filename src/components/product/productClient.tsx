@@ -1,14 +1,6 @@
 'use client'
 
-import {
-  Fragment,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import {
@@ -50,18 +42,13 @@ function paramToCategoryKey(param: string | null): string {
   return p.replace(/-/g, ' ').toUpperCase()
 }
 
-function resolveCategoryFilter(
-  param: string | null,
-  productList: ProductItem[],
-): string {
+function resolveCategoryFilter(param: string | null, productList: ProductItem[]): string {
   const key = paramToCategoryKey(param)
   if (key === 'ALL') return 'ALL'
   if (key === 'OTHER') {
     return productList.some((p) => !p.category?.trim()) ? 'OTHER' : 'ALL'
   }
-  return productList.some((p) => (p.category?.toUpperCase() ?? '') === key)
-    ? key
-    : 'ALL'
+  return productList.some((p) => (p.category?.toUpperCase() ?? '') === key) ? key : 'ALL'
 }
 
 type CategoryGroup = { key: string; label: string; items: ProductItem[] }
@@ -81,9 +68,7 @@ function CategoryCarouselRow({
   const updateArrows = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
-    const isLg =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(min-width: 1024px)').matches
+    const isLg = typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches
     const epsilon = 2
     const { scrollLeft, scrollWidth, clientWidth } = el
     const needsScroll = scrollWidth > clientWidth + epsilon
@@ -159,10 +144,7 @@ function CategoryCarouselRow({
           className="flex gap-4 overflow-x-auto scroll-smooth px-10 py-1 no-scrollbar"
         >
           {products.map((product) => (
-            <div
-              key={product.id}
-              className="w-[calc(50%-8px)] shrink-0 lg:w-[calc(25%-12px)]"
-            >
+            <div key={product.id} className="w-[calc(50%-8px)] shrink-0 lg:w-[calc(25%-12px)]">
               <Link
                 href={`/product/${product.slug}`}
                 className="group flex h-full flex-col overflow-hidden rounded-box border border-base-300 bg-primary-content shadow-sm transition-all duration-300 hover:-translate-y-1"
@@ -263,8 +245,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
     })
     return keys.map((key) => {
       const items = map.get(key)!
-      const label =
-        key === 'OTHER' ? 'Other' : (items[0]?.category ?? key)
+      const label = key === 'OTHER' ? 'Other' : (items[0]?.category ?? key)
       return { key, label, items }
     })
   }, [filtered])
@@ -324,10 +305,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                   weight="bold"
                   aria-hidden
                 />
-                <span
-                  className="h-5 w-px shrink-0 bg-base-content/25"
-                  aria-hidden
-                />
+                <span className="h-5 w-px shrink-0 bg-base-content/25" aria-hidden />
                 <button
                   type="button"
                   onClick={() => setFilterMenuOpen((open) => !open)}
@@ -428,37 +406,35 @@ export function ProductClient({ products = [] }: ProductClientProps) {
           <>
             {viewMode === 'grid' ? (
               <div className="flex flex-col gap-10 pt-6 md:gap-12 md:pt-8">
-                {categoryFilter === 'ALL'
-                  ? groupedByCategory.map((group) => (
-                      <CategoryCarouselRow
-                        key={group.key}
-                        title={group.label}
-                        products={group.items}
-                        onSeeAll={
-                          group.key !== 'OTHER'
-                            ? () => {
-                                router.push(
-                                  `/product?category=${encodeURIComponent(categoryKeyToParam(group.key))}`,
-                                )
-                              }
-                            : undefined
-                        }
-                      />
-                    ))
-                  : (
-                      <CategoryCarouselRow
-                        key={categoryFilter}
-                        title={filtered[0]?.category ?? categoryFilter}
-                        products={filtered}
-                      />
-                    )}
+                {categoryFilter === 'ALL' ? (
+                  groupedByCategory.map((group) => (
+                    <CategoryCarouselRow
+                      key={group.key}
+                      title={group.label}
+                      products={group.items}
+                      onSeeAll={
+                        group.key !== 'OTHER'
+                          ? () => {
+                              router.push(
+                                `/product?category=${encodeURIComponent(categoryKeyToParam(group.key))}`,
+                              )
+                            }
+                          : undefined
+                      }
+                    />
+                  ))
+                ) : (
+                  <CategoryCarouselRow
+                    key={categoryFilter}
+                    title={filtered[0]?.category ?? categoryFilter}
+                    products={filtered}
+                  />
+                )}
               </div>
             ) : (
               <div className="flex flex-col pt-6 md:pt-8">
                 {listDisplay.map((group, gIdx) => {
-                  const rowBase = listDisplay
-                    .slice(0, gIdx)
-                    .reduce((s, g) => s + g.items.length, 0)
+                  const rowBase = listDisplay.slice(0, gIdx).reduce((s, g) => s + g.items.length, 0)
                   return (
                     <Fragment key={group.key}>
                       <h2
@@ -474,9 +450,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                           return (
                             <div
                               key={product.id}
-                              className={
-                                rowOnPage >= 3 && !mobileExpanded ? 'hidden md:block' : ''
-                              }
+                              className={rowOnPage >= 3 && !mobileExpanded ? 'hidden md:block' : ''}
                             >
                               <Link
                                 href={`/product/${product.slug}`}

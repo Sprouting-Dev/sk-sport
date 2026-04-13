@@ -15,7 +15,6 @@ function resolveImageUrl(founderImage: AboutFounderProps['founderImage']): strin
 }
 
 export default function AboutFounder({
-  founderSectionTitle,
   founderImage,
   founderName,
   founderRole,
@@ -29,53 +28,56 @@ export default function AboutFounder({
       : (founderName ?? '')
 
   return (
-    <section className="w-full bg-header-bg py-16 md:py-24">
-      <div className="container mx-auto px-6 flex flex-col gap-10">
-        {founderSectionTitle && (
-          <p className="body-sm text-primary font-semibold uppercase tracking-widest">
-            {founderSectionTitle}
-          </p>
-        )}
+    <section className="w-full bg-header-bg py-12 md:py-14">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-base-300/45 bg-primary-content shadow-md">
+          <div className="flex flex-col gap-7 p-6 md:flex-row md:items-stretch md:gap-10 md:p-8 lg:gap-12 lg:p-10">
+            <div className="mx-auto w-full max-w-[12rem] shrink-0 md:mx-0 md:w-52 md:max-w-none lg:w-56">
+              {imageUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={imageUrl}
+                  alt={imageAlt ?? ''}
+                  className="aspect-[3/4] w-full rounded-xl object-cover object-top shadow-sm"
+                />
+              ) : (
+                <div className="flex aspect-[3/4] w-full items-center justify-center rounded-xl border border-base-300 bg-base-200">
+                  <span className="text-sm text-base-content/40">Founder Image</span>
+                </div>
+              )}
+            </div>
 
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
-          <div className="shrink-0 w-full md:w-72">
-            {imageUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={imageUrl}
-                alt={imageAlt}
-                className="h-80 w-full rounded-box object-cover object-top shadow-md md:h-96"
-              />
-            ) : (
-              <div className="h-80 w-full rounded-box border border-base-300 bg-base-200 flex items-center justify-center md:h-96">
-                <span className="body-sm text-subtle">Founder Image</span>
-              </div>
-            )}
-          </div>
+            <div className="flex min-w-0 flex-1 flex-col gap-3.5 md:justify-center md:gap-4">
+              <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:text-left md:text-xs">
+                FOUNDER & CEO
+              </p>
 
-          <div className="flex flex-col gap-6 flex-1">
-            <div className="flex flex-col gap-1">
               {founderName && (
-                <h2 className="text-2xl md:text-3xl font-heading font-medium text-primary leading-tight">
+                <h2 className="text-center text-2xl font-semibold leading-tight text-base-content md:text-left md:text-3xl">
                   {founderName}
                 </h2>
               )}
-              {founderRole && <p className="body-sm text-subtle font-medium">{founderRole}</p>}
-            </div>
 
-            {founderDescription && (
-              <p className="body-sm text-base-content leading-relaxed indent-4">
-                {founderDescription}
-              </p>
-            )}
-
-            {founderQuote && (
-              <blockquote className="relative pl-5 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-full before:bg-gradient">
-                <p className="body-sm text-subtle italic leading-relaxed">
-                  &ldquo;{founderQuote}&rdquo;
+              {founderRole && (
+                <p className="text-center text-sm text-base-content/50 md:text-left md:text-base">
+                  {founderRole}
                 </p>
-              </blockquote>
-            )}
+              )}
+
+              {founderDescription && (
+                <p className="text-center text-sm leading-relaxed text-base-content/72 md:text-left md:text-base md:leading-relaxed">
+                  {founderDescription}
+                </p>
+              )}
+
+              {founderQuote && (
+                <blockquote className="mt-2 rounded-r-lg border-l-4 border-primary bg-base-200/35 py-4 pl-5 pr-4 md:mt-2.5 md:py-5 md:pl-6">
+                  <p className="text-base font-medium italic leading-relaxed text-base-content md:text-lg">
+                    &ldquo;{founderQuote}&rdquo;
+                  </p>
+                </blockquote>
+              )}
+            </div>
           </div>
         </div>
       </div>

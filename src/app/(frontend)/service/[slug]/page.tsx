@@ -12,6 +12,15 @@ import { getServiceBySlug, getAllServices } from '@/data/service'
 import { getPortfolioArticles } from '@/data/portfolio'
 import type { Service, ServiceMedia, GalleryMedia } from '@/payload-types'
 
+const INTEGRATED_SPORTS_INSTALLATION_SLUG = 'integrated-sports-installation'
+
+/** Safety standards block on Integrated Sports Installation only */
+function isIntegratedSafetyStandardsSection(slug: string, sectionTitle: string | undefined) {
+  if (slug !== INTEGRATED_SPORTS_INSTALLATION_SLUG) return false
+  const t = (sectionTitle ?? '').trim()
+  return t.includes('ความปลอดภัย') || /\bsafety\b/i.test(t)
+}
+
 function mapSectionToDetailProps(
   section: NonNullable<Service['sections']>[number],
 ): DetailProps & { _id: string } {
@@ -77,7 +86,16 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const heroImage =
     serviceData.hero && typeof serviceData.hero !== 'string' ? (serviceData.hero.url ?? '') : ''
 
-  const serviceDetails = (serviceData.sections ?? []).map(mapSectionToDetailProps)
+  const serviceDetails = (serviceData.sections ?? []).map(mapSectionToDetailProps).map((item) =>
+    isIntegratedSafetyStandardsSection(slug, item.sectionTitle)
+      ? {
+          ...item,
+          variant: 'column' as const,
+          images: (item.images ?? []).filter((url) => Boolean(url)),
+          imagePresentation: 'certificate' as const,
+        }
+      : item,
+  )
 
   const moreServices = allServices.map(mapServiceToMoreServicesItem)
 
