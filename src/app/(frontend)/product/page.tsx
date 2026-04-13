@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { getAllProducts } from '@/data/product'
 import { ProductClient } from '@/components/product/productClient'
 import type { GalleryMedia, Product } from '@/payload-types'
@@ -37,7 +38,9 @@ export default async function ProductPage() {
         </div>
       </section>
 
-      <ProductClient products={productItems} />
+      <Suspense fallback={null}>
+        <ProductClient products={productItems} />
+      </Suspense>
     </main>
   )
 }
