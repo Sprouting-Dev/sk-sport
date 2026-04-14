@@ -11,6 +11,9 @@ import { Users } from './payload/collections/Users'
 import { HeroMedia } from './payload/collections/HeroMedia'
 import { Home } from './payload/global/Home'
 import { About } from './payload/global/About'
+import { Faq } from './payload/global/Faq'
+import { PrivacyPolicy } from './payload/global/PrivacyPolicy'
+import { TermsOfService } from './payload/global/TermsOfService'
 import { GalleryMedia } from './payload/collections/GalleryMedia'
 import { ServiceMedia } from './payload/collections/ServiceMedia'
 import { Services } from './payload/collections/Services'
@@ -42,7 +45,7 @@ export default buildConfig({
     Products,
     PartnerMedia,
   ],
-  globals: [Home, About],
+  globals: [Home, About, Faq, PrivacyPolicy, TermsOfService],
   localization: {
     locales: [
       { label: 'English', code: 'en' },

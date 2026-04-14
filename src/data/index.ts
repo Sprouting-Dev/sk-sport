@@ -1,4 +1,7 @@
 export * from './home'
 export * from './about'
+export * from './faq'
+export * from './privacyPolicy'
+export * from './termsOfService'
 export * from './portfolio'
 export * from './product'

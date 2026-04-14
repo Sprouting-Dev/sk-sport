@@ -45,7 +45,7 @@ export default function AddToCartButton({
         <button
           type="button"
           onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-          className="flex h-9 w-9 items-center justify-center rounded-box text-base-content transition-colors hover:bg-base-200 hover:text-primary"
+          className="flex h-9 w-9 items-center cursor-pointer justify-center rounded-box text-base-content transition-colors hover:bg-base-200 hover:text-primary"
           aria-label="Decrease quantity"
         >
           <MinusIcon size={18} weight="bold" />
@@ -56,7 +56,7 @@ export default function AddToCartButton({
         <button
           type="button"
           onClick={() => setQuantity((q) => Math.min(99, q + 1))}
-          className="flex h-9 w-9 items-center justify-center rounded-box text-base-content transition-colors hover:bg-base-200 hover:text-primary"
+          className="flex h-9 w-9 items-center cursor-pointer justify-center rounded-box text-base-content transition-colors hover:bg-base-200 hover:text-primary"
           aria-label="Increase quantity"
         >
           <PlusIcon size={18} weight="bold" />

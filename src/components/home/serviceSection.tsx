@@ -6,7 +6,81 @@ import { ServiceCard } from '@/components/card'
 import { SupportCard } from '@/components/card/supportCard'
 import { BasketballIcon, HeartbeatIcon, InfoIcon } from '@phosphor-icons/react/dist/ssr'
 
-export const Services = () => {
+const INTEGRATED_SPORTS_INSTALLATION_SLUG = 'integrated-sports-installation'
+
+export type IntegratedSportsInstallationHomeTeaser = {
+  title: string
+  description: string
+  image: string
+  href: string
+  imageAlt: string
+}
+
+const legacyFirstLargeServiceCard: IntegratedSportsInstallationHomeTeaser = {
+  title: `Gymnastic Equipment\nInstallation`,
+  description: `From planning and positioning to anchoring and final safety checks, we deliver a complete installation service built for long-term performance.`,
+  image: '/gymnastic-equipment.png',
+  href: `/service/${INTEGRATED_SPORTS_INSTALLATION_SLUG}`,
+  imageAlt: 'Gymnastic equipment in a modern facility',
+}
+
+const legacySecondLargeServiceCard: IntegratedSportsInstallationHomeTeaser = {
+  title: `Outdoor Exercise\nEquipment`,
+  description: `Expert installation for every facility—aligned, secured, and tested to meet standards for safe daily training and competition readiness.`,
+  image: '/outdoor-exercise-equipment.png',
+  href: '/service/outdoor-exercise-equipment',
+  imageAlt: 'Outdoor exercise equipment at sunset',
+}
+
+export type HomeSupportServiceTeaser = {
+  title: string
+  image: string
+  href: string
+  imageAlt: string
+}
+
+const legacyFirstSupportCard: HomeSupportServiceTeaser = {
+  title: 'Consulting & Design',
+  image: '/consulting-support-services.png',
+  href: '/service/consulting-design',
+  imageAlt: 'Consulting and Design Services',
+}
+
+const legacySecondSupportCard: HomeSupportServiceTeaser = {
+  title: 'Health Care Service',
+  image: '/healthcare-support-services.png',
+  href: '/service/health-care-service',
+  imageAlt: 'Health Care Services',
+}
+
+const legacyThirdSupportCard: HomeSupportServiceTeaser = {
+  title: 'Maintenance & Support',
+  image: '/maintenance-support-services.png',
+  href: '/service/maintenance-support',
+  imageAlt: 'Maintenance and Support Services',
+}
+
+type ServicesProps = {
+  integratedSportsInstallationTeaser?: IntegratedSportsInstallationHomeTeaser | null
+  equipmentForTopGymnastsTeaser?: IntegratedSportsInstallationHomeTeaser | null
+  sportsVisionTrainingTeaser?: HomeSupportServiceTeaser | null
+  healthManagementSystemTeaser?: HomeSupportServiceTeaser | null
+  unitedDiscoveryTeaser?: HomeSupportServiceTeaser | null
+}
+
+export const Services = ({
+  integratedSportsInstallationTeaser,
+  equipmentForTopGymnastsTeaser,
+  sportsVisionTrainingTeaser,
+  healthManagementSystemTeaser,
+  unitedDiscoveryTeaser,
+}: ServicesProps) => {
+  const firstLargeCard = integratedSportsInstallationTeaser ?? legacyFirstLargeServiceCard
+  const secondLargeCard = equipmentForTopGymnastsTeaser ?? legacySecondLargeServiceCard
+  const firstSupportCard = sportsVisionTrainingTeaser ?? legacyFirstSupportCard
+  const secondSupportCard = healthManagementSystemTeaser ?? legacySecondSupportCard
+  const thirdSupportCard = unitedDiscoveryTeaser ?? legacyThirdSupportCard
+
   return (
     <section className="w-full">
       <div className="relative text-primary space-y-4 text-center py-12 px-4">
@@ -25,23 +99,23 @@ export const Services = () => {
         <div className="mb-2 grid w-full grid-cols-1 gap-2 lg:grid-cols-2">
           {/* Left Card */}
           <ServiceCard
-            title={`Gymnastic Equipment\nInstallation`}
-            description={`From planning and positioning to anchoring and final safety checks, we deliver a complete installation service built for long-term performance.`}
-            image="/gymnastic-equipment.png"
-            href="/service/integrated-sports-installation"
+            title={firstLargeCard.title}
+            description={firstLargeCard.description}
+            image={firstLargeCard.image}
+            href={firstLargeCard.href}
             buttonText="Learn more"
-            imageAlt="Gymnastic equipment in a modern facility"
+            imageAlt={firstLargeCard.imageAlt}
             alignButton="bottom"
           />
 
           {/* Right Card */}
           <ServiceCard
-            title={`Outdoor Exercise\nEquipment`}
-            description={`Expert installation for every facility—aligned, secured, and tested to meet standards for safe daily training and competition readiness.`}
-            image="/outdoor-exercise-equipment.png"
-            href="/service"
+            title={secondLargeCard.title}
+            description={secondLargeCard.description}
+            image={secondLargeCard.image}
+            href={secondLargeCard.href}
             buttonText="Learn more"
-            imageAlt="Outdoor exercise equipment at sunset"
+            imageAlt={secondLargeCard.imageAlt}
             alignButton="bottom"
           />
         </div>
@@ -49,25 +123,25 @@ export const Services = () => {
         {/* Support cards — part of the same unified services section */}
         <div className="grid grid-cols-1 gap-2 md:grid-cols-3 mt-2">
           <SupportCard
-            title="Consulting & Design"
-            image="/consulting-support-services.png"
+            title={firstSupportCard.title}
+            image={firstSupportCard.image}
             icon={<BasketballIcon size={48} weight="light" />}
-            href="/service"
-            imageAlt="Consulting and Design Services"
+            href={firstSupportCard.href}
+            imageAlt={firstSupportCard.imageAlt}
           />
           <SupportCard
-            title="Health Care Service"
-            image="/healthcare-support-services.png"
+            title={secondSupportCard.title}
+            image={secondSupportCard.image}
             icon={<HeartbeatIcon size={48} weight="light" color="#FF3591" />}
-            href="/service"
-            imageAlt="Health Care Services"
+            href={secondSupportCard.href}
+            imageAlt={secondSupportCard.imageAlt}
           />
           <SupportCard
-            title="Maintenance & Support"
-            image="/maintenance-support-services.png"
+            title={thirdSupportCard.title}
+            image={thirdSupportCard.image}
             icon={<InfoIcon size={48} weight="light" />}
-            href="/service"
-            imageAlt="Maintenance and Support Services"
+            href={thirdSupportCard.href}
+            imageAlt={thirdSupportCard.imageAlt}
           />
         </div>
       </div>

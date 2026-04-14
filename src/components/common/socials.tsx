@@ -1,5 +1,5 @@
 import React from 'react'
-import { FacebookIcon, InstagramIcon, YouTubeIcon, LineIcon } from '@/components/icons'
+import { FacebookIcon, YouTubeIcon, LineIcon } from '@/components/icons'
 import { SOCIAL_URLS } from '@/const/contact'
 
 export const socialLinks = [
@@ -7,11 +7,6 @@ export const socialLinks = [
     label: 'Facebook',
     href: SOCIAL_URLS.facebook ?? '#',
     icon: <FacebookIcon />,
-  },
-  {
-    label: 'Instagram',
-    href: SOCIAL_URLS.instagram ?? '#',
-    icon: <InstagramIcon />,
   },
   {
     label: 'YouTube',

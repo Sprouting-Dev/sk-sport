@@ -11,6 +11,15 @@ export interface PortfolioClientProps {
 
 const ITEMS_PER_PAGE = 9
 
+/** Aligns Payload `tag` (free text) with filter tab labels: trim, uppercase, common plural aliases. */
+function canonicalPortfolioTag(value: string | undefined): string {
+  const normalized = (value ?? '').trim().toUpperCase().replace(/\s+/g, ' ')
+  if (normalized === 'FACILITIES') return 'FACILITY'
+  if (normalized === 'VENUES') return 'VENUE'
+  if (normalized === 'TRAININGS') return 'TRAINING'
+  return normalized
+}
+
 export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] }) => {
   const [activeTab, setActiveTab] = useState('ALL')
   const [search, setSearch] = useState('')
@@ -22,7 +31,9 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
   }, [activeTab, search, articles])
 
   const filteredArticles = articles.filter((article) => {
-    const matchCategory = activeTab === 'ALL' || article.category === activeTab
+    const matchCategory =
+      activeTab === 'ALL' ||
+      canonicalPortfolioTag(article.category) === canonicalPortfolioTag(activeTab)
     const matchSearch = article.title.toLowerCase().includes(search.toLowerCase())
     return matchCategory && matchSearch
   })

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '../button'
 import { Badge, CategoryBadge } from '@/components/common'
@@ -19,6 +19,21 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
   const [activeId, setActiveId] = useState<string | number | null>(
     newestArticles.length > 0 ? newestArticles[0].id : null,
   )
+
+  useEffect(() => {
+    const slides = articles.filter((article) => article.newest === true)
+    if (slides.length <= 1) return
+
+    const intervalId = window.setInterval(() => {
+      setActiveId((currentId) => {
+        const idx = slides.findIndex((a) => a.id === currentId)
+        const i = idx >= 0 ? idx : 0
+        return slides[(i + 1) % slides.length].id
+      })
+    }, 5000)
+
+    return () => window.clearInterval(intervalId)
+  }, [articles])
 
   if (!newestArticles || newestArticles.length === 0) return null
   const currentArticle =

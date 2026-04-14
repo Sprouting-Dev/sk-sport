@@ -58,7 +58,6 @@ export default async function PortfolioDetailPage({
           detail={article.sectionDetail}
           images={sectionImageUrl ? [sectionImageUrl] : []}
           variant="row"
-          tags={article.tag ? [article.tag] : []}
         />
 
         {galleryUrls.length > 0 && (

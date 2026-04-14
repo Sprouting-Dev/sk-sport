@@ -46,14 +46,16 @@ export const PortfolioHero: React.FC<PortfolioHeroProps> = ({
       <div className="relative z-10 w-full px-4 md:px-8 lg:px-12 pb-5 md:pb-8 flex flex-col items-start">
         {category && <CategoryBadge text={category} className="mb-2 md:mb-6" />}
 
-        <h1
+        <h2
           className={cn(
-            'text-primary-content max-w-4xl font-heading tracking-wide',
-            isListing ? 'mb-2 text-3xl sm:text-4xl md:text-5xl md:mb-3' : 'mb-2 md:mb-4',
+            'text-primary-content font-heading tracking-wide break-words leading-snug',
+            isListing
+              ? 'mb-2 max-w-4xl text-3xl sm:text-4xl md:text-5xl md:mb-3'
+              : 'mb-2 max-w-md text-base sm:text-lg md:mb-4 md:max-w-lg md:text-xl',
           )}
         >
           {title}
-        </h1>
+        </h2>
 
         {subtitle && (
           <p

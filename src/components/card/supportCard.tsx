@@ -27,7 +27,7 @@ export const SupportCard = ({ title, image, icon, href, imageAlt }: SupportCardP
           <div className="shrink-0 text-primary-content">{icon}</div>
           <h3 className="min-w-0 text-primary-content text-shadow-card">{title}</h3>
         </div>
-        <div className="shrink-0 md:hidden">
+        <div className="shrink-0">
           <ButtonLink href={href} variant="gradient" size="md" className="text-primary-content">
             Learn more
           </ButtonLink>

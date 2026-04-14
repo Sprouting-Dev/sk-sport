@@ -106,10 +106,16 @@ export interface Config {
   globals: {
     home: Home;
     about: About;
+    faq: Faq;
+    'privacy-policy': PrivacyPolicy;
+    'terms-of-service': TermsOfService;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
+    faq: FaqSelect<false> | FaqSelect<true>;
+    'privacy-policy': PrivacyPolicySelect<false> | PrivacyPolicySelect<true>;
+    'terms-of-service': TermsOfServiceSelect<false> | TermsOfServiceSelect<true>;
   };
   locale: 'en' | 'th';
   user: User;
@@ -743,6 +749,82 @@ export interface About {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  faqItems?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy".
+ */
+export interface PrivacyPolicy {
+  id: string;
+  heroTitle?: string | null;
+  /**
+   * e.g. January 2025
+   */
+  lastUpdated?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "terms-of-service".
+ */
+export interface TermsOfService {
+  id: string;
+  heroTitle?: string | null;
+  /**
+   * e.g. January 2025
+   */
+  lastUpdated?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
@@ -789,6 +871,48 @@ export interface AboutSelect<T extends boolean = true> {
   productsSectionTitle?: T;
   productsSectionSubtitle?: T;
   productsCtaText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq_select".
+ */
+export interface FaqSelect<T extends boolean = true> {
+  heroTitle?: T;
+  heroSubtitle?: T;
+  faqItems?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy_select".
+ */
+export interface PrivacyPolicySelect<T extends boolean = true> {
+  heroTitle?: T;
+  lastUpdated?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "terms-of-service_select".
+ */
+export interface TermsOfServiceSelect<T extends boolean = true> {
+  heroTitle?: T;
+  lastUpdated?: T;
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

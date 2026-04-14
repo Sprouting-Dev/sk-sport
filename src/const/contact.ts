@@ -13,12 +13,10 @@ export const CONTACT = {
 
 export const SOCIAL_URLS: {
   facebook: string | null
-  instagram: string | null
   youtube: string | null
   line: string | null
 } = {
   facebook: 'https://www.facebook.com/profile.php?id=100058286476117',
-  instagram: null,
   youtube: 'https://youtube.com/@sksporttrading5092?si=S5_p9D7lRcJMuor0',
   line: null,
 }
