@@ -32,7 +32,7 @@ export const ServiceHero: React.FC<ServiceHeroProps> = ({
   const router = useRouter()
 
   return (
-    <section className="relative flex w-full min-h-fit md:min-h-120 lg:min-h-150 overflow-hidden bg-hero text-primary-content">
+    <section className="relative flex w-full py-16 md:py-40 overflow-hidden bg-hero text-primary-content">
       <Image src={imageSrc} alt={imageAlt} fill className="object-cover" priority />
 
       <div className="absolute inset-0 z-10 md:bg-transparent bg-overlay-gradient hero-mobile-overlay" />

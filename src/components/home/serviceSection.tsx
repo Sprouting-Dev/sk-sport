@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
 import { ServiceCard } from '@/components/card'
 import { SupportCard } from '@/components/card/supportCard'
 import { BasketballIcon, HeartbeatIcon, InfoIcon } from '@phosphor-icons/react/dist/ssr'
@@ -86,12 +85,6 @@ export const Services = ({
       <div className="relative text-primary space-y-4 text-center py-12 px-4">
         <h2 className="text-3xl md:text-4xl">Our Services</h2>
         <p className="font-body">Professional solution for sports facility development</p>
-        <Link
-          href="/service"
-          className="absolute right-4 top-1/2 -translate-y-1/2 body-sm text-primary hover:underline underline-offset-2"
-        >
-          View all →
-        </Link>
       </div>
 
       {/* Services Content */}

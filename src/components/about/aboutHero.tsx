@@ -1,13 +1,26 @@
+import Image from 'next/image'
+
 interface AboutHeroProps {
   heroTitle?: string | null
   heroSubtitle?: string | null
+  heroImageSrc?: string
 }
 
-export default function AboutHero({ heroTitle, heroSubtitle }: AboutHeroProps) {
+export default function AboutHero({ heroTitle, heroSubtitle, heroImageSrc }: AboutHeroProps) {
   return (
     <section className="about-hero-gradient relative w-full overflow-hidden">
+      {heroImageSrc && (
+        <Image
+          src={heroImageSrc}
+          alt={heroTitle ?? ''}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      )}
       <div className="about-hero-radial-overlay pointer-events-none absolute inset-0" />
-      <div className="relative z-10 container mx-auto flex flex-col items-center justify-center px-6 py-12 text-center md:py-16 lg:about-hero-inner-py-lg">
+      <div className="relative z-10 container mx-auto flex flex-col items-center justify-center px-6 py-16 text-center md:py-40">
         {heroTitle && (
           <h1 className="max-w-4xl text-3xl font-semibold leading-tight tracking-wide text-primary-content drop-shadow-sm md:text-5xl lg:text-6xl">
             {heroTitle}

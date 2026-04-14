@@ -29,6 +29,7 @@ interface ProductClientProps {
 }
 
 const ITEMS_PER_PAGE = 9
+const CATEGORY_PAGE_SIZE = 4
 
 function categoryKeyToParam(key: string): string {
   if (key === 'OTHER') return 'other'
@@ -188,6 +189,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
   const [currentPage, setCurrentPage] = useState(1)
   const [mobileExpanded, setMobileExpanded] = useState(false)
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
+  const [categoryPages, setCategoryPages] = useState<Record<string, number>>({})
 
   const categoryFilter = useMemo(
     () => resolveCategoryFilter(categoryParam, products),
@@ -204,6 +206,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
   useEffect(() => {
     setCurrentPage(1)
     setMobileExpanded(false)
+    setCategoryPages({})
   }, [search, categoryFilter])
 
   useEffect(() => {
@@ -406,30 +409,119 @@ export function ProductClient({ products = [] }: ProductClientProps) {
           <>
             {viewMode === 'grid' ? (
               <div className="flex flex-col gap-10 pt-6 md:gap-12 md:pt-8">
-                {categoryFilter === 'ALL' ? (
-                  groupedByCategory.map((group) => (
-                    <CategoryCarouselRow
-                      key={group.key}
-                      title={group.label}
-                      products={group.items}
-                      onSeeAll={
-                        group.key !== 'OTHER'
-                          ? () => {
-                              router.push(
-                                `/product?category=${encodeURIComponent(categoryKeyToParam(group.key))}`,
-                              )
+                {categoryFilter === 'ALL'
+                  ? groupedByCategory.map((group) => {
+                      const catPage = categoryPages[group.key] ?? 1
+                      const catTotalPages = Math.ceil(group.items.length / CATEGORY_PAGE_SIZE)
+                      const pagedItems = group.items.slice(
+                        (catPage - 1) * CATEGORY_PAGE_SIZE,
+                        catPage * CATEGORY_PAGE_SIZE,
+                      )
+                      return (
+                        <div key={group.key} className="flex flex-col gap-4">
+                          <CategoryCarouselRow
+                            title={group.label}
+                            products={pagedItems}
+                            onSeeAll={
+                              group.key !== 'OTHER'
+                                ? () => {
+                                    router.push(
+                                      `/product?category=${encodeURIComponent(categoryKeyToParam(group.key))}`,
+                                    )
+                                  }
+                                : undefined
                             }
-                          : undefined
-                      }
-                    />
-                  ))
-                ) : (
-                  <CategoryCarouselRow
-                    key={categoryFilter}
-                    title={filtered[0]?.category ?? categoryFilter}
-                    products={filtered}
-                  />
-                )}
+                          />
+                          {catTotalPages > 1 && (
+                            <div className="flex items-center justify-center gap-3">
+                              <button
+                                type="button"
+                                disabled={catPage === 1}
+                                onClick={() =>
+                                  setCategoryPages((prev) => ({
+                                    ...prev,
+                                    [group.key]: catPage - 1,
+                                  }))
+                                }
+                                className="flex h-9 w-9 items-center justify-center rounded-box border body-sm font-medium transition-colors border-base-300 bg-primary-content text-base-content hover:border-primary disabled:opacity-30 disabled:cursor-not-allowed"
+                                aria-label="Previous page"
+                              >
+                                ‹
+                              </button>
+                              <span className="body-sm text-base-content tabular-nums">
+                                {catPage} / {catTotalPages}
+                              </span>
+                              <button
+                                type="button"
+                                disabled={catPage === catTotalPages}
+                                onClick={() =>
+                                  setCategoryPages((prev) => ({
+                                    ...prev,
+                                    [group.key]: catPage + 1,
+                                  }))
+                                }
+                                className="flex h-9 w-9 items-center justify-center rounded-box border body-sm font-medium transition-colors border-base-300 bg-primary-content text-base-content hover:border-primary disabled:opacity-30 disabled:cursor-not-allowed"
+                                aria-label="Next page"
+                              >
+                                ›
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })
+                  : (() => {
+                      const catPage = categoryPages[categoryFilter] ?? 1
+                      const catTotalPages = Math.ceil(filtered.length / CATEGORY_PAGE_SIZE)
+                      const pagedItems = filtered.slice(
+                        (catPage - 1) * CATEGORY_PAGE_SIZE,
+                        catPage * CATEGORY_PAGE_SIZE,
+                      )
+                      return (
+                        <div className="flex flex-col gap-4">
+                          <CategoryCarouselRow
+                            key={categoryFilter}
+                            title={filtered[0]?.category ?? categoryFilter}
+                            products={pagedItems}
+                          />
+                          {catTotalPages > 1 && (
+                            <div className="flex items-center justify-center gap-3">
+                              <button
+                                type="button"
+                                disabled={catPage === 1}
+                                onClick={() =>
+                                  setCategoryPages((prev) => ({
+                                    ...prev,
+                                    [categoryFilter]: catPage - 1,
+                                  }))
+                                }
+                                className="flex h-9 w-9 items-center justify-center rounded-box border body-sm font-medium transition-colors border-base-300 bg-primary-content text-base-content hover:border-primary disabled:opacity-30 disabled:cursor-not-allowed"
+                                aria-label="Previous page"
+                              >
+                                ‹
+                              </button>
+                              <span className="body-sm text-base-content tabular-nums">
+                                {catPage} / {catTotalPages}
+                              </span>
+                              <button
+                                type="button"
+                                disabled={catPage === catTotalPages}
+                                onClick={() =>
+                                  setCategoryPages((prev) => ({
+                                    ...prev,
+                                    [categoryFilter]: catPage + 1,
+                                  }))
+                                }
+                                className="flex h-9 w-9 items-center justify-center rounded-box border body-sm font-medium transition-colors border-base-300 bg-primary-content text-base-content hover:border-primary disabled:opacity-30 disabled:cursor-not-allowed"
+                                aria-label="Next page"
+                              >
+                                ›
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })()}
               </div>
             ) : (
               <div className="flex flex-col pt-6 md:pt-8">
@@ -473,11 +565,6 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                                 <h3 className="min-w-0 flex-1 text-base-content leading-snug group-hover:text-primary">
                                   {product.title}
                                 </h3>
-                                <span className="body-sm shrink-0 font-semibold tabular-nums text-base-content">
-                                  {product.price != null && product.price !== ''
-                                    ? product.price
-                                    : '—'}
-                                </span>
                               </Link>
                             </div>
                           )
@@ -494,7 +581,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                 <button
                   type="button"
                   onClick={() => setMobileExpanded(true)}
-                  className="btn-gradient-solid-border body-sm font-semibold px-8 h-10 text-primary"
+                  className="btn-gradient-solid-border body-sm font-semibold px-8 h-10 text-primary-content cursor-pointer hover:opacity-90"
                 >
                   More
                 </button>

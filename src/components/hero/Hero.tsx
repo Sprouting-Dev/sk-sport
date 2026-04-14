@@ -41,13 +41,15 @@ export const Hero: React.FC<HeroProps> = ({ media, variant = 'default', title, d
   const isContact = variant === 'contact'
 
   return (
-    <section className="relative w-full hero-wrapper-height h-full max-h-308 overflow-hidden bg-hero text-primary-content">
+    <section
+      className={`relative w-full overflow-hidden bg-hero text-primary-content${isContact ? '' : ' hero-wrapper-height h-full max-h-308'}`}
+    >
       <HeroCarousel images={carouselImages} interval={5000} />
 
       <div
         className={`relative z-10 flex w-full pointer-events-none bg-overlay-40 ${
           isContact
-            ? 'h-full flex-col items-center justify-center text-center px-4'
+            ? 'flex-col items-center justify-center text-center px-4 py-16 md:py-40'
             : 'md:h-full h-full md:w-full hero-content-max-w flex-col justify-center px-6 py-12 lg:px-24 lg:py-24 gap-9'
         }`}
       >

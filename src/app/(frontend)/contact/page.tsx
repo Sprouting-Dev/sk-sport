@@ -1,26 +1,29 @@
 import { Hero } from '@/components/hero/Hero'
 import { ContactForm } from '@/components/contact'
+import { getContactHeroGlobal } from '@/data/contactHero'
+import type { Home } from '@/payload-types'
+
+const FALLBACK_MEDIA = [
+  { id: '1', url: '/Contact Section BG Desktop.png', alt: 'Contact Background' },
+] as unknown as Home['heroMedia']
 
 export default async function Contact() {
-  const contactMedia = [
-    { id: '1', url: '/Contact Section BG Desktop.png', alt: 'Contact Background' },
-  ]
+  const contactHero = await getContactHeroGlobal()
+
+  const heroMedia = contactHero.heroMedia?.length ? contactHero.heroMedia : FALLBACK_MEDIA
+  const heroTitle = contactHero.heroTitle ?? 'Contact us'
+  const heroDescription = contactHero.heroSubtitle ?? (
+    <>
+      Your Partner for World-Class Sports Facility Development.
+      <br />
+      We&apos;re here to help with equipment, installation, and facility planning.
+    </>
+  )
 
   return (
     <div className="w-full bg-header-bg">
-      <Hero
-        variant="contact"
-        media={contactMedia as unknown as React.ComponentProps<typeof Hero>['media']}
-        title="Contact us"
-        description={
-          <>
-            Your Partner for World-Class Sports Facility Development.
-            <br />
-            We&apos;re here to help with equipment, installation, and facility planning.
-          </>
-        }
-      />
-      <div className="relative z-20 -mt-40 md:-mt-64">
+      <Hero variant="contact" media={heroMedia} title={heroTitle} description={heroDescription} />
+      <div className="relative z-20">
         <ContactForm />
       </div>
     </div>

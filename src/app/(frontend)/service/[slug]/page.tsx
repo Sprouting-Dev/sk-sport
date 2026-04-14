@@ -13,6 +13,7 @@ import { getPortfolioArticles } from '@/data/portfolio'
 import type { Service, ServiceMedia, GalleryMedia } from '@/payload-types'
 
 const INTEGRATED_SPORTS_INSTALLATION_SLUG = 'integrated-sports-installation'
+const SPORTS_VISION_TRAINING_SLUG = 'sports-vision-training'
 
 /** Safety standards block on Integrated Sports Installation only */
 function isIntegratedSafetyStandardsSection(slug: string, sectionTitle: string | undefined) {
@@ -86,16 +87,23 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const heroImage =
     serviceData.hero && typeof serviceData.hero !== 'string' ? (serviceData.hero.url ?? '') : ''
 
-  const serviceDetails = (serviceData.sections ?? []).map(mapSectionToDetailProps).map((item) =>
-    isIntegratedSafetyStandardsSection(slug, item.sectionTitle)
-      ? {
-          ...item,
-          variant: 'column' as const,
-          images: (item.images ?? []).filter((url) => Boolean(url)),
-          imagePresentation: 'certificate' as const,
-        }
-      : item,
-  )
+  const serviceDetails = (serviceData.sections ?? []).map(mapSectionToDetailProps).map((item) => {
+    if (isIntegratedSafetyStandardsSection(slug, item.sectionTitle)) {
+      return {
+        ...item,
+        variant: 'column' as const,
+        images: (item.images ?? []).filter((url) => Boolean(url)),
+        imagePresentation: 'certificate' as const,
+      }
+    }
+    if (slug === SPORTS_VISION_TRAINING_SLUG) {
+      return {
+        ...item,
+        variant: 'column' as const,
+      }
+    }
+    return item
+  })
 
   const moreServices = allServices.map(mapServiceToMoreServicesItem)
 

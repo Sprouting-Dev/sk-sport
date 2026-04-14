@@ -29,7 +29,7 @@ export const PortfolioHero: React.FC<PortfolioHeroProps> = ({
     <div
       className={cn(
         'relative flex w-full flex-col justify-end overflow-hidden',
-        isListing ? 'portfolio-hero-listing' : 'h-100 md:h-150',
+        isListing ? 'py-16 md:py-40' : 'h-100 md:h-150',
       )}
     >
       {imageSrc && <Image src={imageSrc} alt={title} fill priority className="object-cover" />}

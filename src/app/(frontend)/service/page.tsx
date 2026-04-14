@@ -2,30 +2,47 @@ import { getTranslations } from 'next-intl/server'
 import { ServiceHero } from '@/components/hero/serviceHero'
 import { ServiceCard } from '@/components/service/'
 import { getAllServices } from '@/data/service'
-import type { Service, ServiceMedia } from '@/payload-types'
+import { getServicesHeroGlobal } from '@/data/servicesHero'
+import type { Service, ServiceMedia, HeroMedia } from '@/payload-types'
 
 function resolveHeroImageUrl(hero: Service['hero']): string {
   if (!hero || typeof hero === 'string') return ''
   return (hero as ServiceMedia).url ?? ''
 }
 
+function resolveHeroMediaUrl(
+  heroMedia: (string | HeroMedia)[] | null | undefined,
+): string | undefined {
+  if (!heroMedia?.length) return undefined
+  const first = heroMedia[0]
+  if (!first || typeof first === 'string') return undefined
+  return (first as HeroMedia).url ?? undefined
+}
+
 export default async function ServicePage() {
-  const t = await getTranslations('Service.Hero')
-  const services = await getAllServices()
+  const [t, services, servicesHero] = await Promise.all([
+    getTranslations('Service.Hero'),
+    getAllServices(),
+    getServicesHeroGlobal(),
+  ])
+
+  const heroImageSrc = resolveHeroMediaUrl(servicesHero.heroMedia) ?? '/services-hero.png'
+  const heroTitleLine1 = servicesHero.heroTitle ?? t('titleLine1')
+  const heroSubtitle = servicesHero.heroSubtitle ?? (
+    <>
+      {t('subtitle_line1')}
+      <br />
+      {t('subtitle_line2')}
+    </>
+  )
 
   return (
     <main className="flex w-full flex-col items-center">
       <ServiceHero
-        imageSrc="/services-hero.png"
-        titleLine1={t('titleLine1')}
+        imageSrc={heroImageSrc}
+        titleLine1={heroTitleLine1}
         titleLine2={t('titleLine2')}
-        subtitle={
-          <>
-            {t('subtitle_line1')}
-            <br />
-            {t('subtitle_line2')}
-          </>
-        }
+        subtitle={heroSubtitle}
         ctaLabel={t('cta')}
       />
 

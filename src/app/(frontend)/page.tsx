@@ -1,6 +1,7 @@
 import { getHomeGlobal } from '@/data'
 import { getPortfolioArticles } from '@/data/portfolio'
 import { getServiceBySlug } from '@/data/service'
+import { getAllProducts } from '@/data/product'
 import {
   Accomplishment,
   AboutCompany,
@@ -50,6 +51,7 @@ export default async function HomePage() {
   const [
     homeData,
     portfolioArticles,
+    allProducts,
     integratedSportsService,
     equipmentForTopGymnastsService,
     sportsVisionTrainingService,
@@ -58,6 +60,7 @@ export default async function HomePage() {
   ] = await Promise.all([
     getHomeGlobal(),
     getPortfolioArticles(),
+    getAllProducts(),
     getServiceBySlug(INTEGRATED_SPORTS_INSTALLATION_SLUG),
     getServiceBySlug(EQUIPMENT_FOR_TOP_GYMNASTS_SLUG),
     getServiceBySlug(SPORTS_VISION_TRAINING_SLUG),
@@ -67,13 +70,19 @@ export default async function HomePage() {
 
   const partnerLogos = resolvePartnerLogos(homeData.partners)
 
+  const productTeasers = allProducts.map((p) => ({
+    id: p.id,
+    title: p.title,
+    slug: p.slug,
+    imageUrl: resolveMediaUrl(p.image as string | GalleryMedia | null),
+  }))
+
   const integratedSportsInstallationTeaser = integratedSportsService
     ? {
         title: integratedSportsService.title,
         description: integratedSportsService.subtitle ?? '',
         image:
-          resolveServiceHeroUrl(integratedSportsService.hero) ||
-          '/Contact Section BG Desktop.png',
+          resolveServiceHeroUrl(integratedSportsService.hero) || '/Contact Section BG Desktop.png',
         href: `/service/${integratedSportsService.slug}`,
         imageAlt: integratedSportsService.title,
       }
@@ -145,7 +154,7 @@ export default async function HomePage() {
         healthManagementSystemTeaser={healthManagementSystemTeaser}
         unitedDiscoveryTeaser={unitedDiscoveryTeaser}
       />
-      <OurProducts />
+      <OurProducts products={productTeasers} />
       <Accomplishment items={accomplishmentItems} />
       <CTAFooter />
       <AboutCompany />

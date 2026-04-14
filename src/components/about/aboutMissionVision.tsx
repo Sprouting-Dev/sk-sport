@@ -14,7 +14,7 @@ export default function AboutMissionVision({
   visionDescription,
 }: AboutMissionVisionProps) {
   return (
-    <section className="w-full bg-header-bg py-9 md:py-11">
+    <section className="w-full bg-header-bg pt-4 pb-9 md:pt-5 md:pb-11">
       <div className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-3 px-6 md:grid-cols-2 md:gap-4 lg:max-w-4xl">
         <div className="flex flex-col rounded-lg border border-primary/25 bg-primary/10 px-4 py-4 md:px-5 md:py-5">
           <div className="flex items-start gap-2.5 md:gap-3">

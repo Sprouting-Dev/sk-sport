@@ -145,7 +145,7 @@ export const ContactForm = () => {
   return (
     <div className="mx-auto w-full max-w-6xl py-8 px-8 md:py-16">
       <div className="flex flex-col overflow-hidden rounded-4xl bg-primary-content shadow-lg md:flex-row">
-        <div className="flex w-full flex-col bg-gradient-to-br from-base-200 to-error-content py-12 px-8 md:w-5/12 lg:py-16 lg:px-12">
+        <div className="flex w-full flex-col bg-gradient-to-br from-primary/35 to-secondary/25 py-12 px-8 md:w-5/12 lg:py-16 lg:px-12">
           <h2 className="mb-2 md:mb-8 text-base-content">Get in touch</h2>
           <p className="body-md mb-8 text-base-content">
             Let&apos;s keep the conversation going! <br />

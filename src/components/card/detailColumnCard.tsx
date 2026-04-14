@@ -30,7 +30,9 @@ export const DetailColumnCard = ({
           {images.length === 1 ? (
             <div
               className={cn(
-                isCertificate ? 'detail-cert-single-wrap relative mx-auto aspect-a4-paper' : 'relative aspect-video w-full',
+                isCertificate
+                  ? 'detail-cert-single-wrap relative mx-auto aspect-a4-paper'
+                  : 'relative aspect-video w-full',
               )}
             >
               <Image
@@ -58,7 +60,9 @@ export const DetailColumnCard = ({
                 <div
                   key={`${src}-${imgIdx}`}
                   className={cn(
-                    isCertificate ? 'detail-cert-grid-wrap relative aspect-a4-paper' : 'relative aspect-ratio-4-3 w-full',
+                    isCertificate
+                      ? 'detail-cert-grid-wrap relative aspect-a4-paper'
+                      : 'relative aspect-ratio-4-3 w-full',
                   )}
                 >
                   <Image

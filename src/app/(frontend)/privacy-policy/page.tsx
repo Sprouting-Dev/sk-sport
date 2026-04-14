@@ -24,10 +24,7 @@ export default async function PrivacyPolicyPage() {
       <section className="w-full bg-header-bg">
         <div className="container mx-auto px-6 py-12 md:py-20 max-w-3xl">
           <div className="flex flex-col gap-10 text-base-content">
-            <CmsRichText
-              data={content}
-              className="body-md text-subtle leading-relaxed space-y-4"
-            />
+            <CmsRichText data={content} className="body-md text-subtle leading-relaxed space-y-4" />
           </div>
         </div>
       </section>

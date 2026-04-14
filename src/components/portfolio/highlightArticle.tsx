@@ -111,7 +111,7 @@ export const HighlightArticle: React.FC<HighlightArticleProps> = ({ articles = [
             key={article.id}
             shape="circle"
             variant="ghost"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>)  => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation()
               setActiveId(article.id)
             }}

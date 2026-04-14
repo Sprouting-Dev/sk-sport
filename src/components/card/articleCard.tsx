@@ -82,7 +82,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
       {canScrollLeft && (
         <button
           onClick={() => scroll('left')}
-          className="absolute left-0 top-35 z-20 text-header-bg/60 transition-all hidden md:block"
+          className="absolute left-0 top-35 z-20 text-header-bg/60 transition-all hidden md:block cursor-pointer"
         >
           <CaretLeftIcon size={96} strokeWidth={1.5} />
         </button>
@@ -107,7 +107,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
               type="button"
               onClick={() => scroll('left')}
               aria-label="Previous accomplishment"
-              className="drop-shadow-article-nav-icon p-2 text-primary-content transition-opacity hover:opacity-90"
+              className="drop-shadow-article-nav-icon p-2 text-primary-content transition-opacity hover:opacity-90 cursor-pointer"
             >
               <CaretLeftIcon size={28} strokeWidth={2} />
             </button>
@@ -119,7 +119,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
               type="button"
               onClick={() => scroll('right')}
               aria-label="Next accomplishment"
-              className="drop-shadow-article-nav-icon p-2 text-primary-content transition-opacity hover:opacity-90"
+              className="drop-shadow-article-nav-icon p-2 text-primary-content transition-opacity hover:opacity-90 cursor-pointer"
             >
               <CaretRightIcon size={28} strokeWidth={2} />
             </button>
@@ -130,7 +130,7 @@ export const ArticleCard = ({ items }: ArticleCardProps) => {
       {canScrollRight && (
         <button
           onClick={() => scroll('right')}
-          className="absolute right-0 top-35 z-20 text-header-bg/60 transition-all hidden md:block"
+          className="absolute right-0 top-35 z-20 text-header-bg/60 transition-all hidden md:block cursor-pointer"
         >
           <CaretRightIcon size={96} strokeWidth={1.5} />
         </button>

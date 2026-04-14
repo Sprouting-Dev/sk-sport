@@ -14,6 +14,11 @@ import { About } from './payload/global/About'
 import { Faq } from './payload/global/Faq'
 import { PrivacyPolicy } from './payload/global/PrivacyPolicy'
 import { TermsOfService } from './payload/global/TermsOfService'
+import { AboutHero } from './payload/global/AboutHero'
+import { ServicesHero } from './payload/global/ServicesHero'
+import { PortfolioHero } from './payload/global/PortfolioHero'
+import { ProductsHero } from './payload/global/ProductsHero'
+import { ContactHero } from './payload/global/ContactHero'
 import { GalleryMedia } from './payload/collections/GalleryMedia'
 import { ServiceMedia } from './payload/collections/ServiceMedia'
 import { Services } from './payload/collections/Services'
@@ -45,7 +50,18 @@ export default buildConfig({
     Products,
     PartnerMedia,
   ],
-  globals: [Home, About, Faq, PrivacyPolicy, TermsOfService],
+  globals: [
+    Home,
+    About,
+    Faq,
+    PrivacyPolicy,
+    TermsOfService,
+    AboutHero,
+    ServicesHero,
+    PortfolioHero,
+    ProductsHero,
+    ContactHero,
+  ],
   localization: {
     locales: [
       { label: 'English', code: 'en' },

@@ -17,7 +17,7 @@ interface MoreServicesProps {
 }
 
 const arrowBtnClass =
-  'drop-shadow-service-arrow absolute top-1/2 z-10 flex -translate-y-1/2 items-center p-2 text-base-content/65 transition-opacity hover:text-base-content hover:opacity-90 lg:hidden'
+  'absolute top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-base-content/30 text-primary-content transition-opacity hover:bg-base-content/50 lg:hidden'
 
 export const MoreServices = ({ services }: MoreServicesProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -86,7 +86,7 @@ export const MoreServices = ({ services }: MoreServicesProps) => {
               onClick={() => scrollPage(-1)}
               className={`${arrowBtnClass} left-0`}
             >
-              <CaretLeftIcon className="h-7 w-7" weight="bold" />
+              <CaretLeftIcon className="h-8 w-8" weight="bold" />
             </button>
           ) : null}
           {arrows.right ? (
@@ -96,7 +96,7 @@ export const MoreServices = ({ services }: MoreServicesProps) => {
               onClick={() => scrollPage(1)}
               className={`${arrowBtnClass} right-0`}
             >
-              <CaretRightIcon className="h-7 w-7" weight="bold" />
+              <CaretRightIcon className="h-8 w-8" weight="bold" />
             </button>
           ) : null}
 
@@ -124,10 +124,10 @@ export const MoreServices = ({ services }: MoreServicesProps) => {
                   <div className="flex justify-end mt-auto">
                     <Link
                       href={service.href}
-                      className="group/btn flex items-center body-sm text-secondary"
+                      className="group/btn flex items-center body-sm text-secondary cursor-pointer"
                     >
                       View Service
-                      <ArrowRightIcon className="w-5 md:w-6.25 h-5 md:h-6.25 ml-1 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                      <ArrowRightIcon className="w-6 md:w-6.25 h-6 md:h-6.25 ml-1 text-primary-content/40 transition-transform duration-300 group-hover/btn:translate-x-1" />
                     </Link>
                   </div>
                 </div>
