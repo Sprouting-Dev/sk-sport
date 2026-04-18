@@ -8,6 +8,8 @@ import './styles.css'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import { CartProvider } from '@/context/cartContext'
+import { getFaqGlobal } from '@/data/faq'
+import { FaqChatbot } from '@/components/chatbot/FaqChatbot'
 
 export const metadata: Metadata = {
   description: 'Your equipment. Our expertise. Perfectly installed.',
@@ -20,6 +22,13 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const messages = await getMessages()
   const isLocalEnv = process.env.NODE_ENV === 'development'
 
+  const faq = await getFaqGlobal()
+  const faqItems =
+    faq.faqItems?.filter((item) => item.question?.trim() && item.answer?.trim()).map((item) => ({
+      question: item.question,
+      answer: item.answer,
+    })) ?? []
+
   return (
     <html lang={locale} data-theme="sksport">
       <body className={`${rajdhani.variable} ${notoSansThai.variable} ${prompt.variable}`}>
@@ -29,6 +38,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <main className="pt-20">{children}</main>
 
             <Footer />
+            <FaqChatbot faqItems={faqItems} />
             {isLocalEnv && (
               <ButtonLink
                 href="/example"
