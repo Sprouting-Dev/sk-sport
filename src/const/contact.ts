@@ -18,5 +18,5 @@ export const SOCIAL_URLS: {
 } = {
   facebook: 'https://www.facebook.com/profile.php?id=100058286476117',
   youtube: 'https://youtube.com/@sksporttrading5092?si=S5_p9D7lRcJMuor0',
-  line: null,
+  line: 'https://line.me/ti/p/~pooksasrinan',
 }

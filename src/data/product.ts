@@ -8,6 +8,7 @@ export const getAllProducts = async (): Promise<Product[]> => {
     collection: 'products',
     depth: 1,
     sort: '-createdAt',
+    limit: 0,
   })
 
   return result.docs

@@ -59,229 +59,227 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
-    users: UserAuthOperations
-  }
-  blocks: {}
+    users: UserAuthOperations;
+  };
+  blocks: {};
   collections: {
-    users: User
-    'hero-media': HeroMedia
-    'gallery-media': GalleryMedia
-    'service-media': ServiceMedia
-    services: Service
-    'email-tests': EmailTest
-    contact: Contact
-    'portfolio-articles': PortfolioArticle
-    products: Product
-    'partner-media': PartnerMedia
-    'payload-kv': PayloadKv
-    'payload-locked-documents': PayloadLockedDocument
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  collectionsJoins: {}
+    users: User;
+    'hero-media': HeroMedia;
+    'gallery-media': GalleryMedia;
+    'service-media': ServiceMedia;
+    services: Service;
+    'email-tests': EmailTest;
+    contact: Contact;
+    'portfolio-articles': PortfolioArticle;
+    products: Product;
+    'partner-media': PartnerMedia;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>
-    'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>
-    'gallery-media': GalleryMediaSelect<false> | GalleryMediaSelect<true>
-    'service-media': ServiceMediaSelect<false> | ServiceMediaSelect<true>
-    services: ServicesSelect<false> | ServicesSelect<true>
-    'email-tests': EmailTestsSelect<false> | EmailTestsSelect<true>
-    contact: ContactSelect<false> | ContactSelect<true>
-    'portfolio-articles': PortfolioArticlesSelect<false> | PortfolioArticlesSelect<true>
-    products: ProductsSelect<false> | ProductsSelect<true>
-    'partner-media': PartnerMediaSelect<false> | PartnerMediaSelect<true>
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
-    'payload-locked-documents':
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
-  }
+    users: UsersSelect<false> | UsersSelect<true>;
+    'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
+    'gallery-media': GalleryMediaSelect<false> | GalleryMediaSelect<true>;
+    'service-media': ServiceMediaSelect<false> | ServiceMediaSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    'email-tests': EmailTestsSelect<false> | EmailTestsSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
+    'portfolio-articles': PortfolioArticlesSelect<false> | PortfolioArticlesSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
+    'partner-media': PartnerMediaSelect<false> | PartnerMediaSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
-    defaultIDType: string
-  }
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'th') | ('en' | 'th')[]
+    defaultIDType: string;
+  };
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'th') | ('en' | 'th')[];
   globals: {
-    home: Home
-    about: About
-    faq: Faq
-    'privacy-policy': PrivacyPolicy
-    'terms-of-service': TermsOfService
-    'about-hero': AboutHero
-    'services-hero': ServicesHero
-    'portfolio-hero': PortfolioHero
-    'products-hero': ProductsHero
-    'contact-hero': ContactHero
-  }
+    home: Home;
+    about: About;
+    faq: Faq;
+    'privacy-policy': PrivacyPolicy;
+    'terms-of-service': TermsOfService;
+    'about-hero': AboutHero;
+    'services-hero': ServicesHero;
+    'portfolio-hero': PortfolioHero;
+    'products-hero': ProductsHero;
+    'contact-hero': ContactHero;
+  };
   globalsSelect: {
-    home: HomeSelect<false> | HomeSelect<true>
-    about: AboutSelect<false> | AboutSelect<true>
-    faq: FaqSelect<false> | FaqSelect<true>
-    'privacy-policy': PrivacyPolicySelect<false> | PrivacyPolicySelect<true>
-    'terms-of-service': TermsOfServiceSelect<false> | TermsOfServiceSelect<true>
-    'about-hero': AboutHeroSelect<false> | AboutHeroSelect<true>
-    'services-hero': ServicesHeroSelect<false> | ServicesHeroSelect<true>
-    'portfolio-hero': PortfolioHeroSelect<false> | PortfolioHeroSelect<true>
-    'products-hero': ProductsHeroSelect<false> | ProductsHeroSelect<true>
-    'contact-hero': ContactHeroSelect<false> | ContactHeroSelect<true>
-  }
-  locale: 'en' | 'th'
-  user: User
+    home: HomeSelect<false> | HomeSelect<true>;
+    about: AboutSelect<false> | AboutSelect<true>;
+    faq: FaqSelect<false> | FaqSelect<true>;
+    'privacy-policy': PrivacyPolicySelect<false> | PrivacyPolicySelect<true>;
+    'terms-of-service': TermsOfServiceSelect<false> | TermsOfServiceSelect<true>;
+    'about-hero': AboutHeroSelect<false> | AboutHeroSelect<true>;
+    'services-hero': ServicesHeroSelect<false> | ServicesHeroSelect<true>;
+    'portfolio-hero': PortfolioHeroSelect<false> | PortfolioHeroSelect<true>;
+    'products-hero': ProductsHeroSelect<false> | ProductsHeroSelect<true>;
+    'contact-hero': ContactHeroSelect<false> | ContactHeroSelect<true>;
+  };
+  locale: 'en' | 'th';
+  user: User;
   jobs: {
-    tasks: unknown
-    workflows: unknown
-  }
+    tasks: unknown;
+    workflows: unknown;
+  };
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   login: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   registerFirstUser: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   unlock: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: string
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
+  id: string;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
   sessions?:
     | {
-        id: string
-        createdAt?: string | null
-        expiresAt: string
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
       }[]
-    | null
-  password?: string | null
-  collection: 'users'
+    | null;
+  password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero-media".
  */
 export interface HeroMedia {
-  id: string
+  id: string;
   /**
    * อธิบายว่าภาพนี้คืออะไร สำหรับคนใช้ screen reader และ SEO
    */
-  alt: string
-  prefix?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  alt: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "gallery-media".
  */
 export interface GalleryMedia {
-  id: string
+  id: string;
   /**
    * อธิบายว่าภาพนี้คืออะไร สำหรับคนใช้ screen reader และ SEO
    */
-  alt: string
-  prefix?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  alt: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "service-media".
  */
 export interface ServiceMedia {
-  id: string
+  id: string;
   /**
    * อธิบายว่าภาพนี้คืออะไร สำหรับคนใช้ screen reader และ SEO
    */
-  alt: string
-  prefix?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  alt: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services".
  */
 export interface Service {
-  id: string
-  title: string
-  subtitle?: string | null
-  hero?: (string | null) | ServiceMedia
-  slug: string
+  id: string;
+  title: string;
+  subtitle?: string | null;
+  hero?: (string | null) | ServiceMedia;
+  slug: string;
   sections?:
     | {
-        sectionTitle: string
-        description?: string | null
-        variant: 'column' | 'row'
+        sectionTitle: string;
+        description?: string | null;
+        variant: 'column' | 'row';
         images?:
           | {
-              image: string | ServiceMedia
-              id?: string | null
+              image: string | ServiceMedia;
+              id?: string | null;
             }[]
-          | null
-        image?: (string | null) | ServiceMedia
-        alignment?: ('left' | 'right') | null
-        id?: string | null
+          | null;
+        image?: (string | null) | ServiceMedia;
+        alignment?: ('left' | 'right') | null;
+        id?: string | null;
       }[]
-    | null
+    | null;
   tags?:
     | {
-        tag?: string | null
-        id?: string | null
+        tag?: string | null;
+        id?: string | null;
       }[]
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * Use this collection to test sending emails.
@@ -290,772 +288,773 @@ export interface Service {
  * via the `definition` "email-tests".
  */
 export interface EmailTest {
-  id: string
-  emailType: 'purchase-success' | 'thank-you'
+  id: string;
+  emailType: 'purchase-success' | 'thank-you';
   /**
    * The email address to send the test email to.
    */
-  recipientEmail: string
+  recipientEmail: string;
   /**
    * A mock customer name to insert into the email template.
    */
-  customerName: string
-  updatedAt: string
-  createdAt: string
+  customerName: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact".
  */
 export interface Contact {
-  id: string
-  name: string
-  email: string
-  phoneNumber?: string | null
-  detail?: string | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber?: string | null;
+  detail?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "portfolio-articles".
  */
 export interface PortfolioArticle {
-  id: string
-  title: string
-  subtitle?: string | null
-  highlight?: boolean | null
-  sectionTitle?: string | null
-  sectionDetail: string
-  sectionImage?: (string | null) | GalleryMedia
-  gallery?: (string | GalleryMedia)[] | null
-  tag?: string | null
-  slug: string
-  updatedAt: string
-  createdAt: string
+  id: string;
+  title: string;
+  subtitle?: string | null;
+  highlight?: boolean | null;
+  sectionTitle?: string | null;
+  sectionDetail: string;
+  sectionImage?: (string | null) | GalleryMedia;
+  gallery?: (string | GalleryMedia)[] | null;
+  tag?: string | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products".
  */
 export interface Product {
-  id: string
-  title: string
-  subtitle?: string | null
-  category?: string | null
-  description: string
-  image?: (string | null) | GalleryMedia
-  slug: string
-  updatedAt: string
-  createdAt: string
+  id: string;
+  title: string;
+  subtitle?: string | null;
+  category?: string | null;
+  description: string;
+  image?: (string | null) | GalleryMedia;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "partner-media".
  */
 export interface PartnerMedia {
-  id: string
+  id: string;
   /**
    * Shown in admin and used as logo alt text.
    */
-  name: string
-  prefix?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  name: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string
-  key: string
+  id: string;
+  key: string;
   data:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string
+  id: string;
   document?:
     | ({
-        relationTo: 'users'
-        value: string | User
+        relationTo: 'users';
+        value: string | User;
       } | null)
     | ({
-        relationTo: 'hero-media'
-        value: string | HeroMedia
+        relationTo: 'hero-media';
+        value: string | HeroMedia;
       } | null)
     | ({
-        relationTo: 'gallery-media'
-        value: string | GalleryMedia
+        relationTo: 'gallery-media';
+        value: string | GalleryMedia;
       } | null)
     | ({
-        relationTo: 'service-media'
-        value: string | ServiceMedia
+        relationTo: 'service-media';
+        value: string | ServiceMedia;
       } | null)
     | ({
-        relationTo: 'services'
-        value: string | Service
+        relationTo: 'services';
+        value: string | Service;
       } | null)
     | ({
-        relationTo: 'email-tests'
-        value: string | EmailTest
+        relationTo: 'email-tests';
+        value: string | EmailTest;
       } | null)
     | ({
-        relationTo: 'contact'
-        value: string | Contact
+        relationTo: 'contact';
+        value: string | Contact;
       } | null)
     | ({
-        relationTo: 'portfolio-articles'
-        value: string | PortfolioArticle
+        relationTo: 'portfolio-articles';
+        value: string | PortfolioArticle;
       } | null)
     | ({
-        relationTo: 'products'
-        value: string | Product
+        relationTo: 'products';
+        value: string | Product;
       } | null)
     | ({
-        relationTo: 'partner-media'
-        value: string | PartnerMedia
-      } | null)
-  globalSlug?: string | null
+        relationTo: 'partner-media';
+        value: string | PartnerMedia;
+      } | null);
+  globalSlug?: string | null;
   user: {
-    relationTo: 'users'
-    value: string | User
-  }
-  updatedAt: string
-  createdAt: string
+    relationTo: 'users';
+    value: string | User;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string
+  id: string;
   user: {
-    relationTo: 'users'
-    value: string | User
-  }
-  key?: string | null
+    relationTo: 'users';
+    value: string | User;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  updatedAt?: T
-  createdAt?: T
-  email?: T
-  resetPasswordToken?: T
-  resetPasswordExpiration?: T
-  salt?: T
-  hash?: T
-  loginAttempts?: T
-  lockUntil?: T
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
   sessions?:
     | T
     | {
-        id?: T
-        createdAt?: T
-        expiresAt?: T
-      }
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero-media_select".
  */
 export interface HeroMediaSelect<T extends boolean = true> {
-  alt?: T
-  prefix?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  alt?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "gallery-media_select".
  */
 export interface GalleryMediaSelect<T extends boolean = true> {
-  alt?: T
-  prefix?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  alt?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "service-media_select".
  */
 export interface ServiceMediaSelect<T extends boolean = true> {
-  alt?: T
-  prefix?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  alt?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services_select".
  */
 export interface ServicesSelect<T extends boolean = true> {
-  title?: T
-  subtitle?: T
-  hero?: T
-  slug?: T
+  title?: T;
+  subtitle?: T;
+  hero?: T;
+  slug?: T;
   sections?:
     | T
     | {
-        sectionTitle?: T
-        description?: T
-        variant?: T
+        sectionTitle?: T;
+        description?: T;
+        variant?: T;
         images?:
           | T
           | {
-              image?: T
-              id?: T
-            }
-        image?: T
-        alignment?: T
-        id?: T
-      }
+              image?: T;
+              id?: T;
+            };
+        image?: T;
+        alignment?: T;
+        id?: T;
+      };
   tags?:
     | T
     | {
-        tag?: T
-        id?: T
-      }
-  updatedAt?: T
-  createdAt?: T
+        tag?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "email-tests_select".
  */
 export interface EmailTestsSelect<T extends boolean = true> {
-  emailType?: T
-  recipientEmail?: T
-  customerName?: T
-  updatedAt?: T
-  createdAt?: T
+  emailType?: T;
+  recipientEmail?: T;
+  customerName?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
-  name?: T
-  email?: T
-  phoneNumber?: T
-  detail?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  email?: T;
+  phoneNumber?: T;
+  detail?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "portfolio-articles_select".
  */
 export interface PortfolioArticlesSelect<T extends boolean = true> {
-  title?: T
-  subtitle?: T
-  highlight?: T
-  sectionTitle?: T
-  sectionDetail?: T
-  sectionImage?: T
-  gallery?: T
-  tag?: T
-  slug?: T
-  updatedAt?: T
-  createdAt?: T
+  title?: T;
+  subtitle?: T;
+  highlight?: T;
+  sectionTitle?: T;
+  sectionDetail?: T;
+  sectionImage?: T;
+  gallery?: T;
+  tag?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
-  title?: T
-  subtitle?: T
-  category?: T
-  description?: T
-  image?: T
-  slug?: T
-  updatedAt?: T
-  createdAt?: T
+  title?: T;
+  subtitle?: T;
+  category?: T;
+  description?: T;
+  image?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "partner-media_select".
  */
 export interface PartnerMediaSelect<T extends boolean = true> {
-  name?: T
-  prefix?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  name?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T
-  data?: T
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T
-  globalSlug?: T
-  user?: T
-  updatedAt?: T
-  createdAt?: T
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T
-  key?: T
-  value?: T
-  updatedAt?: T
-  createdAt?: T
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T
-  batch?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home".
  */
 export interface Home {
-  id: string
-  heroMedia?: (string | HeroMedia)[] | null
-  galleryMedia?: (string | GalleryMedia)[] | null
+  id: string;
+  heroMedia?: (string | HeroMedia)[] | null;
+  galleryMedia?: (string | GalleryMedia)[] | null;
   /**
    * Partner logos shown below the home hero. Order matches display order.
    */
-  partners?: (string | PartnerMedia)[] | null
-  updatedAt?: string | null
-  createdAt?: string | null
+  partners?: (string | PartnerMedia)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about".
  */
 export interface About {
-  id: string
-  heroTitle?: string | null
-  heroSubtitle?: string | null
-  historySectionTitle?: string | null
-  companyName?: string | null
-  historyDescription?: string | null
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  historySectionTitle?: string | null;
+  companyName?: string | null;
+  historyDescription?: string | null;
   historyHighlights?:
     | {
-        value?: string | null
-        label?: string | null
-        id?: string | null
+        value?: string | null;
+        label?: string | null;
+        id?: string | null;
       }[]
-    | null
-  missionTitle?: string | null
-  missionDescription?: string | null
-  visionTitle?: string | null
-  visionDescription?: string | null
-  founderSectionTitle?: string | null
-  founderImage?: (string | null) | HeroMedia
-  founderName?: string | null
-  founderRole?: string | null
-  founderDescription?: string | null
-  founderQuote?: string | null
-  featuredProjectsSectionTitle?: string | null
-  featuredProjectsSectionSubtitle?: string | null
-  featuredProjectsCtaText?: string | null
-  servicesSectionTitle?: string | null
-  servicesSectionSubtitle?: string | null
-  servicesCtaText?: string | null
-  productsSectionTitle?: string | null
-  productsSectionSubtitle?: string | null
-  productsCtaText?: string | null
-  updatedAt?: string | null
-  createdAt?: string | null
+    | null;
+  missionTitle?: string | null;
+  missionDescription?: string | null;
+  visionTitle?: string | null;
+  visionDescription?: string | null;
+  founderSectionTitle?: string | null;
+  founderImage?: (string | null) | HeroMedia;
+  founderName?: string | null;
+  founderRole?: string | null;
+  founderDescription?: string | null;
+  founderQuote?: string | null;
+  featuredProjectsSectionTitle?: string | null;
+  featuredProjectsSectionSubtitle?: string | null;
+  featuredProjectsCtaText?: string | null;
+  servicesSectionTitle?: string | null;
+  servicesSectionSubtitle?: string | null;
+  servicesCtaText?: string | null;
+  productsSectionTitle?: string | null;
+  productsSectionSubtitle?: string | null;
+  productsCtaText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faq".
  */
 export interface Faq {
-  id: string
-  heroTitle?: string | null
-  heroSubtitle?: string | null
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
   faqItems?:
     | {
-        question: string
-        answer: string
-        id?: string | null
+        question: string;
+        answer: string;
+        id?: string | null;
       }[]
-    | null
-  updatedAt?: string | null
-  createdAt?: string | null
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "privacy-policy".
  */
 export interface PrivacyPolicy {
-  id: string
-  heroTitle?: string | null
+  id: string;
+  heroTitle?: string | null;
   /**
    * e.g. January 2025
    */
-  lastUpdated?: string | null
+  lastUpdated?: string | null;
   content?: {
     root: {
-      type: string
+      type: string;
       children: {
-        type: any
-        version: number
-        [k: string]: unknown
-      }[]
-      direction: ('ltr' | 'rtl') | null
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-      indent: number
-      version: number
-    }
-    [k: string]: unknown
-  } | null
-  updatedAt?: string | null
-  createdAt?: string | null
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "terms-of-service".
  */
 export interface TermsOfService {
-  id: string
-  heroTitle?: string | null
+  id: string;
+  heroTitle?: string | null;
   /**
    * e.g. January 2025
    */
-  lastUpdated?: string | null
+  lastUpdated?: string | null;
   content?: {
     root: {
-      type: string
+      type: string;
       children: {
-        type: any
-        version: number
-        [k: string]: unknown
-      }[]
-      direction: ('ltr' | 'rtl') | null
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-      indent: number
-      version: number
-    }
-    [k: string]: unknown
-  } | null
-  updatedAt?: string | null
-  createdAt?: string | null
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-hero".
  */
 export interface AboutHero {
-  id: string
-  heroTitle?: string | null
-  heroSubtitle?: string | null
-  heroMedia?: (string | HeroMedia)[] | null
-  updatedAt?: string | null
-  createdAt?: string | null
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  heroMedia?: (string | HeroMedia)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services-hero".
  */
 export interface ServicesHero {
-  id: string
-  heroTitle?: string | null
-  heroSubtitle?: string | null
-  heroMedia?: (string | HeroMedia)[] | null
-  updatedAt?: string | null
-  createdAt?: string | null
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  heroMedia?: (string | HeroMedia)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "portfolio-hero".
  */
 export interface PortfolioHero {
-  id: string
-  heroTitle?: string | null
-  heroSubtitle?: string | null
-  heroMedia?: (string | HeroMedia)[] | null
-  updatedAt?: string | null
-  createdAt?: string | null
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  heroMedia?: (string | HeroMedia)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products-hero".
  */
 export interface ProductsHero {
-  id: string
-  heroTitle?: string | null
-  heroSubtitle?: string | null
-  heroMedia?: (string | HeroMedia)[] | null
-  updatedAt?: string | null
-  createdAt?: string | null
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  heroMedia?: (string | HeroMedia)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-hero".
  */
 export interface ContactHero {
-  id: string
-  heroTitle?: string | null
-  heroSubtitle?: string | null
-  heroMedia?: (string | HeroMedia)[] | null
-  updatedAt?: string | null
-  createdAt?: string | null
+  id: string;
+  heroTitle?: string | null;
+  heroSubtitle?: string | null;
+  heroMedia?: (string | HeroMedia)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
-  heroMedia?: T
-  galleryMedia?: T
-  partners?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroMedia?: T;
+  galleryMedia?: T;
+  partners?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about_select".
  */
 export interface AboutSelect<T extends boolean = true> {
-  heroTitle?: T
-  heroSubtitle?: T
-  historySectionTitle?: T
-  companyName?: T
-  historyDescription?: T
+  heroTitle?: T;
+  heroSubtitle?: T;
+  historySectionTitle?: T;
+  companyName?: T;
+  historyDescription?: T;
   historyHighlights?:
     | T
     | {
-        value?: T
-        label?: T
-        id?: T
-      }
-  missionTitle?: T
-  missionDescription?: T
-  visionTitle?: T
-  visionDescription?: T
-  founderSectionTitle?: T
-  founderImage?: T
-  founderName?: T
-  founderRole?: T
-  founderDescription?: T
-  founderQuote?: T
-  featuredProjectsSectionTitle?: T
-  featuredProjectsSectionSubtitle?: T
-  featuredProjectsCtaText?: T
-  servicesSectionTitle?: T
-  servicesSectionSubtitle?: T
-  servicesCtaText?: T
-  productsSectionTitle?: T
-  productsSectionSubtitle?: T
-  productsCtaText?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  missionTitle?: T;
+  missionDescription?: T;
+  visionTitle?: T;
+  visionDescription?: T;
+  founderSectionTitle?: T;
+  founderImage?: T;
+  founderName?: T;
+  founderRole?: T;
+  founderDescription?: T;
+  founderQuote?: T;
+  featuredProjectsSectionTitle?: T;
+  featuredProjectsSectionSubtitle?: T;
+  featuredProjectsCtaText?: T;
+  servicesSectionTitle?: T;
+  servicesSectionSubtitle?: T;
+  servicesCtaText?: T;
+  productsSectionTitle?: T;
+  productsSectionSubtitle?: T;
+  productsCtaText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faq_select".
  */
 export interface FaqSelect<T extends boolean = true> {
-  heroTitle?: T
-  heroSubtitle?: T
+  heroTitle?: T;
+  heroSubtitle?: T;
   faqItems?:
     | T
     | {
-        question?: T
-        answer?: T
-        id?: T
-      }
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "privacy-policy_select".
  */
 export interface PrivacyPolicySelect<T extends boolean = true> {
-  heroTitle?: T
-  lastUpdated?: T
-  content?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroTitle?: T;
+  lastUpdated?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "terms-of-service_select".
  */
 export interface TermsOfServiceSelect<T extends boolean = true> {
-  heroTitle?: T
-  lastUpdated?: T
-  content?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroTitle?: T;
+  lastUpdated?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-hero_select".
  */
 export interface AboutHeroSelect<T extends boolean = true> {
-  heroTitle?: T
-  heroSubtitle?: T
-  heroMedia?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroTitle?: T;
+  heroSubtitle?: T;
+  heroMedia?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services-hero_select".
  */
 export interface ServicesHeroSelect<T extends boolean = true> {
-  heroTitle?: T
-  heroSubtitle?: T
-  heroMedia?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroTitle?: T;
+  heroSubtitle?: T;
+  heroMedia?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "portfolio-hero_select".
  */
 export interface PortfolioHeroSelect<T extends boolean = true> {
-  heroTitle?: T
-  heroSubtitle?: T
-  heroMedia?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroTitle?: T;
+  heroSubtitle?: T;
+  heroMedia?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products-hero_select".
  */
 export interface ProductsHeroSelect<T extends boolean = true> {
-  heroTitle?: T
-  heroSubtitle?: T
-  heroMedia?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroTitle?: T;
+  heroSubtitle?: T;
+  heroMedia?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-hero_select".
  */
 export interface ContactHeroSelect<T extends boolean = true> {
-  heroTitle?: T
-  heroSubtitle?: T
-  heroMedia?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroTitle?: T;
+  heroSubtitle?: T;
+  heroMedia?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown
+  [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

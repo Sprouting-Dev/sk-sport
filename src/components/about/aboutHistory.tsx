@@ -12,18 +12,6 @@ interface AboutHistoryProps {
   historyHighlights?: HistoryHighlight[] | null
 }
 
-/**
- * Desktop: horizontal card-deck overlap.
- * Each card after the first gets -ml-4 (16px overlap) and a higher z-index
- * so later cards visually stack on top of earlier ones.
- * flex-1 on each child + 3 × -ml-4 cancels out so all 4 cards fill the container exactly.
- */
-const CARD_DECK_CLASS: string[] = [
-  'md:z-0',
-  'md:-ml-4 md:z-10',
-  'md:-ml-4 md:z-20',
-  'md:-ml-4 md:z-30',
-]
 
 const INTRO_CARDS = [
   {
@@ -62,11 +50,11 @@ export default function AboutHistory({ companyName, historyHighlights }: AboutHi
           )}
         </div>
 
-        <div className="mx-auto flex w-full max-w-4xl flex-col gap-4 md:flex-row md:items-stretch md:gap-0">
-          {INTRO_CARDS.map((card, index) => (
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-4 md:flex-row md:items-stretch md:gap-4">
+          {INTRO_CARDS.map((card) => (
             <div
               key={card.title}
-              className={`relative transition-transform duration-200 md:flex-1 md:min-w-0 md:hover:-translate-y-1 md:hover:z-40 ${CARD_DECK_CLASS[index] ?? ''}`}
+              className="relative transition-transform duration-200 md:flex-1 md:min-w-0 md:hover:-translate-y-1"
             >
               <div className="flex h-full flex-col gap-2 rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 px-6 py-5 shadow-2xl hover:shadow-2xl">
                 <h3 className="text-sm font-semibold text-base-content md:text-base">
