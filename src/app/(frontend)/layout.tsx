@@ -2,7 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { Navbar, Footer } from '@/components/layout/'
 import { ButtonLink } from '@/components/button'
-import { rajdhani, notoSansThai, prompt } from '@/lib/fonts'
+import { prompt, sarabun } from '@/lib/fonts'
 import '@/style/typography.css'
 import './styles.css'
 import { NextIntlClientProvider } from 'next-intl'
@@ -33,7 +33,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang={locale} data-theme="sksport">
-      <body className={`${rajdhani.variable} ${notoSansThai.variable} ${prompt.variable}`}>
+      <body className={`${sarabun.variable} ${prompt.variable}`}>
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
             <Navbar />

@@ -1,19 +1,18 @@
-import { Rajdhani, Noto_Sans_Thai, Prompt } from 'next/font/google'
+import { Prompt, Sarabun } from 'next/font/google'
 
-export const rajdhani = Rajdhani({
-  subsets: ['latin'],
-  weight: ['500', '600'],
-  variable: '--font-heading',
+/**
+ * Single Sarabun instance (next/font): duplicate `Sarabun()` calls for the same family
+ * can break font preloading / dev runtime. Map `--font-heading` and `--font-body` in CSS
+ * to `var(--font-sarabun)`.
+ */
+export const sarabun = Sarabun({
+  subsets: ['latin', 'thai'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sarabun',
   display: 'swap',
 })
 
-export const notoSansThai = Noto_Sans_Thai({
-  subsets: ['thai', 'latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-body',
-  display: 'swap',
-})
-
+/** Brand gradient name spans (nav / footer company name) */
 export const prompt = Prompt({
   subsets: ['thai', 'latin'],
   weight: ['600'],
