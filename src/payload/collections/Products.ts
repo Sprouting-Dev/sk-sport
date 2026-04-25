@@ -29,6 +29,27 @@ export const Products: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'mode',
+      label: 'Sales mode',
+      type: 'select',
+      required: true,
+      defaultValue: 'quote',
+      options: [
+        { label: 'Quote only (request a quote)', value: 'quote' },
+        { label: 'Buy (add to cart)', value: 'buy' },
+      ],
+    },
+    {
+      name: 'price',
+      label: 'Price',
+      type: 'number',
+      min: 0,
+      admin: {
+        description: 'Use when mode is Buy (e.g. price in THB).',
+        condition: (data) => (data as { mode?: string }).mode === 'buy',
+      },
+    },
+    {
       name: 'description',
       label: 'Description',
       type: 'textarea',

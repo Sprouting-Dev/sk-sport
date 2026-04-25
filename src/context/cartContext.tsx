@@ -4,6 +4,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react'
 
 const STORAGE_KEY = 'sksport-cart'
 
+/** `mode` / `unitPrice` / `currency` are set for buy lines from Phase 2; earlier carts may omit them. */
 export interface CartItem {
   id: string
   slug: string
@@ -12,6 +13,9 @@ export interface CartItem {
   category?: string
   image?: string
   quantity: number
+  mode?: 'buy'
+  unitPrice?: number
+  currency?: 'THB'
 }
 
 interface CartState {
@@ -41,7 +45,16 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       if (existing) {
         return {
           items: state.items.map((i) =>
-            i.id === itemData.id ? { ...i, quantity: i.quantity + quantity } : i,
+            i.id === itemData.id
+              ? {
+                  ...i,
+                  ...itemData,
+                  quantity: i.quantity + quantity,
+                  mode: itemData.mode ?? i.mode,
+                  unitPrice: itemData.unitPrice ?? i.unitPrice,
+                  currency: itemData.currency ?? i.currency,
+                }
+              : i,
           ),
         }
       }
@@ -69,14 +82,54 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   }
 }
 
+export function isCartLinePriced(
+  item: CartItem,
+): item is CartItem & { mode: 'buy'; unitPrice: number; currency: 'THB' } {
+  return (
+    item.mode === 'buy' &&
+    item.currency === 'THB' &&
+    typeof item.unitPrice === 'number' &&
+    Number.isFinite(item.unitPrice) &&
+    item.unitPrice > 0
+  )
+}
+
+function normalizeCartItem(raw: unknown): CartItem | null {
+  if (!raw || typeof raw !== 'object') return null
+  const o = raw as Record<string, unknown>
+  if (typeof o.id !== 'string' || typeof o.slug !== 'string' || typeof o.title !== 'string') {
+    return null
+  }
+  const quantity = Number(o.quantity)
+  if (!Number.isFinite(quantity) || quantity < 1) return null
+  const item: CartItem = {
+    id: o.id,
+    slug: o.slug,
+    title: o.title,
+    quantity,
+  }
+  if (typeof o.subtitle === 'string') item.subtitle = o.subtitle
+  if (typeof o.category === 'string') item.category = o.category
+  if (typeof o.image === 'string') item.image = o.image
+  if (o.mode === 'buy') item.mode = 'buy'
+  if (o.currency === 'THB') item.currency = 'THB'
+  if (typeof o.unitPrice === 'number' && Number.isFinite(o.unitPrice) && o.unitPrice > 0) {
+    item.unitPrice = o.unitPrice
+  }
+  return item
+}
+
 function loadFromStorage(): CartState {
   if (typeof window === 'undefined') return { items: [] }
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return { items: [] }
-    const parsed = JSON.parse(raw) as CartState
+    const parsed = JSON.parse(raw) as { items?: unknown }
     if (!Array.isArray(parsed?.items)) return { items: [] }
-    return parsed
+    const items = parsed.items
+      .map((row) => normalizeCartItem(row))
+      .filter((i): i is CartItem => i !== null)
+    return { items }
   } catch {
     return { items: [] }
   }

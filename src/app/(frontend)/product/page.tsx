@@ -36,6 +36,8 @@ export default async function ProductPage() {
     category: product.category,
     description: product.description,
     imageUrl: resolveImageUrl(product.image),
+    mode: (product.mode ?? 'quote') as 'quote' | 'buy',
+    price: product.price ?? null,
   }))
 
   return (

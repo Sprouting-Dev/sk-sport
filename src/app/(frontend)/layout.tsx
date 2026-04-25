@@ -24,10 +24,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   const faq = await getFaqGlobal()
   const faqItems =
-    faq.faqItems?.filter((item) => item.question?.trim() && item.answer?.trim()).map((item) => ({
-      question: item.question,
-      answer: item.answer,
-    })) ?? []
+    faq.faqItems
+      ?.filter((item) => item.question?.trim() && item.answer?.trim())
+      .map((item) => ({
+        question: item.question,
+        answer: item.answer,
+      })) ?? []
 
   return (
     <html lang={locale} data-theme="sksport">
@@ -35,7 +37,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
             <Navbar />
-            <main className="pt-20">{children}</main>
+            <main className="pt-28">{children}</main>
 
             <Footer />
             <FaqChatbot faqItems={faqItems} />

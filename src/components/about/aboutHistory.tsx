@@ -12,7 +12,6 @@ interface AboutHistoryProps {
   historyHighlights?: HistoryHighlight[] | null
 }
 
-
 const INTRO_CARDS = [
   {
     title: 'Authorized Global Brands',

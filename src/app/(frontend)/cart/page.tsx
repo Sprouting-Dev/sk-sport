@@ -2,10 +2,26 @@
 
 import Link from 'next/link'
 import { MinusIcon, PlusIcon, TrashIcon, ShoppingCartSimpleIcon } from '@phosphor-icons/react'
-import { useCart } from '@/context/cartContext'
+import { useCart, isCartLinePriced } from '@/context/cartContext'
+import { useMemo } from 'react'
+
+const thb = new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' })
 
 export default function CartPage() {
   const { items, totalItems, updateQuantity, removeItem, clearCart } = useCart()
+
+  const { cartTotal, hasUnpricedLines } = useMemo(() => {
+    let total = 0
+    let unpriced = false
+    for (const item of items) {
+      if (isCartLinePriced(item)) {
+        total += item.unitPrice * item.quantity
+      } else {
+        unpriced = true
+      }
+    }
+    return { cartTotal: total, hasUnpricedLines: unpriced }
+  }, [items])
 
   return (
     <main className="flex w-full flex-col items-center">
@@ -37,74 +53,89 @@ export default function CartPage() {
             <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
               {/* Item list */}
               <div className="flex flex-1 flex-col gap-4">
-                {items.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-start gap-4 rounded-box border border-base-300 bg-primary-content px-5 py-4 shadow-sm"
-                  >
-                    {/* Image */}
-                    <div className="shrink-0 h-20 w-20 overflow-hidden rounded-box border border-base-300 bg-base-200">
-                      {item.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center">
-                          <ShoppingCartSimpleIcon size={20} className="text-subtle" />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Info */}
-                    <div className="flex flex-1 flex-col gap-1 min-w-0">
-                      {item.category && (
-                        <span className="body-sm text-primary font-semibold uppercase tracking-widest">
-                          {item.category}
-                        </span>
-                      )}
-                      <h3 className="text-base-content leading-snug truncate">{item.title}</h3>
-                      {item.subtitle && <p className="body-sm text-subtle">{item.subtitle}</p>}
-                    </div>
-
-                    {/* Quantity + Remove */}
-                    <div className="flex shrink-0 flex-col items-end gap-3">
-                      <div className="flex items-center gap-2 rounded-box border border-base-300 bg-base-100 px-1">
-                        <button
-                          type="button"
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="flex h-8 w-8 items-center justify-center text-base-content transition-colors hover:text-primary"
-                          aria-label="Decrease quantity"
-                        >
-                          <MinusIcon size={14} />
-                        </button>
-                        <span className="body-sm w-6 text-center font-medium text-base-content">
-                          {item.quantity}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="flex h-8 w-8 items-center justify-center text-base-content transition-colors hover:text-primary"
-                          aria-label="Increase quantity"
-                        >
-                          <PlusIcon size={14} />
-                        </button>
+                {items.map((item) => {
+                  const priced = isCartLinePriced(item)
+                  const lineSubtotal = priced ? item.unitPrice * item.quantity : null
+                  return (
+                    <div
+                      key={item.id}
+                      className="flex items-start gap-4 rounded-box border border-base-300 bg-primary-content px-5 py-4 shadow-sm"
+                    >
+                      {/* Image */}
+                      <div className="shrink-0 h-20 w-20 overflow-hidden rounded-box border border-base-300 bg-base-200">
+                        {item.image ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center">
+                            <ShoppingCartSimpleIcon size={20} className="text-subtle" />
+                          </div>
+                        )}
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => removeItem(item.id)}
-                        className="flex items-center gap-1 body-sm text-subtle transition-colors hover:text-error"
-                        aria-label="Remove item"
-                      >
-                        <TrashIcon size={14} />
-                        <span>Remove</span>
-                      </button>
+                      {/* Info */}
+                      <div className="flex flex-1 flex-col gap-1 min-w-0">
+                        {item.category && (
+                          <span className="body-sm text-primary font-semibold uppercase tracking-widest">
+                            {item.category}
+                          </span>
+                        )}
+                        <h3 className="text-base-content leading-snug truncate">{item.title}</h3>
+                        {item.subtitle && <p className="body-sm text-subtle">{item.subtitle}</p>}
+                        {priced && lineSubtotal != null ? (
+                          <div className="mt-1 flex flex-col gap-0.5 body-sm text-base-content">
+                            <span>Unit: {thb.format(item.unitPrice)}</span>
+                            <span className="font-medium">Line: {thb.format(lineSubtotal)}</span>
+                          </div>
+                        ) : (
+                          <p className="body-sm mt-1 text-subtle">
+                            Price unavailable for this line. Remove it and add the product again, or
+                            request a quote.
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Quantity + Remove */}
+                      <div className="flex shrink-0 flex-col items-end gap-3">
+                        <div className="flex items-center gap-2 rounded-box border border-base-300 bg-base-100 px-1">
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded text-base-content transition-colors hover:bg-base-200 hover:text-primary"
+                            aria-label="Decrease quantity"
+                          >
+                            <MinusIcon size={14} />
+                          </button>
+                          <span className="body-sm w-6 text-center font-medium text-base-content">
+                            {item.quantity}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded text-base-content transition-colors hover:bg-base-200 hover:text-primary"
+                            aria-label="Increase quantity"
+                          >
+                            <PlusIcon size={14} />
+                          </button>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => removeItem(item.id)}
+                          className="flex cursor-pointer items-center gap-1 rounded body-sm text-subtle transition-colors hover:opacity-80 hover:text-error"
+                          aria-label="Remove item"
+                        >
+                          <TrashIcon size={14} />
+                          <span>Remove</span>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
 
                 <div className="flex justify-end pt-2">
                   <button
@@ -132,12 +163,44 @@ export default function CartPage() {
                       <span className="body-sm text-subtle">Unique products</span>
                       <span className="body-sm font-medium text-base-content">{items.length}</span>
                     </div>
+                    <div className="flex items-center justify-between">
+                      <span className="body-sm text-subtle">Cart subtotal (THB)</span>
+                      <span className="body-sm font-medium text-base-content">
+                        {hasUnpricedLines ? '—' : thb.format(cartTotal)}
+                      </span>
+                    </div>
                   </div>
 
-                  <p className="body-sm text-subtle leading-relaxed">
-                    Pricing is provided upon request. Contact us and our team will prepare a custom
-                    quote for your selection.
-                  </p>
+                  {hasUnpricedLines && (
+                    <p className="body-sm text-subtle leading-relaxed">
+                      Subtotal excludes lines missing price. Remove those items and add the products
+                      again from the shop, or request a quote for help.
+                    </p>
+                  )}
+
+                  {!hasUnpricedLines && items.length > 0 && (
+                    <p className="body-sm text-subtle leading-relaxed">
+                      When you are ready, continue to checkout for bank transfer and slip upload.
+                    </p>
+                  )}
+
+                  {!hasUnpricedLines && items.length > 0 ? (
+                    <Link
+                      href="/checkout"
+                      className="btn btn-gradient-solid-border btn-lg btn-lg-typo w-full text-center"
+                    >
+                      <span className="text-primary">Continue to checkout</span>
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled
+                      className="btn btn-ghost w-full text-center body-sm text-subtle"
+                      aria-disabled
+                    >
+                      Continue to checkout
+                    </button>
+                  )}
 
                   <Link
                     href="/contact"

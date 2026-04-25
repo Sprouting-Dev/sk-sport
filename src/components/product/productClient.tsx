@@ -20,8 +20,9 @@ export interface ProductItem {
   category?: string | null
   description?: string | null
   imageUrl?: string
-  /** Shown in list view; omit when not in CMS yet */
-  price?: string | null
+  mode: 'quote' | 'buy'
+  /** Set when `mode` is `buy` (e.g. THB from CMS) */
+  price?: number | null
 }
 
 interface ProductClientProps {
@@ -30,6 +31,14 @@ interface ProductClientProps {
 
 const ITEMS_PER_PAGE = 9
 const CATEGORY_PAGE_SIZE = 4
+
+const thb = new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' })
+
+export type ProductListingPurchaseFilter = 'all' | 'readyToBuy' | 'requestQuote'
+
+function isProductPurchasable(p: ProductItem): p is ProductItem & { price: number } {
+  return p.mode === 'buy' && typeof p.price === 'number' && Number.isFinite(p.price) && p.price > 0
+}
 
 function categoryKeyToParam(key: string): string {
   if (key === 'OTHER') return 'other'
@@ -164,10 +173,15 @@ function CategoryCarouselRow({
                     </div>
                   )}
                 </div>
-                <div className="flex min-h-0 min-w-0 w-full flex-col px-4 py-3 md:px-5 md:py-4">
-                  <h3 className="line-clamp-2 w-full min-w-0 text-sm leading-snug text-base-content lg:text-base">
+                <div className="flex min-h-0 w-full min-w-0 flex-col gap-2 px-4 py-3 md:px-5 md:py-4">
+                  <h3 className="line-clamp-2 min-w-0 text-left text-sm leading-snug text-base-content lg:text-base">
                     {product.title}
                   </h3>
+                  {isProductPurchasable(product) ? (
+                    <span className="body-sm self-end text-right font-semibold tabular-nums text-base-content">
+                      {thb.format(product.price)}
+                    </span>
+                  ) : null}
                 </div>
               </Link>
             </div>
@@ -190,24 +204,35 @@ export function ProductClient({ products = [] }: ProductClientProps) {
   const [mobileExpanded, setMobileExpanded] = useState(false)
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [categoryPages, setCategoryPages] = useState<Record<string, number>>({})
+  const [purchaseListingFilter, setPurchaseListingFilter] =
+    useState<ProductListingPurchaseFilter>('all')
+
+  const purchaseFiltered = useMemo(() => {
+    return products.filter((p) => {
+      if (purchaseListingFilter === 'all') return true
+      const purchasable = isProductPurchasable(p)
+      if (purchaseListingFilter === 'readyToBuy') return purchasable
+      return !purchasable
+    })
+  }, [products, purchaseListingFilter])
 
   const categoryFilter = useMemo(
-    () => resolveCategoryFilter(categoryParam, products),
-    [categoryParam, products],
+    () => resolveCategoryFilter(categoryParam, purchaseFiltered),
+    [categoryParam, purchaseFiltered],
   )
 
   useEffect(() => {
     if (!categoryParam) return
-    if (resolveCategoryFilter(categoryParam, products) === 'ALL') {
+    if (resolveCategoryFilter(categoryParam, purchaseFiltered) === 'ALL') {
       router.replace('/product')
     }
-  }, [categoryParam, products, router])
+  }, [categoryParam, purchaseFiltered, router])
 
   useEffect(() => {
     setCurrentPage(1)
     setMobileExpanded(false)
     setCategoryPages({})
-  }, [search, categoryFilter])
+  }, [search, categoryFilter, purchaseListingFilter])
 
   useEffect(() => {
     if (!filterMenuOpen) return
@@ -222,12 +247,12 @@ export function ProductClient({ products = [] }: ProductClientProps) {
 
   const categories = useMemo(() => {
     const unique = Array.from(
-      new Set(products.map((p) => p.category?.toUpperCase()).filter(Boolean)),
+      new Set(purchaseFiltered.map((p) => p.category?.toUpperCase()).filter(Boolean)),
     ) as string[]
     return unique.sort()
-  }, [products])
+  }, [purchaseFiltered])
 
-  const filtered = products.filter((product) => {
+  const filtered = purchaseFiltered.filter((product) => {
     const matchCategory =
       categoryFilter === 'ALL' || (product.category?.toUpperCase() ?? '') === categoryFilter
     const matchSearch = product.title.toLowerCase().includes(search.toLowerCase())
@@ -388,6 +413,34 @@ export function ProductClient({ products = [] }: ProductClientProps) {
             </button>
           </div>
         </div>
+
+        <div
+          className="mt-4 flex w-full flex-wrap items-center gap-2"
+          role="group"
+          aria-label="Filter by purchase type"
+        >
+          {(
+            [
+              { id: 'all' as const, label: 'All Products' },
+              { id: 'readyToBuy' as const, label: 'Ready to Buy' },
+              { id: 'requestQuote' as const, label: 'Request a Quote' },
+            ] as const
+          ).map((opt) => (
+            <button
+              key={opt.id}
+              type="button"
+              onClick={() => setPurchaseListingFilter(opt.id)}
+              aria-pressed={purchaseListingFilter === opt.id}
+              className={`body-sm rounded-full border px-4 py-2 shadow-sm transition-all duration-200 ${
+                purchaseListingFilter === opt.id
+                  ? 'border-transparent bg-gradient-to-r from-primary to-secondary font-semibold text-primary-content'
+                  : 'border-base-300/80 bg-primary-content text-base-content hover:border-primary/30 hover:bg-gradient-to-r hover:from-primary/10 hover:to-secondary/10'
+              } `}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="bg-primary-content px-6 pb-12 md:px-8 md:pb-16">
@@ -398,6 +451,7 @@ export function ProductClient({ products = [] }: ProductClientProps) {
               type="button"
               onClick={() => {
                 setSearch('')
+                setPurchaseListingFilter('all')
                 router.push('/product')
               }}
               className="body-sm text-primary underline underline-offset-2"
@@ -562,9 +616,14 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                                     </div>
                                   )}
                                 </div>
-                                <h3 className="min-w-0 flex-1 text-base-content leading-snug group-hover:text-primary">
+                                <h3 className="min-w-0 flex-1 text-left text-base-content leading-snug group-hover:text-primary">
                                   {product.title}
                                 </h3>
+                                {isProductPurchasable(product) ? (
+                                  <span className="body-sm shrink-0 self-end font-semibold tabular-nums text-primary">
+                                    {thb.format(product.price)}
+                                  </span>
+                                ) : null}
                               </Link>
                             </div>
                           )

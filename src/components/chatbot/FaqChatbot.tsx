@@ -1,12 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
-import {
-  ChatCircleDotsIcon,
-  XIcon,
-  ArrowRightIcon,
-  CaretLeftIcon,
-} from '@phosphor-icons/react'
+import { ChatCircleDotsIcon, XIcon, ArrowRightIcon, CaretLeftIcon } from '@phosphor-icons/react'
 import Link from 'next/link'
 import { cn } from '@/utils/cn'
 
@@ -19,9 +14,7 @@ interface FaqChatbotProps {
   faqItems: FaqItem[]
 }
 
-type ChatResult =
-  | { type: 'answer'; item: FaqItem }
-  | { type: 'no-match' }
+type ChatResult = { type: 'answer'; item: FaqItem } | { type: 'no-match' }
 
 function matchFaq(input: string, items: FaqItem[]): FaqItem | null {
   const words = input
@@ -165,9 +158,7 @@ export function FaqChatbot({ faqItems }: FaqChatbotProps) {
                 <Link
                   href="/contact"
                   onClick={handleClose}
-                  className={cn(
-                    'btn btn-gradient-solid-border btn-sm w-full',
-                  )}
+                  className={cn('btn btn-gradient-solid-border btn-sm w-full')}
                 >
                   <span className="flex items-center gap-1 text-primary">
                     Contact Us

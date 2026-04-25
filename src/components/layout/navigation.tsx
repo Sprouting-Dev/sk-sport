@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { ListIcon, XIcon, ShoppingCartSimpleIcon } from '@phosphor-icons/react'
 import { useTranslations } from 'next-intl'
@@ -36,17 +37,25 @@ export const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 h-20 bg-base-content">
+      <nav className="fixed top-0 left-0 right-0 z-50 h-28 bg-base-content">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
-          <Link href="/" onClick={closeMenu} className="flex items-center shrink-0">
-            <h3 className="tracking-wider whitespace-nowrap text-sm md:text-base lg:text-xl xl:text-2xl">
-              <span className="company-name-part1">{t('companyNamePart1')} </span>
-              <span className="company-name-part2">{t('companyNamePart2')}</span>
-            </h3>
+          <Link
+            href="/"
+            onClick={closeMenu}
+            className="flex min-w-0 w-64 shrink-0 items-center sm:w-80 md:w-96 lg:w-96 scale-125 origin-left"
+          >
+            <Image
+              src="/LogoSK.png"
+              alt="SK Sport Trading Co., Ltd."
+              width={480}
+              height={132}
+              className="h-auto w-full max-h-28 object-contain object-left"
+              priority
+            />
           </Link>
 
           {/* Desktop full nav — lg and above only */}
-          <div className="hidden lg:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-6">
             {navItems.map((item) => (
               <Link
                 key={item.key}
@@ -103,7 +112,7 @@ export const Navbar = () => {
           isOpen ? 'translate-x-0' : 'translate-x-full',
         )}
       >
-        <div className="flex justify-between items-center p-5 h-20">
+        <div className="flex h-28 items-center justify-between p-5">
           <button onClick={closeMenu} className="text-primary-content">
             <XIcon size={32} />
           </button>

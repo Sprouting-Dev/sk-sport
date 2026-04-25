@@ -1,5 +1,6 @@
 import { getAboutGlobal } from '@/data/about'
 import { getAboutHeroGlobal } from '@/data/aboutHero'
+import { getVisibleFounders } from '@/data/founders'
 import AboutHero from '@/components/about/aboutHero'
 import AboutHistory from '@/components/about/aboutHistory'
 import AboutMissionVision from '@/components/about/aboutMissionVision'
@@ -16,7 +17,11 @@ function resolveHeroMediaUrl(
 }
 
 export default async function AboutPage() {
-  const [about, aboutHero] = await Promise.all([getAboutGlobal(), getAboutHeroGlobal()])
+  const [about, aboutHero, cmsFounders] = await Promise.all([
+    getAboutGlobal(),
+    getAboutHeroGlobal(),
+    getVisibleFounders(),
+  ])
 
   const heroImageSrc = resolveHeroMediaUrl(aboutHero.heroMedia)
 
@@ -41,6 +46,7 @@ export default async function AboutPage() {
       />
       <AboutFounder
         founderSectionTitle={about.founderSectionTitle}
+        cmsFounders={cmsFounders}
         founderImage={about.founderImage}
         founderName={about.founderName}
         founderRole={about.founderRole}

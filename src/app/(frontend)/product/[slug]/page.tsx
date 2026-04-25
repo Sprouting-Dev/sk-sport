@@ -20,6 +20,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   const imageUrl = resolveImageUrl(product.image)
   const recommended = await getRecommendedProducts(product.id, product.category, 3)
+  const isQuote = (product.mode ?? 'quote') === 'quote'
+  const isBuy = !isQuote
+  const p = product.price
+  const isPurchasable = isBuy && typeof p === 'number' && Number.isFinite(p) && p > 0
+  const priceLabel = isPurchasable
+    ? new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(p as number)
+    : null
+  const addToCartUnit: number | undefined = isPurchasable && typeof p === 'number' ? p : undefined
 
   return (
     <main className="flex w-full flex-col items-center">
@@ -66,14 +74,34 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   <p className="body-sm font-medium text-subtle">{product.subtitle}</p>
                 )}
                 <div className="h-0.5 w-12 bg-gradient" />
-                <AddToCartButton
-                  id={product.id}
-                  slug={product.slug}
-                  title={product.title}
-                  subtitle={product.subtitle}
-                  category={product.category}
-                  image={imageUrl || undefined}
-                />
+                {priceLabel && (
+                  <p className="body-sm font-semibold text-base-content">{priceLabel}</p>
+                )}
+                {isBuy && !isPurchasable && (
+                  <p className="body-sm text-subtle">
+                    Price is currently unavailable. Please request a quote.
+                  </p>
+                )}
+                {isPurchasable && addToCartUnit != null ? (
+                  <AddToCartButton
+                    mode="buy"
+                    unitPrice={addToCartUnit}
+                    currency="THB"
+                    id={product.id}
+                    slug={product.slug}
+                    title={product.title}
+                    subtitle={product.subtitle}
+                    category={product.category}
+                    image={imageUrl || undefined}
+                  />
+                ) : (
+                  <Link
+                    href="/contact"
+                    className="btn btn-gradient-solid-border btn-lg btn-lg-typo inline-flex w-fit px-6 text-center"
+                  >
+                    <span className="text-primary">Request a Quote</span>
+                  </Link>
+                )}
               </div>
             </div>
 

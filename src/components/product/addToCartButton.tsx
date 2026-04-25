@@ -5,6 +5,11 @@ import { MinusIcon, PlusIcon, ShoppingCartSimpleIcon, CheckIcon } from '@phospho
 import { useCart } from '@/context/cartContext'
 
 interface AddToCartButtonProps {
+  /** Only `buy` products may use the cart; quote products must not render this or it returns null. */
+  mode: 'quote' | 'buy'
+  /** THB unit price; required for buy (parent only renders when purchasable). */
+  unitPrice: number
+  currency: 'THB'
   id: string
   slug: string
   title: string
@@ -14,6 +19,9 @@ interface AddToCartButtonProps {
 }
 
 export default function AddToCartButton({
+  mode,
+  unitPrice,
+  currency,
   id,
   slug,
   title,
@@ -25,8 +33,21 @@ export default function AddToCartButton({
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
 
+  const canUseCart =
+    mode === 'buy' && typeof unitPrice === 'number' && Number.isFinite(unitPrice) && unitPrice > 0
+
+  if (!canUseCart) {
+    return null
+  }
+
   const handleAdd = () => {
+    if (typeof unitPrice !== 'number' || !Number.isFinite(unitPrice) || unitPrice <= 0) {
+      return
+    }
     addItem({
+      mode: 'buy',
+      unitPrice,
+      currency,
       id,
       slug,
       title,

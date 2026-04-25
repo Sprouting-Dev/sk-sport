@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Product } from '@/payload-types'
 
+/** Returns full product docs including `mode` and `price` (depth 1 for `image`). */
 export const getAllProducts = async (): Promise<Product[]> => {
   const payload = await getPayload({ config })
   const result = await payload.find({
@@ -14,6 +15,7 @@ export const getAllProducts = async (): Promise<Product[]> => {
   return result.docs
 }
 
+/** Resolves by slug with `mode`, `price`, and populated `image`. */
 export const getProductBySlug = async (slug: string): Promise<Product | null> => {
   const payload = await getPayload({ config })
   const result = await payload.find({

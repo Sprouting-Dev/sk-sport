@@ -19,6 +19,7 @@ import { ServicesHero } from './payload/global/ServicesHero'
 import { PortfolioHero } from './payload/global/PortfolioHero'
 import { ProductsHero } from './payload/global/ProductsHero'
 import { ContactHero } from './payload/global/ContactHero'
+import { PaymentSettings } from './payload/global/PaymentSettings'
 import { GalleryMedia } from './payload/collections/GalleryMedia'
 import { ServiceMedia } from './payload/collections/ServiceMedia'
 import { Services } from './payload/collections/Services'
@@ -27,6 +28,9 @@ import { Contact } from './payload/collections/Contact'
 import { PortfolioArticles } from './payload/collections/PortfolioArticles'
 import { Products } from './payload/collections/Products'
 import { PartnerMedia } from './payload/collections/PartnerMedia'
+import { Founders } from './payload/collections/Founders'
+import { PaymentSlips } from './payload/collections/PaymentSlips'
+import { Orders } from './payload/collections/Orders'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -49,6 +53,9 @@ export default buildConfig({
     PortfolioArticles,
     Products,
     PartnerMedia,
+    Founders,
+    PaymentSlips,
+    Orders,
   ],
   globals: [
     Home,
@@ -61,6 +68,7 @@ export default buildConfig({
     PortfolioHero,
     ProductsHero,
     ContactHero,
+    PaymentSettings,
   ],
   localization: {
     locales: [
@@ -91,6 +99,7 @@ export default buildConfig({
         'gallery-media': { prefix: 'gallery-media' },
         'service-media': { prefix: 'service-media' },
         'partner-media': { prefix: 'partner-media' },
+        'payment-slips': { prefix: 'payment-slips' },
       },
       bucket: process.env.S3_BUCKET || '',
       config: {
