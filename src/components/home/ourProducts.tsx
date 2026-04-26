@@ -15,9 +15,15 @@ export type ProductTeaser = {
 
 type OurProductsProps = {
   products: ProductTeaser[]
+  sectionTitleFontSizePx: number
+  cardTitleFontSizePx: number
 }
 
-export const OurProducts = ({ products }: OurProductsProps) => {
+export const OurProducts = ({
+  products,
+  sectionTitleFontSizePx,
+  cardTitleFontSizePx,
+}: OurProductsProps) => {
   const t = useTranslations('Home.Product')
   const [activeIndex, setActiveIndex] = React.useState(0)
   const [resetKey, setResetKey] = React.useState(0)
@@ -51,7 +57,12 @@ export const OurProducts = ({ products }: OurProductsProps) => {
   return (
     <div className="w-full flex flex-col">
       <div className="w-full h-40 bg-header-bg px-4 flex justify-center items-center">
-        <h2 className="text-header">{t('title')}</h2>
+        <h2
+          className="text-header"
+          style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+        >
+          {t('title')}
+        </h2>
       </div>
 
       <div className="w-full bg-header-bg px-4 md:px-10 pb-10">
@@ -75,7 +86,10 @@ export const OurProducts = ({ products }: OurProductsProps) => {
                 </div>
               )}
               <div className="absolute inset-0 bg-gradient-card-left" />
-              <div className="absolute bottom-4 left-4 text-primary-content font-medium text-lg leading-tight">
+              <div
+                className="absolute bottom-4 left-4 text-primary-content font-medium leading-tight"
+                style={{ fontSize: `${cardTitleFontSizePx}px` }}
+              >
                 {product.title}
               </div>
             </Link>
@@ -98,9 +112,12 @@ export const OurProducts = ({ products }: OurProductsProps) => {
               />
             )}
             <div className="absolute inset-0 bg-gradient-card-left" />
-            <div className="absolute bottom-4 left-4 text-primary-content font-medium text-lg leading-tight">
-              {mobileCard.title}
-            </div>
+            <div
+                className="absolute bottom-4 left-4 text-primary-content font-medium leading-tight"
+                style={{ fontSize: `${cardTitleFontSizePx}px` }}
+              >
+                {mobileCard.title}
+              </div>
           </Link>
         </div>
 

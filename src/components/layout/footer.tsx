@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="section-bg-to-right w-full min-h-112.5 overflow-hidden">
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-12 md:px-12 lg:p-18">
+      <div className="relative z-10 container mx-auto w-full px-4 py-12 lg:py-18">
         <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-20 w-full justify-between">
           <div className="flex flex-col gap-5 lg:max-w-125 flex-1">
             <h3 className="tracking-wider">

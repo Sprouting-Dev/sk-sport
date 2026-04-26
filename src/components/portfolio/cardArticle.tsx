@@ -24,9 +24,15 @@ export function portfolioDetailHref(slug?: string | null): string | null {
 export interface CardArticleProps {
   data: ArticleData
   onClick?: () => void
+  /** Clamped (px) from PortfolioHero; listing grid and detail “more projects”. */
+  titleFontSizePx?: number
 }
 
-export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
+export const CardArticle: React.FC<CardArticleProps> = ({
+  data,
+  onClick,
+  titleFontSizePx,
+}) => {
   const { category, title, subtitle, image } = data
 
   return (
@@ -62,7 +68,13 @@ export const CardArticle: React.FC<CardArticleProps> = ({ data, onClick }) => {
           </span>
         )}
 
-        <h3 className="line-clamp-2 text-base font-medium leading-snug text-primary-content md:text-lg">
+        <h3
+          className={cn(
+            'line-clamp-2 font-medium leading-snug text-primary-content',
+            titleFontSizePx == null && 'text-base md:text-lg',
+          )}
+          style={titleFontSizePx != null ? { fontSize: `${titleFontSizePx}px` } : undefined}
+        >
           {title}
         </h3>
 

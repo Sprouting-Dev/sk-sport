@@ -13,6 +13,10 @@ export interface PortfolioHeroProps {
   title: string
   subtitle?: string
   publishedDate?: string
+  /** Clamped at page level (px). When set, controls main hero title only. */
+  titleFontSizePx?: number
+  /** Listing only (px). When set, controls hero subtitle. */
+  subtitleFontSizePx?: number
 }
 
 export const PortfolioHero: React.FC<PortfolioHeroProps> = ({
@@ -22,6 +26,8 @@ export const PortfolioHero: React.FC<PortfolioHeroProps> = ({
   title,
   subtitle,
   publishedDate,
+  titleFontSizePx,
+  subtitleFontSizePx,
 }) => {
   const isListing = variant === 'listing'
 
@@ -49,10 +55,13 @@ export const PortfolioHero: React.FC<PortfolioHeroProps> = ({
         <h2
           className={cn(
             'text-primary-content font-heading tracking-wide break-words leading-snug',
-            isListing
-              ? 'mb-2 max-w-4xl text-3xl sm:text-4xl md:text-5xl md:mb-3'
-              : 'mb-2 max-w-md text-base sm:text-lg md:mb-4 md:max-w-lg md:text-xl',
+            titleFontSizePx == null &&
+              (isListing
+                ? 'mb-2 max-w-4xl text-3xl sm:text-4xl md:text-5xl md:mb-3'
+                : 'mb-2 max-w-md text-base sm:text-lg md:mb-4 md:max-w-lg md:text-xl'),
+            titleFontSizePx != null && (isListing ? 'mb-2 max-w-4xl md:mb-3' : 'mb-2 max-w-md md:mb-4 md:max-w-lg'),
           )}
+          style={titleFontSizePx != null ? { fontSize: `${titleFontSizePx}px` } : undefined}
         >
           {title}
         </h2>
@@ -61,10 +70,15 @@ export const PortfolioHero: React.FC<PortfolioHeroProps> = ({
           <p
             className={cn(
               'text-primary-content/90 max-w-2xl',
-              isListing
-                ? 'text-sm sm:text-base leading-snug md:leading-relaxed'
-                : 'body-lg mb-2 md:mb-4',
+              subtitleFontSizePx != null
+                ? isListing
+                  ? 'leading-snug md:leading-relaxed'
+                  : 'body-lg mb-2 md:mb-4'
+                : isListing
+                  ? 'text-sm sm:text-base leading-snug md:leading-relaxed'
+                  : 'body-lg mb-2 md:mb-4',
             )}
+            style={subtitleFontSizePx != null ? { fontSize: `${subtitleFontSizePx}px` } : undefined}
           >
             {subtitle}
           </p>

@@ -10,6 +10,8 @@ export interface DetailRowCardProps {
   alignment?: 'left' | 'right'
   tags?: string[]
   verticalAlign?: 'top' | 'middle'
+  contentTitleFontSizePx?: number
+  contentBodyFontSizePx?: number
 }
 
 export const DetailRowCard = ({
@@ -19,14 +21,31 @@ export const DetailRowCard = ({
   alignment = 'left',
   tags = [],
   verticalAlign = 'top',
+  contentTitleFontSizePx,
+  contentBodyFontSizePx,
 }: DetailRowCardProps) => {
   const hasImages = images.length > 0
   const isImageLeft = alignment === 'left'
 
   const textBlock = (
     <div className="flex flex-1 flex-col gap-3">
-      {sectionTitle && <h2>{sectionTitle}</h2>}
-      <p className="body-sm">{description}</p>
+      {sectionTitle && (
+        <h2
+          style={
+            contentTitleFontSizePx != null
+              ? { fontSize: `${contentTitleFontSizePx}px` }
+              : undefined
+          }
+        >
+          {sectionTitle}
+        </h2>
+      )}
+      <p
+        className={contentBodyFontSizePx == null ? 'body-sm' : undefined}
+        style={contentBodyFontSizePx != null ? { fontSize: `${contentBodyFontSizePx}px` } : undefined}
+      >
+        {description}
+      </p>
       {tags.length > 0 && (
         <div className="mt-1 flex flex-wrap gap-2">
           {tags.map((tag) => (

@@ -22,7 +22,22 @@ interface FormData {
   message: string
 }
 
-export const ContactForm = () => {
+export interface ContactFormTypography {
+  contactSectionTitleFontSizePx: number
+  contactInfoTitleFontSizePx: number
+  contactInfoBodyFontSizePx: number
+  formLabelFontSizePx: number
+  formInputFontSizePx: number
+}
+
+export const ContactForm = (props: ContactFormTypography) => {
+  const {
+    contactSectionTitleFontSizePx,
+    contactInfoTitleFontSizePx,
+    contactInfoBodyFontSizePx,
+    formLabelFontSizePx,
+    formInputFontSizePx,
+  } = props
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
@@ -104,7 +119,7 @@ export const ContactForm = () => {
 
   const getInputClassName = (hasError: boolean) =>
     cn(
-      'rounded-xl body-sm border bg-secondary-content p-3 outline-none transition-all',
+      'rounded-xl border bg-secondary-content p-3 outline-none transition-all',
       hasError
         ? 'border-error bg-error-content'
         : 'border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary',
@@ -146,8 +161,13 @@ export const ContactForm = () => {
     <div className="mx-auto w-full max-w-6xl py-8 px-8 md:py-16">
       <div className="flex flex-col overflow-hidden rounded-4xl bg-primary-content shadow-lg md:flex-row">
         <div className="flex w-full flex-col bg-gradient-to-br from-primary/35 to-secondary/25 py-12 px-8 md:w-5/12 lg:py-16 lg:px-12">
-          <h2 className="mb-2 md:mb-8 text-base-content">Get in touch</h2>
-          <p className="body-md mb-8 text-base-content">
+          <h2
+            className="mb-2 text-base-content md:mb-8"
+            style={{ fontSize: `${contactSectionTitleFontSizePx}px` }}
+          >
+            Get in touch
+          </h2>
+          <p className="mb-8 text-base-content" style={{ fontSize: `${contactInfoBodyFontSizePx}px` }}>
             Let&apos;s keep the conversation going! <br />
             You can find my contact details right here.
           </p>
@@ -159,8 +179,16 @@ export const ContactForm = () => {
                   <info.Icon className="h-6 w-6 md:h-7.5 md:w-7.5" weight="fill" />
                 </div>
                 <div>
-                  <p className="text-sm md:text-sm lg:text-base text-primary">{info.title}</p>
-                  <p className="text-sm md:text-sm lg:text-base text-base-content wrap-break-word">
+                  <p
+                    className="text-primary"
+                    style={{ fontSize: `${contactInfoTitleFontSizePx}px` }}
+                  >
+                    {info.title}
+                  </p>
+                  <p
+                    className="text-base-content wrap-break-word"
+                    style={{ fontSize: `${contactInfoBodyFontSizePx}px` }}
+                  >
                     {info.detail}
                   </p>
                 </div>
@@ -171,7 +199,12 @@ export const ContactForm = () => {
           <hr className="mb-8 border-primary hidden md:block" />
 
           <div className="mb-8">
-            <p className="mb-2 md:mb-4 body-md text-base-content">Follow our social media</p>
+            <p
+              className="mb-2 text-base-content md:mb-4"
+              style={{ fontSize: `${contactInfoTitleFontSizePx}px` }}
+            >
+              Follow our social media
+            </p>
             <div className="flex gap-3">
               {socialLinks.map((link) => (
                 <a
@@ -188,8 +221,16 @@ export const ContactForm = () => {
           </div>
 
           <div>
-            <p className="mb-3 md:mb-8 body-md text-base-content">Open Hours</p>
-            <div className="space-y-3 body-sm text-base-content">
+            <p
+              className="mb-3 text-base-content md:mb-8"
+              style={{ fontSize: `${contactInfoTitleFontSizePx}px` }}
+            >
+              Open Hours
+            </p>
+            <div
+              className="space-y-3 text-base-content"
+              style={{ fontSize: `${contactInfoBodyFontSizePx}px` }}
+            >
               {openHours.map((schedule) => (
                 <div key={schedule.day} className="flex justify-between">
                   <div className="flex flex-row gap-1 md:gap-2">
@@ -204,7 +245,12 @@ export const ContactForm = () => {
         </div>
 
         <div className="relative z-10 -mt-8 flex w-full flex-col rounded-t-4xl bg-primary-content p-8 md:mt-0 md:w-7/12 lg:py-16 lg:px-12 md:rounded-none">
-          <h2 className="mb-8 text-primary">Send us message</h2>
+          <h2
+            className="mb-8 text-primary"
+            style={{ fontSize: `${contactSectionTitleFontSizePx}px` }}
+          >
+            Send us message
+          </h2>
 
           {isSuccess ? (
             <SuccessConfirm
@@ -224,7 +270,12 @@ export const ContactForm = () => {
             <form onSubmit={handleSubmit} className="flex h-full flex-col space-y-6">
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="flex flex-col">
-                  <label className="mb-1 md:mb-2 body-sm text-primary">Name</label>
+                  <label
+                    className="mb-1 text-primary md:mb-2"
+                    style={{ fontSize: `${formLabelFontSizePx}px` }}
+                  >
+                    Name
+                  </label>
                   <input
                     type="text"
                     name="name"
@@ -232,12 +283,18 @@ export const ContactForm = () => {
                     onChange={handleChange}
                     placeholder="Enter your name"
                     className={getInputClassName(!!errors.name)}
+                    style={{ fontSize: `${formInputFontSizePx}px` }}
                   />
                   {errors.name && <span className="mt-1 text-xs text-error">{errors.name}</span>}
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="mb-1 md:mb-2 body-sm text-primary">Phone Number</label>
+                  <label
+                    className="mb-1 text-primary md:mb-2"
+                    style={{ fontSize: `${formLabelFontSizePx}px` }}
+                  >
+                    Phone Number
+                  </label>
                   <input
                     type="tel"
                     name="phone"
@@ -245,13 +302,19 @@ export const ContactForm = () => {
                     onChange={handleChange}
                     placeholder="Enter your number"
                     className={getInputClassName(!!errors.phone)}
+                    style={{ fontSize: `${formInputFontSizePx}px` }}
                   />
                   {errors.phone && <span className="mt-1 text-xs text-error">{errors.phone}</span>}
                 </div>
               </div>
 
               <div className="flex flex-col">
-                <label className="mb-1 md:mb-2 body-sm text-primary">Email</label>
+                <label
+                  className="mb-1 text-primary md:mb-2"
+                  style={{ fontSize: `${formLabelFontSizePx}px` }}
+                >
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -259,12 +322,16 @@ export const ContactForm = () => {
                   onChange={handleChange}
                   placeholder="Enter your email"
                   className={getInputClassName(!!errors.email)}
+                  style={{ fontSize: `${formInputFontSizePx}px` }}
                 />
                 {errors.email && <span className="mt-1 text-xs text-error">{errors.email}</span>}
               </div>
 
               <div className="flex flex-col">
-                <label className="mb-1 md:mb-2 body-sm text-primary">
+                <label
+                  className="mb-1 text-primary md:mb-2"
+                  style={{ fontSize: `${formLabelFontSizePx}px` }}
+                >
                   {mounted && items.length > 0 ? 'Quote Request Details' : 'Your Message'}
                 </label>
                 <textarea
@@ -278,6 +345,7 @@ export const ContactForm = () => {
                   }
                   rows={7}
                   className={getInputClassName(!!errors.message)}
+                  style={{ fontSize: `${formInputFontSizePx}px` }}
                 />
                 {errors.message && (
                   <span className="mt-1 text-xs text-error">{errors.message}</span>

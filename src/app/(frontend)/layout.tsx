@@ -8,6 +8,7 @@ import './styles.css'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import { CartProvider } from '@/context/cartContext'
+import { QuoteCartProvider } from '@/context/quoteCartContext'
 import { getFaqGlobal } from '@/data/faq'
 import { FaqChatbot } from '@/components/chatbot/FaqChatbot'
 
@@ -36,21 +37,23 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body className={`${sarabun.variable} ${prompt.variable}`}>
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
-            <Navbar />
-            <main className="pt-28">{children}</main>
+            <QuoteCartProvider>
+              <Navbar />
+              <main className="pt-28">{children}</main>
 
-            <Footer />
-            <FaqChatbot faqItems={faqItems} />
-            {isLocalEnv && (
-              <ButtonLink
-                href="/example"
-                variant="primary"
-                className="fixed right-4 bottom-4 z-50"
-                shape="circle"
-              >
-                ex
-              </ButtonLink>
-            )}
+              <Footer />
+              <FaqChatbot faqItems={faqItems} />
+              {isLocalEnv && (
+                <ButtonLink
+                  href="/example"
+                  variant="primary"
+                  className="fixed right-4 bottom-4 z-50"
+                  shape="circle"
+                >
+                  ex
+                </ButtonLink>
+              )}
+            </QuoteCartProvider>
           </CartProvider>
         </NextIntlClientProvider>
       </body>

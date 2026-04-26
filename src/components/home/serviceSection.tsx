@@ -1,8 +1,7 @@
 'use client'
 
 import React from 'react'
-import { ServiceCard } from '@/components/card'
-import { SupportCard } from '@/components/card/supportCard'
+import { HomeLargeServiceCard, HomeSupportServiceCard } from './homeServiceCards'
 import { BasketballIcon, HeartbeatIcon, InfoIcon } from '@phosphor-icons/react/dist/ssr'
 
 const INTEGRATED_SPORTS_INSTALLATION_SLUG = 'integrated-sports-installation'
@@ -65,6 +64,10 @@ type ServicesProps = {
   sportsVisionTrainingTeaser?: HomeSupportServiceTeaser | null
   healthManagementSystemTeaser?: HomeSupportServiceTeaser | null
   unitedDiscoveryTeaser?: HomeSupportServiceTeaser | null
+  sectionTitleFontSizePx: number
+  taglineFontSizePx: number
+  cardTitleFontSizePx: number
+  cardBodyFontSizePx: number
 }
 
 export const Services = ({
@@ -73,6 +76,10 @@ export const Services = ({
   sportsVisionTrainingTeaser,
   healthManagementSystemTeaser,
   unitedDiscoveryTeaser,
+  sectionTitleFontSizePx,
+  taglineFontSizePx,
+  cardTitleFontSizePx,
+  cardBodyFontSizePx,
 }: ServicesProps) => {
   const firstLargeCard = integratedSportsInstallationTeaser ?? legacyFirstLargeServiceCard
   const secondLargeCard = equipmentForTopGymnastsTeaser ?? legacySecondLargeServiceCard
@@ -83,15 +90,25 @@ export const Services = ({
   return (
     <section className="w-full">
       <div className="relative text-primary space-y-4 text-center py-12 px-4">
-        <h2 className="text-3xl md:text-4xl">Our Services</h2>
-        <p className="font-body">Professional solution for sports facility development</p>
+        <h2
+          className="font-body font-semibold"
+          style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+        >
+          Our Services
+        </h2>
+        <p
+          className="font-body"
+          style={{ fontSize: `${taglineFontSizePx}px` }}
+        >
+          Professional solution for sports facility development
+        </p>
       </div>
 
       {/* Services Content */}
       <div className="w-full">
         <div className="mb-2 grid w-full grid-cols-1 gap-2 lg:grid-cols-2">
           {/* Left Card */}
-          <ServiceCard
+          <HomeLargeServiceCard
             title={firstLargeCard.title}
             description={firstLargeCard.description}
             image={firstLargeCard.image}
@@ -99,10 +116,12 @@ export const Services = ({
             buttonText="Learn more"
             imageAlt={firstLargeCard.imageAlt}
             alignButton="bottom"
+            titleFontSizePx={cardTitleFontSizePx}
+            bodyFontSizePx={cardBodyFontSizePx}
           />
 
           {/* Right Card */}
-          <ServiceCard
+          <HomeLargeServiceCard
             title={secondLargeCard.title}
             description={secondLargeCard.description}
             image={secondLargeCard.image}
@@ -110,31 +129,36 @@ export const Services = ({
             buttonText="Learn more"
             imageAlt={secondLargeCard.imageAlt}
             alignButton="bottom"
+            titleFontSizePx={cardTitleFontSizePx}
+            bodyFontSizePx={cardBodyFontSizePx}
           />
         </div>
 
         {/* Support cards — part of the same unified services section */}
         <div className="grid grid-cols-1 gap-2 md:grid-cols-3 mt-2">
-          <SupportCard
+          <HomeSupportServiceCard
             title={firstSupportCard.title}
             image={firstSupportCard.image}
             icon={<BasketballIcon size={48} weight="light" />}
             href={firstSupportCard.href}
             imageAlt={firstSupportCard.imageAlt}
+            titleFontSizePx={cardTitleFontSizePx}
           />
-          <SupportCard
+          <HomeSupportServiceCard
             title={secondSupportCard.title}
             image={secondSupportCard.image}
             icon={<HeartbeatIcon size={48} weight="light" color="#FF3591" />}
             href={secondSupportCard.href}
             imageAlt={secondSupportCard.imageAlt}
+            titleFontSizePx={cardTitleFontSizePx}
           />
-          <SupportCard
+          <HomeSupportServiceCard
             title={thirdSupportCard.title}
             image={thirdSupportCard.image}
             icon={<InfoIcon size={48} weight="light" />}
             href={thirdSupportCard.href}
             imageAlt={thirdSupportCard.imageAlt}
+            titleFontSizePx={cardTitleFontSizePx}
           />
         </div>
       </div>

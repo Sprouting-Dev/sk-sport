@@ -31,6 +31,7 @@ import { PartnerMedia } from './payload/collections/PartnerMedia'
 import { Founders } from './payload/collections/Founders'
 import { PaymentSlips } from './payload/collections/PaymentSlips'
 import { Orders } from './payload/collections/Orders'
+import { QuoteRequests } from './payload/collections/QuoteRequests'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -56,6 +57,7 @@ export default buildConfig({
     Founders,
     PaymentSlips,
     Orders,
+    QuoteRequests,
   ],
   globals: [
     Home,

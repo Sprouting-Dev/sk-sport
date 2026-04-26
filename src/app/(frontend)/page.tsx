@@ -7,12 +7,12 @@ import {
   AboutCompany,
   ContactSection,
   Gallery,
+  HomeHero,
   OurProducts,
   PartnersSection,
   Services,
 } from '@/components/home'
 import { CTAFooter } from '@/components/layout'
-import { Hero } from '@/components/hero/Hero'
 import type { GalleryMedia, Home, PartnerMedia, Service, ServiceMedia } from '@/payload-types'
 import './styles.css'
 
@@ -30,6 +30,27 @@ const UNITED_DISCOVERY_SLUG = 'united-discovery'
 function resolveServiceHeroUrl(hero: Service['hero']): string {
   if (!hero || typeof hero === 'string') return ''
   return (hero as ServiceMedia).url ?? ''
+}
+
+function clampInt(n: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, Math.round(n)))
+}
+
+function px(v: number | null | undefined, min: number, max: number, fallback: number): number {
+  if (v == null || !Number.isFinite(v)) return fallback
+  return clampInt(v, min, max)
+}
+
+function homeTypography(h: Home) {
+  return {
+    heroTitle: px(h.heroTitleFontSize, 32, 96, 56),
+    heroSubtitle: px(h.heroSubtitleFontSize, 14, 32, 20),
+    sectionTitle: px(h.sectionTitleFontSize, 20, 56, 32),
+    highlightTitle: px(h.highlightTitleFontSize, 20, 48, 28),
+    highlightBody: px(h.highlightBodyFontSize, 14, 24, 16),
+    cardTitle: px(h.cardTitleFontSize, 16, 36, 20),
+    cardBody: px(h.cardBodyFontSize, 12, 22, 14),
+  }
 }
 
 function resolvePartnerLogos(
@@ -69,6 +90,7 @@ export default async function HomePage() {
   ])
 
   const partnerLogos = resolvePartnerLogos(homeData.partners)
+  const tf = homeTypography(homeData)
 
   const productTeasers = allProducts.map((p) => ({
     id: p.id,
@@ -145,7 +167,11 @@ export default async function HomePage() {
 
   return (
     <div className="mx-auto flex min-h-[60vh] w-full flex-col items-center justify-center bg-header-bg">
-      <Hero media={homeData.heroMedia} />
+      <HomeHero
+        media={homeData.heroMedia}
+        titleFontSizePx={tf.heroTitle}
+        subtitleFontSizePx={tf.heroSubtitle}
+      />
       <PartnersSection partners={partnerLogos} />
       <Services
         integratedSportsInstallationTeaser={integratedSportsInstallationTeaser}
@@ -153,13 +179,30 @@ export default async function HomePage() {
         sportsVisionTrainingTeaser={sportsVisionTrainingTeaser}
         healthManagementSystemTeaser={healthManagementSystemTeaser}
         unitedDiscoveryTeaser={unitedDiscoveryTeaser}
+        sectionTitleFontSizePx={tf.sectionTitle}
+        taglineFontSizePx={tf.highlightBody}
+        cardTitleFontSizePx={tf.cardTitle}
+        cardBodyFontSizePx={tf.cardBody}
       />
-      <OurProducts products={productTeasers} />
-      <Accomplishment items={accomplishmentItems} />
+      <OurProducts
+        products={productTeasers}
+        sectionTitleFontSizePx={tf.sectionTitle}
+        cardTitleFontSizePx={tf.cardTitle}
+      />
+      <Accomplishment
+        items={accomplishmentItems}
+        sectionTitleFontSizePx={tf.sectionTitle}
+        cardTitleFontSizePx={tf.cardTitle}
+      />
       <CTAFooter />
-      <AboutCompany />
-      <ContactSection />
-      <Gallery media={homeData.galleryMedia} />
+      <AboutCompany
+        sectionTitleFontSizePx={tf.sectionTitle}
+        highlightTitleFontSizePx={tf.highlightTitle}
+        highlightBodyFontSizePx={tf.highlightBody}
+        cardBodyFontSizePx={tf.cardBody}
+      />
+      <ContactSection sectionTitleFontSizePx={tf.sectionTitle} />
+      <Gallery media={homeData.galleryMedia} sectionTitleFontSizePx={tf.sectionTitle} />
     </div>
   )
 }

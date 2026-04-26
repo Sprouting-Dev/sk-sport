@@ -1,9 +1,56 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getProductBySlug, getRecommendedProducts } from '@/data/product'
+import { getProductsHeroGlobal } from '@/data/productsHero'
 import type { Product, GalleryMedia } from '@/payload-types'
 import AddToCartButton from '@/components/product/addToCartButton'
+import AddToQuoteButton from '@/components/product/addToQuoteButton'
 import { CTAFooter } from '@/components/layout'
+
+const DETAIL_TITLE_MIN = 32
+const DETAIL_TITLE_MAX = 96
+const DETAIL_TITLE_DEFAULT = 56
+const DETAIL_SUBTITLE_MIN = 14
+const DETAIL_SUBTITLE_MAX = 32
+const DETAIL_SUBTITLE_DEFAULT = 18
+const DETAIL_SECTION_TITLE_MIN = 20
+const DETAIL_SECTION_TITLE_MAX = 48
+const DETAIL_SECTION_TITLE_DEFAULT = 28
+const DETAIL_BODY_MIN = 14
+const DETAIL_BODY_MAX = 24
+const DETAIL_BODY_DEFAULT = 16
+const RELATED_TITLE_MIN = 20
+const RELATED_TITLE_MAX = 48
+const RELATED_TITLE_DEFAULT = 28
+
+function clampInt(n: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, Math.round(n)))
+}
+
+function detailTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_TITLE_DEFAULT
+  return clampInt(v, DETAIL_TITLE_MIN, DETAIL_TITLE_MAX)
+}
+
+function detailSubtitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_SUBTITLE_DEFAULT
+  return clampInt(v, DETAIL_SUBTITLE_MIN, DETAIL_SUBTITLE_MAX)
+}
+
+function detailSectionTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_SECTION_TITLE_DEFAULT
+  return clampInt(v, DETAIL_SECTION_TITLE_MIN, DETAIL_SECTION_TITLE_MAX)
+}
+
+function detailBodyFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_BODY_DEFAULT
+  return clampInt(v, DETAIL_BODY_MIN, DETAIL_BODY_MAX)
+}
+
+function relatedTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return RELATED_TITLE_DEFAULT
+  return clampInt(v, RELATED_TITLE_MIN, RELATED_TITLE_MAX)
+}
 
 function resolveImageUrl(image: Product['image']): string {
   if (!image || typeof image === 'string') return ''
@@ -12,11 +59,20 @@ function resolveImageUrl(image: Product['image']): string {
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const product = await getProductBySlug(slug)
+  const [product, productsHero] = await Promise.all([
+    getProductBySlug(slug),
+    getProductsHeroGlobal(),
+  ])
 
   if (!product) {
     notFound()
   }
+
+  const titlePx = detailTitleFontPx(productsHero.detailTitleFontSize)
+  const subtitlePx = detailSubtitleFontPx(productsHero.detailSubtitleFontSize)
+  const detailsHeadingPx = detailSectionTitleFontPx(productsHero.detailSectionTitleFontSize)
+  const bodyPx = detailBodyFontPx(productsHero.detailBodyFontSize)
+  const relatedHeadingPx = relatedTitleFontPx(productsHero.relatedTitleFontSize)
 
   const imageUrl = resolveImageUrl(product.image)
   const recommended = await getRecommendedProducts(product.id, product.category, 3)
@@ -69,9 +125,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     {product.category}
                   </span>
                 )}
-                <h1 className="text-2xl text-primary md:text-3xl">{product.title}</h1>
+                <h1 className="text-primary" style={{ fontSize: `${titlePx}px` }}>
+                  {product.title}
+                </h1>
                 {product.subtitle && (
-                  <p className="body-sm font-medium text-subtle">{product.subtitle}</p>
+                  <p
+                    className="font-medium text-subtle"
+                    style={{ fontSize: `${subtitlePx}px` }}
+                  >
+                    {product.subtitle}
+                  </p>
                 )}
                 <div className="h-0.5 w-12 bg-gradient" />
                 {priceLabel && (
@@ -94,20 +157,52 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     category={product.category}
                     image={imageUrl || undefined}
                   />
+                ) : isQuote ? (
+                  <div className="flex flex-col gap-3 sm:gap-4">
+                    <AddToQuoteButton
+                      id={product.id}
+                      slug={product.slug}
+                      title={product.title}
+                      subtitle={product.subtitle}
+                      category={product.category}
+                      image={imageUrl || undefined}
+                    />
+                    <Link
+                      href="/contact"
+                      className="body-sm font-medium text-primary underline-offset-4 hover:underline w-fit"
+                    >
+                      Request a Quote (contact form)
+                    </Link>
+                  </div>
                 ) : (
-                  <Link
-                    href="/contact"
-                    className="btn btn-gradient-solid-border btn-lg btn-lg-typo inline-flex w-fit px-6 text-center"
-                  >
-                    <span className="text-primary">Request a Quote</span>
-                  </Link>
+                  <>
+                    {isBuy && !isPurchasable && (
+                      <p className="body-sm text-subtle">
+                        Price is currently unavailable. Please request a quote.
+                      </p>
+                    )}
+                    <Link
+                      href="/contact"
+                      className="btn btn-gradient-solid-border btn-lg btn-lg-typo inline-flex w-fit px-6 text-center"
+                    >
+                      <span className="text-primary">Request a Quote</span>
+                    </Link>
+                  </>
                 )}
               </div>
             </div>
 
             <div className="mt-8 border-t border-base-200 pt-8 md:mt-10 md:pt-10">
-              <h2 className="mb-4 text-xl font-semibold text-primary md:text-2xl">Details</h2>
-              <p className="body-sm max-w-4xl leading-relaxed text-base-content">
+              <h2
+                className="mb-4 font-semibold text-primary"
+                style={{ fontSize: `${detailsHeadingPx}px` }}
+              >
+                Details
+              </h2>
+              <p
+                className="max-w-4xl leading-relaxed text-base-content"
+                style={{ fontSize: `${bodyPx}px` }}
+              >
                 {product.description}
               </p>
             </div>
@@ -115,7 +210,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
           {recommended.length > 0 && (
             <section className="mt-12 md:mt-16">
-              <h2 className="mb-4 text-xl font-semibold text-primary md:mb-5 md:text-2xl">
+              <h2
+                className="mb-4 font-semibold text-primary md:mb-5"
+                style={{ fontSize: `${relatedHeadingPx}px` }}
+              >
                 You may also like
               </h2>
               <div className="grid grid-cols-3 gap-3 md:flex md:flex-wrap md:justify-start md:gap-6">

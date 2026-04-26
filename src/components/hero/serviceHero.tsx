@@ -16,6 +16,10 @@ export interface ServiceHeroProps {
   ctaHref?: string
   showCta?: boolean
   contentPosition?: 'center' | 'bottom'
+  /** When set, both title lines use this size (px; clamp at call site). */
+  titleFontSizePx?: number
+  /** When set, subtitle text uses this size (px; clamp at call site). */
+  subtitleFontSizePx?: number
 }
 
 export const ServiceHero: React.FC<ServiceHeroProps> = ({
@@ -28,6 +32,8 @@ export const ServiceHero: React.FC<ServiceHeroProps> = ({
   ctaHref = NAV_PATHS[NavKey.CONTACT_US],
   showCta = true,
   contentPosition = 'center',
+  titleFontSizePx,
+  subtitleFontSizePx,
 }) => {
   const router = useRouter()
 
@@ -45,14 +51,30 @@ export const ServiceHero: React.FC<ServiceHeroProps> = ({
         }`}
       >
         <div className="flex flex-col gap-3 md:gap-6">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-medium leading-tight md:leading-tight tracking-wider text-primary-content">
+          <h1
+            className={
+              titleFontSizePx != null
+                ? 'font-heading font-medium leading-tight md:leading-tight tracking-wider text-primary-content'
+                : 'text-3xl sm:text-4xl lg:text-5xl font-heading font-medium leading-tight md:leading-tight tracking-wider text-primary-content'
+            }
+            style={titleFontSizePx != null ? { fontSize: `${titleFontSizePx}px` } : undefined}
+          >
             <span className="block">{titleLine1}</span>
             {titleLine2 && <span className="block">{titleLine2}</span>}
           </h1>
 
           <div className="flex flex-col gap-4 md:gap-6">
             {subtitle && (
-              <p className="font-body text-sm md:text-base font-normal leading-snug tracking-wider text-primary-content/90 max-w-[95%] md:max-w-xl">
+              <p
+                className={
+                  subtitleFontSizePx != null
+                    ? 'font-body font-normal leading-snug tracking-wider text-primary-content/90 max-w-[95%] md:max-w-xl'
+                    : 'font-body text-sm md:text-base font-normal leading-snug tracking-wider text-primary-content/90 max-w-[95%] md:max-w-xl'
+                }
+                style={
+                  subtitleFontSizePx != null ? { fontSize: `${subtitleFontSizePx}px` } : undefined
+                }
+              >
                 {subtitle}
               </p>
             )}

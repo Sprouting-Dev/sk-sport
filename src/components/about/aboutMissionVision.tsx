@@ -5,6 +5,8 @@ interface AboutMissionVisionProps {
   missionDescription?: string | null
   visionTitle?: string | null
   visionDescription?: string | null
+  missionVisionTitleFontSizePx: number
+  missionVisionBodyFontSizePx: number
 }
 
 export default function AboutMissionVision({
@@ -12,6 +14,8 @@ export default function AboutMissionVision({
   missionDescription,
   visionTitle,
   visionDescription,
+  missionVisionTitleFontSizePx,
+  missionVisionBodyFontSizePx,
 }: AboutMissionVisionProps) {
   return (
     <section className="w-full bg-header-bg pt-4 pb-9 md:pt-5 md:pb-11">
@@ -26,13 +30,19 @@ export default function AboutMissionVision({
             </div>
             <div className="min-w-0 flex-1">
               {missionTitle && (
-                <h2 className="text-sm font-normal tracking-normal text-base-content/90 md:text-base">
+                <h2
+                  className="font-normal tracking-normal text-base-content/90"
+                  style={{ fontSize: `${missionVisionTitleFontSizePx}px` }}
+                >
                   {missionTitle}
                 </h2>
               )}
               <div className="mt-1.5 h-px w-6 bg-primary/35" />
               {missionDescription && (
-                <p className="mt-2 text-xs leading-relaxed text-base-content/58 md:text-sm">
+                <p
+                  className="mt-2 leading-relaxed text-base-content/58"
+                  style={{ fontSize: `${missionVisionBodyFontSizePx}px` }}
+                >
                   {missionDescription}
                 </p>
               )}
@@ -50,13 +60,19 @@ export default function AboutMissionVision({
             </div>
             <div className="min-w-0 flex-1">
               {visionTitle && (
-                <h2 className="text-sm font-normal tracking-normal text-base-content/90 md:text-base">
+                <h2
+                  className="font-normal tracking-normal text-base-content/90"
+                  style={{ fontSize: `${missionVisionTitleFontSizePx}px` }}
+                >
                   {visionTitle}
                 </h2>
               )}
               <div className="mt-1.5 h-px w-6 bg-secondary/35" />
               {visionDescription && (
-                <p className="mt-2 text-xs leading-relaxed text-base-content/58 md:text-sm">
+                <p
+                  className="mt-2 leading-relaxed text-base-content/58"
+                  style={{ fontSize: `${missionVisionBodyFontSizePx}px` }}
+                >
                   {visionDescription}
                 </p>
               )}

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Button } from '@/components/button'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import { cn } from '@/utils/cn'
 
 export type RelatedArticleItem = {
   id: string | number
@@ -16,18 +17,31 @@ export type RelatedArticleItem = {
 interface RelatedArticleProps {
   title?: string
   articles: RelatedArticleItem[]
+  relatedHeadingFontSizePx?: number
+  relatedItemTitleFontSizePx?: number
 }
 
 export const RelatedArticle = ({
   title = 'บทความที่เกี่ยวข้อง',
   articles,
+  relatedHeadingFontSizePx,
+  relatedItemTitleFontSizePx,
 }: RelatedArticleProps) => {
   const t = useTranslations('Service')
   const router = useRouter()
 
   return (
     <div className="w-full">
-      <p className="body-lg mb-6">{title}</p>
+      <p
+        className={cn('mb-6', relatedHeadingFontSizePx == null && 'body-lg')}
+        style={
+          relatedHeadingFontSizePx != null
+            ? { fontSize: `${relatedHeadingFontSizePx}px` }
+            : undefined
+        }
+      >
+        {title}
+      </p>
 
       <div className="flex flex-col divide-y-2 divide-gray-200">
         {articles.map((article) => (
@@ -42,7 +56,16 @@ export const RelatedArticle = ({
             </div>
 
             <div className="flex flex-1 flex-col justify-center items-start">
-              <p className="body-sm">{article.title}</p>
+              <p
+                className={cn(relatedItemTitleFontSizePx == null && 'body-sm')}
+                style={
+                  relatedItemTitleFontSizePx != null
+                    ? { fontSize: `${relatedItemTitleFontSizePx}px` }
+                    : undefined
+                }
+              >
+                {article.title}
+              </p>
 
               <Button
                 variant="link"

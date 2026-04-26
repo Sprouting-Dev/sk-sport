@@ -10,6 +10,8 @@ export interface DetailColumnCardProps {
   images?: string[]
   tags?: string[]
   imagePresentation?: 'default' | 'certificate'
+  contentTitleFontSizePx?: number
+  contentBodyFontSizePx?: number
 }
 
 export const DetailColumnCard = ({
@@ -18,13 +20,25 @@ export const DetailColumnCard = ({
   images = [],
   tags = [],
   imagePresentation = 'default',
+  contentTitleFontSizePx,
+  contentBodyFontSizePx,
 }: DetailColumnCardProps) => {
   const hasImages = images.length > 0
   const isCertificate = imagePresentation === 'certificate'
 
   return (
     <div className="flex w-full flex-col gap-4">
-      {sectionTitle && <h2>{sectionTitle}</h2>}
+      {sectionTitle && (
+        <h2
+          style={
+            contentTitleFontSizePx != null
+              ? { fontSize: `${contentTitleFontSizePx}px` }
+              : undefined
+          }
+        >
+          {sectionTitle}
+        </h2>
+      )}
       {hasImages && (
         <div className="w-full">
           {images.length === 1 ? (
@@ -84,7 +98,12 @@ export const DetailColumnCard = ({
       )}
 
       <div className="flex flex-col gap-3">
-        <p className="body-sm">{description}</p>
+        <p
+          className={contentBodyFontSizePx == null ? 'body-sm' : undefined}
+          style={contentBodyFontSizePx != null ? { fontSize: `${contentBodyFontSizePx}px` } : undefined}
+        >
+          {description}
+        </p>
         {tags.length > 0 && (
           <div className="mt-1 flex flex-wrap gap-2">
             {tags.map((tag) => (

@@ -10,10 +10,56 @@ import {
 import { MoreServices } from '@/components/service'
 import { getServiceBySlug, getAllServices } from '@/data/service'
 import { getPortfolioArticles } from '@/data/portfolio'
+import { getServicesHeroGlobal } from '@/data/servicesHero'
 import type { Service, ServiceMedia, GalleryMedia } from '@/payload-types'
 
 const INTEGRATED_SPORTS_INSTALLATION_SLUG = 'integrated-sports-installation'
 const SPORTS_VISION_TRAINING_SLUG = 'sports-vision-training'
+
+const DETAIL_HERO_TITLE_MIN = 32
+const DETAIL_HERO_TITLE_MAX = 88
+const DETAIL_HERO_TITLE_DEFAULT = 48
+const DETAIL_CONTENT_TITLE_MIN = 20
+const DETAIL_CONTENT_TITLE_MAX = 48
+const DETAIL_CONTENT_TITLE_DEFAULT = 28
+const DETAIL_CONTENT_BODY_MIN = 14
+const DETAIL_CONTENT_BODY_MAX = 24
+const DETAIL_CONTENT_BODY_DEFAULT = 16
+const RELATED_HEADING_MIN = 18
+const RELATED_HEADING_MAX = 36
+const RELATED_HEADING_DEFAULT = 22
+const RELATED_ITEM_TITLE_MIN = 12
+const RELATED_ITEM_TITLE_MAX = 22
+const RELATED_ITEM_TITLE_DEFAULT = 14
+
+function clampInt(n: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, Math.round(n)))
+}
+
+function detailHeroTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_HERO_TITLE_DEFAULT
+  return clampInt(v, DETAIL_HERO_TITLE_MIN, DETAIL_HERO_TITLE_MAX)
+}
+
+function detailContentTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_CONTENT_TITLE_DEFAULT
+  return clampInt(v, DETAIL_CONTENT_TITLE_MIN, DETAIL_CONTENT_TITLE_MAX)
+}
+
+function detailContentBodyFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_CONTENT_BODY_DEFAULT
+  return clampInt(v, DETAIL_CONTENT_BODY_MIN, DETAIL_CONTENT_BODY_MAX)
+}
+
+function relatedHeadingFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return RELATED_HEADING_DEFAULT
+  return clampInt(v, RELATED_HEADING_MIN, RELATED_HEADING_MAX)
+}
+
+function relatedItemTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return RELATED_ITEM_TITLE_DEFAULT
+  return clampInt(v, RELATED_ITEM_TITLE_MIN, RELATED_ITEM_TITLE_MAX)
+}
 
 /** Safety standards block on Integrated Sports Installation only */
 function isIntegratedSafetyStandardsSection(slug: string, sectionTitle: string | undefined) {
@@ -74,15 +120,22 @@ function mapServiceToMoreServicesItem(service: Service) {
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  const [serviceData, allServices, recentPortfolioArticles] = await Promise.all([
+  const [serviceData, allServices, recentPortfolioArticles, servicesHero] = await Promise.all([
     getServiceBySlug(slug),
     getAllServices(),
     getPortfolioArticles(),
+    getServicesHeroGlobal(),
   ])
 
   if (!serviceData) {
     notFound()
   }
+
+  const detailHeroTitlePx = detailHeroTitleFontPx(servicesHero.detailHeroTitleFontSize)
+  const contentTitlePx = detailContentTitleFontPx(servicesHero.detailContentTitleFontSize)
+  const contentBodyPx = detailContentBodyFontPx(servicesHero.detailContentBodyFontSize)
+  const relatedHeadingPx = relatedHeadingFontPx(servicesHero.relatedHeadingFontSize)
+  const relatedItemTitlePx = relatedItemTitleFontPx(servicesHero.relatedItemTitleFontSize)
 
   const heroImage =
     serviceData.hero && typeof serviceData.hero !== 'string' ? (serviceData.hero.url ?? '') : ''
@@ -123,18 +176,30 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         titleLine1={serviceData.title}
         showCta={false}
         contentPosition="bottom"
+        titleFontSizePx={detailHeroTitlePx}
       />
       <div className="flex w-full flex-col items-center justify-center bg-header-bg">
         <div className="w-full py-6 md:py-8">
           <div className="flex flex-col lg:grid lg:grid-cols-3">
             <div className="order-1 lg:order-1 lg:col-span-2 px-4 flex flex-col gap-8">
               {serviceDetails.map((item, index) => (
-                <Detail key={item._id || index} {...item} />
+                <Detail
+                  key={item._id || index}
+                  {...item}
+                  contentTitleFontSizePx={contentTitlePx}
+                  contentBodyFontSizePx={contentBodyPx}
+                />
               ))}
             </div>
 
             <div className="order-4 mt-8 px-4 lg:order-2 lg:col-span-1 lg:mt-0">
-              {relatedArticles.length > 0 && <RelatedArticle articles={relatedArticles} />}
+              {relatedArticles.length > 0 && (
+                <RelatedArticle
+                  articles={relatedArticles}
+                  relatedHeadingFontSizePx={relatedHeadingPx}
+                  relatedItemTitleFontSizePx={relatedItemTitlePx}
+                />
+              )}
             </div>
 
             <div className="order-2 pt-4 lg:order-3 col-span-3">

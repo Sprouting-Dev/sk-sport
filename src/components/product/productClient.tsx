@@ -27,12 +27,50 @@ export interface ProductItem {
 
 interface ProductClientProps {
   products: ProductItem[]
+  /** From ProductsHero global; clamped in this component. */
+  categoryTitleFontSize?: number | null
+  productCardTitleFontSize?: number | null
+  productPriceFontSize?: number | null
 }
 
 const ITEMS_PER_PAGE = 9
 const CATEGORY_PAGE_SIZE = 4
 
 const thb = new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' })
+
+const CATEGORY_TITLE_PX_MIN = 20
+const CATEGORY_TITLE_PX_MAX = 56
+const CATEGORY_TITLE_PX_DEFAULT = 32
+const PRODUCT_CARD_TITLE_PX_MIN = 14
+const PRODUCT_CARD_TITLE_PX_MAX = 36
+const PRODUCT_CARD_TITLE_PX_DEFAULT = 22
+const PRODUCT_PRICE_PX_MIN = 12
+const PRODUCT_PRICE_PX_MAX = 28
+const PRODUCT_PRICE_PX_DEFAULT = 16
+
+function clampCategoryTitlePx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return CATEGORY_TITLE_PX_DEFAULT
+  return Math.min(
+    CATEGORY_TITLE_PX_MAX,
+    Math.max(CATEGORY_TITLE_PX_MIN, Math.round(v)),
+  )
+}
+
+function clampProductCardTitlePx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return PRODUCT_CARD_TITLE_PX_DEFAULT
+  return Math.min(
+    PRODUCT_CARD_TITLE_PX_MAX,
+    Math.max(PRODUCT_CARD_TITLE_PX_MIN, Math.round(v)),
+  )
+}
+
+function clampProductPricePx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return PRODUCT_PRICE_PX_DEFAULT
+  return Math.min(
+    PRODUCT_PRICE_PX_MAX,
+    Math.max(PRODUCT_PRICE_PX_MIN, Math.round(v)),
+  )
+}
 
 export type ProductListingPurchaseFilter = 'all' | 'readyToBuy' | 'requestQuote'
 
@@ -67,10 +105,16 @@ function CategoryCarouselRow({
   title,
   products,
   onSeeAll,
+  categoryTitleFontPx,
+  productCardTitleFontPx,
+  productPriceFontPx,
 }: {
   title: string
   products: ProductItem[]
   onSeeAll?: () => void
+  categoryTitleFontPx: number
+  productCardTitleFontPx: number
+  productPriceFontPx: number
 }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [arrows, setArrows] = useState({ left: false, right: false })
@@ -115,7 +159,10 @@ function CategoryCarouselRow({
   return (
     <section className="w-full">
       <div className="mb-4 flex items-center justify-between gap-4">
-        <h2 className="text-base font-bold uppercase tracking-widest bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent md:text-lg">
+        <h2
+          className="font-bold uppercase tracking-widest bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent"
+          style={{ fontSize: `${categoryTitleFontPx}px` }}
+        >
           {title}
         </h2>
         {onSeeAll ? (
@@ -174,11 +221,17 @@ function CategoryCarouselRow({
                   )}
                 </div>
                 <div className="flex min-h-0 w-full min-w-0 flex-col gap-2 px-4 py-3 md:px-5 md:py-4">
-                  <h3 className="line-clamp-2 min-w-0 text-left text-sm leading-snug text-base-content lg:text-base">
+                  <h3
+                    className="line-clamp-2 min-w-0 text-left leading-snug text-base-content"
+                    style={{ fontSize: `${productCardTitleFontPx}px` }}
+                  >
                     {product.title}
                   </h3>
                   {isProductPurchasable(product) ? (
-                    <span className="body-sm self-end text-right font-semibold tabular-nums text-base-content">
+                    <span
+                      className="self-end text-right font-semibold tabular-nums text-base-content"
+                      style={{ fontSize: `${productPriceFontPx}px` }}
+                    >
                       {thb.format(product.price)}
                     </span>
                   ) : null}
@@ -192,7 +245,15 @@ function CategoryCarouselRow({
   )
 }
 
-export function ProductClient({ products = [] }: ProductClientProps) {
+export function ProductClient({
+  products = [],
+  categoryTitleFontSize,
+  productCardTitleFontSize,
+  productPriceFontSize,
+}: ProductClientProps) {
+  const categoryTitleFontPx = clampCategoryTitlePx(categoryTitleFontSize)
+  const productCardTitleFontPx = clampProductCardTitlePx(productCardTitleFontSize)
+  const productPriceFontPx = clampProductPricePx(productPriceFontSize)
   const router = useRouter()
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category')
@@ -476,6 +537,9 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                           <CategoryCarouselRow
                             title={group.label}
                             products={pagedItems}
+                            categoryTitleFontPx={categoryTitleFontPx}
+                            productCardTitleFontPx={productCardTitleFontPx}
+                            productPriceFontPx={productPriceFontPx}
                             onSeeAll={
                               group.key !== 'OTHER'
                                 ? () => {
@@ -537,6 +601,9 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                             key={categoryFilter}
                             title={filtered[0]?.category ?? categoryFilter}
                             products={pagedItems}
+                            categoryTitleFontPx={categoryTitleFontPx}
+                            productCardTitleFontPx={productCardTitleFontPx}
+                            productPriceFontPx={productPriceFontPx}
                           />
                           {catTotalPages > 1 && (
                             <div className="flex items-center justify-center gap-3">
@@ -584,9 +651,10 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                   return (
                     <Fragment key={group.key}>
                       <h2
-                        className={`inline-block max-w-full text-base font-bold uppercase tracking-widest bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent md:text-lg ${
+                        className={`inline-block max-w-full font-bold uppercase tracking-widest bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent ${
                           gIdx > 0 ? 'mt-8 md:mt-10' : ''
                         }`}
+                        style={{ fontSize: `${categoryTitleFontPx}px` }}
                       >
                         {group.label}
                       </h2>
@@ -616,11 +684,17 @@ export function ProductClient({ products = [] }: ProductClientProps) {
                                     </div>
                                   )}
                                 </div>
-                                <h3 className="min-w-0 flex-1 text-left text-base-content leading-snug group-hover:text-primary">
+                                <h3
+                                  className="min-w-0 flex-1 text-left text-base-content leading-snug group-hover:text-primary"
+                                  style={{ fontSize: `${productCardTitleFontPx}px` }}
+                                >
                                   {product.title}
                                 </h3>
                                 {isProductPurchasable(product) ? (
-                                  <span className="body-sm shrink-0 self-end font-semibold tabular-nums text-primary">
+                                  <span
+                                    className="shrink-0 self-end font-semibold tabular-nums text-primary"
+                                    style={{ fontSize: `${productPriceFontPx}px` }}
+                                  >
                                     {thb.format(product.price)}
                                   </span>
                                 ) : null}

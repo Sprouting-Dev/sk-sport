@@ -19,6 +19,43 @@ function resolveHeroMediaUrl(
   return (first as HeroMedia).url ?? undefined
 }
 
+const HERO_TITLE_MIN = 32
+const HERO_TITLE_MAX = 96
+const HERO_TITLE_DEFAULT = 56
+const HERO_SUB_MIN = 14
+const HERO_SUB_MAX = 32
+const HERO_SUB_DEFAULT = 20
+const CARD_TITLE_MIN = 18
+const CARD_TITLE_MAX = 48
+const CARD_TITLE_DEFAULT = 28
+const CARD_BODY_MIN = 14
+const CARD_BODY_MAX = 24
+const CARD_BODY_DEFAULT = 16
+
+function clampInt(n: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, Math.round(n)))
+}
+
+function heroTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return HERO_TITLE_DEFAULT
+  return clampInt(v, HERO_TITLE_MIN, HERO_TITLE_MAX)
+}
+
+function heroSubtitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return HERO_SUB_DEFAULT
+  return clampInt(v, HERO_SUB_MIN, HERO_SUB_MAX)
+}
+
+function serviceCardTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return CARD_TITLE_DEFAULT
+  return clampInt(v, CARD_TITLE_MIN, CARD_TITLE_MAX)
+}
+
+function serviceCardBodyFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return CARD_BODY_DEFAULT
+  return clampInt(v, CARD_BODY_MIN, CARD_BODY_MAX)
+}
+
 export default async function ServicePage() {
   const [t, services, servicesHero] = await Promise.all([
     getTranslations('Service.Hero'),
@@ -36,6 +73,11 @@ export default async function ServicePage() {
     </>
   )
 
+  const listingHeroTitlePx = heroTitleFontPx(servicesHero.heroTitleFontSize)
+  const listingHeroSubtitlePx = heroSubtitleFontPx(servicesHero.heroSubtitleFontSize)
+  const cardTitlePx = serviceCardTitleFontPx(servicesHero.serviceCardTitleFontSize)
+  const cardBodyPx = serviceCardBodyFontPx(servicesHero.serviceCardBodyFontSize)
+
   return (
     <main className="flex w-full flex-col items-center">
       <ServiceHero
@@ -44,6 +86,8 @@ export default async function ServicePage() {
         titleLine2={t('titleLine2')}
         subtitle={heroSubtitle}
         ctaLabel={t('cta')}
+        titleFontSizePx={listingHeroTitlePx}
+        subtitleFontSizePx={listingHeroSubtitlePx}
       />
 
       <div className="flex w-full flex-col items-center justify-center bg-header-bg">
@@ -64,6 +108,8 @@ export default async function ServicePage() {
                     image={resolveHeroImageUrl(service.hero) || '/Contact Section BG Desktop.png'}
                     href={`/service/${service.slug}`}
                     variant={variant}
+                    titleFontSizePx={cardTitlePx}
+                    bodyFontSizePx={cardBodyPx}
                   />
                 </div>
               )

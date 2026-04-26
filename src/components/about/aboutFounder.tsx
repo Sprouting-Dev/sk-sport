@@ -11,6 +11,10 @@ interface AboutFounderProps {
   founderRole?: string | null
   founderDescription?: string | null
   founderQuote?: string | null
+  sectionTitleFontSizePx: number
+  founderCardTitleFontSizePx: number
+  founderCardBodyFontSizePx: number
+  founderQuoteFontSizePx: number
 }
 
 function FounderCardShell({
@@ -22,6 +26,9 @@ function FounderCardShell({
   bodyText,
   quote,
   readMoreHref,
+  titleFontSizePx,
+  bodyFontSizePx,
+  quoteFontSizePx,
 }: {
   imageUrl: string
   imageAlt: string
@@ -31,6 +38,9 @@ function FounderCardShell({
   bodyText?: string | null
   quote?: string | null
   readMoreHref?: string
+  titleFontSizePx: number
+  bodyFontSizePx: number
+  quoteFontSizePx: number
 }) {
   return (
     <div className="mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-base-300/40 bg-gradient-to-br from-primary/15 to-secondary/15 shadow-md">
@@ -55,7 +65,10 @@ function FounderCardShell({
             {label}
           </p>
 
-          <h2 className="text-center text-2xl font-semibold leading-tight text-base-content md:text-left md:text-3xl">
+          <h2
+            className="text-center font-semibold leading-tight text-base-content md:text-left"
+            style={{ fontSize: `${titleFontSizePx}px` }}
+          >
             {name}
           </h2>
 
@@ -66,14 +79,20 @@ function FounderCardShell({
           )}
 
           {bodyText && (
-            <p className="text-center text-sm leading-relaxed text-base-content/72 md:text-left md:text-base md:leading-relaxed">
+            <p
+              className="text-center leading-relaxed text-base-content/72 md:text-left md:leading-relaxed"
+              style={{ fontSize: `${bodyFontSizePx}px` }}
+            >
               {bodyText}
             </p>
           )}
 
           {quote && (
             <blockquote className="mt-2 rounded-r-xl border-l-4 border-primary bg-base-200/30 py-4 pl-5 pr-4 md:mt-2.5 md:py-5 md:pl-6">
-              <p className="text-base font-medium italic leading-relaxed text-base-content md:text-lg">
+              <p
+                className="font-medium italic leading-relaxed text-base-content"
+                style={{ fontSize: `${quoteFontSizePx}px` }}
+              >
                 &ldquo;{quote}&rdquo;
               </p>
             </blockquote>
@@ -103,6 +122,10 @@ export default function AboutFounder({
   founderRole,
   founderDescription,
   founderQuote,
+  sectionTitleFontSizePx,
+  founderCardTitleFontSizePx,
+  founderCardBodyFontSizePx,
+  founderQuoteFontSizePx,
 }: AboutFounderProps) {
   const cms = cmsFounders?.filter((f) => f?.slug) ?? []
   if (cms.length > 0) {
@@ -110,7 +133,10 @@ export default function AboutFounder({
       <section className="w-full bg-header-bg py-12 md:py-14">
         <div className="container mx-auto flex flex-col gap-8 px-6">
           {founderSectionTitle?.trim() && (
-            <h2 className="text-center text-2xl font-semibold tracking-wide text-base-content md:text-3xl">
+            <h2
+              className="text-center font-semibold tracking-wide text-base-content"
+              style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+            >
               {founderSectionTitle}
             </h2>
           )}
@@ -131,6 +157,9 @@ export default function AboutFounder({
                   bodyText={f.excerpt?.trim() || null}
                   quote={f.quote?.trim() || null}
                   readMoreHref={`/about/founders/${f.slug}`}
+                  titleFontSizePx={founderCardTitleFontSizePx}
+                  bodyFontSizePx={founderCardBodyFontSizePx}
+                  quoteFontSizePx={founderQuoteFontSizePx}
                 />
               )
             })}
@@ -153,7 +182,10 @@ export default function AboutFounder({
     <section className="w-full bg-header-bg py-12 md:py-14">
       <div className="container mx-auto flex flex-col gap-6 px-6">
         {founderSectionTitle?.trim() && (
-          <h2 className="text-center text-2xl font-semibold tracking-wide text-base-content md:text-3xl">
+          <h2
+            className="text-center font-semibold tracking-wide text-base-content"
+            style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+          >
             {founderSectionTitle}
           </h2>
         )}
@@ -165,6 +197,9 @@ export default function AboutFounder({
           role={founderRole}
           bodyText={founderDescription}
           quote={founderQuote}
+          titleFontSizePx={founderCardTitleFontSizePx}
+          bodyFontSizePx={founderCardBodyFontSizePx}
+          quoteFontSizePx={founderQuoteFontSizePx}
         />
       </div>
     </section>

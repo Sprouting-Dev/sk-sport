@@ -13,6 +13,9 @@ export type ServiceCardProps = {
   image: string
   href?: string
   variant?: 'vertical' | 'horizontal'
+  /** Optional (px; clamped at call site) — services listing only when passed. */
+  titleFontSizePx?: number
+  bodyFontSizePx?: number
 }
 
 export const ServiceCard = ({
@@ -21,6 +24,8 @@ export const ServiceCard = ({
   image,
   href = '#',
   variant = 'vertical',
+  titleFontSizePx,
+  bodyFontSizePx,
 }: ServiceCardProps) => {
   const t = useTranslations('Service')
   const router = useRouter()
@@ -53,14 +58,21 @@ export const ServiceCard = ({
           isHorizontal ? 'w-full md:w-3/5 lg:w-1/2' : 'w-full',
         )}
       >
-        <h2 className="mb-2 md:mb-3 font-semibold line-clamp-2">{title}</h2>
+        <h2
+          className="mb-2 md:mb-3 font-semibold line-clamp-2"
+          style={titleFontSizePx != null ? { fontSize: `${titleFontSizePx}px` } : undefined}
+        >
+          {title}
+        </h2>
         <p
           className={cn(
-            'body-sm text-base-content/80 mb-4',
+            bodyFontSizePx == null && 'body-sm',
+            'text-base-content/80 mb-4',
             isHorizontal
               ? 'line-clamp-2 md:line-clamp-4 lg:line-clamp-5'
               : 'line-clamp-2 md:line-clamp-3 lg:line-clamp-4',
           )}
+          style={bodyFontSizePx != null ? { fontSize: `${bodyFontSizePx}px` } : undefined}
         >
           {description}
         </p>

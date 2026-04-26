@@ -80,6 +80,7 @@ export interface Config {
     founders: Founder;
     'payment-slips': PaymentSlip;
     orders: Order;
+    'quote-requests': QuoteRequest;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -100,6 +101,7 @@ export interface Config {
     founders: FoundersSelect<false> | FoundersSelect<true>;
     'payment-slips': PaymentSlipsSelect<false> | PaymentSlipsSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
+    'quote-requests': QuoteRequestsSelect<false> | QuoteRequestsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -481,6 +483,30 @@ export interface Order {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quote-requests".
+ */
+export interface QuoteRequest {
+  id: string;
+  status?: ('new' | 'contacted' | 'closed') | null;
+  customerName: string;
+  email: string;
+  phone?: string | null;
+  companyName?: string | null;
+  message?: string | null;
+  lineItems: {
+    productId: string;
+    slug: string;
+    title: string;
+    category?: string | null;
+    quantity: number;
+    id?: string | null;
+  }[];
+  adminNotes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -554,6 +580,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'orders';
         value: string | Order;
+      } | null)
+    | ({
+        relationTo: 'quote-requests';
+        value: string | QuoteRequest;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -854,6 +884,31 @@ export interface OrdersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quote-requests_select".
+ */
+export interface QuoteRequestsSelect<T extends boolean = true> {
+  status?: T;
+  customerName?: T;
+  email?: T;
+  phone?: T;
+  companyName?: T;
+  message?: T;
+  lineItems?:
+    | T
+    | {
+        productId?: T;
+        slug?: T;
+        title?: T;
+        category?: T;
+        quantity?: T;
+        id?: T;
+      };
+  adminNotes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -901,9 +956,37 @@ export interface Home {
   heroMedia?: (string | HeroMedia)[] | null;
   galleryMedia?: (string | GalleryMedia)[] | null;
   /**
-   * Partner logos shown below the home hero. Order matches display order.
+   * ลำดับบนเว็บตามลำดับที่เลือก
    */
   partners?: (string | PartnerMedia)[] | null;
+  /**
+   * หัวข้อหลักบนแบนเนอร์ (หลายบรรทัด) ไม่รวมปุ่ม
+   */
+  heroTitleFontSize?: number | null;
+  /**
+   * คำอธิบายใต้หัวข้อ บนแบนเนอร์
+   */
+  heroSubtitleFontSize?: number | null;
+  /**
+   * หัวรายส่วนเช่น บริการ สินค้า ผลงาน แกลเลอรี ฯลฯ
+   */
+  sectionTitleFontSize?: number | null;
+  /**
+   * หัวย่อยบล็อกเนื้อหา / รายละเอียด (เช่น About, รายละเอียดเด่น)
+   */
+  highlightTitleFontSize?: number | null;
+  /**
+   * เนื้อหายาวในบล็อกเน้น / ย่อยนำ ไม่รวมป้ายเล็ก
+   */
+  highlightBodyFontSize?: number | null;
+  /**
+   * ชื่อบนการ์ดบริการ / สินค้า / ผลงาน ฯลฯ (ไม่รวมไอคอน/ปุ่ม)
+   */
+  cardTitleFontSize?: number | null;
+  /**
+   * คำอธิบาย/ย่อใต้หัวบนการ์ดใหญ่
+   */
+  cardBodyFontSize?: number | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -944,6 +1027,54 @@ export interface About {
   productsSectionTitle?: string | null;
   productsSectionSubtitle?: string | null;
   productsCtaText?: string | null;
+  /**
+   * เช่น หัว “About Us” หรือหัวส่วน Founder บนหน้า About
+   */
+  sectionTitleFontSize?: number | null;
+  /**
+   * หัวข้อบนการ์ดตัวเติม 4 ใบใต้ส่วน About
+   */
+  highlightCardTitleFontSize?: number | null;
+  /**
+   * เนื้อหาหลักบนการ์ดตัวเติม 4 ใบ
+   */
+  highlightCardBodyFontSize?: number | null;
+  /**
+   * ตัวเลขบนกล่อง “ไฮไลต์ / สถิติ” จาก CMS
+   */
+  statNumberFontSize?: number | null;
+  /**
+   * คำอธิบายใต้ตัวเลขในกล่องสถิติ
+   */
+  statLabelFontSize?: number | null;
+  /**
+   * หัวพันธกิจและหัววิสัยทัศน์ บล็อกสองฝั่ง
+   */
+  missionVisionTitleFontSize?: number | null;
+  /**
+   * เนื้อหาใต้หัวพันธกิจและวิสัยทัศน์
+   */
+  missionVisionBodyFontSize?: number | null;
+  /**
+   * ชื่อบนการ์ด Founder หน้า About (ไม่รวมป้ายตำแหน่ง/ปุ่ม Read more)
+   */
+  founderCardTitleFontSize?: number | null;
+  /**
+   * ย่อ/คำอธิบายบนการ์ด Founder หน้า About
+   */
+  founderCardBodyFontSize?: number | null;
+  /**
+   * ข้อความคำคม (blockquote) บนการ์ด Founder หน้า About
+   */
+  founderQuoteFontSize?: number | null;
+  /**
+   * ชื่อบนหน้า /about/founders/[slug] (ไม่รวมป้าย role หรือปุ่ม)
+   */
+  founderDetailTitleFontSize?: number | null;
+  /**
+   * เนื้อหาหลัก (คำอธิบาย) บนหน้า founder — ไม่รวมคำคมใน blockquote หรือลิงก์กลับ
+   */
+  founderDetailBodyFontSize?: number | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -955,6 +1086,34 @@ export interface Faq {
   id: string;
   heroTitle?: string | null;
   heroSubtitle?: string | null;
+  /**
+   * ตัวอักษรหัวข้อบนส่วนแบนเนอร์ (ตัวใหญ่บนสุด)
+   */
+  heroTitleFontSize?: number | null;
+  /**
+   * บรรทัดแนะนำใต้หัวข้อ Hero
+   */
+  heroSubtitleFontSize?: number | null;
+  /**
+   * หัวข้อแต่ละข้อคำถามในรายการ
+   */
+  questionFontSize?: number | null;
+  /**
+   * เนื้อหาคำตอบใต้คำถาม
+   */
+  answerFontSize?: number | null;
+  /**
+   * หัวข้อในกล่อง CTA ล่างสุด (เช่น “หาคำตอบไม่เจอ?”)
+   */
+  bottomCtaTitleFontSize?: number | null;
+  /**
+   * บรรทัดอธิบายใต้หัวข้อ CTA ไม่รวมปุ่มติดต่อ
+   */
+  bottomCtaBodyFontSize?: number | null;
+  /**
+   * เนื้อหาใต้หัว CTA; ถ้าเว้นว่างจะแสดงข้อความสำรองอัตโนมัติ
+   */
+  bottomCtaBody?: string | null;
   faqItems?:
     | {
         question: string;
@@ -1031,6 +1190,14 @@ export interface AboutHero {
   id: string;
   heroTitle?: string | null;
   heroSubtitle?: string | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อหลัก บนส่วน Hero หน้า About
+   */
+  heroTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของคำอธิบาย ใต้หัวข้อบน Hero หน้า About
+   */
+  heroSubtitleFontSize?: number | null;
   heroMedia?: (string | HeroMedia)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1043,6 +1210,42 @@ export interface ServicesHero {
   id: string;
   heroTitle?: string | null;
   heroSubtitle?: string | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อหลัก (บรรทัดแรกและบรรทัดสอง) บนส่วน Hero หน้าแสดงรายการบริการ
+   */
+  heroTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของคำอธิบายใต้หัวข้อบนส่วน Hero หน้าแสดงรายการบริการ
+   */
+  heroSubtitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของชื่อบริการบนแต่ละการ์ด ในหน้าแสดงรายการบริการ
+   */
+  serviceCardTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของคำอธิบายย่อบนแต่ละการ์ด ในหน้าแสดงรายการบริการ
+   */
+  serviceCardBodyFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อหลักบนส่วน Hero ด้านบน หน้ารายละเอียดแต่ละบริการ
+   */
+  detailHeroTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อแต่ละย่อ ในเนื้อหาหลักบนหน้ารายละเอียดบริการ
+   */
+  detailContentTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของเนื้อหา / รายละเอียดใต้หัวข้อแต่ละย่อ บนหน้ารายละเอียดบริการ
+   */
+  detailContentBodyFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อด้านบนรายการ “บทความที่เกี่ยวข้อง” บนหน้ารายละเอียดบริการ
+   */
+  relatedHeadingFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของชื่อบทความแต่ละรายการ ไม่รวมลิงก์ “Read more / อ่านเพิ่ม”
+   */
+  relatedItemTitleFontSize?: number | null;
   heroMedia?: (string | HeroMedia)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1055,6 +1258,38 @@ export interface PortfolioHero {
   id: string;
   heroTitle?: string | null;
   heroSubtitle?: string | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อหลักบนส่วน Hero หน้าแสดงรายการ Portfolio
+   */
+  heroTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของคำอธิบายใต้หัวข้อ บนส่วน Hero หน้าแสดงรายการ Portfolio
+   */
+  heroSubtitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อ “HIGHLIGHTS” บนหน้าแสดงรายการ Portfolio
+   */
+  highlightsTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อ “OUR FACILITIES” บนหน้าแสดงรายการ Portfolio
+   */
+  sectionTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของชื่อบนผลงาน ในแต่ละการ์ดบนการ์ด หน้าแสดงรายการ และหัวข้อบนผลงาน “เพิ่มเติม” หน้ารายละเอียด
+   */
+  cardTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อหลัก บนส่วน Hero หน้ารายละเอียดผลงาน
+   */
+  detailHeroTitleFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของเนื้อหา / รายละเอียดหลัก ในส่วนเนื้อหา บนหน้ารายละเอียดผลงาน
+   */
+  detailBodyFontSize?: number | null;
+  /**
+   * ใช้กำหนดขนาดตัวอักษรของหัวข้อ “More Projects / ผลงานเพิ่มเติม” บนหน้ารายละเอียดผลงาน
+   */
+  moreProjectsTitleFontSize?: number | null;
   heroMedia?: (string | HeroMedia)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1071,8 +1306,40 @@ export interface ProductsHero {
    * Short label above the title (e.g. category). If empty, the public site uses the default “Equipment & Gear”.
    */
   eyebrow?: string | null;
-  titleSize?: ('default' | 'small' | 'large' | 'extraLarge') | null;
-  bodySize?: ('default' | 'small' | 'large') | null;
+  titleFontSize?: number | null;
+  subtitleFontSize?: number | null;
+  /**
+   * e.g. “BASKETBALL EQUIPMENT” row titles on the product listing.
+   */
+  categoryTitleFontSize?: number | null;
+  /**
+   * Product name on each card in the listing grid and list.
+   */
+  productCardTitleFontSize?: number | null;
+  /**
+   * Controls product price text size in product cards/list.
+   */
+  productPriceFontSize?: number | null;
+  /**
+   * Main product name on the product detail page.
+   */
+  detailTitleFontSize?: number | null;
+  /**
+   * Product subtitle on the product detail page.
+   */
+  detailSubtitleFontSize?: number | null;
+  /**
+   * Section heading for the product description block.
+   */
+  detailSectionTitleFontSize?: number | null;
+  /**
+   * Product description / body copy on the product detail page.
+   */
+  detailBodyFontSize?: number | null;
+  /**
+   * Heading above related products on the product detail page.
+   */
+  relatedTitleFontSize?: number | null;
   heroMedia?: (string | HeroMedia)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1085,6 +1352,34 @@ export interface ContactHero {
   id: string;
   heroTitle?: string | null;
   heroSubtitle?: string | null;
+  /**
+   * ขนาดตัวอักษรของหัวข้อหลักบนแบนเนอร์หน้า Contact
+   */
+  heroTitleFontSize?: number | null;
+  /**
+   * ขนาดตัวอักษรของคำอธิบายใต้หัวข้อ บนแบนเนอร์
+   */
+  heroSubtitleFontSize?: number | null;
+  /**
+   * หัวข้อรายส่วนเช่น “Get in touch” และ “Send us message” (คอลัมน์หลัก)
+   */
+  contactSectionTitleFontSize?: number | null;
+  /**
+   * หัวข้อย่อยเช่น ที่อยู่, อีเมล, ติดตามโซเชียล, เวลาเปิดทำการ
+   */
+  contactInfoTitleFontSize?: number | null;
+  /**
+   * เนื้อหาหลัก, รายละเอียดติดต่อ, ย่อนำ (ไม่รวมปุ่ม)
+   */
+  contactInfoBodyFontSize?: number | null;
+  /**
+   * ป้าย Name, Email, ฯลฯ ไม่รวมข้อความ error
+   */
+  formLabelFontSize?: number | null;
+  /**
+   * ช่อง input และ textarea (ไม่รวม error หรือปุ่ม)
+   */
+  formInputFontSize?: number | null;
   heroMedia?: (string | HeroMedia)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1117,6 +1412,13 @@ export interface HomeSelect<T extends boolean = true> {
   heroMedia?: T;
   galleryMedia?: T;
   partners?: T;
+  heroTitleFontSize?: T;
+  heroSubtitleFontSize?: T;
+  sectionTitleFontSize?: T;
+  highlightTitleFontSize?: T;
+  highlightBodyFontSize?: T;
+  cardTitleFontSize?: T;
+  cardBodyFontSize?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1157,6 +1459,18 @@ export interface AboutSelect<T extends boolean = true> {
   productsSectionTitle?: T;
   productsSectionSubtitle?: T;
   productsCtaText?: T;
+  sectionTitleFontSize?: T;
+  highlightCardTitleFontSize?: T;
+  highlightCardBodyFontSize?: T;
+  statNumberFontSize?: T;
+  statLabelFontSize?: T;
+  missionVisionTitleFontSize?: T;
+  missionVisionBodyFontSize?: T;
+  founderCardTitleFontSize?: T;
+  founderCardBodyFontSize?: T;
+  founderQuoteFontSize?: T;
+  founderDetailTitleFontSize?: T;
+  founderDetailBodyFontSize?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1168,6 +1482,13 @@ export interface AboutSelect<T extends boolean = true> {
 export interface FaqSelect<T extends boolean = true> {
   heroTitle?: T;
   heroSubtitle?: T;
+  heroTitleFontSize?: T;
+  heroSubtitleFontSize?: T;
+  questionFontSize?: T;
+  answerFontSize?: T;
+  bottomCtaTitleFontSize?: T;
+  bottomCtaBodyFontSize?: T;
+  bottomCtaBody?: T;
   faqItems?:
     | T
     | {
@@ -1210,6 +1531,8 @@ export interface TermsOfServiceSelect<T extends boolean = true> {
 export interface AboutHeroSelect<T extends boolean = true> {
   heroTitle?: T;
   heroSubtitle?: T;
+  heroTitleFontSize?: T;
+  heroSubtitleFontSize?: T;
   heroMedia?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1222,6 +1545,15 @@ export interface AboutHeroSelect<T extends boolean = true> {
 export interface ServicesHeroSelect<T extends boolean = true> {
   heroTitle?: T;
   heroSubtitle?: T;
+  heroTitleFontSize?: T;
+  heroSubtitleFontSize?: T;
+  serviceCardTitleFontSize?: T;
+  serviceCardBodyFontSize?: T;
+  detailHeroTitleFontSize?: T;
+  detailContentTitleFontSize?: T;
+  detailContentBodyFontSize?: T;
+  relatedHeadingFontSize?: T;
+  relatedItemTitleFontSize?: T;
   heroMedia?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1234,6 +1566,14 @@ export interface ServicesHeroSelect<T extends boolean = true> {
 export interface PortfolioHeroSelect<T extends boolean = true> {
   heroTitle?: T;
   heroSubtitle?: T;
+  heroTitleFontSize?: T;
+  heroSubtitleFontSize?: T;
+  highlightsTitleFontSize?: T;
+  sectionTitleFontSize?: T;
+  cardTitleFontSize?: T;
+  detailHeroTitleFontSize?: T;
+  detailBodyFontSize?: T;
+  moreProjectsTitleFontSize?: T;
   heroMedia?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1247,8 +1587,16 @@ export interface ProductsHeroSelect<T extends boolean = true> {
   heroTitle?: T;
   heroSubtitle?: T;
   eyebrow?: T;
-  titleSize?: T;
-  bodySize?: T;
+  titleFontSize?: T;
+  subtitleFontSize?: T;
+  categoryTitleFontSize?: T;
+  productCardTitleFontSize?: T;
+  productPriceFontSize?: T;
+  detailTitleFontSize?: T;
+  detailSubtitleFontSize?: T;
+  detailSectionTitleFontSize?: T;
+  detailBodyFontSize?: T;
+  relatedTitleFontSize?: T;
   heroMedia?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1261,6 +1609,13 @@ export interface ProductsHeroSelect<T extends boolean = true> {
 export interface ContactHeroSelect<T extends boolean = true> {
   heroTitle?: T;
   heroSubtitle?: T;
+  heroTitleFontSize?: T;
+  heroSubtitleFontSize?: T;
+  contactSectionTitleFontSize?: T;
+  contactInfoTitleFontSize?: T;
+  contactInfoBodyFontSize?: T;
+  formLabelFontSize?: T;
+  formInputFontSize?: T;
   heroMedia?: T;
   updatedAt?: T;
   createdAt?: T;

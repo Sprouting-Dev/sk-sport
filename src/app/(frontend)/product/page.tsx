@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { getAllProducts } from '@/data/product'
 import { getProductsHeroGlobal } from '@/data/productsHero'
 import { ProductClient } from '@/components/product/productClient'
-import type { GalleryMedia, HeroMedia, Product, ProductsHero } from '@/payload-types'
+import type { GalleryMedia, HeroMedia, Product } from '@/payload-types'
 
 function resolveImageUrl(image: Product['image']): string {
   if (!image || typeof image === 'string') return ''
@@ -21,28 +21,25 @@ function resolveHeroMediaUrl(
 
 const DEFAULT_EYEBROW = 'Equipment & Gear'
 
-function productsHeroTitleClass(size: ProductsHero['titleSize']): string {
-  switch (size) {
-    case 'small':
-      return 'text-2xl md:text-3xl text-primary-content font-heading font-medium leading-tight'
-    case 'large':
-      return 'text-3xl md:text-4xl text-primary-content font-heading font-medium leading-tight'
-    case 'extraLarge':
-      return 'text-4xl md:text-5xl text-primary-content font-heading font-medium leading-tight tracking-tight'
-    default:
-      return 'text-primary-content'
-  }
+const TITLE_FONT_MIN = 32
+const TITLE_FONT_MAX = 96
+const TITLE_FONT_DEFAULT = 56
+const SUBTITLE_FONT_MIN = 14
+const SUBTITLE_FONT_MAX = 32
+const SUBTITLE_FONT_DEFAULT = 20
+
+function clampInt(n: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, Math.round(n)))
 }
 
-function productsHeroBodyClass(size: ProductsHero['bodySize']): string {
-  switch (size) {
-    case 'small':
-      return 'body-sm text-primary-content/80 mt-3 max-w-lg'
-    case 'large':
-      return 'body-md md:body-lg text-primary-content/80 mt-3 max-w-lg'
-    default:
-      return 'body-lg text-primary-content/80 mt-3 max-w-lg'
-  }
+function productsHeroTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return TITLE_FONT_DEFAULT
+  return clampInt(v, TITLE_FONT_MIN, TITLE_FONT_MAX)
+}
+
+function productsHeroSubtitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return SUBTITLE_FONT_DEFAULT
+  return clampInt(v, SUBTITLE_FONT_MIN, SUBTITLE_FONT_MAX)
 }
 
 export default async function ProductPage() {
@@ -57,8 +54,8 @@ export default async function ProductPage() {
     typeof productsHero.eyebrow === 'string' && productsHero.eyebrow.trim() !== ''
       ? productsHero.eyebrow.trim()
       : DEFAULT_EYEBROW
-  const titleClass = productsHeroTitleClass(productsHero.titleSize)
-  const subtitleClass = productsHeroBodyClass(productsHero.bodySize)
+  const titleFontPx = productsHeroTitleFontPx(productsHero.titleFontSize)
+  const subtitleFontPx = productsHeroSubtitleFontPx(productsHero.subtitleFontSize)
 
   const productItems = products.map((product) => ({
     id: product.id,
@@ -90,14 +87,29 @@ export default async function ProductPage() {
             <p className="body-sm text-secondary font-semibold uppercase tracking-widest mb-2">
               {eyebrow}
             </p>
-            <h1 className={titleClass}>{heroTitle}</h1>
-            <p className={subtitleClass}>{heroSubtitle}</p>
+            <h1
+              className="text-primary-content"
+              style={{ fontSize: `${titleFontPx}px` }}
+            >
+              {heroTitle}
+            </h1>
+            <p
+              className="body-lg text-primary-content/80 mt-3 max-w-lg"
+              style={{ fontSize: `${subtitleFontPx}px` }}
+            >
+              {heroSubtitle}
+            </p>
           </div>
         </div>
       </section>
 
       <Suspense fallback={null}>
-        <ProductClient products={productItems} />
+        <ProductClient
+          products={productItems}
+          categoryTitleFontSize={productsHero.categoryTitleFontSize}
+          productCardTitleFontSize={productsHero.productCardTitleFontSize}
+          productPriceFontSize={productsHero.productPriceFontSize}
+        />
       </Suspense>
     </main>
   )

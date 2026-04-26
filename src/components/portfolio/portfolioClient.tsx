@@ -7,6 +7,9 @@ import { ArticleData, portfolioDetailHref } from '@/components/portfolio/cardArt
 
 export interface PortfolioClientProps {
   articles: ArticleData[]
+  highlightsTitleFontSizePx: number
+  sectionTitleFontSizePx: number
+  cardTitleFontSizePx: number
 }
 
 const ITEMS_PER_PAGE = 9
@@ -20,7 +23,12 @@ function canonicalPortfolioTag(value: string | undefined): string {
   return normalized
 }
 
-export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] }) => {
+export const PortfolioClient: React.FC<PortfolioClientProps> = ({
+  articles = [],
+  highlightsTitleFontSizePx,
+  sectionTitleFontSizePx,
+  cardTitleFontSizePx,
+}) => {
   const [activeTab, setActiveTab] = useState('ALL')
   const [search, setSearch] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
@@ -47,7 +55,10 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
   return (
     <div className="w-full bg-header-bg">
       <div className="max-w-7xl mx-auto px-4 pt-8 pb-2 md:px-6 md:pt-10 md:pb-4">
-        <h1 className="tracking-portfolio-highlights mb-5 text-base font-semibold uppercase text-base-content/80 md:mb-8">
+        <h1
+          className="tracking-portfolio-highlights mb-5 font-semibold uppercase text-base-content/80 md:mb-8"
+          style={{ fontSize: `${highlightsTitleFontSizePx}px` }}
+        >
           HIGHLIGHTS
         </h1>
         <HighlightArticle articles={articles} />
@@ -68,7 +79,10 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
       </div>
 
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12 bg-primary-content">
-        <h2 className="tracking-portfolio-facilities text-base font-semibold uppercase text-base-content/75">
+        <h2
+          className="tracking-portfolio-facilities font-semibold uppercase text-base-content/75"
+          style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+        >
           OUR FACILITIES
         </h2>
         <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-8 md:grid-cols-3 md:gap-6">
@@ -79,6 +93,7 @@ export const PortfolioClient: React.FC<PortfolioClientProps> = ({ articles = [] 
                 key={item.id}
                 data={item}
                 onClick={href ? () => router.push(href) : undefined}
+                titleFontSizePx={cardTitleFontSizePx}
               />
             )
           })}

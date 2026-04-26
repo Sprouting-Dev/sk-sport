@@ -4,11 +4,49 @@ import { Detail } from '@/components/common'
 import { PortfolioHero } from '@/components/hero/portfolioHero'
 import { CTAFooter } from '@/components/layout'
 import { getPortfolioArticleBySlug, getPortfolioArticles } from '@/data/portfolio'
+import { getPortfolioHeroGlobal } from '@/data/portfolioHero'
 import type { GalleryMedia } from '@/payload-types'
 
 function resolveMediaUrl(media: string | GalleryMedia | null | undefined): string {
   if (!media || typeof media === 'string') return ''
   return media.url ?? ''
+}
+
+const DETAIL_HERO_TITLE_MIN = 28
+const DETAIL_HERO_TITLE_MAX = 72
+const DETAIL_HERO_TITLE_DEFAULT = 40
+const DETAIL_BODY_MIN = 14
+const DETAIL_BODY_MAX = 24
+const DETAIL_BODY_DEFAULT = 16
+const MORE_TITLE_MIN = 18
+const MORE_TITLE_MAX = 36
+const MORE_TITLE_DEFAULT = 24
+const CARD_TITLE_MIN = 14
+const CARD_TITLE_MAX = 28
+const CARD_TITLE_DEFAULT = 18
+
+function clampInt(n: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, Math.round(n)))
+}
+
+function detailHeroTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_HERO_TITLE_DEFAULT
+  return clampInt(v, DETAIL_HERO_TITLE_MIN, DETAIL_HERO_TITLE_MAX)
+}
+
+function detailBodyFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return DETAIL_BODY_DEFAULT
+  return clampInt(v, DETAIL_BODY_MIN, DETAIL_BODY_MAX)
+}
+
+function moreProjectsTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return MORE_TITLE_DEFAULT
+  return clampInt(v, MORE_TITLE_MIN, MORE_TITLE_MAX)
+}
+
+function cardTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return CARD_TITLE_DEFAULT
+  return clampInt(v, CARD_TITLE_MIN, CARD_TITLE_MAX)
 }
 
 export default async function PortfolioDetailPage({
@@ -18,14 +56,20 @@ export default async function PortfolioDetailPage({
 }) {
   const { slug } = await params
 
-  const [article, allArticles] = await Promise.all([
+  const [article, allArticles, portfolioHero] = await Promise.all([
     getPortfolioArticleBySlug(slug),
     getPortfolioArticles(),
+    getPortfolioHeroGlobal(),
   ])
 
   if (!article) {
     notFound()
   }
+
+  const detailHeroTitlePx = detailHeroTitleFontPx(portfolioHero.detailHeroTitleFontSize)
+  const detailBodyPx = detailBodyFontPx(portfolioHero.detailBodyFontSize)
+  const moreProjectsTitlePx = moreProjectsTitleFontPx(portfolioHero.moreProjectsTitleFontSize)
+  const moreCardTitlePx = cardTitleFontPx(portfolioHero.cardTitleFontSize)
 
   const sectionImageUrl = resolveMediaUrl(article.sectionImage as string | GalleryMedia | null)
 
@@ -49,6 +93,7 @@ export default async function PortfolioDetailPage({
         title={article.title}
         subtitle={article.subtitle ?? undefined}
         publishedDate={publishedDate}
+        titleFontSizePx={detailHeroTitlePx}
       />
 
       <div className="container mx-auto px-6 py-10 md:py-16 flex flex-col gap-10">
@@ -58,6 +103,7 @@ export default async function PortfolioDetailPage({
           detail={article.sectionDetail}
           images={sectionImageUrl ? [sectionImageUrl] : []}
           variant="row"
+          contentBodyFontSizePx={detailBodyPx}
         />
 
         {galleryUrls.length > 0 && (
@@ -83,7 +129,7 @@ export default async function PortfolioDetailPage({
         <section className="w-full bg-primary-content border-t border-base-300">
           <div className="container mx-auto px-6 py-10 md:py-16">
             <div className="flex items-center justify-between mb-6 md:mb-8">
-              <h2>More Projects</h2>
+              <h2 style={{ fontSize: `${moreProjectsTitlePx}px` }}>More Projects</h2>
               <Link
                 href="/portfolio"
                 className="body-sm text-primary underline-offset-2 hover:underline"
@@ -121,7 +167,10 @@ export default async function PortfolioDetailPage({
                           {item.tag}
                         </span>
                       )}
-                      <p className="body-sm text-base-content font-medium leading-snug line-clamp-2">
+                      <p
+                        className="text-base-content font-medium leading-snug line-clamp-2"
+                        style={{ fontSize: `${moreCardTitlePx}px` }}
+                      >
                         {item.title}
                       </p>
                     </div>

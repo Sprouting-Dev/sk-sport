@@ -6,17 +6,37 @@ import { NavKey, NAV_PATHS } from '@/const/navigation'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
-export const AboutCompany = () => {
+type AboutCompanyProps = {
+  sectionTitleFontSizePx: number
+  highlightTitleFontSizePx: number
+  highlightBodyFontSizePx: number
+  cardBodyFontSizePx: number
+}
+
+export const AboutCompany = ({
+  sectionTitleFontSizePx,
+  highlightTitleFontSizePx,
+  highlightBodyFontSizePx,
+  cardBodyFontSizePx,
+}: AboutCompanyProps) => {
   const t = useTranslations('Home.AboutCompany')
   const router = useRouter()
 
   return (
     <div className="w-full flex flex-col gap-8 pt-10">
       <div className="text-center space-y-2">
-        <p className="body-sm text-primary">
+        <p
+          className="text-primary"
+          style={{ fontSize: `${cardBodyFontSizePx}px` }}
+        >
           Professional <br /> with
         </p>
-        <h2 className="text-primary">Our Company</h2>
+        <h2
+          className="text-primary"
+          style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+        >
+          Our Company
+        </h2>
       </div>
 
       <div className="relative w-full h-80 md:h-140">
@@ -29,9 +49,14 @@ export const AboutCompany = () => {
 
         <div className="container relative z-20 mx-auto px-6 h-full flex items-center justify-end">
           <div className="w-full md:w-1/2 flex flex-col gap-6 text-primary-content md:pl-10">
-            <h3>{t(`title`)}</h3>
+            <h3 style={{ fontSize: `${highlightTitleFontSizePx}px` }}>{t(`title`)}</h3>
 
-            <p className="indent-1 body-sm">{t(`detail`)}</p>
+            <p
+              className="indent-1"
+              style={{ fontSize: `${highlightBodyFontSizePx}px` }}
+            >
+              {t(`detail`)}
+            </p>
 
             <div className="pt-4 flex justify-center md:justify-end">
               <button

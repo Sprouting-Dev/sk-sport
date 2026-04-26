@@ -10,6 +10,11 @@ interface AboutHistoryProps {
   /** Retained for CMS compatibility; description is presented via INTRO_CARDS below. */
   historyDescription?: string | null
   historyHighlights?: HistoryHighlight[] | null
+  sectionTitleFontSizePx: number
+  highlightCardTitleFontSizePx: number
+  highlightCardBodyFontSizePx: number
+  statNumberFontSizePx: number
+  statLabelFontSizePx: number
 }
 
 const INTRO_CARDS = [
@@ -35,12 +40,23 @@ const INTRO_CARDS = [
   },
 ] as const
 
-export default function AboutHistory({ companyName, historyHighlights }: AboutHistoryProps) {
+export default function AboutHistory({
+  companyName,
+  historyHighlights,
+  sectionTitleFontSizePx,
+  highlightCardTitleFontSizePx,
+  highlightCardBodyFontSizePx,
+  statNumberFontSizePx,
+  statLabelFontSizePx,
+}: AboutHistoryProps) {
   return (
     <section className="w-full bg-header-bg pt-12 pb-6 md:pt-16 md:pb-8">
       <div className="container mx-auto flex flex-col items-center gap-5 px-6 md:gap-6">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-          <h2 className="text-2xl font-semibold tracking-wide text-base-content md:text-3xl">
+          <h2
+            className="font-semibold tracking-wide text-base-content"
+            style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+          >
             About Us
           </h2>
           <div className="h-0.5 w-12 rounded-full bg-gradient md:w-14" aria-hidden />
@@ -56,10 +72,18 @@ export default function AboutHistory({ companyName, historyHighlights }: AboutHi
               className="relative transition-transform duration-200 md:flex-1 md:min-w-0 md:hover:-translate-y-1"
             >
               <div className="flex h-full flex-col gap-2 rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 px-6 py-5 shadow-2xl hover:shadow-2xl">
-                <h3 className="text-sm font-semibold text-base-content md:text-base">
+                <h3
+                  className="font-semibold text-base-content"
+                  style={{ fontSize: `${highlightCardTitleFontSizePx}px` }}
+                >
                   {card.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-base-content/75">{card.description}</p>
+                <p
+                  className="leading-relaxed text-base-content/75"
+                  style={{ fontSize: `${highlightCardBodyFontSizePx}px` }}
+                >
+                  {card.description}
+                </p>
               </div>
             </div>
           ))}
@@ -75,12 +99,18 @@ export default function AboutHistory({ companyName, historyHighlights }: AboutHi
                   className="flex min-h-28 flex-col items-center justify-center gap-2 rounded-xl border border-base-300/50 bg-primary-content px-6 py-6 text-center shadow-sm md:min-h-32"
                 >
                   {item.value && (
-                    <span className="text-2xl font-semibold text-gradient md:text-3xl">
+                    <span
+                      className="font-semibold text-gradient"
+                      style={{ fontSize: `${statNumberFontSizePx}px` }}
+                    >
                       {item.value}
                     </span>
                   )}
                   {item.label && (
-                    <span className="text-sm leading-snug text-base-content/60 md:text-base">
+                    <span
+                      className="leading-snug text-base-content/60"
+                      style={{ fontSize: `${statLabelFontSizePx}px` }}
+                    >
                       {item.label}
                     </span>
                   )}

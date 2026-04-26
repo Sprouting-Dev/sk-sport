@@ -9,14 +9,18 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { CONTACT } from '@/const/contact'
 
-export const ContactSection = () => {
+type ContactSectionProps = {
+  sectionTitleFontSizePx: number
+}
+
+export const ContactSection = ({ sectionTitleFontSizePx }: ContactSectionProps) => {
   const t = useTranslations('Home.ContactSection')
   const router = useRouter()
 
   return (
     <div className="w-full flex flex-col">
       <div className="bg-base-content text-primary-content py-6 md:py-14 px-4 text-center">
-        <h2>
+        <h2 style={{ fontSize: `${sectionTitleFontSizePx}px` }}>
           {t(`title1`)}
           <br />
           {t(`title2`)}
@@ -62,7 +66,12 @@ export const ContactSection = () => {
           </div>
 
           <div className="relative z-10 w-full max-w-lg md:max-w-2xl md:mr-auto">
-            <h2 className="text-primary-content mb-4 md:my-12">Meet Us</h2>
+            <h2
+              className="text-primary-content mb-4 md:my-12"
+              style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+            >
+              Meet Us
+            </h2>
 
             <div className="flex flex-col gap-2 md:gap-6">
               <div className="flex items-start gap-4">

@@ -1,17 +1,37 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getFounderBySlug } from '@/data/founders'
+import { getAboutGlobal } from '@/data/about'
 import { FounderDetailImages } from '@/components/about/founderDetailImages'
 import { resolveFounderDetailImages } from '@/components/about/founderMedia'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
+function clampInt(n: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, Math.round(n)))
+}
+
+function detailTitlePx(v: number | null | undefined) {
+  if (v == null || !Number.isFinite(v)) return 42
+  return clampInt(v, 28, 72)
+}
+function detailBodyPx(v: number | null | undefined) {
+  if (v == null || !Number.isFinite(v)) return 16
+  return clampInt(v, 14, 24)
+}
+
 export default async function FounderDetailPage({ params }: PageProps) {
   const { slug } = await params
-  const founder = await getFounderBySlug(decodeURIComponent(slug))
+  const [founder, about] = await Promise.all([
+    getFounderBySlug(decodeURIComponent(slug)),
+    getAboutGlobal(),
+  ])
   if (!founder) {
     notFound()
   }
+
+  const titleSize = detailTitlePx(about.founderDetailTitleFontSize)
+  const bodySize = detailBodyPx(about.founderDetailBodyFontSize)
 
   const images = resolveFounderDetailImages(founder)
   const label = (founder.role?.trim() || 'Founder').toUpperCase()
@@ -35,7 +55,10 @@ export default async function FounderDetailPage({ params }: PageProps) {
             <p className="text-founder-label tracking-founder-role font-semibold uppercase text-primary">
               {label}
             </p>
-            <h1 className="mt-2 text-3xl font-semibold text-base-content md:text-4xl">
+            <h1
+              className="mt-2 font-semibold text-base-content"
+              style={{ fontSize: `${titleSize}px` }}
+            >
               {founder.name}
             </h1>
             {founder.role && (
@@ -43,7 +66,10 @@ export default async function FounderDetailPage({ params }: PageProps) {
             )}
 
             {founder.description?.trim() && (
-              <p className="body-md mt-6 whitespace-pre-line leading-relaxed text-base-content/85">
+              <p
+                className="mt-6 whitespace-pre-line leading-relaxed text-base-content/85"
+                style={{ fontSize: `${bodySize}px` }}
+              >
                 {founder.description}
               </p>
             )}

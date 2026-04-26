@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { NavKey, NAV_PATHS } from '@/const/navigation'
-import { ListIcon, XIcon, ShoppingCartSimpleIcon } from '@phosphor-icons/react'
+import { ListIcon, XIcon, ShoppingCartSimpleIcon, FileText } from '@phosphor-icons/react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/utils/cn'
 import { useCart } from '@/context/cartContext'
+import { useQuoteCart } from '@/context/quoteCartContext'
 
 const NAV_KEYS = [
   NavKey.PRODUCT,
@@ -25,6 +26,7 @@ export const Navbar = () => {
   }))
 
   const { totalItems } = useCart()
+  const { totalQuoteItems } = useQuoteCart()
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -66,7 +68,20 @@ export const Navbar = () => {
               </Link>
             ))}
 
-            <Link href="/cart" className="relative p-2 text-primary-content">
+            {mounted && totalQuoteItems > 0 && (
+              <Link
+                href="/quote-cart"
+                className="relative p-2 text-primary-content"
+                aria-label="Quote cart"
+              >
+                <FileText size={32} weight="duotone" />
+                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
+                  {totalQuoteItems > 99 ? '99+' : totalQuoteItems}
+                </span>
+              </Link>
+            )}
+
+            <Link href="/cart" className="relative p-2 text-primary-content" aria-label="Shopping cart">
               <ShoppingCartSimpleIcon size={32} />
               {mounted && totalItems > 0 && (
                 <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
@@ -76,14 +91,45 @@ export const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile hamburger only — below md */}
-          <button onClick={toggleMenu} className="md:hidden p-2 text-primary-content">
-            <ListIcon size={32} />
-          </button>
+          {/* Mobile: quote (when not empty) + hamburger — below md */}
+          <div className="md:hidden flex items-center gap-0.5">
+            {mounted && totalQuoteItems > 0 && (
+              <Link
+                href="/quote-cart"
+                className="relative p-2 text-primary-content"
+                aria-label="Quote cart"
+              >
+                <FileText size={32} weight="duotone" />
+                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
+                  {totalQuoteItems > 99 ? '99+' : totalQuoteItems}
+                </span>
+              </Link>
+            )}
+            <button
+              onClick={toggleMenu}
+              className="p-2 text-primary-content"
+              type="button"
+              aria-label="Open menu"
+            >
+              <ListIcon size={32} />
+            </button>
+          </div>
 
-          {/* Tablet compact controls: cart + hamburger — md to lg only */}
+          {/* Tablet compact: quote + cart + hamburger — md to lg only */}
           <div className="hidden md:flex lg:hidden items-center gap-1">
-            <Link href="/cart" className="hidden relative p-2 text-primary-content">
+            {mounted && totalQuoteItems > 0 && (
+              <Link
+                href="/quote-cart"
+                className="relative p-2 text-primary-content"
+                aria-label="Quote cart"
+              >
+                <FileText size={32} weight="duotone" />
+                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
+                  {totalQuoteItems > 99 ? '99+' : totalQuoteItems}
+                </span>
+              </Link>
+            )}
+            <Link href="/cart" className="relative p-2 text-primary-content" aria-label="Shopping cart">
               <ShoppingCartSimpleIcon size={32} />
               {mounted && totalItems > 0 && (
                 <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
@@ -91,7 +137,7 @@ export const Navbar = () => {
                 </span>
               )}
             </Link>
-            <button onClick={toggleMenu} className="p-2 text-primary-content">
+            <button onClick={toggleMenu} className="p-2 text-primary-content" type="button" aria-label="Open menu">
               <ListIcon size={32} />
             </button>
           </div>
@@ -112,19 +158,39 @@ export const Navbar = () => {
           isOpen ? 'translate-x-0' : 'translate-x-full',
         )}
       >
-        <div className="flex h-28 items-center justify-between p-5">
-          <button onClick={closeMenu} className="text-primary-content">
+        <div className="flex h-28 items-center justify-between gap-2 p-5">
+          <button type="button" onClick={closeMenu} className="text-primary-content" aria-label="Close menu">
             <XIcon size={32} />
           </button>
 
-          <Link href="/cart" onClick={closeMenu} className="relative text-primary-content p-2">
-            <ShoppingCartSimpleIcon size={32} />
-            {mounted && totalItems > 0 && (
-              <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
-                {totalItems > 99 ? '99+' : totalItems}
-              </span>
+          <div className="flex items-center gap-1">
+            {mounted && totalQuoteItems > 0 && (
+              <Link
+                href="/quote-cart"
+                onClick={closeMenu}
+                className="relative p-2 text-primary-content"
+                aria-label="Quote cart"
+              >
+                <FileText size={32} weight="duotone" />
+                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
+                  {totalQuoteItems > 99 ? '99+' : totalQuoteItems}
+                </span>
+              </Link>
             )}
-          </Link>
+            <Link
+              href="/cart"
+              onClick={closeMenu}
+              className="relative p-2 text-primary-content"
+              aria-label="Shopping cart"
+            >
+              <ShoppingCartSimpleIcon size={32} />
+              {mounted && totalItems > 0 && (
+                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-secondary body-sm text-secondary-content font-semibold leading-none">
+                  {totalItems > 99 ? '99+' : totalItems}
+                </span>
+              )}
+            </Link>
+          </div>
         </div>
 
         <div className="flex flex-col w-full">

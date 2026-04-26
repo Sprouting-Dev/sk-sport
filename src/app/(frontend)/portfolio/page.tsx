@@ -32,6 +32,51 @@ function mapArticleToCardData(article: PortfolioArticle): ArticleData {
   }
 }
 
+const HERO_TITLE_MIN = 32
+const HERO_TITLE_MAX = 96
+const HERO_TITLE_DEFAULT = 56
+const HERO_SUB_MIN = 14
+const HERO_SUB_MAX = 32
+const HERO_SUB_DEFAULT = 20
+const HIGHLIGHTS_MIN = 24
+const HIGHLIGHTS_MAX = 72
+const HIGHLIGHTS_DEFAULT = 40
+const SECTION_MIN = 20
+const SECTION_MAX = 48
+const SECTION_DEFAULT = 28
+const CARD_TITLE_MIN = 14
+const CARD_TITLE_MAX = 28
+const CARD_TITLE_DEFAULT = 18
+
+function clampInt(n: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, Math.round(n)))
+}
+
+function heroTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return HERO_TITLE_DEFAULT
+  return clampInt(v, HERO_TITLE_MIN, HERO_TITLE_MAX)
+}
+
+function heroSubtitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return HERO_SUB_DEFAULT
+  return clampInt(v, HERO_SUB_MIN, HERO_SUB_MAX)
+}
+
+function highlightsTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return HIGHLIGHTS_DEFAULT
+  return clampInt(v, HIGHLIGHTS_MIN, HIGHLIGHTS_MAX)
+}
+
+function sectionTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return SECTION_DEFAULT
+  return clampInt(v, SECTION_MIN, SECTION_MAX)
+}
+
+function cardTitleFontPx(v: number | null | undefined): number {
+  if (v == null || !Number.isFinite(v)) return CARD_TITLE_DEFAULT
+  return clampInt(v, CARD_TITLE_MIN, CARD_TITLE_MAX)
+}
+
 export default async function Portfolio() {
   const [articles, portfolioHero] = await Promise.all([
     getPortfolioArticles(),
@@ -45,6 +90,12 @@ export default async function Portfolio() {
     'Venues, facilities, and training projects delivered with precision and care.'
   const heroImageSrc = resolveHeroMediaUrl(portfolioHero.heroMedia) ?? '/services-hero.png'
 
+  const titlePx = heroTitleFontPx(portfolioHero.heroTitleFontSize)
+  const subPx = heroSubtitleFontPx(portfolioHero.heroSubtitleFontSize)
+  const highlightsPx = highlightsTitleFontPx(portfolioHero.highlightsTitleFontSize)
+  const sectionPx = sectionTitleFontPx(portfolioHero.sectionTitleFontSize)
+  const cardTitlePx = cardTitleFontPx(portfolioHero.cardTitleFontSize)
+
   return (
     <main className="flex w-full flex-col">
       <PortfolioHero
@@ -52,8 +103,15 @@ export default async function Portfolio() {
         imageSrc={heroImageSrc}
         title={heroTitle}
         subtitle={heroSubtitle}
+        titleFontSizePx={titlePx}
+        subtitleFontSizePx={subPx}
       />
-      <PortfolioClient articles={mappedArticles} />
+      <PortfolioClient
+        articles={mappedArticles}
+        highlightsTitleFontSizePx={highlightsPx}
+        sectionTitleFontSizePx={sectionPx}
+        cardTitleFontSizePx={cardTitlePx}
+      />
     </main>
   )
 }
