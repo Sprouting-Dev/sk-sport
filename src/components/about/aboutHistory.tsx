@@ -71,7 +71,7 @@ export default function AboutHistory({
               key={card.title}
               className="relative transition-transform duration-200 md:flex-1 md:min-w-0 md:hover:-translate-y-1"
             >
-              <div className="flex h-full flex-col gap-2 rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 px-6 py-5 shadow-2xl hover:shadow-2xl">
+              <div className="flex h-full flex-col gap-2 rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 px-6 py-5 shadow-lg transition hover:shadow-xl">
                 <h3
                   className="font-semibold text-base-content"
                   style={{ fontSize: `${highlightCardTitleFontSizePx}px` }}
@@ -96,7 +96,7 @@ export default function AboutHistory({
               return (
                 <div
                   key={index}
-                  className="flex min-h-28 flex-col items-center justify-center gap-2 rounded-xl border border-base-300/50 bg-primary-content px-6 py-6 text-center shadow-sm md:min-h-32"
+                  className="flex min-h-28 flex-col items-center justify-center gap-2 rounded-xl border border-base-300/50 bg-primary-content px-6 py-6 text-center shadow-lg transition hover:shadow-xl md:min-h-32"
                 >
                   {item.value && (
                     <span

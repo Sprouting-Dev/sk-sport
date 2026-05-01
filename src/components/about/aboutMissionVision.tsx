@@ -20,7 +20,7 @@ export default function AboutMissionVision({
   return (
     <section className="w-full bg-header-bg pt-4 pb-9 md:pt-5 md:pb-11">
       <div className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-3 px-6 md:grid-cols-2 md:gap-4 lg:max-w-4xl">
-        <div className="flex flex-col rounded-lg border border-primary/25 bg-primary/10 px-4 py-4 md:px-5 md:py-5">
+        <div className="flex flex-col rounded-lg border border-primary/25 bg-primary/10 px-4 py-4 shadow-lg transition hover:shadow-xl md:px-5 md:py-5">
           <div className="flex items-start gap-2.5 md:gap-3">
             <div
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary/20 text-primary md:h-9 md:w-9"
@@ -50,7 +50,7 @@ export default function AboutMissionVision({
           </div>
         </div>
 
-        <div className="flex flex-col rounded-lg border border-secondary/25 bg-secondary/10 px-4 py-4 md:px-5 md:py-5">
+        <div className="flex flex-col rounded-lg border border-secondary/25 bg-secondary/10 px-4 py-4 shadow-lg transition hover:shadow-xl md:px-5 md:py-5">
           <div className="flex items-start gap-2.5 md:gap-3">
             <div
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary/20 text-secondary md:h-9 md:w-9"

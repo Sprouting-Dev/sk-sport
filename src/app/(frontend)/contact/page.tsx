@@ -1,5 +1,6 @@
 import { ContactForm, ContactPageHero } from '@/components/contact'
 import { getContactHeroGlobal } from '@/data/contactHero'
+import { CONTACT } from '@/const/contact'
 import type { ContactHero as ContactHeroType, Home } from '@/payload-types'
 
 const FALLBACK_MEDIA = [
@@ -41,6 +42,8 @@ export default async function Contact() {
     </>
   )
 
+  const mapEmbedSrc = contactHero.googleMapEmbedUrl || CONTACT.mapEmbedSrc
+
   return (
     <div className="w-full bg-header-bg">
       <ContactPageHero
@@ -57,6 +60,20 @@ export default async function Contact() {
           contactInfoBodyFontSizePx={t.contactInfoBodyPx}
           formLabelFontSizePx={t.formLabelPx}
           formInputFontSizePx={t.formInputPx}
+        />
+      </div>
+      <div className="w-full h-80 md:h-120 relative overflow-hidden">
+        <iframe
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          scrolling="no"
+          marginHeight={0}
+          marginWidth={0}
+          src={mapEmbedSrc}
+          className="absolute inset-0 w-full h-full"
+          title="Google Map"
+          loading="lazy"
         />
       </div>
     </div>

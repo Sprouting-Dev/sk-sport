@@ -73,8 +73,12 @@ export const About: GlobalConfig = {
     },
     {
       name: 'founderSectionTitle',
-      label: 'หัวข้อส่วน Founder',
+      label: 'หัวข้อส่วน Team Member',
       type: 'text',
+      defaultValue: 'Team Member',
+      admin: {
+        description: 'หัวข้อที่แสดงเหนือการ์ดสมาชิกทีม ค่าเริ่มต้น: "Team Member"',
+      },
     },
     {
       name: 'founderImage',
@@ -224,6 +228,51 @@ export const About: GlobalConfig = {
       admin: {
         description: 'เนื้อหาใต้หัวพันธกิจและวิสัยทัศน์',
       },
+    },
+    {
+      name: 'videoSectionTitle',
+      label: 'หัวข้อ Section วิดีโอ',
+      type: 'text',
+      defaultValue: 'Video',
+    },
+    {
+      name: 'videoSectionTitleFontSize',
+      label: 'ขนาดหัวข้อ Section วิดีโอ (px)',
+      type: 'number',
+      defaultValue: 32,
+      min: 20,
+      max: 56,
+      admin: {
+        description: 'ขนาดตัวอักษรของหัวข้อ Section วิดีโอบนหน้า About',
+      },
+    },
+    {
+      name: 'youtubeVideos',
+      label: 'คลิป YouTube',
+      type: 'array',
+      minRows: 0,
+      fields: [
+        {
+          name: 'title',
+          label: 'ชื่อคลิป',
+          type: 'text',
+        },
+        {
+          name: 'youtubeUrl',
+          label: 'ลิงก์ YouTube',
+          type: 'text',
+          admin: {
+            description:
+              'วางลิงก์ YouTube เช่น https://www.youtube.com/watch?v=... หรือ https://youtu.be/...',
+          },
+        },
+        {
+          name: 'embedTitle',
+          label: 'คำอธิบายสำหรับ iframe',
+          type: 'text',
+          defaultValue: 'YouTube video',
+        },
+      ],
     },
     {
       name: 'founderCardTitleFontSize',

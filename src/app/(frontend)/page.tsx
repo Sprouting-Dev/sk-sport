@@ -1,4 +1,5 @@
 import { getHomeGlobal } from '@/data'
+import { getContactHeroGlobal } from '@/data/contactHero'
 import { getPortfolioArticles } from '@/data/portfolio'
 import { getServiceBySlug } from '@/data/service'
 import { getAllProducts } from '@/data/product'
@@ -71,6 +72,7 @@ function resolvePartnerLogos(
 export default async function HomePage() {
   const [
     homeData,
+    contactHeroData,
     portfolioArticles,
     allProducts,
     integratedSportsService,
@@ -80,6 +82,7 @@ export default async function HomePage() {
     unitedDiscoveryService,
   ] = await Promise.all([
     getHomeGlobal(),
+    getContactHeroGlobal(),
     getPortfolioArticles(),
     getAllProducts(),
     getServiceBySlug(INTEGRATED_SPORTS_INSTALLATION_SLUG),
@@ -201,7 +204,10 @@ export default async function HomePage() {
         highlightBodyFontSizePx={tf.highlightBody}
         cardBodyFontSizePx={tf.cardBody}
       />
-      <ContactSection sectionTitleFontSizePx={tf.sectionTitle} />
+      <ContactSection
+        sectionTitleFontSizePx={tf.sectionTitle}
+        mapEmbedSrc={contactHeroData.googleMapEmbedUrl ?? undefined}
+      />
       <Gallery media={homeData.galleryMedia} sectionTitleFontSizePx={tf.sectionTitle} />
     </div>
   )

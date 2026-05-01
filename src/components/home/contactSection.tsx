@@ -11,9 +11,10 @@ import { CONTACT } from '@/const/contact'
 
 type ContactSectionProps = {
   sectionTitleFontSizePx: number
+  mapEmbedSrc?: string
 }
 
-export const ContactSection = ({ sectionTitleFontSizePx }: ContactSectionProps) => {
+export const ContactSection = ({ sectionTitleFontSizePx, mapEmbedSrc }: ContactSectionProps) => {
   const t = useTranslations('Home.ContactSection')
   const router = useRouter()
 
@@ -36,7 +37,7 @@ export const ContactSection = ({ sectionTitleFontSizePx }: ContactSectionProps) 
             scrolling="no"
             marginHeight={0}
             marginWidth={0}
-            src={CONTACT.mapEmbedSrc}
+            src={mapEmbedSrc || CONTACT.mapEmbedSrc}
             className="absolute inset-0 w-full h-full"
             title="Google Map"
             loading="lazy"

@@ -5,6 +5,7 @@ import AboutHero from '@/components/about/aboutHero'
 import AboutHistory from '@/components/about/aboutHistory'
 import AboutMissionVision from '@/components/about/aboutMissionVision'
 import AboutFounder from '@/components/about/aboutFounder'
+import AboutVideoSection from '@/components/about/aboutVideoSection'
 import type { About as AboutType, AboutHero as AboutHeroType, HeroMedia } from '@/payload-types'
 
 function clampInt(n: number, min: number, max: number): number {
@@ -57,6 +58,9 @@ function fCardBodyPx(a: AboutType) {
 function fQuotePx(a: AboutType) {
   return pxOr(a.founderQuoteFontSize, 14, 28, 18)
 }
+function videoSectionTitlePx(a: AboutType) {
+  return pxOr(a.videoSectionTitleFontSize, 20, 56, 32)
+}
 
 function resolveHeroMediaUrl(
   heroMedia: (string | HeroMedia)[] | null | undefined,
@@ -104,8 +108,17 @@ export default async function AboutPage() {
         missionVisionTitleFontSizePx={mvTitlePx(about)}
         missionVisionBodyFontSizePx={mvBodyPx(about)}
       />
+      <AboutVideoSection
+        videoSectionTitle={about.videoSectionTitle ?? 'Video'}
+        videoSectionTitleFontSizePx={videoSectionTitlePx(about)}
+        youtubeVideos={about.youtubeVideos}
+      />
       <AboutFounder
-        founderSectionTitle={about.founderSectionTitle}
+        founderSectionTitle={
+          about.founderSectionTitle?.trim() === 'Founder'
+            ? 'Team Member'
+            : (about.founderSectionTitle ?? 'Team Member')
+        }
         cmsFounders={cmsFounders}
         founderImage={about.founderImage}
         founderName={about.founderName}

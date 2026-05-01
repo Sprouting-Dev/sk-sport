@@ -132,20 +132,18 @@ export default function AboutFounder({
     return (
       <section className="w-full bg-header-bg py-12 md:py-14">
         <div className="container mx-auto flex flex-col gap-8 px-6">
-          {founderSectionTitle?.trim() && (
-            <h2
-              className="text-center font-semibold tracking-wide text-base-content"
-              style={{ fontSize: `${sectionTitleFontSizePx}px` }}
-            >
-              {founderSectionTitle}
-            </h2>
-          )}
+          <h2
+            className="text-center font-semibold tracking-wide text-base-content"
+            style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+          >
+            {founderSectionTitle?.trim() || 'Team Member'}
+          </h2>
           <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 md:gap-8">
             {cms.map((f) => {
               const img = resolveFounderAboutImage(f.aboutImage)
               const imageUrl = img?.url ?? ''
               const imageAlt = img?.alt || f.name
-              const label = (f.role?.trim() || 'Founder').toUpperCase()
+              const label = (f.role?.trim() || 'Team Member').toUpperCase()
               return (
                 <FounderCardShell
                   key={f.id}
@@ -181,18 +179,16 @@ export default function AboutFounder({
   return (
     <section className="w-full bg-header-bg py-12 md:py-14">
       <div className="container mx-auto flex flex-col gap-6 px-6">
-        {founderSectionTitle?.trim() && (
-          <h2
-            className="text-center font-semibold tracking-wide text-base-content"
-            style={{ fontSize: `${sectionTitleFontSizePx}px` }}
-          >
-            {founderSectionTitle}
-          </h2>
-        )}
+        <h2
+          className="text-center font-semibold tracking-wide text-base-content"
+          style={{ fontSize: `${sectionTitleFontSizePx}px` }}
+        >
+          {founderSectionTitle?.trim() || 'Team Member'}
+        </h2>
         <FounderCardShell
           imageUrl={imageUrl}
           imageAlt={imageAlt}
-          label="FOUNDER & CEO"
+          label="TEAM MEMBER"
           name={founderName || ''}
           role={founderRole}
           bodyText={founderDescription}

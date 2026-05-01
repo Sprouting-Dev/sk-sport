@@ -1012,6 +1012,9 @@ export interface About {
   missionDescription?: string | null;
   visionTitle?: string | null;
   visionDescription?: string | null;
+  /**
+   * หัวข้อที่แสดงเหนือการ์ดสมาชิกทีม ค่าเริ่มต้น: "Team Member"
+   */
   founderSectionTitle?: string | null;
   founderImage?: (string | null) | HeroMedia;
   founderName?: string | null;
@@ -1055,6 +1058,22 @@ export interface About {
    * เนื้อหาใต้หัวพันธกิจและวิสัยทัศน์
    */
   missionVisionBodyFontSize?: number | null;
+  videoSectionTitle?: string | null;
+  /**
+   * ขนาดตัวอักษรของหัวข้อ Section วิดีโอบนหน้า About
+   */
+  videoSectionTitleFontSize?: number | null;
+  youtubeVideos?:
+    | {
+        title?: string | null;
+        /**
+         * วางลิงก์ YouTube เช่น https://www.youtube.com/watch?v=... หรือ https://youtu.be/...
+         */
+        youtubeUrl?: string | null;
+        embedTitle?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   /**
    * ชื่อบนการ์ด Founder หน้า About (ไม่รวมป้ายตำแหน่ง/ปุ่ม Read more)
    */
@@ -1380,6 +1399,10 @@ export interface ContactHero {
    * ช่อง input และ textarea (ไม่รวม error หรือปุ่ม)
    */
   formInputFontSize?: number | null;
+  /**
+   * วางลิงก์ iframe/embed ของ Google Map ที่ต้องการแสดงบนเว็บไซต์ (ได้จาก Google Maps → Share → Embed a map → copy src="...")
+   */
+  googleMapEmbedUrl?: string | null;
   heroMedia?: (string | HeroMedia)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1466,6 +1489,16 @@ export interface AboutSelect<T extends boolean = true> {
   statLabelFontSize?: T;
   missionVisionTitleFontSize?: T;
   missionVisionBodyFontSize?: T;
+  videoSectionTitle?: T;
+  videoSectionTitleFontSize?: T;
+  youtubeVideos?:
+    | T
+    | {
+        title?: T;
+        youtubeUrl?: T;
+        embedTitle?: T;
+        id?: T;
+      };
   founderCardTitleFontSize?: T;
   founderCardBodyFontSize?: T;
   founderQuoteFontSize?: T;
@@ -1616,6 +1649,7 @@ export interface ContactHeroSelect<T extends boolean = true> {
   contactInfoBodyFontSize?: T;
   formLabelFontSize?: T;
   formInputFontSize?: T;
+  googleMapEmbedUrl?: T;
   heroMedia?: T;
   updatedAt?: T;
   createdAt?: T;

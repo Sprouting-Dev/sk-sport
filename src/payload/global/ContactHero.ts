@@ -97,6 +97,15 @@ export const ContactHero: GlobalConfig = {
       },
     },
     {
+      name: 'googleMapEmbedUrl',
+      label: 'ลิงก์ Google Map Embed',
+      type: 'textarea',
+      admin: {
+        description:
+          'วางลิงก์ iframe/embed ของ Google Map ที่ต้องการแสดงบนเว็บไซต์ (ได้จาก Google Maps → Share → Embed a map → copy src="...")',
+      },
+    },
+    {
       name: 'heroMedia',
       label: 'รูปภาพ Hero',
       type: 'relationship',
